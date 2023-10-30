@@ -6,8 +6,8 @@ license = "MIT"
 description = "Squareup SDK for Rust"
 keywords = ["square", "squareup"]
 repository = "https://github.com/kcable194/squareup"
-exclude = [
-    ".cargo_vcs_info.json",
+include = [
+    "src/*",
 ]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
