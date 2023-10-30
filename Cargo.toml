@@ -8,6 +8,9 @@ keywords = ["square", "squareup"]
 repository = "https://github.com/kcable194/squareup"
 include = [
     "src/*",
+    "Cargo.toml",
+    "README.md",
+    "LICENSE",
 ]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
