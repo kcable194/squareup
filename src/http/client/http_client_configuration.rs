@@ -35,7 +35,7 @@ pub struct RetryConfiguration {
     /// - first retry: 3^0 = 1
     /// - second retry: 3^1 = 3
     /// - third retry: 3^2 = 9
-    pub backoff_exponent: u32,
+    pub base: u32,
 }
 
 impl Default for RetryConfiguration {
@@ -44,7 +44,7 @@ impl Default for RetryConfiguration {
             retries_count: 0,
             min_retry_interval: Duration::from_secs(1),
             max_retry_interval: Duration::from_secs(30 * 60),
-            backoff_exponent: 3,
+            base: 3,
         }
     }
 }

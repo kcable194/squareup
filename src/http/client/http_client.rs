@@ -188,7 +188,7 @@ fn create_retry_policy(retry_configuration: &RetryConfiguration) -> ExponentialB
         ExponentialBackoff::builder().build_with_max_retries(retry_configuration.retries_count);
     retry_policy.max_retry_interval = retry_configuration.max_retry_interval;
     retry_policy.min_retry_interval = retry_configuration.min_retry_interval;
-    retry_policy.backoff_exponent = retry_configuration.backoff_exponent;
+    retry_policy.base = retry_configuration.base;
     retry_policy
 }
 
