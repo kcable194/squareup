@@ -80,13 +80,27 @@ impl From<&chrono::DateTime<Utc>> for DateTime {
     }
 }
 
-impl From<i64> for DateTime {
-    /// Converts a Unix timestamp into a `DateTime`.
-    fn from(timestamp: i64) -> Self {
-        Self::from(&chrono::DateTime::<Utc>::from_utc(
-            chrono::NaiveDateTime::from_timestamp(timestamp, 0),
-            Utc,
-        ))
+impl TryFrom<i64> for DateTime {
+    type Error = ApiError;
+
+    /// Attempts to convert a Unix timestamp into a `DateTime`.
+    ///
+    /// Returns an API Error if the input i64 cannot be parsed.
+    fn try_from(timestamp: i64) -> Result<Self, Self::Error> {
+        let inner = chrono::NaiveDateTime::from_timestamp_opt(timestamp, 0);
+        match inner {
+            Some(datetime) => {
+                Ok(Self::from(&chrono::DateTime::<Utc>::from_naive_utc_and_offset(
+                    datetime,
+                    Utc,
+                )))
+            },
+            None => {
+                let msg = format!("Error parsing UTC timestamp to NaiveDateTime: {}", timestamp);
+                error!("{}", &msg);
+                Err(Self::Error::new(&msg))
+            }
+        }
     }
 }
 
@@ -112,7 +126,7 @@ impl TryFrom<&str> for DateTime {
             error!("{}", &msg);
             Self::Error::new(&msg)
         })?;
-        let inner = inner.with_timezone(&chrono::offset::Utc);
+        let inner = inner.with_timezone(&Utc);
         Ok(Self { inner })
     }
 }

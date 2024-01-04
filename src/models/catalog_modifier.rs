@@ -2,7 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::Money;
+use super::{ModifierLocationOverrides, Money};
 
 /// A modifier applicable to items at the time of sale.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]
@@ -18,9 +18,9 @@ pub struct CatalogModifier {
     pub ordinal: Option<i32>,
     /// The ID of the `CatalogModifierList` associated with this modifier.
     pub modifier_list_id: Option<String>,
-    /// The IDs of images associated with this `CatalogModifier` instance. Currently these images
-    /// are not displayed by Square, but are free to be displayed in 3rd party applications.
-    pub image_ids: Option<Vec<String>>,
-    /// If `true`, this `CatalogModifier` should be selected by default for this `CatalogItem`.
-    pub on_by_default: Option<bool>,
+    /// Location-specific price overrides.
+    pub location_overrides: Option<ModifierLocationOverrides>,
+    /// The ID of the image associated with this CatalogModifier instance. Currently this image is not
+    /// displayed by Square, but is free to be displayed in 3rd party applications.
+    pub image_id: Option<String>,
 }

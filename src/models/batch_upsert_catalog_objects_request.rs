@@ -15,7 +15,7 @@ pub struct BatchUpsertCatalogObjectsRequest {
     ///
     /// See [Idempotency](https://developer.squareup.com/docs/basics/api101/idempotency) for more
     /// information.
-    pub idempotency_key: Option<String>,
+    pub idempotency_key: String,
     /// A batch of CatalogObjects to be inserted/updated atomically. The objects within a batch will
     /// be inserted in an all-or-nothing fashion, i.e., if an error occurs attempting to insert or
     /// update an object within a batch, the entire batch will be rejected. However, an error in one

@@ -2,7 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::{enums::SubscriptionCadence, Money};
+use super::{enums::SubscriptionCadence, Money, SubscriptionPricing};
 
 /// Describes a phase in a subscription plan.
 ///
@@ -25,4 +25,6 @@ pub struct SubscriptionPhase {
     /// The position this phase appears in the sequence of phases defined for the plan, indexed from
     /// 0. This field cannot be changed after a `SubscriptionPhase` is created.
     pub ordinal: Option<i64>,
+    /// The subscription pricing.
+    pub pricing: Option<SubscriptionPricing>
 }

@@ -48,7 +48,7 @@ pub enum CatalogObjectType {
     /// The `CatalogObject` instance is of the [CatalogSubscriptionPlan] type and represents a
     /// subscription plan. The subscription-plan-specific data must be stored on the
     /// `subscription_plan_data` field.
-    SubscriptionPlan,
+    SubscriptionPlanVariation,
     /// The `CatalogObject` instance is of the [CatalogItemOption] type and represents a list of
     /// options (such as a color or size of a T-shirt) that can be assigned to item variations. The
     /// item-option-specific data must be on the `item_option_data` field.
@@ -68,6 +68,10 @@ pub enum CatalogObjectType {
     /// The quick-amounts-settings-specific data must be set on the `quick_amounts_settings_data`
     /// field.
     QuickAmountsSettings,
+    /// The `CatalogObject` instance is of the [CatalogSubscriptionPlan] type and represents a
+    /// subscription plan. The subscription plan specific data must be stored on the
+    /// subscription_plan_data field.
+    SubscriptionPlan,
 }
 
 impl Default for CatalogObjectType {

@@ -25,4 +25,6 @@ pub struct CatalogTax {
     /// A Boolean flag to indicate whether the tax is displayed as enabled (`true`) in the Square
     /// Point of Sale app or not (`false`).
     pub enabled: Option<bool>,
+    /// The ID of a CatalogProductSet object. If set, the tax is applicable to all products in the product set.
+    pub applies_to_product_set_id: Option<String>,
 }

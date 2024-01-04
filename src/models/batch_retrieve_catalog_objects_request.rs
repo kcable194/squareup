@@ -22,4 +22,19 @@ pub struct BatchRetrieveCatalogObjectsRequest {
     ///
     /// Default value: `false`
     pub include_related_objects: Option<bool>,
+    /// The specific version of the catalog objects to be included in the response. This allows you
+    /// to retrieve historical versions of objects. The specified version value is matched against
+    /// the CatalogObjects' version attribute. If not included, results will be from the current
+    /// version of the catalog.
+    pub catalog_version: Option<i64>,
+    /// Indicates whether to include (true) or not (false) in the response deleted objects, namely,
+    /// those with the is_deleted attribute set to true.
+    pub include_deleted_objects: Option<bool>,
+    /// Specifies whether or not to include the path_to_root list for each returned category instance.
+    /// The path_to_root list consists of CategoryPathToRootNode objects and specifies the path that
+    /// starts with the immediate parent category of the returned category and ends with its root
+    /// category. If the returned category is a top-level category, the path_to_root list is empty and
+    /// is not returned in the response payload.
+    pub include_category_path_to_root: Option<bool>,
+
 }

@@ -49,4 +49,10 @@ pub struct SearchCatalogObjectsRequest {
     /// the implementation may return more or fewer results. If the supplied limit is negative,
     /// zero, or is higher than the maximum limit of 1,000, it will be ignored.
     pub limit: Option<i32>,
+    /// Specifies whether or not to include the path_to_root list for each returned category
+    /// instance. The path_to_root list consists of CategoryPathToRootNode objects and specifies
+    /// the path that starts with the immediate parent category of the returned category and ends
+    /// with its root category. If the returned category is a top-level category, the path_to_root
+    /// list is empty and is not returned in the response payload.
+    pub include_category_path_to_root: Option<bool>
 }

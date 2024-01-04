@@ -1,5 +1,7 @@
 //! Query parameters for the Retrieve Catalog Object API
 
+use std::fmt::Display;
+
 /// This is a model struct for RetrieveCatalogObjectParameters (query parameters)
 #[derive(Clone, Debug, Default)]
 pub struct RetrieveCatalogObjectParameters {
@@ -23,6 +25,12 @@ pub struct RetrieveCatalogObjectParameters {
     /// found in the version field of [CatalogObject]s. If not included, results will be from the
     /// current version of the catalog.
     pub catalog_version: Option<i64>,
+    /// Specifies whether or not to include the path_to_root list for each returned category instance.
+    /// The path_to_root list consists of CategoryPathToRootNode objects and specifies the path that
+    /// starts with the immediate parent category of the returned category and ends with its root
+    /// category. If the returned category is a top-level category, the path_to_root list is empty
+    /// and is not returned in the response payload.
+    pub include_category_path_to_root: Option<bool>
 }
 
 impl RetrieveCatalogObjectParameters {
@@ -37,8 +45,8 @@ impl From<RetrieveCatalogObjectParameters> for String {
     }
 }
 
-impl ToString for RetrieveCatalogObjectParameters {
-    fn to_string(&self) -> String {
+impl Display for RetrieveCatalogObjectParameters {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut params = Vec::new();
 
         if let Some(include_related_objects) = &self.include_related_objects {
@@ -49,10 +57,15 @@ impl ToString for RetrieveCatalogObjectParameters {
             params.push(format!("catalog_version={}", catalog_version));
         }
 
-        if params.is_empty() {
+        if let Some(include_category_path_to_root) = &self.include_category_path_to_root {
+            params.push(format!("include_category_path_to_root={}", include_category_path_to_root));
+        }
+
+        let str = if params.is_empty() {
             String::new()
         } else {
             format!("?{}", params.join("&"))
-        }
+        };
+        write!(f, "{}", str)
     }
 }

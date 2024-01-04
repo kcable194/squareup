@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 
 use super::{
     enums::CatalogItemProductType, CatalogItemModifierListInfo, CatalogItemOptionForItem,
-    CatalogObject,
+    CatalogObject, CatalogObjectCategory, CatalogEcomSeoData
 };
 
 /// A [CatalogObject] instance of the `ITEM` type, also referred to as an item, in the catalog.
@@ -13,9 +13,6 @@ pub struct CatalogItem {
     /// The item's name. This is a searchable attribute for use in applicable query filters, its
     /// value must not be empty, and the length is of Unicode code points.
     pub name: Option<String>,
-    /// The item's description. This is a searchable attribute for use in applicable query filters,
-    /// and its value length is of Unicode code points.
-    pub description: Option<String>,
     /// The text of the item's display label in the Square Point of Sale app. Only up to the first
     /// five characters of the string are used. This attribute is searchable, and its value length
     /// is of Unicode code points.
@@ -30,8 +27,6 @@ pub struct CatalogItem {
     /// If `true`, the item can be added to electronically fulfilled orders from the merchant's
     /// online store.
     pub available_electronically: Option<bool>,
-    /// The ID of the item's category, if any.
-    pub category_id: Option<String>,
     /// A set of IDs indicating the taxes enabled for this item. When updating an item, any taxes
     /// listed here will be added to the item. Taxes may also be added to or deleted from an item
     /// using `UpdateItemTaxes`.
@@ -72,4 +67,23 @@ pub struct CatalogItem {
     ///
     /// It is currently supported for sellers of the Japanese locale only.
     pub sort_name: Option<String>,
+    /// The list of categories.
+    pub categories: Option<Vec<CatalogObjectCategory>>,
+    /// The item's description as expressed in valid HTML elements. The length of this field value, including those of
+    /// HTML tags, is of Unicode points. With application query filters, the text values of the HTML
+    /// elements and attributes are searchable. Invalid or unsupported HTML elements or attributes are
+    /// ignored.
+    /// Max Length = 65535
+    pub description_html: Option<String>,
+    /// **Read only** A server-generated plaintext version of the description_html field, without formatting tags.
+    pub description_plaintext: Option<String>,
+    /// A list of IDs representing channels, such as a Square Online site, where the item can be made visible or
+    /// available.
+    pub channels: Option<Vec<String>>,
+    /// Indicates whether this item is archived (true) or not (false).
+    pub is_archived: Option<bool>,
+    /// The SEO data for a seller's Square Online store.
+    pub ecom_seo_data: Option<CatalogEcomSeoData>,
+    /// The item's reporting category.
+    pub reporting_category: Option<CatalogObjectCategory>
 }

@@ -4,13 +4,7 @@ use std::collections::HashMap;
 
 use serde::{Deserialize, Serialize};
 
-use super::{
-    enums::CatalogObjectType, CatalogCategory, CatalogCustomAttributeDefinition,
-    CatalogCustomAttributeValue, CatalogDiscount, CatalogImage, CatalogItem, CatalogItemOption,
-    CatalogItemOptionValue, CatalogItemVariation, CatalogMeasurementUnit, CatalogModifier,
-    CatalogModifierList, CatalogPricingRule, CatalogProductSet, CatalogQuickAmountsSettings,
-    CatalogSubscriptionPlan, CatalogTax, CatalogTimePeriod, CatalogV1Id, DateTime,
-};
+use super::{enums::CatalogObjectType, CatalogCategory, CatalogCustomAttributeDefinition, CatalogCustomAttributeValue, CatalogDiscount, CatalogImage, CatalogItem, CatalogItemOption, CatalogItemOptionValue, CatalogItemVariation, CatalogMeasurementUnit, CatalogModifier, CatalogModifierList, CatalogPricingRule, CatalogProductSet, CatalogQuickAmountsSettings, CatalogSubscriptionPlan, CatalogTax, CatalogTimePeriod, CatalogV1Id, DateTime, CatalogSubscriptionPlanVariation, CatalogAvailabilityPeriod};
 
 /// The wrapper object for the catalog entries of a given object type.
 ///
@@ -123,4 +117,10 @@ pub struct CatalogObject {
     /// Structured data for a `CatalogQuickAmountsSettings`, set for CatalogObjects of type
     /// `QUICK_AMOUNTS_SETTINGS`.
     pub quick_amounts_settings_data: Option<CatalogQuickAmountsSettings>,
+    /// Structured data for a CatalogSubscriptionPlanVariation, set for CatalogObjects of type
+    /// SUBSCRIPTION_PLAN_VARIATION.
+    pub subscription_plan_variation_data: Option<CatalogSubscriptionPlanVariation>,
+    /// Structured data for a CatalogAvailabilityPeriod, set for CatalogObjects of type
+    /// AVAILABILITY_PERIOD.
+    pub availability_period_data: Option<CatalogAvailabilityPeriod>,
 }

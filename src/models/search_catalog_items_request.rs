@@ -1,8 +1,9 @@
 //! Request struct for the Search Catalog Items API
 
 use serde::Serialize;
+use crate::models::CustomAttributeFilter;
 
-use super::enums::{SearchCatalogItemsRequestStockLevel, SortOrder};
+use super::enums::{ArchivedState, CatalogItemProductType, SearchCatalogItemsRequestStockLevel, SortOrder};
 
 /// This is a model struct for SearchCatalogItemsRequest type.
 #[derive(Clone, Debug, Default, Eq, PartialEq, Serialize)]
@@ -27,4 +28,13 @@ pub struct SearchCatalogItemsRequest {
     pub limit: Option<i32>,
     /// The order to sort the results by item names. The default sort order is ascending (`ASC`).
     pub sort_order: Option<SortOrder>,
+    /// The product types query expression to return items or item variations having the specified product types.
+    pub product_types: Option<CatalogItemProductType>,
+    /// The customer-attribute filter to return items or item variations matching the specified custom
+    /// attribute expressions. A maximum number of 10 custom attribute expressions are supported in a
+    /// single call to the SearchCatalogItems endpoint.
+    pub custom_attribute_filters: Option<Vec<CustomAttributeFilter>>,
+    /// The query filter to return not archived (ArchivedStateNotArchived), archived (ArchivedStateArchived),
+    /// or either type (ArchivedStateAll) of items.
+    pub archived_state: Option<ArchivedState>,
 }

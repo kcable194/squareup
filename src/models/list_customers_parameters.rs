@@ -1,5 +1,6 @@
 //! Model struct for ListCustomersParameters (query parameters)
 
+use std::fmt::Display;
 use super::enums::{SortCustomersField, SortOrder};
 
 const DEFAULT_SORT_ORDER: SortOrder = SortOrder::Asc;
@@ -44,8 +45,8 @@ impl Default for ListCustomersParameters {
     }
 }
 
-impl ToString for ListCustomersParameters {
-    fn to_string(&self) -> String {
+impl Display for ListCustomersParameters {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut params = Vec::new();
 
         if !self.cursor.is_empty() {
@@ -53,17 +54,18 @@ impl ToString for ListCustomersParameters {
         }
 
         if self.sort_field != DEFAULT_SORT_CUSTOMER_FIELD {
-            params.push(format!("sort_field={}", self.sort_field.to_string()));
+            params.push(format!("sort_field={}", self.sort_field));
         }
 
         if self.sort_order != DEFAULT_SORT_ORDER {
             params.push(format!("sort_order={}", serde_json::to_string(&self.sort_order).unwrap()));
         }
 
-        if params.is_empty() {
+        let str = if params.is_empty() {
             String::new()
         } else {
             format!("?{}", params.join("&"))
-        }
+        };
+        write!(f, "{}", str)
     }
 }
