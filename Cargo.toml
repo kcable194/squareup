@@ -1,18 +1,26 @@
 [package]
-name = "squareup"
-version = "0.1.0"
+name = "square-api-client"
+description = "Rust wrapper for the Square web API"
+version = "0.1.9"
+homepage = "https://github.com/cosm-eng/rust-square-api-client-lib"
+repository = "https://github.com/cosm-eng/rust-square-api-client-lib"
+authors = ["Mike Harkins <mharkins@cosm.com>"]
 edition = "2021"
-license = "MIT"
-description = "Squareup SDK for Rust"
-keywords = ["square", "squareup"]
-repository = "https://github.com/kcable194/squareup"
-include = [
-    "src/*",
-    "Cargo.toml",
-    "README.md",
-    "LICENSE",
-]
+license = "Apache-2.0"
+keywords = ["Square", "API", "Client", "SDK"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+async-trait = "0.1.57"
+chrono = { version = "0.4.22", features = ["serde"] }
+infer = "0.9.0"
+log = "0.4.17"
+reqwest = { version = "0.11.11", features = ["json", "multipart"] }
+reqwest-middleware = "0.1.6"
+reqwest-retry = "0.1.5"
+package_info = "0.1.0"
+package_info_derive = "0.1.0"
+rustc_version_runtime = "0.2.1"
+serde = { version = "1.0.144", features = ["derive"] }
+serde_json = "1.0.85"
