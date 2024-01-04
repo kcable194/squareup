@@ -1,5 +1,6 @@
 //! Query parameters for the List Gift Card Activities API
 
+use std::fmt::Display;
 use super::{
     enums::{GiftCardActivityType, SortOrder},
     DateTime,
@@ -51,8 +52,8 @@ impl From<ListGiftCardActivitiesParameters> for String {
     }
 }
 
-impl ToString for ListGiftCardActivitiesParameters {
-    fn to_string(&self) -> String {
+impl Display for ListGiftCardActivitiesParameters {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut params = Vec::new();
 
         if let Some(gift_card_id) = &self.gift_card_id {
@@ -84,10 +85,11 @@ impl ToString for ListGiftCardActivitiesParameters {
             params.push(format!("cursor={}", cursor));
         }
 
-        if params.is_empty() {
+        let str = if params.is_empty() {
             String::new()
         } else {
             format!("?{}", params.join("&"))
-        }
+        };
+        write!(f, "{}", str)
     }
 }

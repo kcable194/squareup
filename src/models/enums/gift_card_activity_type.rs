@@ -50,6 +50,14 @@ pub enum GiftCardActivityType {
     /// and clears the balance. `IMPORT_REVERSAL` activities are managed by Square and cannot be
     /// created using the Gift Card Activities API.
     ImportReversal,
+    /// Deducted money from a gift card as the result of a transfer to the balance of another gift card.
+    /// TRANSFER_BALANCE_FROM activities are managed by Square and cannot be created using the Gift Card
+    /// Activities API.
+    TransferBalanceFrom,
+    /// Added money to a gift card as the result of a transfer from the balance of another gift card.
+    /// TRANSFER_BALANCE_TO activities are managed by Square and cannot be created using the Gift Card
+    /// Activities API.
+    TransferBalanceTo,
 }
 
 impl Default for GiftCardActivityType {

@@ -366,6 +366,8 @@ mod delete_customer_parameters;
 mod remove_group_from_customer_response;
 mod add_group_to_customer_response;
 mod empty_request_body;
+mod gift_card_activity_transfer_balance_to;
+mod gift_card_activity_transfer_balance_from;
 
 pub use ach_details::AchDetails;
 pub use additional_recipient::AdditionalRecipient;
@@ -730,3 +732,5 @@ pub use delete_customer_parameters::DeleteCustomerParameters;
 pub use remove_group_from_customer_response::RemoveGroupFromCustomerResponse;
 pub use add_group_to_customer_response::AddGroupToCustomerResponse;
 pub use empty_request_body::EmptyRequestBody;
+pub use gift_card_activity_transfer_balance_to::GiftCardActivityTransferBalanceTo;
+pub use gift_card_activity_transfer_balance_from::GiftCardActivityTransferBalanceFrom;
