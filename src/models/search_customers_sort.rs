@@ -16,7 +16,7 @@ pub struct SearchCustomersSort {
     /// field in `DateTimeFilter`, `SearchCustomers` returns an error.
     ///
     /// Default: `CREATED_AT`.
-    pub sort_field: Option<SortCustomersField>,
+    pub field: Option<SortCustomersField>,
     /// The chronological order in which results are returned. Defaults to DESC.
-    pub sort_order: Option<SortOrder>,
+    pub order: Option<SortOrder>,
 }

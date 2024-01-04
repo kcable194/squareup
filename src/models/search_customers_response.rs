@@ -16,4 +16,9 @@ pub struct SearchCustomersResponse {
     pub cursor: Option<String>,
     /// [Error]s encountered during the search
     pub errors: Option<Vec<Error>>,
+    /// The total count of customers associated with the Square account that match the search query.
+    /// Only customer profiles with public information (given_name, family_name, company_name,
+    /// email_address, or phone_number) are counted. This field is present only if count is set to
+    /// true in the request.
+    pub count: Option<i64>,
 }

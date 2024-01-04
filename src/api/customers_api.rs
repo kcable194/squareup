@@ -14,6 +14,7 @@ use crate::{
         UpdateCustomerResponse,
     },
 };
+use crate::models::{AddGroupToCustomerResponse, DeleteCustomerParameters, EmptyRequestBody, RemoveGroupFromCustomerResponse};
 
 const DEFAULT_URI: &str = "/customers";
 
@@ -30,6 +31,22 @@ impl CustomersApi {
         Self { config, client }
     }
 
+    /// Lists [Customer] profiles associated with a Square account.
+    ///
+    /// Under normal operating conditions, newly created or updated customer profiles become
+    /// available for the listing operation in well under 30 seconds. Occasionally, propagation of
+    /// the new or updated profiles can take closer to one minute or longer, especially during
+    /// network incidents and outages.
+    pub async fn list_customers(
+        &self,
+        params: &ListCustomersParameters,
+    ) -> Result<ListCustomersResponse, ApiError> {
+        let url = format!("{}{}", &self.url(), params.to_query_string());
+        let response = self.client.get(&url).await?;
+
+        response.deserialize().await
+    }
+
     /// Creates a new [Customer] for a business.
     ///
     /// You must provide at least one of the following values in your request to this endpoint:
@@ -44,36 +61,6 @@ impl CustomersApi {
         body: &CreateCustomerRequest,
     ) -> Result<CreateCustomerResponse, ApiError> {
         let response = self.client.post(&self.url(), body).await?;
-
-        response.deserialize().await
-    }
-
-    /// Returns details for a single [Customer].
-    pub async fn retrieve_customer(
-        &self,
-        customer_id: &str,
-    ) -> Result<RetrieveCustomerResponse, ApiError> {
-        let url = format!("{}/{}", &self.url(), customer_id);
-        let response = self.client.get(&url).await?;
-
-        response.deserialize().await
-    }
-
-    /// Deletes a [Customer] profile from a business.
-    ///
-    /// This operation also unlinks any associated cards on file.
-    ///
-    /// As a best practice, you should include the version field in the request to enable optimistic
-    /// concurrency control. The value must be set to the current version of the customer profile.
-    ///
-    /// To delete a customer profile that was created by merging existing profiles, you must use the
-    /// ID of the newly created profile.
-    pub async fn delete_customer(
-        &self,
-        customer_id: &str,
-    ) -> Result<DeleteCustomerResponse, ApiError> {
-        let url = format!("{}/{}", &self.url(), customer_id);
-        let response = self.client.delete(&url).await?;
 
         response.deserialize().await
     }
@@ -98,17 +85,32 @@ impl CustomersApi {
         response.deserialize().await
     }
 
-    /// Lists [Customer] profiles associated with a Square account.
+    /// Deletes a [Customer] profile from a business.
     ///
-    /// Under normal operating conditions, newly created or updated customer profiles become
-    /// available for the listing operation in well under 30 seconds. Occasionally, propagation of
-    /// the new or updated profiles can take closer to one minute or longer, especially during
-    /// network incidents and outages.
-    pub async fn list_customers(
+    /// This operation also unlinks any associated cards on file.
+    ///
+    /// As a best practice, you should include the version field in the request to enable optimistic
+    /// concurrency control. The value must be set to the current version of the customer profile.
+    ///
+    /// To delete a customer profile that was created by merging existing profiles, you must use the
+    /// ID of the newly created profile.
+    pub async fn delete_customer(
         &self,
-        params: &ListCustomersParameters,
-    ) -> Result<ListCustomersResponse, ApiError> {
-        let url = format!("{}{}", &self.url(), params.to_query_string());
+        customer_id: &str,
+        params: &DeleteCustomerParameters,
+    ) -> Result<DeleteCustomerResponse, ApiError> {
+        let url = format!("{}/{}{}", &self.url(), customer_id, params.to_query_string());
+        let response = self.client.delete(&url).await?;
+
+        response.deserialize().await
+    }
+
+    /// Returns details for a single [Customer].
+    pub async fn retrieve_customer(
+        &self,
+        customer_id: &str,
+    ) -> Result<RetrieveCustomerResponse, ApiError> {
+        let url = format!("{}/{}", &self.url(), customer_id);
         let response = self.client.get(&url).await?;
 
         response.deserialize().await
@@ -137,6 +139,38 @@ impl CustomersApi {
     ) -> Result<UpdateCustomerResponse, ApiError> {
         let url = format!("{}/{}", &self.url(), customer_id);
         let response = self.client.put(&url, body).await?;
+
+        response.deserialize().await
+    }
+
+    /// Removes a group membership from a [Customer].
+    ///
+    /// The customer is identified by the customer_id value and the customer group is
+    /// identified by the group_id value.
+    pub async fn remove_group_from_customer(
+        &self,
+        customer_id: &str,
+        group_id: &str,
+    ) -> Result<RemoveGroupFromCustomerResponse, ApiError> {
+        let url = format!("{}/{}/groups/{}", &self.url(), customer_id, group_id);
+        let response = self.client.delete(&url).await?;
+
+        response.deserialize().await
+    }
+
+    /// Adds a group membership to a [Customer].
+    ///
+    /// Adds a group membership to a customer.
+    /// The customer is identified by the customer_id value and the customer group is identified by
+    /// the group_id value.
+    pub async fn add_group_to_customer(
+        &self,
+        customer_id: &str,
+        group_id: &str,
+    ) -> Result<AddGroupToCustomerResponse, ApiError> {
+        let url = format!("{}/{}/groups/{}", &self.url(), customer_id, group_id);
+        let empty_request_body = EmptyRequestBody{};
+        let response = self.client.put(&url, &empty_request_body).await?;
 
         response.deserialize().await
     }
