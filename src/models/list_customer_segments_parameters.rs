@@ -1,5 +1,7 @@
 //! Query parameters for the List Customer Segments API
 
+use std::fmt::Display;
+
 /// This is a model struct for ListCustomerSegmentsParameters (query parameters)
 #[derive(Clone, Debug, Default)]
 pub struct ListCustomerSegmentsParameters {
@@ -31,8 +33,8 @@ impl From<ListCustomerSegmentsParameters> for String {
     }
 }
 
-impl ToString for ListCustomerSegmentsParameters {
-    fn to_string(&self) -> String {
+impl Display for ListCustomerSegmentsParameters {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut params = Vec::new();
 
         if let Some(cursor) = &self.cursor {
@@ -43,10 +45,11 @@ impl ToString for ListCustomerSegmentsParameters {
             params.push(format!("limit={}", limit));
         }
 
-        if params.is_empty() {
+        let str = if params.is_empty() {
             String::new()
         } else {
             format!("?{}", params.join("&"))
-        }
+        };
+        write!(f, "{}", str)
     }
 }
