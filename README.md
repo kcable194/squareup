@@ -20,7 +20,7 @@ your app.
 
 The client is instantiated most simply with
 ```rust
-use square_api_client::{config::Configuration, SquareClient};
+use squareup::{config::Configuration, SquareClient};
 
 let client = SquareClient::try_new(Configuration::default()).unwrap();
 ```
@@ -33,7 +33,7 @@ of `/v2`, a timeout of 60 seconds and no HTTP Client retries.
 
 The Square client can be customized a bit via the properties shown here:
 ```rust
-use square_api_client::{
+use squareup::{
     config::{Configuration, Environment},
     http::{client::{HttpClientConfiguration, RetryConfiguration}, Headers},
 };
@@ -67,7 +67,7 @@ let client = SquareClient::try_new(Configuration {
 Once you have a `SquareClient` instance access to the various APIs is through its properties.
 For example, to access the Payments API, you would:
 ```rust
-use square_api_client::{
+use squareup::{
     config::Configuration,
     models::CreatePaymentRequest,
     SquareClient,

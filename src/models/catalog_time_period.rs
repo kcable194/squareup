@@ -10,7 +10,7 @@ pub struct CatalogTimePeriod {
     ///
     /// Example:
     /// ```
-    /// use square_api_client::models::CatalogTimePeriod;
+    /// use squareup::models::CatalogTimePeriod;
     ///
     /// CatalogTimePeriod {
     ///     event: Some(String::from("DTSTART:20190707T180000\nDURATION:P2H\nRRULE:FREQ=WEEKLY;BYDAY=MO,WE,FR")),

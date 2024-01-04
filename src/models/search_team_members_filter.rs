@@ -10,7 +10,7 @@ use super::enums::TeamMemberStatus;
 /// list-based fields. For example, setting this filter value:
 ///
 /// ```
-/// use square_api_client::models::{enums::TeamMemberStatus, SearchTeamMembersFilter};
+/// use squareup::models::{enums::TeamMemberStatus, SearchTeamMembersFilter};
 ///
 /// let filter = SearchTeamMembersFilter {
 ///     location_ids: Some(vec![String::from("A"), String::from("B")]),
