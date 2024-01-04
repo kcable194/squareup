@@ -119,6 +119,15 @@ pub enum ErrorCode {
     InvalidPauseLength,
     /// The subscription cannot be paused/resumed on the given date.
     InvalidDate,
+    /// The API request references an unsupported country.
+    UnsupportedCountry,
+    /// The API request references an unsupported currency.
+    UnsupportedCurrency,
+    /// The payment was declined by the card issuer during an Apple Tap to Pay (TTP) transaction with a request for the
+    /// card's PIN. This code will be returned alongside CARD_DECLINED_VERIFICATION_REQUIRED as a supplemental error,
+    /// and will include an issuer-provided token in the details field that is needed to initiate the PIN collection
+    /// flow on the iOS device.
+    AppleTtpPinToken,
     /// The card issuer declined the request because the card is expired.
     CardExpired,
     /// The expiration date for the payment card is invalid. For example, it indicates a date in the
@@ -138,6 +147,9 @@ pub enum ErrorCode {
     InvalidEncryptedCard,
     /// The credit card cannot be validated based on the provided details.
     InvalidCard,
+    /// The payment was declined because there was a payment amount mismatch. The money amount Square was expecting
+    /// does not match the amount provided.
+    PaymentAmountMismatch,
     /// Square received a decline without any additional information. If the payment information
     /// seems correct, the buyer can contact their issuer to ask for more information.
     GenericDecline,
@@ -230,6 +242,8 @@ pub enum ErrorCode {
     PaymentNotRefundable,
     /// Request failed - The card issuer declined the refund.
     RefundDeclined,
+    /// The Square account does not have the permissions to process this refund.
+    InsufficientPermissionsForRefund,
     /// Generic error - the provided card data is invalid.
     InvalidCardData,
     /// The provided source id was already used to create a card.
@@ -259,6 +273,18 @@ pub enum ErrorCode {
     InvalidSquareVersionFormat,
     /// The provided Square-Version is incompatible with the requested action.
     ApiVersionIncompatible,
+    /// The transaction requires that a card be present.
+    CardPresenceRequired,
+    /// The API request references an unsupported source type.
+    UnsupportedSourceType,
+    /// The provided card does not match what is expected.
+    CardMismatch,
+    /// Generic plaid error
+    PlaidError,
+    /// Plaid error - ITEM_LOGIN_REQUIRED
+    PlaidErrorItemLoginRequired,
+    /// Plaid error - RATE_LIMIT
+    PlaidErrorRateLimit,
     /// The card was declined.
     CardDeclined,
     /// The CVV could not be verified.
@@ -266,7 +292,7 @@ pub enum ErrorCode {
     /// The AVS could not be verified.
     VerifyAvsFailure,
     /// The payment card was declined with a request for the card holder to call the issuer.
-    CardDeclinedCallIssure,
+    CardDeclinedCallIssuer,
     /// The payment card was declined with a request for additional verification.
     CardDeclinedVerificationRequired,
     /// The card expiration date is either missing or incorrectly formatted.
@@ -278,6 +304,8 @@ pub enum ErrorCode {
     AllowablePinTriesExceeded,
     /// The card issuer declined the refund.
     ReservationDeclined,
+    /// The body parameter is not recognized by the requested endpoint.
+    UnknownBodyParameter,
     /// Not Found - a general error occurred.
     NotFound,
     /// Square could not find the associated Apple Pay certificate.

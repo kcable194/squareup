@@ -29,4 +29,6 @@ pub enum ErrorCategory {
     RefundError,
     /// An error occurred when checking a merchant subscription status
     MerchantSubscriptionError,
+    /// An error that is returned from an external vendor's API
+    ExternalVendorError,
 }
