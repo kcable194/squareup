@@ -1,5 +1,6 @@
 //! Model struct for ListCardsParameters (query parameters)
 
+use std::fmt::Display;
 use super::enums::SortOrder;
 
 const DEFAULT_SORT_ORDER: SortOrder = SortOrder::Asc;
@@ -48,8 +49,8 @@ impl From<ListCardsParameters> for String {
     }
 }
 
-impl ToString for ListCardsParameters {
-    fn to_string(&self) -> String {
+impl Display for ListCardsParameters {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut params = Vec::new();
 
         if !self.cursor.is_empty() {
@@ -72,10 +73,11 @@ impl ToString for ListCardsParameters {
             params.push(format!("sort_order={}", serde_json::to_string(&self.sort_order).unwrap()));
         }
 
-        if params.is_empty() {
+        let str = if params.is_empty() {
             String::new()
         } else {
             format!("?{}", params.join("&"))
-        }
+        };
+        write!(f, "{}", str)
     }
 }

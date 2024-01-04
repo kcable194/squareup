@@ -3,7 +3,7 @@
 use serde::{Deserialize, Serialize};
 
 use super::{
-    enums::{CardBrand, CardPrepaidType, CardType},
+    enums::{CardBrand, CardPrepaidType, CardType, CardCoBrand},
     Address,
 };
 
@@ -52,4 +52,7 @@ pub struct Card {
     /// existing Card object will be rejected unless the version in the request matches the current
     /// version for the Card.
     pub version: Option<i32>,
+    /// **Read only** The card's co-brand if available. For example, an Afterpay virtual card would
+    /// have a co-brand of AFTERPAY.
+    pub card_co_brand: Option<CardCoBrand>,
 }

@@ -5,6 +5,7 @@ mod application_details_external_square_product;
 mod bank_account_payment_details_account_ownership_type;
 mod bank_account_payment_details_transfer_type;
 mod card_brand;
+mod card_co_brand;
 mod card_payment_details_avs_status;
 mod card_payment_details_cvv_status;
 mod card_payment_details_entry_method;
@@ -110,6 +111,7 @@ pub use application_details_external_square_product::ApplicationDetailsExternalS
 pub use bank_account_payment_details_account_ownership_type::BankAccountPaymentDetailsAccountOwnershipType;
 pub use bank_account_payment_details_transfer_type::BankAccountPaymentDetailsTransferType;
 pub use card_brand::CardBrand;
+pub use card_co_brand::CardCoBrand;
 pub use card_payment_details_avs_status::CardPaymentDetailsAvsStatus;
 pub use card_payment_details_cvv_status::CardPaymentDetailsCvvStatus;
 pub use card_payment_details_entry_method::CardPaymentDetailsEntryMethod;

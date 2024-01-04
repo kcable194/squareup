@@ -25,13 +25,25 @@ pub struct Address {
     pub locality: Option<String>,
     /// A civil region within the address's `locality`, if any.
     pub sublocality: Option<String>,
+    /// A civil region within the address's `sublocality`, if any.
+    pub sublocality_2: Option<String>,
+    /// A civil region within the address's `sublocality_2`, if any.
+    pub sublocality_3: Option<String>,
     /// A civil entity within the address's country. In the US, this is the state. For a full list
     /// of field meanings by country, see [Working with
     /// Addresses](https://developer.squareup.com/docs/build-basics/working-with-addresses).
     pub administrative_district_level_1: Option<String>,
+    /// A civil entity within the address's administrative_district_level_1. In the US, this is the county.
+    pub administrative_district_level_2: Option<String>,
+    /// A civil entity within the address's administrative_district_level_2, if any.
+    pub administrative_district_level_3: Option<String>,
     /// The address's postal code. For a full list of field meanings by country, see [Working with
     /// Addresses](https://developer.squareup.com/docs/build-basics/working-with-addresses).
     pub postal_code: Option<String>,
     /// The address's country, in the two-letter format of ISO 3166. For example, `US` or `FR`.
     pub country: Option<Country>,
+    /// Optional first name when it's representing recipient.
+    pub first_name: Option<String>,
+    /// Optional last name when it's representing recipient.
+    pub last_name: Option<String>,
 }
