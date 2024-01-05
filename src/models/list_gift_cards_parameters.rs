@@ -1,5 +1,6 @@
 //! Query parameters for the List Gift Cards API
 
+use std::fmt::Display;
 use super::enums::{GiftCardStatus, GiftCardType};
 
 /// This is a model struct for ListGiftCardsParameters (query parameters)
@@ -37,8 +38,8 @@ impl From<ListGiftCardsParameters> for String {
     }
 }
 
-impl ToString for ListGiftCardsParameters {
-    fn to_string(&self) -> String {
+impl Display for ListGiftCardsParameters {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut params = Vec::new();
 
         if let Some(gift_card_type) = &self.r#type {
@@ -61,10 +62,11 @@ impl ToString for ListGiftCardsParameters {
             params.push(format!("customer_id={}", customer_id));
         }
 
-        if params.is_empty() {
+        let str = if params.is_empty() {
             String::new()
         } else {
             format!("?{}", params.join("&"))
-        }
+        };
+        write!(f, "{}", str)
     }
 }
