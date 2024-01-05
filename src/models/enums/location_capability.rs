@@ -10,4 +10,6 @@ pub enum LocationCapability {
     CreditCardProcessing,
     /// The capability to receive automatic transfers from Square.
     AutomaticTransfers,
+    /// The capability to process unlinked refunds with Square.
+    UnlinkedRefunds,
 }
