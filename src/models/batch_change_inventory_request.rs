@@ -13,5 +13,5 @@ pub struct BatchChangeInventoryRequest {
     pub changes: Option<Vec<InventoryChange>>,
     /// Indicates whether the current physical count should be ignored if the quantity is unchanged.
     ///  Default: true.
-    pub ignore_unchanged_count: bool,
+    pub ignore_unchanged_count: Option<bool>,
 }

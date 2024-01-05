@@ -2,7 +2,7 @@
 //! and physical counts for quantities of products (as item variations) and
 //! transitions of stocked products to the relevant inventory state.
 //!
-//! hese include the following key data types for the Inventory API:
+//! these include the following key data types for the Inventory API:
 
 //! InventoryCount - computed quantity of an item variation at a specific location.
 //! InventoryAdjustment - quantity of an item variation transitioning from one state to another.
@@ -17,7 +17,7 @@ use crate::{
         BatchRetrieveInventoryChangesRequest, BatchRetrieveInventoryChangesResponse,
         BatchRetrieveInventoryCountsRequest, BatchRetrieveInventoryCountsResponse,
         RetrieveInventoryAdjustmentResponse, RetrieveInventoryCountParams,
-        RetrieveInventoryCountResponse, RetrieveInventoryPhysicalCount,
+        RetrieveInventoryCountResponse, RetrieveInventoryPhysicalCountResponse,
         RetrieveInventoryTransferResponse,
     },
 };
@@ -36,29 +36,6 @@ impl InventoryApi {
         Self { config, client }
     }
 
-    /// Retrieves the current calculated stock count for a given CatalogObject at a given set of Locations.
-    pub async fn retrieve_inventory_count(
-        &self,
-        catalog_object_id: &str,
-        params: RetrieveInventoryCountParams,
-    ) -> Result<RetrieveInventoryCountResponse, ApiError> {
-        let url = format!("{}/{}{}", &self.url(), catalog_object_id, params.to_query_string());
-        let response = self.client.get(&url).await?;
-
-        response.deserialize().await
-    }
-
-    /// Returns the InventoryTransfer object with the provided transfer_id.
-    pub async fn retrieve_inventory_transfer(
-        &self,
-        transfer_id: &str,
-    ) -> Result<RetrieveInventoryTransferResponse, ApiError> {
-        let url = format!("{}/{}", &self.url(), transfer_id);
-        let response = self.client.get(&url).await?;
-
-        response.deserialize().await
-    }
-
     /// Returns the InventoryAdjustment object with the provided adjustment id.
     pub async fn retrieve_inventory_adjustment(
         &self,
@@ -70,21 +47,10 @@ impl InventoryApi {
         response.deserialize().await
     }
 
-    /// Returns the InventoryPhysicalCount object with the provided physical_count_id.
-    pub async fn retrieve_inventory_physical_count(
-        &self,
-        physical_count_id: &str,
-    ) -> Result<RetrieveInventoryPhysicalCount, ApiError> {
-        let url = format!("{}/{}", &self.url(), physical_count_id);
-        let response = self.client.get(&url).await?;
-
-        response.deserialize().await
-    }
-
     /// Applies adjustments and counts to the provided item quantities.
     /// On success: returns the current calculated counts for all objects referenced in the request.
     /// On failure: returns a list of related errors.
-    pub async fn batch_change(
+    pub async fn batch_change_inventory(
         &self,
         body: &BatchChangeInventoryRequest,
     ) -> Result<BatchChangeInventoryResponse, ApiError> {
@@ -94,9 +60,21 @@ impl InventoryApi {
         response.deserialize().await
     }
 
+    /// Returns historical physical counts and adjustments based on the provided filter criteria.
+    /// Results are paginated and sorted in ascending order according their occurred_at timestamp.
+    pub async fn batch_retrieve_inventory_changes(
+        &self,
+        body: &BatchRetrieveInventoryChangesRequest,
+    ) -> Result<BatchRetrieveInventoryChangesResponse, ApiError> {
+        let url = format!("{}/changes/batch-retrieve", &self.url());
+        let response = self.client.post(&url, body).await?;
+
+        response.deserialize().await
+    }
+
     /// Returns current counts for the provided CatalogObjects at the requested Locations.
     /// Results are paginated and sorted in descending order according to their calculated_at timestamp.
-    pub async fn batch_retrieve_count(
+    pub async fn batch_retrieve_inventory_counts(
         &self,
         body: &BatchRetrieveInventoryCountsRequest,
     ) -> Result<BatchRetrieveInventoryCountsResponse, ApiError> {
@@ -106,14 +84,36 @@ impl InventoryApi {
         response.deserialize().await
     }
 
-    /// Returns historical physical counts and adjustments based on the provided filter criteria.
-    /// Results are paginated and sorted in ascending order according their occurred_at timestamp.
-    pub async fn batch_retrieve_changes(
+    /// Returns the InventoryPhysicalCount object with the provided physical_count_id.
+    pub async fn retrieve_inventory_physical_count(
         &self,
-        body: &BatchRetrieveInventoryChangesRequest,
-    ) -> Result<BatchRetrieveInventoryChangesResponse, ApiError> {
-        let url = format!("{}/changes/batch-retrieve", &self.url());
-        let response = self.client.post(&url, body).await?;
+        physical_count_id: &str,
+    ) -> Result<RetrieveInventoryPhysicalCountResponse, ApiError> {
+        let url = format!("{}/physical-counts/{}", &self.url(), physical_count_id);
+        let response = self.client.get(&url).await?;
+
+        response.deserialize().await
+    }
+
+    /// Returns the InventoryTransfer object with the provided transfer_id.
+    pub async fn retrieve_inventory_transfer(
+        &self,
+        transfer_id: &str,
+    ) -> Result<RetrieveInventoryTransferResponse, ApiError> {
+        let url = format!("{}/transfers/{}", &self.url(), transfer_id);
+        let response = self.client.get(&url).await?;
+
+        response.deserialize().await
+    }
+
+    /// Retrieves the current calculated stock count for a given CatalogObject at a given set of Locations.
+    pub async fn retrieve_inventory_count(
+        &self,
+        catalog_object_id: &str,
+        params: RetrieveInventoryCountParams,
+    ) -> Result<RetrieveInventoryCountResponse, ApiError> {
+        let url = format!("{}/{}{}", &self.url(), catalog_object_id, params.to_query_string());
+        let response = self.client.get(&url).await?;
 
         response.deserialize().await
     }

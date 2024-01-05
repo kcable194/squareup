@@ -1,7 +1,10 @@
 //! Model struct for RetrieveInventoryCountParams type
 
+use std::fmt::Display;
+
 #[derive(Clone, Debug, Default)]
 pub struct RetrieveInventoryCountParams {
+    /// The Location IDs to look up as a comma-separated list. An empty list queries all locations.
     pub location_ids: Option<Vec<String>>,
     /// The pagination cursor returned in the previous response. Leave unset for an initial request.
     /// The page size is currently set to be 100.
@@ -22,8 +25,8 @@ impl From<RetrieveInventoryCountParams> for String {
     }
 }
 
-impl ToString for RetrieveInventoryCountParams {
-    fn to_string(&self) -> String {
+impl Display for RetrieveInventoryCountParams {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut params = Vec::new();
 
         if let Some(location_ids) = &self.location_ids {
@@ -34,10 +37,11 @@ impl ToString for RetrieveInventoryCountParams {
             params.push(format!("cursor={}", cursor));
         }
 
-        if params.is_empty() {
+        let str = if params.is_empty() {
             String::new()
         } else {
             format!("?{}", params.join("&"))
-        }
+        };
+        write!(f, "{}", str)
     }
 }

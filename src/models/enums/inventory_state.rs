@@ -32,6 +32,7 @@ pub enum InventoryState {
     ReceivedFromVendor,
     /// The related quantity of items are in transit between locations. READ-ONLY*: the Inventory
     /// API cannot move quantities to or from this state.
+    #[deprecated]
     InTransitTo,
     /// A placeholder indicating that the related quantity of items are not currently tracked in
     /// Square. Transferring quantities from the NONE state to a tracked state (e.g., IN_STOCK)
@@ -50,5 +51,8 @@ pub enum InventoryState {
     Decomposed,
     /// This state is not supported by this version of the Square API. We recommend that you upgrade
     /// the client to use the appropriate version of the Square API supporting this state.
-    SuportedByNewerVersion,
+    SupportedByNewerVersion,
+    /// The related quantity of items are in transit between locations. **READ-ONLY:** the Inventory API
+    /// cannot currently be used to move quantities to or from this inventory state.
+    InTransit,
 }
