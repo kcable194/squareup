@@ -27,4 +27,11 @@ pub struct OrderReturnLineItemModifier {
     /// **Read only** The total price of the item modifier for its line item. This is the modifier's
     /// `base_price_money` multiplied by the line item's quantity.
     pub total_price_money: Option<Money>,
+    /// The quantity of the line item modifier. The modifier quantity can be 0 or more. For example, suppose
+    /// a restaurant offers a cheeseburger on the menu. When a buyer orders this item, the restaurant records
+    /// the purchase by creating an Order object with a line item for a burger. The line item includes a line
+    /// item modifier: the name is cheese and the quantity is 1. The buyer has the option to order extra
+    /// cheese (or no cheese). If the buyer chooses the extra cheese option, the modifier quantity increases
+    /// to 2. If the buyer does not want any cheese, the modifier quantity is set to 0.
+    pub quantity: Option<String>,
 }

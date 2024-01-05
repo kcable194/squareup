@@ -45,7 +45,7 @@ pub struct OrderReturnDiscount {
     pub applied_money: Option<Money>,
     /// Indicates the level at which the `OrderReturnDiscount` applies. For `ORDER` scoped
     /// discounts, the server generates references in `applied_discounts` on all
-    /// `OrderReturnLineItems`. For `LINE_ITEM` scoped discounts, the discount is only applied to
+    /// `OrderReturnLineItems`. For `LineItem` scoped discounts, the discount is only applied to
     /// `OrderReturnLineItems` with references in their `applied_discounts` field.
     pub scope: Option<OrderLineItemDiscountScope>,
 }

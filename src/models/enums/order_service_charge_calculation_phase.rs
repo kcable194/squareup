@@ -15,4 +15,10 @@ pub enum OrderServiceChargeCalculationPhase {
     SubtotalPhase,
     /// The service charge is applied after all discounts and taxes are applied.
     TotalPhase,
+    /// The service charge is calculated as a compounding adjustment after any discounts, but before amount
+    /// based apportioned service charges and any tax considerations.
+    ApportionedPercentagePhase,
+    /// The service charge is calculated as a compounding adjustment after any discounts and percentage based
+    /// apportioned service charges, but before any tax considerations.
+    ApportionedAmountPhase,
 }

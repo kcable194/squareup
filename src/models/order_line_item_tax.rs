@@ -52,7 +52,7 @@ pub struct OrderLineItemTax {
     /// The amount of money applied by the tax in the order.
     pub applied_money: Option<Money>,
     /// Indicates the level at which the tax applies. For `ORDER` scoped taxes, Square generates
-    /// references in `applied_taxes` on all order line items that do not have them. For `LINE_ITEM`
+    /// references in `applied_taxes` on all order line items that do not have them. For `LineItem`
     /// scoped taxes, the tax only applies to line items with references in their `applied_taxes`
     /// field.
     ///

@@ -8,5 +8,5 @@ use super::enums::OrderState;
 #[derive(Clone, Debug, Default, Eq, PartialEq, Serialize)]
 pub struct SearchOrdersStateFilter {
     /// States to filter for.
-    pub states: Option<Vec<OrderState>>,
+    pub states: Vec<OrderState>,
 }

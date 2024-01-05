@@ -1,6 +1,7 @@
 //! Model struct for OrderReturnServiceCharge type
 
 use serde::{Deserialize, Serialize};
+use crate::models::enums::{OrderServiceChargeScope, OrderServiceChargeTreatmentType};
 
 use super::{enums::OrderServiceChargeCalculationPhase, Money, OrderLineItemAppliedTax};
 
@@ -52,4 +53,14 @@ pub struct OrderReturnServiceCharge {
     /// the `uid` of a top-level `OrderReturnTax` that is being applied to the
     /// `OrderReturnServiceCharge`. On reads, the applied amount is populated.
     pub applied_taxes: Option<Vec<OrderLineItemAppliedTax>>,
+    /// **Read only** The treatment type of the service charge.
+    pub treatment_type: Option<OrderServiceChargeTreatmentType>,
+    /// Indicates the level at which the apportioned service charge applies. For ORDER scoped service charges,
+    /// Square generates references in applied_service_charges on all order line items that do not have them.
+    /// For LINE_ITEM scoped service charges, the service charge only applies to line items with a service
+    /// charge reference in their applied_service_charges field.
+    ///
+    /// This field is immutable. To change the scope of an apportioned service charge, you must delete the
+    /// apportioned service charge and re-add it as a new apportioned service charge.
+    pub scope: Option<OrderServiceChargeScope>,
 }

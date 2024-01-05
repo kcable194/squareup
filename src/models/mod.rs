@@ -368,6 +368,10 @@ mod add_group_to_customer_response;
 mod empty_request_body;
 mod gift_card_activity_transfer_balance_to;
 mod gift_card_activity_transfer_balance_from;
+mod order_line_item_applied_service_charge;
+mod tender_bank_account_details;
+mod tender_buy_now_pay_later_details;
+mod tender_square_account_details;
 
 pub use ach_details::AchDetails;
 pub use additional_recipient::AdditionalRecipient;
@@ -734,3 +738,7 @@ pub use add_group_to_customer_response::AddGroupToCustomerResponse;
 pub use empty_request_body::EmptyRequestBody;
 pub use gift_card_activity_transfer_balance_to::GiftCardActivityTransferBalanceTo;
 pub use gift_card_activity_transfer_balance_from::GiftCardActivityTransferBalanceFrom;
+pub use order_line_item_applied_service_charge::OrderLineItemAppliedServiceCharge;
+pub use tender_bank_account_details::TenderBankAccountDetails;
+pub use tender_buy_now_pay_later_details::TenderBuyNowPayLaterDetails;
+pub use tender_square_account_details::TenderSquareAccountDetails;

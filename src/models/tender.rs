@@ -2,9 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::{
-    enums::TenderType, AdditionalRecipient, DateTime, Money, TenderCardDetails, TenderCashDetails,
-};
+use super::{enums::TenderType, AdditionalRecipient, DateTime, Money, TenderCardDetails, TenderCashDetails, TenderBankAccountDetails, TenderBuyNowPayLaterDetails, TenderSquareAccountDetails};
 
 /// Represents a tender (i.e., a method of payment) used in a Square transaction.
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
@@ -43,6 +41,18 @@ pub struct Tender {
     ///
     /// This value is present only if the value of `type` is `CASH`.
     pub cash_details: Option<TenderCashDetails>,
+    /// The details of the bank account tender.
+    ///
+    /// This value is present only if the value of type is BANK_ACCOUNT.
+    pub bank_account_details: Option<TenderBankAccountDetails>,
+    /// The details of a Buy Now Pay Later tender.
+    ///
+    /// This value is present only if the value of type is BUY_NOW_PAY_LATER.
+    pub buy_now_pay_later_details: Option<TenderBuyNowPayLaterDetails>,
+    /// The details of a Square Account tender.
+    ///
+    /// This value is present only if the value of type is SQUARE_ACCOUNT.
+    pub square_account_details: Option<TenderSquareAccountDetails>,
     /// Additional recipients (other than the merchant) receiving a portion of this tender. For
     /// example, fees assessed on the purchase by a third party integration.
     #[deprecated]

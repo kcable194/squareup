@@ -106,7 +106,7 @@ pub struct Payment {
     /// `source_type` is `WALLET`.
     pub wallet_details: Option<DigitalWalletDetails>,
     /// **Read only** Details about a Buy Now Pay Later payment. The details are only populated if
-    /// the `source_type` is `BUY_NOW_PAY_LATER`. For more information, see [Afterpay
+    /// the `source_type` is `BuyNowPayLater`. For more information, see [Afterpay
     /// Payments](https://developer.squareup.com/docs/payments-api/take-payments/afterpay-payments).
     pub buy_now_pay_later_details: Option<BuyNowPayLaterDetails>,
     /// **Read only** The ID of the location associated with the payment.

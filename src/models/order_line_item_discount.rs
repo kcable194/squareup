@@ -67,7 +67,7 @@ pub struct OrderLineItemDiscount {
     pub metadata: Option<HashMap<String, String>>,
     /// Indicates the level at which the discount applies. For `ORDER` scoped discounts, Square
     /// generates references in `applied_discounts` on all order line items that do not have them.
-    /// For `LINE_ITEM` scoped discounts, the discount only applies to line items with a discount
+    /// For `LineItem` scoped discounts, the discount only applies to line items with a discount
     /// reference in their `applied_discounts` field.
     ///
     /// This field is immutable. To change the scope of a discount, you must delete the discount and

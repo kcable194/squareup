@@ -19,11 +19,17 @@ pub enum TenderType {
     SquareGiftCard,
     /// This tender represents the register being opened for a "no sale" event.
     NoSale,
+    /// A bank account payment.
+    BankAccount,
     /// A payment from a digital wallet, e.g. Cash App.
     ///
     /// Note: Some "digital wallets", including Google Pay and Apple Pay, facilitate card payments.
     /// Those payments have the `CARD` type.
     Wallet,
+    /// A Buy Now Pay Later payment.
+    BuyNowPayLater,
+    /// A Square House Account payment.
+    SquareAccount,
     /// A form of tender that does not match any other value.
     Other,
 }

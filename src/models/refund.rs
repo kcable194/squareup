@@ -12,7 +12,7 @@ pub struct Refund {
     /// **Required** The ID of the refund's associated location.
     pub location_id: String,
     /// **Required** The ID of the transaction that the refunded tender is part of.
-    pub transaction_id: String,
+    pub transaction_id: Option<String>,
     /// **Required** The ID of the refunded tender.
     pub tender_id: String,
     /// **Read only** The timestamp for when the refund was created.

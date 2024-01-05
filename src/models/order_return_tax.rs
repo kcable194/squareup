@@ -32,7 +32,7 @@ pub struct OrderReturnTax {
     /// The amount of money applied by the tax in an order.
     pub applied_money: Option<Money>,
     /// Indicates the level at which the `OrderReturnTax` applies. For `ORDER` scoped taxes, Square
-    /// generates references in `applied_taxes` on all `OrderReturnLineItems`. For `LINE_ITEM`
+    /// generates references in `applied_taxes` on all `OrderReturnLineItems`. For `LineItem`
     /// scoped taxes, the tax is only applied to `OrderReturnLineItems` with references in their
     /// `applied_discounts` field.
     pub scope: Option<OrderLineItemTaxScope>,

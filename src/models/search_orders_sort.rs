@@ -18,7 +18,7 @@ pub struct SearchOrdersSort {
     /// field in `DateTimeFilter`, `SearchOrders` returns an error.
     ///
     /// Default: `CREATED_AT`.
-    pub sort_field: Option<SearchOrdersSortField>,
+    pub sort_field: SearchOrdersSortField,
     /// The chronological order in which results are returned. Defaults to DESC.
     pub sort_order: Option<SortOrder>,
 }

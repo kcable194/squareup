@@ -22,5 +22,5 @@ pub struct SearchOrdersRequest {
     pub limit: Option<i32>,
     /// A Boolean that controls the format of the search results. If true, SearchOrders returns
     /// OrderEntry objects. If false, SearchOrders returns complete order objects.
-    pub return_entries: bool,
+    pub return_entries: Option<bool>,
 }

@@ -2,10 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::{
-    enums::OrderFulfillmentPickupDetailsScheduleType, DateTime,
-    OrderFulfillmentPickupDetailsCurbsidePickupDetails, OrderFulfillmentRecipient,
-};
+use super::{enums::OrderFulfillmentPickupDetailsScheduleType, DateTime, OrderFulfillmentPickupDetailsCurbsidePickupDetails, OrderFulfillmentRecipient, OrderFulfillmentShipmentDetails, OrderFulfillmentDeliveryDetails};
 
 /// This is a model struct for OrderFulfillmentPickupDetails type.
 ///
@@ -85,4 +82,14 @@ pub struct OrderFulfillmentPickupDetails {
     /// Specific details for curbside pickup. These details can only be populated if
     /// `is_curbside_pickup` is set to `true`.
     pub curbside_pickup_details: Option<OrderFulfillmentPickupDetailsCurbsidePickupDetails>,
+    /// Contains details for a shipment fulfillment. These details are required when the fulfillment type
+    /// is SHIPMENT.
+    ///
+    /// A shipment fulfillment's relationship to fulfillment state: PROPOSED: A shipment is requested.
+    /// RESERVED: Fulfillment accepted. Shipment processing. PREPARED: Shipment packaged. Shipping label
+    /// created. COMPLETED: Package has been shipped. CANCELED: Shipment has been canceled. FAILED: Shipment
+    /// has failed.
+    pub shipment_details: Option<OrderFulfillmentShipmentDetails>,
+    ///
+    pub delivery_details: Option<OrderFulfillmentDeliveryDetails>
 }

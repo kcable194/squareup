@@ -3,6 +3,7 @@
 use std::collections::HashMap;
 
 use serde::{Deserialize, Serialize};
+use crate::models::enums::{OrderServiceChargeScope, OrderServiceChargeTreatmentType};
 
 use super::{
     enums::{OrderServiceChargeCalculationPhase, OrderServiceChargeType},
@@ -57,7 +58,7 @@ pub struct OrderServiceCharge {
     ///
     /// An `OrderLineItemAppliedTax` is automatically created on every taxable service charge for
     /// all `ORDER` scoped taxes that are added to the order. `OrderLineItemAppliedTax` records for
-    /// `LINE_ITEM` scoped taxes must be added in requests for the tax to apply to any taxable
+    /// `LineItem` scoped taxes must be added in requests for the tax to apply to any taxable
     /// service charge. Taxable service charges have the `taxable` field set to `true` and
     /// calculated in the `SUBTOTAL_PHASE`.
     ///
@@ -85,4 +86,14 @@ pub struct OrderServiceCharge {
     pub metadata: Option<HashMap<String, String>>,
     /// **Read only** The type of the service charge.
     pub r#type: Option<OrderServiceChargeType>,
+    /// **Read only** The treatment type of the service charge.
+    pub treatment_type: Option<OrderServiceChargeTreatmentType>,
+    /// Indicates the level at which the apportioned service charge applies. For ORDER scoped service charges,
+    /// Square generates references in applied_service_charges on all order line items that do not have them.
+    /// For LineItem scoped service charges, the service charge only applies to line items with a service
+    /// charge reference in their applied_service_charges field.
+    ///
+    /// This field is immutable. To change the scope of an apportioned service charge, you must delete the
+    /// apportioned service charge and re-add it as a new apportioned service charge
+    pub scope: Option<OrderServiceChargeScope>,
 }

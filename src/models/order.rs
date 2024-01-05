@@ -22,7 +22,7 @@ pub struct Order {
     /// **Read only** The order's unique ID.
     pub id: Option<String>,
     /// The ID of the seller location that this order is associated with.
-    pub location_id: Option<String>,
+    pub location_id: String,
     /// A client-specified ID to associate an entity in another system with this order.
     pub reference_id: Option<String>,
     /// The origination details of the order.
@@ -39,23 +39,23 @@ pub struct Order {
     pub line_items: Option<Vec<OrderLineItem>>,
     /// The list of all taxes associated with the order.
     ///
-    /// Taxes can be scoped to either `ORDER` or `LINE_ITEM`. For taxes with `LINE_ITEM` scope, an
+    /// Taxes can be scoped to either `ORDER` or `LineItem`. For taxes with `LineItem` scope, an
     /// `OrderLineItemAppliedTax` must be added to each line item that the tax applies to. For taxes
     /// with `ORDER` scope, the server generates an `OrderLineItemAppliedTax` for every line item.
     ///
     /// On reads, each tax in the list includes the total amount of that tax applied to the order.
     ///
-    /// **IMPORTANT:** If `LINE_ITEM` scope is set on any taxes in this field, using the deprecated
+    /// **IMPORTANT:** If `LineItem` scope is set on any taxes in this field, using the deprecated
     /// `line_items.taxes` field results in an error. Use `line_items.applied_taxes` instead.
     pub taxes: Option<Vec<OrderLineItemTax>>,
     /// The list of all discounts associated with the order.
     ///
-    /// Discounts can be scoped to either `ORDER` or `LINE_ITEM`. For discounts scoped to
-    /// `LINE_ITEM`, an `OrderLineItemAppliedDiscount` must be added to each line item that the
+    /// Discounts can be scoped to either `ORDER` or `LineItem`. For discounts scoped to
+    /// `LineItem`, an `OrderLineItemAppliedDiscount` must be added to each line item that the
     /// discount applies to. For discounts with `ORDER` scope, the server generates an
     /// `OrderLineItemAppliedDiscount` for every line item.
     ///
-    /// **IMPORTANT:** If `LINE_ITEM` scope is set on any discounts in this field, using the
+    /// **IMPORTANT:** If `LineItem` scope is set on any discounts in this field, using the
     /// deprecated `line_items.discounts` field results in an error. Use
     /// `line_items.applied_discounts` instead.
     pub discounts: Option<Vec<OrderLineItemDiscount>>,
@@ -142,4 +142,6 @@ pub struct Order {
     pub pricing_options: Option<OrderPricingOptions>,
     /// **Read only** A set-like list of Rewards that have been added to the Order.
     pub rewards: Option<Vec<OrderReward>>,
+    /// **Read only** The net amount of money due on the order.
+    pub net_amount_due_money: Option<Money>,
 }

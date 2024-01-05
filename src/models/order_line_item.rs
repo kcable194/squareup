@@ -4,10 +4,7 @@ use std::collections::HashMap;
 
 use serde::{Deserialize, Serialize};
 
-use super::{
-    enums::OrderLineItemItemType, Money, OrderLineItemAppliedDiscount, OrderLineItemAppliedTax,
-    OrderLineItemModifier, OrderLineItemPricingBlocklists, OrderQuantityUnit,
-};
+use super::{enums::OrderLineItemItemType, Money, OrderLineItemAppliedDiscount, OrderLineItemAppliedServiceCharge, OrderLineItemAppliedTax, OrderLineItemModifier, OrderLineItemPricingBlocklists, OrderQuantityUnit};
 
 /// Represents a line item in an order.
 ///
@@ -66,7 +63,7 @@ pub struct OrderLineItem {
     /// line item. On reads, the amount applied is populated.
     ///
     /// An `OrderLineItemAppliedTax` is automatically created on every line item for all `ORDER`
-    /// scoped taxes added to the order. `OrderLineItemAppliedTax` records for `LINE_ITEM` scoped
+    /// scoped taxes added to the order. `OrderLineItemAppliedTax` records for `LineItem` scoped
     /// taxes must be added in requests for the tax to apply to any line items.
     ///
     /// To change the amount of a tax, modify the referenced top-level tax.
@@ -78,11 +75,17 @@ pub struct OrderLineItem {
     ///
     /// An `OrderLineItemAppliedDiscount` is automatically created on every line item for all
     /// `ORDER` scoped discounts that are added to the order. `OrderLineItemAppliedDiscount` records
-    /// for `LINE_ITEM` scoped discounts must be added in requests for the discount to apply to any
+    /// for `LineItem` scoped discounts must be added in requests for the discount to apply to any
     /// line items.
     ///
     /// To change the amount of a discount, modify the referenced top-level discount.
     pub applied_discounts: Option<Vec<OrderLineItemAppliedDiscount>>,
+    /// The list of references to service charges applied to this line item. Each OrderLineItemAppliedServiceCharge
+    /// has a service_charge_id that references the uid of a top-level OrderServiceCharge applied to the line item.
+    /// On reads, the amount applied is populated.
+    ///
+    /// To change the amount of a service charge, modify the referenced top-level service charge.
+    pub applied_service_charges: Option<Vec<OrderLineItemAppliedServiceCharge>>,
     /// The base price for a single unit of the line item.
     pub base_price_money: Option<Money>,
     /// **Read only** The total price of all item variations sold in this line item. The price is
@@ -101,4 +104,6 @@ pub struct OrderLineItem {
     /// line item. For more information, see [Apply Taxes and
     /// Discounts](https://developer.squareup.com/docs/orders-api/apply-taxes-and-discounts).
     pub pricing_blocklists: Option<OrderLineItemPricingBlocklists>,
+    /// **Read only** The total amount of apportioned service charge money to collect for the line item.
+    pub total_service_charge_money: Option<Money>,
 }
