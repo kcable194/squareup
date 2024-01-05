@@ -2,12 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::{
-    enums::{PaymentCapability, PaymentDelayAction, PaymentSourceType, PaymentStatus},
-    Address, ApplicationDetails, BankAccountPaymentDetails, BuyNowPayLaterDetails,
-    CardPaymentDetails, CashPaymentDetails, DateTime, DeviceDetails, DigitalWalletDetails,
-    ExternalPaymentDetails, Money, ProcessingFee, RiskEvaluation,
-};
+use super::{enums::{PaymentCapability, PaymentDelayAction, PaymentSourceType, PaymentStatus}, Address, ApplicationDetails, BankAccountPaymentDetails, BuyNowPayLaterDetails, CardPaymentDetails, CashPaymentDetails, DateTime, DeviceDetails, DigitalWalletDetails, ExternalPaymentDetails, Money, ProcessingFee, RiskEvaluation, TenderSquareAccountDetails, SquareAccountDetails};
 
 /// Represents a payment processed by the Square API.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]
@@ -109,6 +104,9 @@ pub struct Payment {
     /// the `source_type` is `BuyNowPayLater`. For more information, see [Afterpay
     /// Payments](https://developer.squareup.com/docs/payments-api/take-payments/afterpay-payments).
     pub buy_now_pay_later_details: Option<BuyNowPayLaterDetails>,
+    /// **Read only** Details about a Square Account payment. The details are only populated if the
+    /// source_type is SQUARE_ACCOUNT.
+    pub square_account_details: Option<SquareAccountDetails>,
     /// **Read only** The ID of the location associated with the payment.
     pub location_id: Option<String>,
     /// **Read only** The ID of the [Order] associated with the payment.

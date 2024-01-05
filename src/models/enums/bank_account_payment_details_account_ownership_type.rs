@@ -8,5 +8,5 @@ use serde::{Deserialize, Serialize};
 pub enum BankAccountPaymentDetailsAccountOwnershipType {
     Individual,
     Company,
-    Unknown,
+    AccountTypeUnknown,
 }

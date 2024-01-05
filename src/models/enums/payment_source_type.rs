@@ -21,6 +21,8 @@ pub enum PaymentSourceType {
     /// For more information, see [Afterpay
     /// Payments](https://developer.squareup.com/docs/payments-api/take-payments/afterpay-payments).
     BuyNowPayLater,
+    /// Square account
+    SquareAccount,
     /// A seller can receive cash payments from a buyer and use `CreatePayment` to record the
     /// payment. For more information, see [Take Cash
     /// Payments](https://developer.squareup.com/docs/payments-api/take-payments/cash-payments).

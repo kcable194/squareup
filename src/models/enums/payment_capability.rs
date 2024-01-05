@@ -14,4 +14,6 @@ pub enum PaymentCapability {
     EditTipAmountUp,
     /// The tip amount can be edited down.
     EditTipAmountDown,
+    /// The delay_action can be edited.
+    EditDelayAction,
 }

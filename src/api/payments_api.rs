@@ -41,15 +41,34 @@ impl PaymentsApi {
         Self { config, client }
     }
 
-    /// Cancels (voids) a payment.
+    /// Retrieves a list of payments taken by the account making the request.
     ///
-    /// You can use this endpoint to cancel a payment with the APPROVED `status`.
-    pub async fn cancel_payment(
+    /// Results are eventually consistent, and new payments or changes to payments might take
+    /// several seconds to appear.
+    ///
+    /// The maximum results per page is 100.
+    pub async fn list_payments(
         &self,
-        payment_id: &str,
-    ) -> Result<CancelPaymentResponse, ApiError> {
-        let url = format!("{}/{}/cancel", &self.url(), payment_id);
-        let response = self.client.post::<Option<()>>(&url, &None).await?;
+        params: &ListPaymentsParameters,
+    ) -> Result<ListPaymentsResponse, ApiError> {
+        let url = format!("{}{}", &self.url(), params.to_query_string());
+        let response = self.client.get(&url).await?;
+
+        response.deserialize().await
+    }
+
+    /// Creates a payment using the provided source.
+    ///
+    /// You can use this endpoint to charge a card (credit/debit card or Square gift card) or record
+    /// a payment that the seller received outside of Square (cash payment from a buyer or a payment
+    /// that an external entity processed on behalf of the seller).
+    ///
+    /// The endpoint creates a [Payment] object and returns it in the response.
+    pub async fn create_payment(
+        &self,
+        body: &CreatePaymentRequest,
+    ) -> Result<CreatePaymentResponse, ApiError> {
+        let response = self.client.post(&self.url(), body).await?;
 
         response.deserialize().await
     }
@@ -76,57 +95,9 @@ impl PaymentsApi {
         response.deserialize().await
     }
 
-    /// Completes (captures) a payment.
-    ///
-    /// By default, payments are set to complete immediately after they are created.
-    ///
-    /// You can use this endpoint to complete a payment with the APPROVED `status`.
-    pub async fn complete_payment(
-        &self,
-        payment_id: &str,
-        body: &CompletePaymentRequest,
-    ) -> Result<CompletePaymentResponse, ApiError> {
-        let url = format!("{}/{}/complete", &self.url(), payment_id);
-        let response = self.client.post(&url, body).await?;
-
-        response.deserialize().await
-    }
-
-    /// Creates a payment using the provided source.
-    ///
-    /// You can use this endpoint to charge a card (credit/debit card or Square gift card) or record
-    /// a payment that the seller received outside of Square (cash payment from a buyer or a payment
-    /// that an external entity processed on behalf of the seller).
-    ///
-    /// The endpoint creates a [Payment] object and returns it in the response.
-    pub async fn create_payment(
-        &self,
-        body: &CreatePaymentRequest,
-    ) -> Result<CreatePaymentResponse, ApiError> {
-        let response = self.client.post(&self.url(), body).await?;
-
-        response.deserialize().await
-    }
-
     /// Retrieves details for a specific payment
     pub async fn get_payment(&self, payment_id: &str) -> Result<GetPaymentResponse, ApiError> {
         let url = format!("{}/{}", &self.url(), payment_id);
-        let response = self.client.get(&url).await?;
-
-        response.deserialize().await
-    }
-
-    /// Retrieves a list of payments taken by the account making the request.
-    ///
-    /// Results are eventually consistent, and new payments or changes to payments might take
-    /// several seconds to appear.
-    ///
-    /// The maximum results per page is 100.
-    pub async fn list_payments(
-        &self,
-        params: &ListPaymentsParameters,
-    ) -> Result<ListPaymentsResponse, ApiError> {
-        let url = format!("{}{}", &self.url(), params.to_query_string());
         let response = self.client.get(&url).await?;
 
         response.deserialize().await
@@ -142,6 +113,35 @@ impl PaymentsApi {
     ) -> Result<UpdatePaymentResponse, ApiError> {
         let url = format!("{}/{}", &self.url(), payment_id);
         let response = self.client.put(&url, &body).await?;
+
+        response.deserialize().await
+    }
+
+    /// Cancels (voids) a payment.
+    ///
+    /// You can use this endpoint to cancel a payment with the APPROVED `status`.
+    pub async fn cancel_payment(
+        &self,
+        payment_id: &str,
+    ) -> Result<CancelPaymentResponse, ApiError> {
+        let url = format!("{}/{}/cancel", &self.url(), payment_id);
+        let response = self.client.post::<Option<()>>(&url, &None).await?;
+
+        response.deserialize().await
+    }
+
+    /// Completes (captures) a payment.
+    ///
+    /// By default, payments are set to complete immediately after they are created.
+    ///
+    /// You can use this endpoint to complete a payment with the APPROVED `status`.
+    pub async fn complete_payment(
+        &self,
+        payment_id: &str,
+        body: &CompletePaymentRequest,
+    ) -> Result<CompletePaymentResponse, ApiError> {
+        let url = format!("{}/{}/complete", &self.url(), payment_id);
+        let response = self.client.post(&url, body).await?;
 
         response.deserialize().await
     }

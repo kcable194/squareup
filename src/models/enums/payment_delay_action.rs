@@ -8,4 +8,6 @@ use serde::{Deserialize, Serialize};
 pub enum PaymentDelayAction {
     /// Cancel the payment.
     Cancel,
+    /// Complete the payment.
+    Complete,
 }

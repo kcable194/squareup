@@ -1,8 +1,9 @@
 //! Request struct for the Create Payment API
 
 use serde::Serialize;
+use crate::models::enums::DelayAction;
 
-use super::{Address, CashPaymentDetails, ExternalPaymentDetails, Money};
+use super::{Address, CashPaymentDetails, CustomerDetails, ExternalPaymentDetails, Money};
 
 /// This is a model class for CreatePaymentRequest type.
 #[derive(Clone, Debug, Default, Eq, PartialEq, Serialize)]
@@ -75,6 +76,10 @@ pub struct CreatePaymentRequest {
     ///
     /// Example for 2 days, 12 hours, 30 minutes, and 15 seconds: P2DT12H30M15S
     pub delay_duration: Option<String>,
+    /// The action to be applied to the payment when the delay_duration has elapsed. The action must be
+    /// CANCEL or COMPLETE. For more information, see Time Threshold
+    /// Default: CANCEL
+    pub delay_action: Option<DelayAction>,
     /// If set to `true`, this payment will be completed when possible. If set to `false`, this
     /// payment is held in an approved state until either explicitly completed (captured) or
     /// canceled (voided). For more information, see [Delayed
@@ -137,4 +142,6 @@ pub struct CreatePaymentRequest {
     pub cash_details: Option<CashPaymentDetails>,
     /// Additional details required when recording an external payment (`source_id` is EXTERNAL).
     pub external_details: Option<ExternalPaymentDetails>,
+    /// Details about the customer making the payment.
+    pub customer_details: Option<CustomerDetails>,
 }

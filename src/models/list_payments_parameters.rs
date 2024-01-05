@@ -1,5 +1,7 @@
 //! Model struct for ListPaymentsParameters (query parameters)
 
+use std::fmt::Display;
+use crate::models::enums::CardBrand;
 use super::{enums::SortOrder, DateTime};
 
 /// This is a model struct for ListPaymentsParameters (query parameters)
@@ -31,7 +33,7 @@ pub struct ListPaymentsParameters {
     /// The last four digits of a payment card.
     pub last_4: Option<String>,
     /// The brand of the payment card (for example, VISA).
-    pub card_brand: Option<String>,
+    pub card_brand: Option<CardBrand>,
     /// The maximum number of results to be returned in a single page. It is possible to receive
     /// fewer results than the specified limit on a given page.
     ///
@@ -54,8 +56,8 @@ impl From<ListPaymentsParameters> for String {
     }
 }
 
-impl ToString for ListPaymentsParameters {
-    fn to_string(&self) -> String {
+impl Display for ListPaymentsParameters {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut params = Vec::new();
 
         if let Some(begin_time) = &self.begin_time {
@@ -87,17 +89,18 @@ impl ToString for ListPaymentsParameters {
         }
 
         if let Some(card_brand) = &self.card_brand {
-            params.push(format!("card_brand={}", card_brand));
+            params.push(format!("card_brand={:?}", card_brand));
         }
 
         if let Some(limit) = &self.limit {
             params.push(format!("limit={}", limit));
         }
 
-        if params.is_empty() {
+        let str = if params.is_empty() {
             String::new()
         } else {
             format!("?{}", params.join("&"))
-        }
+        };
+        write!(f, "{}", str)
     }
 }

@@ -39,7 +39,7 @@ pub struct CardPaymentDetails {
     /// For EMV payments, the method used to verify the cardholder's identity.
     pub verification_method: Option<CardPaymentDetailsVerificationMethod>,
     /// For EMV payments, the results of the cardholder verification.
-    pub verfication_results: Option<CardPaymentDetailsVerificationResult>,
+    pub verification_results: Option<CardPaymentDetailsVerificationResult>,
     /// The statement description sent to the card networks.
     ///
     /// Note: The actual statement description varies and is likely to be truncated and appended

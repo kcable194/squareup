@@ -372,6 +372,10 @@ mod order_line_item_applied_service_charge;
 mod tender_bank_account_details;
 mod tender_buy_now_pay_later_details;
 mod tender_square_account_details;
+mod cash_app_details;
+mod clearpay_details;
+mod square_account_details;
+mod customer_details;
 
 pub use ach_details::AchDetails;
 pub use additional_recipient::AdditionalRecipient;
@@ -742,3 +746,7 @@ pub use order_line_item_applied_service_charge::OrderLineItemAppliedServiceCharg
 pub use tender_bank_account_details::TenderBankAccountDetails;
 pub use tender_buy_now_pay_later_details::TenderBuyNowPayLaterDetails;
 pub use tender_square_account_details::TenderSquareAccountDetails;
+pub use cash_app_details::CashAppDetails;
+pub use clearpay_details::ClearpayDetails;
+pub use square_account_details::SquareAccountDetails;
+pub use customer_details::CustomerDetails;

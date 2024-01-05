@@ -3,7 +3,7 @@
 use std::fmt::Display;
 
 /// This is a model struct for DeleteCustomerParameters (query parameters)
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Default)]
 pub struct DeleteCustomerParameters {
     /// The current version of the customer profile.
     ///
@@ -21,13 +21,6 @@ impl DeleteCustomerParameters {
 impl From<DeleteCustomerParameters> for String {
     fn from(delete_customer_parameters: DeleteCustomerParameters) -> Self {
         delete_customer_parameters.to_string()
-    }
-}
-impl Default for DeleteCustomerParameters {
-    fn default() -> Self {
-        Self {
-            version: None,
-        }
     }
 }
 
