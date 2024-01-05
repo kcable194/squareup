@@ -1,8 +1,9 @@
 //! Model struct for PaymentRefund type
 
 use serde::{Deserialize, Serialize};
+use crate::models::enums::DestinationType;
 
-use super::{enums::PaymentRefundStatus, DateTime, Money, ProcessingFee};
+use super::{enums::PaymentRefundStatus, DateTime, Money, ProcessingFee, DestinationDetails};
 
 /// Represents a refund of a payment made using Square.
 ///
@@ -15,6 +16,13 @@ pub struct PaymentRefund {
     pub status: Option<PaymentRefundStatus>,
     /// The location ID associated with the payment this refund is attached to.
     pub location_id: Option<String>,
+    /// Read only Flag indicating whether or not the refund is linked to an existing payment in Square.
+    pub unlinked: Option<bool>,
+    /// The destination type for this refund.
+    pub destination_type: Option<DestinationType>,
+    /// **Read only** Contains information about the refund destination. This field is populated only if
+    /// destination_id is defined in the RefundPayment request.
+    pub destination_details: Option<DestinationDetails>,
     /// The amount of money refunded. This amount is specified in the smallest denomination of the
     /// applicable currency (for example, US dollar amounts are specified in cents).
     pub amount_money: Option<Money>,

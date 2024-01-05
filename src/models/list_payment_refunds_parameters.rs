@@ -1,5 +1,6 @@
 //! Model struct for ListPaymentRefundsParameters (query parameters)
 
+use std::fmt::Display;
 use super::{
     enums::{PaymentRefundStatus, PaymentSourceType, SortOrder},
     DateTime,
@@ -62,8 +63,8 @@ impl From<ListPaymentRefundsParameters> for String {
     }
 }
 
-impl ToString for ListPaymentRefundsParameters {
-    fn to_string(&self) -> String {
+impl Display for ListPaymentRefundsParameters {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut params = Vec::new();
 
         if let Some(begin_time) = &self.begin_time {
@@ -98,10 +99,11 @@ impl ToString for ListPaymentRefundsParameters {
             params.push(format!("limit={}", limit));
         }
 
-        if params.is_empty() {
+        let str = if params.is_empty() {
             String::new()
         } else {
             format!("?{}", params.join("&"))
-        }
+        };
+        write!(f, "{}", str)
     }
 }

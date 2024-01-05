@@ -116,6 +116,7 @@ mod tender_buy_now_pay_later_details_status;
 mod tender_square_account_details_status;
 mod digital_wallet_brand;
 mod delay_action;
+mod destination_type;
 
 pub use ach_details_account_type::AchDetailsAccountType;
 pub use application_details_external_square_product::ApplicationDetailsExternalSquareProduct;
@@ -233,3 +234,4 @@ pub use tender_buy_now_pay_later_details_status::TenderBuyNowPayLaterDetailsStat
 pub use tender_square_account_details_status::TenderSquareAccountDetailsStatus;
 pub use digital_wallet_brand::DigitalWalletBrand;
 pub use delay_action::DelayAction;
+pub use destination_type::DestinationType;

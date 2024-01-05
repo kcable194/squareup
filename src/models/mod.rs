@@ -376,6 +376,8 @@ mod cash_app_details;
 mod clearpay_details;
 mod square_account_details;
 mod customer_details;
+mod destination_details;
+mod destination_details_card_refund_details;
 
 pub use ach_details::AchDetails;
 pub use additional_recipient::AdditionalRecipient;
@@ -750,3 +752,5 @@ pub use cash_app_details::CashAppDetails;
 pub use clearpay_details::ClearpayDetails;
 pub use square_account_details::SquareAccountDetails;
 pub use customer_details::CustomerDetails;
+pub use destination_details::DestinationDetails;
+pub use destination_details_card_refund_details::DestinationDetailsCardRefundDetails;
