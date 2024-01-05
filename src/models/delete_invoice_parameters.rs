@@ -1,5 +1,7 @@
 //! Query parameters for the Delete Invoice API
 
+use std::fmt::Display;
+
 /// This is a model struct for DeleteInvoiceParameters (query parameters)
 #[derive(Clone, Debug, Default)]
 pub struct DeleteInvoiceParameters {
@@ -21,18 +23,19 @@ impl From<DeleteInvoiceParameters> for String {
     }
 }
 
-impl ToString for DeleteInvoiceParameters {
-    fn to_string(&self) -> String {
+impl Display for DeleteInvoiceParameters {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut params = Vec::new();
 
         if let Some(version) = &self.version {
             params.push(format!("version={}", version));
         }
 
-        if params.is_empty() {
+        let str = if params.is_empty() {
             String::new()
         } else {
             format!("?{}", params.join("&"))
-        }
+        };
+        write!(f, "{}", str)
     }
 }

@@ -1,5 +1,7 @@
 //! Query parameters for the List Invoices API
 
+use std::fmt::Display;
+
 /// This is a model struct for ListInvoicesParameters (query parameters)
 #[derive(Clone, Debug, Default)]
 pub struct ListInvoicesParameters {
@@ -28,8 +30,8 @@ impl From<ListInvoicesParameters> for String {
     }
 }
 
-impl ToString for ListInvoicesParameters {
-    fn to_string(&self) -> String {
+impl Display for ListInvoicesParameters {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut params = Vec::new();
 
         if !self.location_id.is_empty() {
@@ -44,10 +46,11 @@ impl ToString for ListInvoicesParameters {
             params.push(format!("limit={}", limit));
         }
 
-        if params.is_empty() {
+        let str = if params.is_empty() {
             String::new()
         } else {
             format!("?{}", params.join("&"))
-        }
+        };
+        write!(f, "{}", str)
     }
 }
