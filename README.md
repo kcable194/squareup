@@ -45,7 +45,7 @@ headers.insert("X_SOME_CUSTOM_HEADER", "custom_header_value");
 
 let client = SquareClient::try_new(Configuration {
     environment: Environment::Production,
-    square_version: String::from("2022-09-21"),
+    square_version: SquareVersion::CurrentSquareVersion,
     http_client_config: HttpClientConfiguration {
         timeout: 30,
         user_agent: String::from("Some User Agent String"),
@@ -54,7 +54,7 @@ let client = SquareClient::try_new(Configuration {
             retries_count: 1,
             min_retry_interval: Duration::from_secs(1),
             max_retry_interval: Duration::from_secs(30 * 60),
-            backoff_exponent: 3,
+            base: 3,
         },
     },
     access_token: String::from("Bearer MY_ACCESS_TOKEN"),
