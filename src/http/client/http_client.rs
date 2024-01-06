@@ -172,6 +172,16 @@ impl HttpClient {
         Ok(HttpResponse::new(response))
     }
 
+    /// Sends an HTTP PUT without any body
+    pub async fn empty_put(&self, url: &str) -> Result<HttpResponse, ApiError> {
+        let response = self.retry_client.put(url).send().await.map_err(|e| {
+            let msg = format!("Error putting to {}: {}", url, e);
+            error!("{}", msg);
+            ApiError::new(&msg)
+        })?;
+        Ok(HttpResponse::new(response))
+    }
+
     /// Sends an HTTP DELETE
     pub async fn delete(&self, url: &str) -> Result<HttpResponse, ApiError> {
         let response = self.retry_client.delete(url).send().await.map_err(|e| {

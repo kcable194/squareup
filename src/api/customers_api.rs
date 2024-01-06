@@ -14,7 +14,7 @@ use crate::{
         UpdateCustomerResponse,
     },
 };
-use crate::models::{AddGroupToCustomerResponse, DeleteCustomerParameters, EmptyRequestBody, RemoveGroupFromCustomerResponse};
+use crate::models::{AddGroupToCustomerResponse, DeleteCustomerParameters, RemoveGroupFromCustomerResponse};
 
 const DEFAULT_URI: &str = "/customers";
 
@@ -169,8 +169,7 @@ impl CustomersApi {
         group_id: &str,
     ) -> Result<AddGroupToCustomerResponse, ApiError> {
         let url = format!("{}/{}/groups/{}", &self.url(), customer_id, group_id);
-        let empty_request_body = EmptyRequestBody{};
-        let response = self.client.put(&url, &empty_request_body).await?;
+        let response = self.client.empty_put(&url).await?;
 
         response.deserialize().await
     }

@@ -20,7 +20,7 @@ use crate::{
         UpdateSubscriptionResponse,
     },
 };
-use crate::models::{BulkSwapPlanRequest, BulkSwapPlanResponse, ChangeBillingAnchorDateRequest, ChangeBillingAnchorDateResponse, EmptyRequestBody};
+use crate::models::{BulkSwapPlanRequest, BulkSwapPlanResponse, ChangeBillingAnchorDateRequest, ChangeBillingAnchorDateResponse};
 
 const DEFAULT_URI: &str = "/subscriptions";
 
@@ -146,8 +146,7 @@ impl SubscriptionsApi {
         subscription_id: &str,
     ) -> Result<CancelSubscriptionResponse, ApiError> {
         let url = format!("{}/{}/cancel", &self.url(), subscription_id);
-        let body = EmptyRequestBody{};
-        let response = self.client.post(&url, &body).await?;
+        let response = self.client.empty_post(&url).await?;
 
         response.deserialize().await
     }
