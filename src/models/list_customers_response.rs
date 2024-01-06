@@ -15,4 +15,8 @@ pub struct ListCustomersResponse {
     /// response. See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for
     /// more information.
     pub cursor: Option<String>,
+    /// The total count of customers associated with the Square account. Only customer profiles with public
+    /// information (given_name, family_name, company_name, email_address, or phone_number) are counted.
+    /// This field is present only if count is set to true in the request.
+    pub count: Option<i64>,
 }
