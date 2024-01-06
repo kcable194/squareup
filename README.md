@@ -28,7 +28,7 @@ let client = SquareClient::try_new(Configuration::default()).unwrap();
 For this to work, it's necessary to set an environment variable with the name of `SQUARE_API_TOKEN`
 and the value of your API Token string... otherwise, you'll get API errors when making live calls.
 
-Other default values are `Sandbox` for the Square environment, `2022-02-16` API version, a base URI
+Other default values are `Sandbox` for the Square environment, `2023-12-13` API version, a base URI
 of `/v2`, a timeout of 60 seconds and no HTTP Client retries.
 
 The Square client can be customized a bit via the properties shown here:
