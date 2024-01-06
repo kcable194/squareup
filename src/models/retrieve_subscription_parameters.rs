@@ -1,5 +1,7 @@
 //! Query String parameters for the Retrieve Subscription API
 
+use std::fmt::Display;
+
 /// This is a model struct for RetrieveSubscriptionParameters (query parameters)
 #[derive(Clone, Debug, Default)]
 pub struct RetrieveSubscriptionParameters {
@@ -23,18 +25,19 @@ impl From<RetrieveSubscriptionParameters> for String {
     }
 }
 
-impl ToString for RetrieveSubscriptionParameters {
-    fn to_string(&self) -> String {
+impl Display for RetrieveSubscriptionParameters {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut params = Vec::new();
 
         if let Some(include) = &self.include {
             params.push(format!("include={}", include));
         }
 
-        if params.is_empty() {
+        let str = if params.is_empty() {
             String::new()
         } else {
             format!("?{}", params.join("&"))
-        }
+        };
+        write!(f, "{}", str)
     }
 }

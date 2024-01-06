@@ -1,6 +1,7 @@
 //! Model struct for SubscriptionAction type
 
 use serde::{Deserialize, Serialize};
+use crate::models::Phase;
 
 use super::enums::SubscriptionActionType;
 
@@ -13,6 +14,10 @@ pub struct SubscriptionAction {
     pub r#type: Option<SubscriptionActionType>,
     /// The `YYYY-MM-DD`-formatted date when the action occurs on the subscription.
     pub effective_date: Option<String>,
+    /// The new billing anchor day value, for a CHANGE_BILLING_ANCHOR_DATE action.
+    pub monthly_billing_anchor_date: Option<i32>,
+    /// A list of Phases, to pass phase-specific information used in the swap.
+    pub phases: Option<Vec<Phase>>,
     /// The target subscription plan a subscription switches to, for a `SWAP_PLAN` action.
-    pub new_plan_id: Option<String>,
+    pub new_plan_variation_id: Option<String>,
 }

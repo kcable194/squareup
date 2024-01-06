@@ -20,6 +20,7 @@ use crate::{
         UpdateSubscriptionResponse,
     },
 };
+use crate::models::{BulkSwapPlanRequest, BulkSwapPlanResponse, ChangeBillingAnchorDateRequest, ChangeBillingAnchorDateResponse, EmptyRequestBody};
 
 const DEFAULT_URI: &str = "/subscriptions";
 
@@ -48,6 +49,17 @@ impl SubscriptionsApi {
         body: &CreateSubscriptionRequest,
     ) -> Result<CreateSubscriptionResponse, ApiError> {
         let response = self.client.post(&self.url(), body).await?;
+
+        response.deserialize().await
+    }
+
+    /// Schedules a plan variation change for all active subscriptions under a given plan variation.
+    pub async fn bulk_swap_plan(
+        &self,
+        body: &BulkSwapPlanRequest,
+    ) -> Result<BulkSwapPlanResponse, ApiError> {
+        let url = format!("{}/bulk-swap-plan", &self.url());
+        let response = self.client.post(&url, body).await?;
 
         response.deserialize().await
     }
@@ -114,6 +126,18 @@ impl SubscriptionsApi {
         response.deserialize().await
     }
 
+    /// Changes the billing anchor date for a subscription.
+    pub async fn change_billing_anchor_date(
+        &self,
+        subscription_id: &str,
+        body: &ChangeBillingAnchorDateRequest,
+    ) -> Result<ChangeBillingAnchorDateResponse, ApiError> {
+        let url = format!("{}/{}/billing-anchor", &self.url(), subscription_id);
+        let response = self.client.post(&url, body).await?;
+
+        response.deserialize().await
+    }
+
     /// Schedules a `CANCEL` action to cancel an active subscription by setting the `canceled_date`
     /// field to the end of the active billing period and changing the subscription status from
     /// ACTIVE to CANCELED after this date.
@@ -122,7 +146,8 @@ impl SubscriptionsApi {
         subscription_id: &str,
     ) -> Result<CancelSubscriptionResponse, ApiError> {
         let url = format!("{}/{}/cancel", &self.url(), subscription_id);
-        let response = self.client.post(&url, "").await?;
+        let body = EmptyRequestBody{};
+        let response = self.client.post(&url, &body).await?;
 
         response.deserialize().await
     }

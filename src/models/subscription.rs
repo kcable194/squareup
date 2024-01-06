@@ -2,10 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::{
-    enums::{SubscriptionStatus, Timezone},
-    DateTime, Money, SubscriptionAction, SubscriptionSource,
-};
+use super::{enums::{SubscriptionStatus, Timezone}, DateTime, Money, SubscriptionAction, SubscriptionSource, Phase};
 
 /// Represents a subscription to a subscription plan by a subscriber.
 ///
@@ -20,7 +17,7 @@ pub struct Subscription {
     /// **Read only** The ID of the location associated with the subscription.
     pub location_id: Option<String>,
     /// **Read only** The ID of the subscribed-to [subscription plan](CatalogSubscriptionPlan).
-    pub plan_id: Option<String>,
+    pub plan_variation_id: Option<String>,
     /// **Read only** The ID of the subscribing [customer](Customer) profile.
     pub customer_id: Option<String>,
     /// **Read only** The `YYYY-MM-DD`-formatted date (for example, 2013-01-15) to start the
@@ -72,4 +69,8 @@ pub struct Subscription {
     /// [SearchSubscriptions](https://developer.squareup.com/reference/square/subscriptions-api/search-subscriptions)
     /// with the input parameter of `include:["actions"]`.
     pub actions: Option<Vec<SubscriptionAction>>,
+    /// **Read only** The day of the month on which the subscription will issue invoices and publish orders.
+    pub monthly_billing_anchor_date: Option<i32>,
+    /// **Read only** array of phases for this subscription
+    pub phases: Option<Vec<Phase>>,
 }

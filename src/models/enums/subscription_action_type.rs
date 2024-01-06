@@ -14,4 +14,6 @@ pub enum SubscriptionActionType {
     Resume,
     /// The action to execute a scheduled swap of a subscription plan in a subscription.
     SwapPlan,
+    /// A billing anchor date change action.
+    ChangeBillingAnchorDate,
 }
