@@ -1,7 +1,7 @@
 [package]
 name = "squareup"
 description = "Rust SDK for the Square Developer API"
-version = "0.0.1"
+version = "1.0.0.20231213"
 homepage = "https://github.com/kcable194/squareup"
 repository = "https://github.com/kcable194/squareup"
 authors = ["Mike Harkins <mharkins@cosm.com>", "Keaton Cable <keaton@mavengvl.com>"]
