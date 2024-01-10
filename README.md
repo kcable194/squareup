@@ -45,7 +45,7 @@ headers.insert("X_SOME_CUSTOM_HEADER", "custom_header_value");
 
 let client = SquareClient::try_new(Configuration {
     environment: Environment::Production,
-    square_version: SquareVersion::CurrentSquareVersion,
+    square_version: SquareVersion::SquareVersion,
     http_client_config: HttpClientConfiguration {
         timeout: 30,
         user_agent: String::from("Some User Agent String"),
@@ -64,18 +64,18 @@ let client = SquareClient::try_new(Configuration {
 
 ### Using the client
 
-Once you have a `SquareClient` instance access to the various APIs is through its properties.
-For example, to access the Payments API, you would:
-```rust
-use squareup::{
-    config::Configuration,
-    models::CreatePaymentRequest,
-    SquareClient,
-};
+Once you have a `SquareClient`, inject the client into various APIs. This helps with safety
+by not allowing your app access to every API at once.
 
-let client = SquareClient::try_new(Configuration::default()).unwrap();
-let request = CreatePaymentRequest::default(); // this actually has many fields to fill
-let response = client.payments_api.create_payment(request).await.unwrap();
+For example, to access the Customers API and Orders API, you would:
+```rust
+use squareup::api::{CustomersApi, OrdersApi};
+use squareup::config::Configuration;
+use squareup::SquareClient;
+
+let square_client: SquareClient = SquareClient::try_new(Configuration::default()).unwrap();
+let customers_api: CustomersApi = CustomersApi::new(square_client.clone());
+let orders_api: OrdersApi = OrdersApi::new(square_client.clone());
 ```
 
 ## Progress
