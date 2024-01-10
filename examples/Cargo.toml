@@ -1,0 +1,17 @@
+[package]
+name = "examples"
+version = "0.0.0"
+publish = false
+edition = "2021"
+
+# If you copy one of the examples into a new project, you should be using
+# [dependencies] instead, and delete the **path**.
+[dependencies]
+axum = "0.7.3"
+tokio = { version = "1.35.1", features = ["full"] }
+squareup = { path = "../squareup" }
+
+
+[[example]]
+name = "axum_square_client"
+path = "axum_square_client.rs"
