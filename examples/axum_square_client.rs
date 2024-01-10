@@ -42,7 +42,7 @@ async fn main() {
     // build our application with some routes
     let app = Router::new()
         .route("/customers/:num", get(customers))
-        .route("/orders/:num", get(orders))
+        .route("/orders/:location_id/:num", get(orders))
         .with_state(app_state_arc);
 
     // run it with hyper
@@ -79,11 +79,11 @@ async fn customers(
     Json(customer.clone())
 }
 
-async fn orders(Path(num): Path<usize>, State(app_state): State<Arc<AppState>>) -> Json<Order> {
+async fn orders(Path((location_id, num)): Path<(String, usize)>, State(app_state): State<Arc<AppState>>) -> Json<Order> {
     let state = app_state.clone();
 
     let search_request = SearchOrdersRequest {
-        location_ids: Some(vec!["LXNA993NA140J".to_string()]),
+        location_ids: Some(vec![location_id]),
         cursor: None,
         query: None,
         limit: Some(100),
