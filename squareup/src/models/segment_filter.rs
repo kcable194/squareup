@@ -13,10 +13,10 @@ pub struct SegmentFilter {
     /// A query filter to search for buyer-accessible appointment segments with service-providing
     /// team members matching the specified list of team member IDs. Supported query expressions are
     ///
-    ///     ANY: return the appointment segments with team members whose IDs match any member in
-    ///     this list.
-    ///     NONE: return the appointment segments with team members whose IDs are not in this list.
-    ///     ALL: not supported.
+    /// ANY- return the appointment segments with team members whose IDs match any member in
+    /// this list.
+    /// NONE- return the appointment segments with team members whose IDs are not in this list.
+    /// ALL- not supported.
     ///
     /// When no expression is specified, any service-providing team member is eligible to fulfill
     /// the Booking.
