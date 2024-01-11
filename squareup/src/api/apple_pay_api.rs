@@ -7,6 +7,7 @@ use crate::{
     config::Configuration,
     http::client::HttpClient,
     models::{errors::ApiError, RegisterDomainRequest, RegisterDomainResponse},
+    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/apple-pay/domains";
@@ -16,13 +17,16 @@ pub struct ApplePayApi {
     /// App config information
     config: Configuration,
     /// HTTP Client for requests to the Apple Pay API endpoints
-    client: HttpClient,
+    http_client: HttpClient,
 }
 
 impl ApplePayApi {
     /// Instantiates a new `ApplePayApi`
-    pub fn new(config: Configuration, client: HttpClient) -> Self {
-        Self { config, client }
+    pub fn new(square_client: SquareClient) -> ApplePayApi {
+        ApplePayApi {
+            config: square_client.config,
+            http_client: square_client.http_client,
+        }
     }
 
     /// Activates a domain for use with Apple Pay on the Web and Square.
@@ -45,7 +49,7 @@ impl ApplePayApi {
         &self,
         body: &RegisterDomainRequest,
     ) -> Result<RegisterDomainResponse, ApiError> {
-        let response = self.client.post(&self.url(), body).await?;
+        let response = self.http_client.post(&self.url(), body).await?;
 
         response.deserialize().await
     }

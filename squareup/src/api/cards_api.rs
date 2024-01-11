@@ -17,6 +17,7 @@ use crate::{
         errors::ApiError, CreateCardRequest, CreateCardResponse, DisableCardResponse,
         ListCardsParameters, ListCardsResponse, RetrieveCardResponse,
     },
+    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/cards";
@@ -26,13 +27,16 @@ pub struct CardsApi {
     /// App config information
     config: Configuration,
     /// HTTP Client for requests to the Cards API endpoints
-    client: HttpClient,
+    http_client: HttpClient,
 }
 
 impl CardsApi {
     /// Instantiates a new `CardsApi`
-    pub fn new(config: Configuration, client: HttpClient) -> Self {
-        Self { config, client }
+    pub fn new(square_client: SquareClient) -> CardsApi {
+        CardsApi {
+            config: square_client.config,
+            http_client: square_client.http_client,
+        }
     }
 
     /// Adds a card on file to an existing merchant.
@@ -40,7 +44,7 @@ impl CardsApi {
         &self,
         body: &CreateCardRequest,
     ) -> Result<CreateCardResponse, ApiError> {
-        let response = self.client.post(&self.url(), body).await?;
+        let response = self.http_client.post(&self.url(), body).await?;
 
         response.deserialize().await
     }
@@ -50,7 +54,7 @@ impl CardsApi {
     /// Disabling an already disabled card is allowed but has no effect.
     pub async fn disable_card(&self, card_id: &str) -> Result<DisableCardResponse, ApiError> {
         let url = format!("{}/{}/disable", &self.url(), card_id);
-        let response = self.client.empty_post(&url).await?;
+        let response = self.http_client.empty_post(&url).await?;
 
         response.deserialize().await
     }
@@ -63,7 +67,7 @@ impl CardsApi {
         params: &ListCardsParameters,
     ) -> Result<ListCardsResponse, ApiError> {
         let url = format!("{}{}", &self.url(), params.to_query_string());
-        let response = self.client.get(&url).await?;
+        let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
     }
@@ -71,7 +75,7 @@ impl CardsApi {
     /// Retrieves details for a specific Card.
     pub async fn retrieve_card(&self, card_id: &str) -> Result<RetrieveCardResponse, ApiError> {
         let url = format!("{}/{}", &self.url(), card_id);
-        let response = self.client.get(&url).await?;
+        let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
     }

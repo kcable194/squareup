@@ -17,7 +17,7 @@ impl Environment {
         match self {
             Environment::Production => String::from(PRODUCTION_URL),
             Environment::Sandbox => String::from(SANDBOX_URL),
-            Environment::Custom(custom_url) => custom_url.clone(),
+            Environment::Custom(custom_url) => custom_url.to_owned(),
         }
     }
 }

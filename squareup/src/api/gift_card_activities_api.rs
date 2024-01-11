@@ -11,6 +11,7 @@ use crate::{
         errors::ApiError, CreateGiftCardActivityRequest, CreateGiftCardActivityResponse,
         ListGiftCardActivitiesParameters, ListGiftCardActivitiesResponse,
     },
+    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/gift-cards/activities";
@@ -19,13 +20,16 @@ pub struct GiftCardActivitiesApi {
     /// App config information
     config: Configuration,
     /// HTTP Client for requests to the Gift Card Activities API endpoints
-    client: HttpClient,
+    http_client: HttpClient,
 }
 
 impl GiftCardActivitiesApi {
     /// Instantiates a new `GiftCardActivitiesApi`
-    pub fn new(config: Configuration, client: HttpClient) -> Self {
-        Self { config, client }
+    pub fn new(square_client: SquareClient) -> GiftCardActivitiesApi {
+        GiftCardActivitiesApi {
+            config: square_client.config,
+            http_client: square_client.http_client,
+        }
     }
 
     /// Lists gift card activities.
@@ -39,7 +43,7 @@ impl GiftCardActivitiesApi {
         params: &ListGiftCardActivitiesParameters,
     ) -> Result<ListGiftCardActivitiesResponse, ApiError> {
         let url = format!("{}{}", &self.url(), params.to_query_string());
-        let response = self.client.get(&url).await?;
+        let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
     }
@@ -52,7 +56,7 @@ impl GiftCardActivitiesApi {
         &self,
         body: &CreateGiftCardActivityRequest,
     ) -> Result<CreateGiftCardActivityResponse, ApiError> {
-        let response = self.client.post(&self.url(), body).await?;
+        let response = self.http_client.post(&self.url(), body).await?;
 
         response.deserialize().await
     }

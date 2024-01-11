@@ -16,6 +16,7 @@ use crate::{
         SearchTeamMembersRequest, SearchTeamMembersResponse, UpdateTeamMemberRequest,
         UpdateTeamMemberResponse, UpdateWageSettingRequest, UpdateWageSettingResponse,
     },
+    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/team-members";
@@ -24,13 +25,16 @@ pub struct TeamApi {
     /// App config information
     config: Configuration,
     /// HTTP Client for requests to the Team API endpoints
-    client: HttpClient,
+    http_client: HttpClient,
 }
 
 impl TeamApi {
     /// Instantiates a new `TeamApi`
-    pub fn new(config: Configuration, client: HttpClient) -> Self {
-        Self { config, client }
+    pub fn new(square_client: SquareClient) -> TeamApi {
+        TeamApi {
+            config: square_client.config,
+            http_client: square_client.http_client,
+        }
     }
 
     /// Creates a single `TeamMember` object.
@@ -46,7 +50,7 @@ impl TeamApi {
         &self,
         body: &CreateTeamMemberRequest,
     ) -> Result<CreateTeamMemberResponse, ApiError> {
-        let response = self.client.post(&self.url(), body).await?;
+        let response = self.http_client.post(&self.url(), body).await?;
 
         response.deserialize().await
     }
@@ -65,7 +69,7 @@ impl TeamApi {
         body: &BulkCreateTeamMembersRequest,
     ) -> Result<BulkCreateTeamMembersResponse, ApiError> {
         let url = format!("{}/bulk-create", self.url());
-        let response = self.client.post(&url, body).await?;
+        let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await
     }
@@ -84,7 +88,7 @@ impl TeamApi {
         body: &BulkUpdateTeamMembersRequest,
     ) -> Result<BulkUpdateTeamMembersResponse, ApiError> {
         let url = format!("{}/bulk-update", self.url());
-        let response = self.client.post(&url, body).await?;
+        let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await
     }
@@ -99,7 +103,7 @@ impl TeamApi {
         body: &SearchTeamMembersRequest,
     ) -> Result<SearchTeamMembersResponse, ApiError> {
         let url = format!("{}/search", self.url());
-        let response = self.client.post(&url, body).await?;
+        let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await
     }
@@ -113,7 +117,7 @@ impl TeamApi {
         team_member_id: &str,
     ) -> Result<RetrieveTeamMemberResponse, ApiError> {
         let url = format!("{}/{}", self.url(), team_member_id);
-        let response = self.client.get(&url).await?;
+        let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
     }
@@ -130,7 +134,7 @@ impl TeamApi {
         body: &UpdateTeamMemberRequest,
     ) -> Result<UpdateTeamMemberResponse, ApiError> {
         let url = format!("{}/{}", self.url(), team_member_id);
-        let response = self.client.put(&url, body).await?;
+        let response = self.http_client.put(&url, body).await?;
 
         response.deserialize().await
     }
@@ -144,7 +148,7 @@ impl TeamApi {
         team_member_id: &str,
     ) -> Result<RetrieveWageSettingResponse, ApiError> {
         let url = format!("{}/{}/wage-setting", self.url(), team_member_id);
-        let response = self.client.get(&url).await?;
+        let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
     }
@@ -163,7 +167,7 @@ impl TeamApi {
         body: &UpdateWageSettingRequest,
     ) -> Result<UpdateWageSettingResponse, ApiError> {
         let url = format!("{}/{}/wage-setting", self.url(), team_member_id);
-        let response = self.client.put(&url, body).await?;
+        let response = self.http_client.put(&url, body).await?;
 
         response.deserialize().await
     }

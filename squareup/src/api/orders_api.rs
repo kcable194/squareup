@@ -31,7 +31,7 @@ pub struct OrdersApi {
     /// App config information
     config: Configuration,
     /// HTTP Client for requests to the Orders API endpoints
-    client: HttpClient,
+    http_client: HttpClient,
 }
 
 impl OrdersApi {
@@ -39,7 +39,7 @@ impl OrdersApi {
     pub fn new(square_client: SquareClient) -> OrdersApi {
         OrdersApi {
             config: square_client.config,
-            client: square_client.http_client,
+            http_client: square_client.http_client,
         }
     }
 
@@ -52,7 +52,7 @@ impl OrdersApi {
         &self,
         body: &CreateOrderRequest,
     ) -> Result<CreateOrderResponse, ApiError> {
-        let response = self.client.post(&self.url(), body).await?;
+        let response = self.http_client.post(&self.url(), body).await?;
 
         response.deserialize().await
     }
@@ -65,7 +65,7 @@ impl OrdersApi {
         body: &BatchRetrieveOrdersRequest,
     ) -> Result<BatchRetrieveOrdersResponse, ApiError> {
         let url = format!("{}/batch-retrieve", &self.url());
-        let response = self.client.post(&url, body).await?;
+        let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await
     }
@@ -76,7 +76,7 @@ impl OrdersApi {
         body: &CalculateOrderRequest,
     ) -> Result<CalculateOrderResponse, ApiError> {
         let url = format!("{}/calculate", &self.url());
-        let response = self.client.post(&url, body).await?;
+        let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await
     }
@@ -90,7 +90,7 @@ impl OrdersApi {
         body: &CloneOrderRequest,
     ) -> Result<CloneOrderResponse, ApiError> {
         let url = format!("{}/clone", &self.url());
-        let response = self.client.post(&url, body).await?;
+        let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await
     }
@@ -116,7 +116,7 @@ impl OrdersApi {
         body: &SearchOrdersRequest,
     ) -> Result<SearchOrdersResponse, ApiError> {
         let url = format!("{}/search", &self.url());
-        let response = self.client.post(&url, body).await?;
+        let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await
     }
@@ -124,7 +124,7 @@ impl OrdersApi {
     /// Retrieves an [Order] by ID.
     pub async fn retrieve_order(&self, order_id: &str) -> Result<RetrieveOrderResponse, ApiError> {
         let url = format!("{}/{}", &self.url(), order_id);
-        let response = self.client.get(&url).await?;
+        let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
     }
@@ -150,7 +150,7 @@ impl OrdersApi {
         body: &UpdateOrderRequest,
     ) -> Result<UpdateOrderResponse, ApiError> {
         let url = format!("{}/{}", &self.url(), order_id);
-        let response = self.client.put(&url, body).await?;
+        let response = self.http_client.put(&url, body).await?;
 
         response.deserialize().await
     }
@@ -176,7 +176,7 @@ impl OrdersApi {
         body: &PayOrderRequest,
     ) -> Result<PayOrderResponse, ApiError> {
         let url = format!("{}/{}/pay", &self.url(), order_id);
-        let response = self.client.post(&url, body).await?;
+        let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await
     }

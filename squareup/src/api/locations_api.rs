@@ -10,6 +10,7 @@ use crate::{
         errors::ApiError, CreateLocationRequest, CreateLocationResponse, ListLocationsResponse,
         RetrieveLocationResponse, UpdateLocationRequest, UpdateLocationResponse,
     },
+    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/locations";
@@ -19,20 +20,23 @@ pub struct LocationsApi {
     /// App config information
     config: Configuration,
     /// HTTP Client for requests to the Locations API endpoints
-    client: HttpClient,
+    http_client: HttpClient,
 }
 
 impl LocationsApi {
     /// Instantiates a new `LocationsApi`
-    pub fn new(config: Configuration, client: HttpClient) -> Self {
-        Self { config, client }
+    pub fn new(square_client: SquareClient) -> LocationsApi {
+        LocationsApi {
+            config: square_client.config,
+            http_client: square_client.http_client,
+        }
     }
 
     /// Provides details about all of the seller's
     /// [locations](https://developer.squareup.com/docs/locations-api), including those
     /// with an inactive status.
     pub async fn list_locations(&self) -> Result<ListLocationsResponse, ApiError> {
-        let response = self.client.get(&self.url()).await?;
+        let response = self.http_client.get(&self.url()).await?;
 
         response.deserialize().await
     }
@@ -49,7 +53,7 @@ impl LocationsApi {
         &self,
         body: &CreateLocationRequest,
     ) -> Result<CreateLocationResponse, ApiError> {
-        let response = self.client.post(&self.url(), body).await?;
+        let response = self.http_client.post(&self.url(), body).await?;
 
         response.deserialize().await
     }
@@ -63,7 +67,7 @@ impl LocationsApi {
         location_id: &str,
     ) -> Result<RetrieveLocationResponse, ApiError> {
         let url = format!("{}/{}", &self.url(), location_id);
-        let response = self.client.get(&url).await?;
+        let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
     }
@@ -75,7 +79,7 @@ impl LocationsApi {
         body: &UpdateLocationRequest,
     ) -> Result<UpdateLocationResponse, ApiError> {
         let url = format!("{}/{}", &self.url(), location_id);
-        let response = self.client.post(&url, body).await?;
+        let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await
     }

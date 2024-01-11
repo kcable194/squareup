@@ -45,7 +45,7 @@ headers.insert("X_SOME_CUSTOM_HEADER", "custom_header_value");
 
 let client = SquareClient::try_new(Configuration {
     environment: Environment::Production,
-    square_version: SquareVersion::SquareVersion,
+    square_version: SquareVersion::default(),
     http_client_config: HttpClientConfiguration {
         timeout: 30,
         user_agent: String::from("Some User Agent String"),

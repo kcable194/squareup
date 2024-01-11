@@ -26,14 +26,15 @@ pub struct CustomersApi {
     /// App config information
     config: Configuration,
     /// HTTP Client for requests to the Customers API endpoints
-    client: HttpClient,
+    http_client: HttpClient,
 }
 
 impl CustomersApi {
+    /// Instantiates a new `CustomersApi`
     pub fn new(square_client: SquareClient) -> CustomersApi {
         CustomersApi {
             config: square_client.config,
-            client: square_client.http_client,
+            http_client: square_client.http_client,
         }
     }
 
@@ -48,7 +49,7 @@ impl CustomersApi {
         params: &ListCustomersParameters,
     ) -> Result<ListCustomersResponse, ApiError> {
         let url = format!("{}{}", &self.url(), params.to_query_string());
-        let response = self.client.get(&url).await?;
+        let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
     }
@@ -66,7 +67,7 @@ impl CustomersApi {
         &self,
         body: &CreateCustomerRequest,
     ) -> Result<CreateCustomerResponse, ApiError> {
-        let response = self.client.post(&self.url(), body).await?;
+        let response = self.http_client.post(&self.url(), body).await?;
 
         response.deserialize().await
     }
@@ -86,7 +87,7 @@ impl CustomersApi {
         body: &SearchCustomersRequest,
     ) -> Result<SearchCustomersResponse, ApiError> {
         let url = format!("{}/search", &self.url());
-        let response = self.client.post(&url, body).await?;
+        let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await
     }
@@ -111,7 +112,7 @@ impl CustomersApi {
             customer_id,
             params.to_query_string()
         );
-        let response = self.client.delete(&url).await?;
+        let response = self.http_client.delete(&url).await?;
 
         response.deserialize().await
     }
@@ -122,7 +123,7 @@ impl CustomersApi {
         customer_id: &str,
     ) -> Result<RetrieveCustomerResponse, ApiError> {
         let url = format!("{}/{}", &self.url(), customer_id);
-        let response = self.client.get(&url).await?;
+        let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
     }
@@ -149,7 +150,7 @@ impl CustomersApi {
         body: &UpdateCustomerRequest,
     ) -> Result<UpdateCustomerResponse, ApiError> {
         let url = format!("{}/{}", &self.url(), customer_id);
-        let response = self.client.put(&url, body).await?;
+        let response = self.http_client.put(&url, body).await?;
 
         response.deserialize().await
     }
@@ -164,7 +165,7 @@ impl CustomersApi {
         group_id: &str,
     ) -> Result<RemoveGroupFromCustomerResponse, ApiError> {
         let url = format!("{}/{}/groups/{}", &self.url(), customer_id, group_id);
-        let response = self.client.delete(&url).await?;
+        let response = self.http_client.delete(&url).await?;
 
         response.deserialize().await
     }
@@ -180,7 +181,7 @@ impl CustomersApi {
         group_id: &str,
     ) -> Result<AddGroupToCustomerResponse, ApiError> {
         let url = format!("{}/{}/groups/{}", &self.url(), customer_id, group_id);
-        let response = self.client.empty_put(&url).await?;
+        let response = self.http_client.empty_put(&url).await?;
 
         response.deserialize().await
     }

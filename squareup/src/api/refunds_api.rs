@@ -19,6 +19,7 @@ use crate::{
         errors::ApiError, GetPaymentRefundResponse, ListPaymentRefundsParameters,
         ListPaymentRefundsResponse, RefundPaymentRequest, RefundPaymentResponse,
     },
+    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/refunds";
@@ -28,12 +29,16 @@ pub struct RefundsApi {
     /// App config information
     config: Configuration,
     /// HTTP Client for requests to the Refunds API endpoints
-    client: HttpClient,
+    http_client: HttpClient,
 }
 
 impl RefundsApi {
-    pub fn new(config: Configuration, client: HttpClient) -> Self {
-        Self { config, client }
+    /// Instantiates a new `RefundsApi`
+    pub fn new(square_client: SquareClient) -> RefundsApi {
+        RefundsApi {
+            config: square_client.config,
+            http_client: square_client.http_client,
+        }
     }
 
     /// Retrieves a list of refunds for the account making the request.
@@ -47,7 +52,7 @@ impl RefundsApi {
         params: &ListPaymentRefundsParameters,
     ) -> Result<ListPaymentRefundsResponse, ApiError> {
         let url = format!("{}{}", &self.url(), params.to_query_string());
-        let response = self.client.get(&url).await?;
+        let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
     }
@@ -62,7 +67,7 @@ impl RefundsApi {
         &self,
         body: &RefundPaymentRequest,
     ) -> Result<RefundPaymentResponse, ApiError> {
-        let response = self.client.post(&self.url(), body).await?;
+        let response = self.http_client.post(&self.url(), body).await?;
 
         response.deserialize().await
     }
@@ -73,7 +78,7 @@ impl RefundsApi {
         refund_id: &str,
     ) -> Result<GetPaymentRefundResponse, ApiError> {
         let url = format!("{}/{}", &self.url(), refund_id);
-        let response = self.client.get(&url).await?;
+        let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
     }

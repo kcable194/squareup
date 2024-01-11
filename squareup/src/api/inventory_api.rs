@@ -20,6 +20,7 @@ use crate::{
         RetrieveInventoryCountResponse, RetrieveInventoryPhysicalCountResponse,
         RetrieveInventoryTransferResponse,
     },
+    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/inventory";
@@ -28,12 +29,16 @@ pub struct InventoryApi {
     /// App config information
     config: Configuration,
     /// HTTP Client for requests to the Inventory API endpoints
-    client: HttpClient,
+    http_client: HttpClient,
 }
 
 impl InventoryApi {
-    pub fn new(config: Configuration, client: HttpClient) -> Self {
-        Self { config, client }
+    /// Instantiates a new `InventoryApi`
+    pub fn new(square_client: SquareClient) -> InventoryApi {
+        InventoryApi {
+            config: square_client.config,
+            http_client: square_client.http_client,
+        }
     }
 
     /// Returns the InventoryAdjustment object with the provided adjustment id.
@@ -42,7 +47,7 @@ impl InventoryApi {
         adjustment_id: &str,
     ) -> Result<RetrieveInventoryAdjustmentResponse, ApiError> {
         let url = format!("{}/{}", &self.url(), adjustment_id);
-        let response = self.client.get(&url).await?;
+        let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
     }
@@ -55,7 +60,7 @@ impl InventoryApi {
         body: &BatchChangeInventoryRequest,
     ) -> Result<BatchChangeInventoryResponse, ApiError> {
         let url = format!("{}/changes/batch-create", &self.url());
-        let response = self.client.post(&url, body).await?;
+        let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await
     }
@@ -67,7 +72,7 @@ impl InventoryApi {
         body: &BatchRetrieveInventoryChangesRequest,
     ) -> Result<BatchRetrieveInventoryChangesResponse, ApiError> {
         let url = format!("{}/changes/batch-retrieve", &self.url());
-        let response = self.client.post(&url, body).await?;
+        let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await
     }
@@ -79,7 +84,7 @@ impl InventoryApi {
         body: &BatchRetrieveInventoryCountsRequest,
     ) -> Result<BatchRetrieveInventoryCountsResponse, ApiError> {
         let url = format!("{}/counts/batch-retrieve", &self.url());
-        let response = self.client.post(&url, body).await?;
+        let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await
     }
@@ -90,7 +95,7 @@ impl InventoryApi {
         physical_count_id: &str,
     ) -> Result<RetrieveInventoryPhysicalCountResponse, ApiError> {
         let url = format!("{}/physical-counts/{}", &self.url(), physical_count_id);
-        let response = self.client.get(&url).await?;
+        let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
     }
@@ -101,7 +106,7 @@ impl InventoryApi {
         transfer_id: &str,
     ) -> Result<RetrieveInventoryTransferResponse, ApiError> {
         let url = format!("{}/transfers/{}", &self.url(), transfer_id);
-        let response = self.client.get(&url).await?;
+        let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
     }
@@ -118,7 +123,7 @@ impl InventoryApi {
             catalog_object_id,
             params.to_query_string()
         );
-        let response = self.client.get(&url).await?;
+        let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
     }

@@ -19,6 +19,7 @@ use crate::{
         DeleteCustomerGroupResponse, ListCustomerGroupsParameters, ListCustomerGroupsResponse,
         RetrieveCustomerGroupResponse, UpdateCustomerGroupRequest, UpdateCustomerGroupResponse,
     },
+    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/customers/groups";
@@ -29,12 +30,16 @@ pub struct CustomerGroupsApi {
     /// App config information
     config: Configuration,
     /// HTTP Client for requests to the Customer Groups API endpoints
-    client: HttpClient,
+    http_client: HttpClient,
 }
 
 impl CustomerGroupsApi {
-    pub fn new(config: Configuration, client: HttpClient) -> Self {
-        Self { config, client }
+    /// Instantiates a new `CustomerGroupsApi`
+    pub fn new(square_client: SquareClient) -> CustomerGroupsApi {
+        CustomerGroupsApi {
+            config: square_client.config,
+            http_client: square_client.http_client,
+        }
     }
 
     /// Retrieves the list of customer groups of a business.
@@ -43,7 +48,7 @@ impl CustomerGroupsApi {
         params: &ListCustomerGroupsParameters,
     ) -> Result<ListCustomerGroupsResponse, ApiError> {
         let url = format!("{}{}", &self.url(), params.to_query_string());
-        let response = self.client.get(&url).await?;
+        let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
     }
@@ -55,7 +60,7 @@ impl CustomerGroupsApi {
         &self,
         body: &CreateCustomerGroupRequest,
     ) -> Result<CreateCustomerGroupResponse, ApiError> {
-        let response = self.client.post(&self.url(), body).await?;
+        let response = self.http_client.post(&self.url(), body).await?;
 
         response.deserialize().await
     }
@@ -66,7 +71,7 @@ impl CustomerGroupsApi {
         group_id: &str,
     ) -> Result<DeleteCustomerGroupResponse, ApiError> {
         let url = format!("{}/{}", &self.url(), group_id);
-        let response = self.client.delete(&url).await?;
+        let response = self.http_client.delete(&url).await?;
 
         response.deserialize().await
     }
@@ -77,7 +82,7 @@ impl CustomerGroupsApi {
         group_id: &str,
     ) -> Result<RetrieveCustomerGroupResponse, ApiError> {
         let url = format!("{}/{}", &self.url(), group_id);
-        let response = self.client.get(&url).await?;
+        let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
     }
@@ -88,7 +93,7 @@ impl CustomerGroupsApi {
         body: &UpdateCustomerGroupRequest,
     ) -> Result<UpdateCustomerGroupResponse, ApiError> {
         let url = format!("{}/{}", &self.url(), group_id);
-        let response = self.client.put(&url, body).await?;
+        let response = self.http_client.put(&url, body).await?;
 
         response.deserialize().await
     }

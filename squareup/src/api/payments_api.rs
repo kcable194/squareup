@@ -24,6 +24,7 @@ use crate::{
         CompletePaymentResponse, CreatePaymentRequest, CreatePaymentResponse, GetPaymentResponse,
         ListPaymentsParameters, ListPaymentsResponse, UpdatePaymentRequest, UpdatePaymentResponse,
     },
+    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/payments";
@@ -33,12 +34,16 @@ pub struct PaymentsApi {
     /// App config information
     config: Configuration,
     /// HTTP Client for requests to the Payments API endpoints
-    client: HttpClient,
+    http_client: HttpClient,
 }
 
 impl PaymentsApi {
-    pub fn new(config: Configuration, client: HttpClient) -> Self {
-        Self { config, client }
+    /// Instantiates a new `PaymentsApi`
+    pub fn new(square_client: SquareClient) -> PaymentsApi {
+        PaymentsApi {
+            config: square_client.config,
+            http_client: square_client.http_client,
+        }
     }
 
     /// Retrieves a list of payments taken by the account making the request.
@@ -52,7 +57,7 @@ impl PaymentsApi {
         params: &ListPaymentsParameters,
     ) -> Result<ListPaymentsResponse, ApiError> {
         let url = format!("{}{}", &self.url(), params.to_query_string());
-        let response = self.client.get(&url).await?;
+        let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
     }
@@ -68,7 +73,7 @@ impl PaymentsApi {
         &self,
         body: &CreatePaymentRequest,
     ) -> Result<CreatePaymentResponse, ApiError> {
-        let response = self.client.post(&self.url(), body).await?;
+        let response = self.http_client.post(&self.url(), body).await?;
 
         response.deserialize().await
     }
@@ -90,7 +95,7 @@ impl PaymentsApi {
         body: &CancelPaymentByIdempotencyKeyRequest,
     ) -> Result<CancelPaymentByIdempotencyKeyResponse, ApiError> {
         let url = format!("{}/cancel", &self.url());
-        let response = self.client.post(&url, body).await?;
+        let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await
     }
@@ -98,7 +103,7 @@ impl PaymentsApi {
     /// Retrieves details for a specific payment
     pub async fn get_payment(&self, payment_id: &str) -> Result<GetPaymentResponse, ApiError> {
         let url = format!("{}/{}", &self.url(), payment_id);
-        let response = self.client.get(&url).await?;
+        let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
     }
@@ -112,7 +117,7 @@ impl PaymentsApi {
         body: &UpdatePaymentRequest,
     ) -> Result<UpdatePaymentResponse, ApiError> {
         let url = format!("{}/{}", &self.url(), payment_id);
-        let response = self.client.put(&url, &body).await?;
+        let response = self.http_client.put(&url, &body).await?;
 
         response.deserialize().await
     }
@@ -125,7 +130,7 @@ impl PaymentsApi {
         payment_id: &str,
     ) -> Result<CancelPaymentResponse, ApiError> {
         let url = format!("{}/{}/cancel", &self.url(), payment_id);
-        let response = self.client.post::<Option<()>>(&url, &None).await?;
+        let response = self.http_client.post::<Option<()>>(&url, &None).await?;
 
         response.deserialize().await
     }
@@ -141,7 +146,7 @@ impl PaymentsApi {
         body: &CompletePaymentRequest,
     ) -> Result<CompletePaymentResponse, ApiError> {
         let url = format!("{}/{}/complete", &self.url(), payment_id);
-        let response = self.client.post(&url, body).await?;
+        let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await
     }
