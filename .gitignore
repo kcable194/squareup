@@ -17,3 +17,5 @@ Cargo.lock
 
 /target
 /examples/target
+/examples/axum_square_client/target/
+/examples/pagination/target/

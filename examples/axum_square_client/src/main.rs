@@ -23,15 +23,15 @@ struct AppState {
 async fn main() {
     let config = Configuration {
         environment: Environment::Production,
-        square_version: SquareVersion::default(),
+        square_version: SquareVersion::SquareVersion,
         http_client_config: HttpClientConfiguration::default(),
         access_token: "".to_string(),
         base_uri: String::from("/v2"),
     };
 
     let square_client: SquareClient = SquareClient::try_new(config).unwrap();
-    let customers_api: CustomersApi = CustomersApi::new(square_client.clone());
-    let orders_api: OrdersApi = OrdersApi::new(square_client.clone());
+    let customers_api: CustomersApi = CustomersApi::new(square_client.to_owned());
+    let orders_api: OrdersApi = OrdersApi::new(square_client.to_owned());
 
     let app_state = AppState {
         customers_api,

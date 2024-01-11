@@ -3,7 +3,14 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/examples/axum_square_client/axum_square_client/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/examples/axum_square_client/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/examples/pagination/pagination/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/examples/pagination/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/squareup/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/examples/axum_square_client/target" />
+      <excludeFolder url="file://$MODULE_DIR$/examples/pagination/pagination/target" />
+      <excludeFolder url="file://$MODULE_DIR$/examples/pagination/target" />
       <excludeFolder url="file://$MODULE_DIR$/examples/target" />
       <excludeFolder url="file://$MODULE_DIR$/squareup/target" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
