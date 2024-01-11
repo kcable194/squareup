@@ -1,5 +1,5 @@
 use squareup::api::CustomersApi;
-use squareup::config::{Configuration, Environment, SquareVersion};
+use squareup::config::{BaseUri, Configuration, Environment};
 use squareup::http::client::HttpClientConfiguration;
 use squareup::models::enums::{SortCustomersField, SortOrder};
 use squareup::models::{ListCustomersParameters, ListCustomersResponse};
@@ -10,10 +10,8 @@ async fn main() {
     // Create client config, square client, and customers_api
     let config = Configuration {
         environment: Environment::Production,
-        square_version: SquareVersion::default(),
         http_client_config: HttpClientConfiguration::default(),
-        access_token: "".to_string(),
-        base_uri: String::from("/v2"),
+        base_uri: BaseUri::Default,
     };
 
     let square_client: SquareClient = SquareClient::try_new(config).unwrap();

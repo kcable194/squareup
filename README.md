@@ -22,33 +22,51 @@ The client is instantiated most simply with
 ```rust
 use squareup::{config::Configuration, SquareClient};
 
+// This will default to Sandbox, not Production!!
 let client = SquareClient::try_new(Configuration::default()).unwrap();
 ```
 
 For this to work, it's necessary to set an environment variable with the name of `SQUARE_API_TOKEN`
 and the value of your API Token string... otherwise, you'll get API errors when making live calls.
+You can also add your API Token to the Headers manually when configuring the client. Only do this
+for local scripts (if even then).
 
 Other default values are `Sandbox` for the Square environment, `2023-12-13` API version, a base URI
 of `/v2`, a timeout of 60 seconds and no HTTP Client retries.
 
+
+The standard configuration for production is shown below:
+```rust
+    // Create square client config
+    let config = Configuration {
+        environment: Environment::Production,
+        http_client_config: HttpClientConfiguration::default(),
+        base_uri: BaseUri::Default,
+    };
+```
+
 The Square client can be customized a bit via the properties shown here:
 ```rust
-use squareup::{
-    config::{Configuration, Environment},
-    http::{client::{HttpClientConfiguration, RetryConfiguration}, Headers},
-};
+use squareup::api::{CustomersApi, OrdersApi};
+use squareup::config::BaseUri;
+use squareup::config::{Configuration, Environment};
+use squareup::http::client::HttpClientConfiguration;
+use squareup::SquareClient;
 use std::time::Duration;
+use squareup::http::client::RetryConfiguration;
+use squareup::http::Headers;
 
 let mut headers = Headers::default();
 headers.set_user_agent("Some User Agent String");
 headers.insert("X_SOME_CUSTOM_HEADER", "custom_header_value");
+// Not recommended, only do this if you are running local scripts
+headers.set_authorization("YOUR_API_TOKEN".to_string());
 
-let client = SquareClient::try_new(Configuration {
+let config = Configuration {
     environment: Environment::Production,
-    square_version: SquareVersion::default(),
     http_client_config: HttpClientConfiguration {
         timeout: 30,
-        user_agent: String::from("Some User Agent String"),
+        user_agent: String::from("Some User Agent String"), // will override what's in headers
         default_headers: headers,
         retry_configuration: RetryConfiguration {
             retries_count: 1,
@@ -57,9 +75,11 @@ let client = SquareClient::try_new(Configuration {
             base: 3,
         },
     },
-    access_token: String::from("Bearer MY_ACCESS_TOKEN"),
-    base_uri: String::from("/v2"),
-}).unwrap();
+    base_uri: BaseUri::Default,
+};
+
+// Create square client
+let square_client: SquareClient = SquareClient::try_new(config).unwrap();
 ```
 
 ### Using the client

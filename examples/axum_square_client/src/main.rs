@@ -4,7 +4,7 @@ use axum::{
     Json, Router,
 };
 use squareup::api::{CustomersApi, OrdersApi};
-use squareup::config::SquareVersion;
+use squareup::config::BaseUri;
 use squareup::config::{Configuration, Environment};
 use squareup::http::client::HttpClientConfiguration;
 use squareup::models::enums::{SortCustomersField, SortOrder};
@@ -14,6 +14,7 @@ use squareup::models::{
 use squareup::SquareClient;
 use std::sync::Arc;
 use tokio::net::TcpListener;
+
 
 // struct that holds shared app state that axum will inject
 struct AppState {
@@ -38,10 +39,8 @@ async fn main() {
     // Create square client config
     let config = Configuration {
         environment: Environment::Production,
-        square_version: SquareVersion::SquareVersion,
         http_client_config: HttpClientConfiguration::default(),
-        access_token: "".to_string(),
-        base_uri: String::from("/v2"),
+        base_uri: BaseUri::Default,
     };
 
     // Create square client, and instantiate any api structs you want
@@ -59,9 +58,7 @@ async fn main() {
         .with_state(app_state);
 
     // run app with hyper
-    let listener: TcpListener = TcpListener::bind("127.0.0.1:3000")
-        .await
-        .unwrap();
+    let listener: TcpListener = TcpListener::bind("127.0.0.1:3000").await.unwrap();
     axum::serve(listener, app).await.unwrap();
 }
 
@@ -92,7 +89,10 @@ async fn customers(
     Json(customer.to_owned())
 }
 
-async fn orders(Path((location_id, num)): Path<(String, usize)>, State(app_state): State<Arc<AppState>>) -> Json<Order> {
+async fn orders(
+    Path((location_id, num)): Path<(String, usize)>,
+    State(app_state): State<Arc<AppState>>,
+) -> Json<Order> {
     // Create search orders request object
     let search_request = SearchOrdersRequest {
         location_ids: Some(vec![location_id]),

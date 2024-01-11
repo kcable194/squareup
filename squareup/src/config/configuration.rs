@@ -1,31 +1,19 @@
 //! App configuration for the library
 
-use std::env;
 
-use crate::config::square_version::SquareVersion;
-use log::warn;
-
+use crate::config::base_uri::BaseUri;
 use crate::http::client::HttpClientConfiguration;
-
 use super::Environment;
 
-const DEFAULT_BASE_URI: &str = "/v2";
-
 /// Configuration struct for the library
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Default)]
 pub struct Configuration {
     /// Current API environment
     pub environment: Environment,
-    /// Square connect API versions.
-    pub square_version: SquareVersion,
     /// Http Client Configuration instance.
     pub http_client_config: HttpClientConfiguration,
-    /// OAuth 2.0 Access Token, if this isn't provided during initialization, environment
-    /// variable SQUARE_API_TOKEN is checked. Failure to provide an API token by one of
-    /// these methods will result in unauthorized requests
-    pub access_token: String,
     /// Base URI
-    pub base_uri: String,
+    pub base_uri: BaseUri,
 }
 
 impl Configuration {
@@ -33,37 +21,13 @@ impl Configuration {
     /// specifier (e.g. "/v2")
     pub(crate) fn get_base_url(&self) -> String {
         let base_url = self.environment.get_base_url();
-        format!("{}{}", base_url, self.base_uri)
-    }
-}
-
-/// The default authorization header is a Bearer token found in the `SQUARE_API_TOKEN`
-/// environment variable
-pub(crate) fn default_authorization() -> String {
-    format!(
-        "Bearer {}",
-        env::var("SQUARE_API_TOKEN").unwrap_or_else(|_| {
-            warn!("No SQUARE_API_TOKEN environment variable found");
-            String::new()
-        })
-    )
-}
-
-impl Default for Configuration {
-    fn default() -> Self {
-        Self {
-            environment: Default::default(),
-            square_version: SquareVersion::default(),
-            http_client_config: Default::default(),
-            access_token: default_authorization(),
-            base_uri: DEFAULT_BASE_URI.to_owned(),
-        }
+        format!("{}{}", base_url, self.base_uri.get_base_uri())
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::config::{Configuration, Environment};
+    use crate::config::{BaseUri, Configuration, Environment};
 
     #[test]
     fn get_base_url_default_url() {
@@ -84,7 +48,7 @@ mod tests {
     #[test]
     fn get_base_url_with_different_base_uri() {
         let mut configuration = Configuration::default();
-        configuration.base_uri = String::from("/custom_base_uri");
+        configuration.base_uri = BaseUri::Custom("/custom_base_uri".to_string());
         assert_eq!(
             "https://connect.squareupsandbox.com/custom_base_uri",
             configuration.get_base_url()
