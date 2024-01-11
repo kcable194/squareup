@@ -13,14 +13,29 @@ use squareup::models::{
 };
 use squareup::SquareClient;
 use std::sync::Arc;
+use tokio::net::TcpListener;
 
+// struct that holds shared app state that axum will inject
 struct AppState {
     customers_api: CustomersApi,
     orders_api: OrdersApi,
 }
 
+impl AppState {
+    // convenience method for wrapping app state in an Arc
+    pub fn new(customers_api: CustomersApi, orders_api: OrdersApi) -> Arc<AppState> {
+        let app_state = AppState {
+            customers_api,
+            orders_api,
+        };
+
+        Arc::new(app_state)
+    }
+}
+
 #[tokio::main]
 async fn main() {
+    // Create square client config
     let config = Configuration {
         environment: Environment::Production,
         square_version: SquareVersion::SquareVersion,
@@ -29,24 +44,22 @@ async fn main() {
         base_uri: String::from("/v2"),
     };
 
+    // Create square client, and instantiate any api structs you want
     let square_client: SquareClient = SquareClient::try_new(config).unwrap();
     let customers_api: CustomersApi = CustomersApi::new(square_client.to_owned());
     let orders_api: OrdersApi = OrdersApi::new(square_client.to_owned());
 
-    let app_state = AppState {
-        customers_api,
-        orders_api,
-    };
-    let app_state_arc = Arc::new(app_state);
+    // Instantiate app state struct, wrapped in an Arc for sharing across threads
+    let app_state: Arc<AppState> = AppState::new(customers_api, orders_api);
 
-    // build our application with some routes
-    let app = Router::new()
+    // Add some routes to the application, as well as our app state
+    let app: Router = Router::new()
         .route("/customers/:num", get(customers))
         .route("/orders/:location_id/:num", get(orders))
-        .with_state(app_state_arc);
+        .with_state(app_state);
 
-    // run it with hyper
-    let listener = tokio::net::TcpListener::bind("127.0.0.1:3000")
+    // run app with hyper
+    let listener: TcpListener = TcpListener::bind("127.0.0.1:3000")
         .await
         .unwrap();
     axum::serve(listener, app).await.unwrap();
@@ -56,8 +69,6 @@ async fn customers(
     Path(num): Path<usize>,
     State(app_state): State<Arc<AppState>>,
 ) -> Json<Customer> {
-    let state = app_state.clone();
-
     // Begin getting customer information
     let list_customer_params = ListCustomersParameters {
         cursor: "".to_string(),
@@ -68,20 +79,21 @@ async fn customers(
     };
 
     // call customers api and get list of customers
-    let customers_response: ListCustomersResponse = state
+    let customers_response: ListCustomersResponse = app_state
         .customers_api
         .list_customers(&list_customer_params)
         .await
         .unwrap();
 
+    // unwrap response and send back as serialized json
     let customers = customers_response.customers.unwrap();
     let customer: &Customer = customers.get(num).unwrap();
-    Json(customer.clone())
+
+    Json(customer.to_owned())
 }
 
 async fn orders(Path((location_id, num)): Path<(String, usize)>, State(app_state): State<Arc<AppState>>) -> Json<Order> {
-    let state = app_state.clone();
-
+    // Create search orders request object
     let search_request = SearchOrdersRequest {
         location_ids: Some(vec![location_id]),
         cursor: None,
@@ -90,13 +102,16 @@ async fn orders(Path((location_id, num)): Path<(String, usize)>, State(app_state
         return_entries: Some(false),
     };
 
-    let search_response = state
+    // call orders api to get list of orders
+    let search_response = app_state
         .orders_api
         .search_orders(&search_request)
         .await
         .unwrap();
 
+    // unwrap response and send back as serialized json
     let orders = search_response.orders.unwrap();
     let order: &Order = orders.get(num).unwrap();
-    Json(order.clone())
+
+    Json(order.to_owned())
 }
