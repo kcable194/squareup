@@ -82,10 +82,7 @@ impl Headers {
                 );
             }
             None => {
-                headers.insert(
-                    String::from("Authorization"),
-                    Self::default_authorization(),
-                );
+                headers.insert(String::from("Authorization"), Self::default_authorization());
             }
         }
 
@@ -149,10 +146,7 @@ impl Default for Headers {
             String::from("user-agent"),
             HttpClientConfiguration::default_user_agent(),
         );
-        headers.insert(
-            String::from("Authorization"),
-            Self::default_authorization(),
-        );
+        headers.insert(String::from("Authorization"), Self::default_authorization());
 
         Self { headers }
     }

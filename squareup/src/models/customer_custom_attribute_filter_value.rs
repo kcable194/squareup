@@ -1,8 +1,7 @@
 //! Model struct for CustomerCustomAttributeFilterValue type
 
 use crate::models::{
-    CustomerAddressFilter, FilterValue, FloatNumberRange, SearchCustomersTextFilter,
-    TimeRange,
+    CustomerAddressFilter, FilterValue, FloatNumberRange, SearchCustomersTextFilter, TimeRange,
 };
 use serde::Serialize;
 

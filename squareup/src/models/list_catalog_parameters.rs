@@ -1,6 +1,7 @@
 //! Query parameters for the List Catalog API
 
 use super::enums::CatalogObjectType;
+use std::fmt::Display;
 
 /// This is a model struct for ListCatalogParameters (query parameters)
 #[derive(Clone, Debug, Default)]
@@ -43,8 +44,8 @@ impl From<ListCatalogParameters> for String {
     }
 }
 
-impl ToString for ListCatalogParameters {
-    fn to_string(&self) -> String {
+impl Display for ListCatalogParameters {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut params = Vec::new();
 
         if let Some(cursor) = &self.cursor {
@@ -65,10 +66,11 @@ impl ToString for ListCatalogParameters {
             params.push(format!("catalog_version={}", catalog_version));
         }
 
-        if params.is_empty() {
+        let str = if params.is_empty() {
             String::new()
         } else {
             format!("?{}", params.join("&"))
-        }
+        };
+        write!(f, "{}", str)
     }
 }

@@ -1,9 +1,8 @@
 //! App configuration for the library
 
-
+use super::Environment;
 use crate::config::base_uri::BaseUri;
 use crate::http::client::HttpClientConfiguration;
-use super::Environment;
 
 /// Configuration struct for the library
 #[derive(Clone, Debug, Default)]
