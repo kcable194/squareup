@@ -16,7 +16,7 @@ use crate::{
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::ApiError, GetPaymentRefundResponse, ListPaymentRefundsParameters,
+        errors::SquareApiError, GetPaymentRefundResponse, ListPaymentRefundsParameters,
         ListPaymentRefundsResponse, RefundPaymentRequest, RefundPaymentResponse,
     },
     SquareClient,
@@ -50,7 +50,7 @@ impl RefundsApi {
     pub async fn list_payment_refunds(
         &self,
         params: &ListPaymentRefundsParameters,
-    ) -> Result<ListPaymentRefundsResponse, ApiError> {
+    ) -> Result<ListPaymentRefundsResponse, SquareApiError> {
         let url = format!("{}{}", &self.url(), params.to_query_string());
         let response = self.http_client.get(&url).await?;
 
@@ -66,7 +66,7 @@ impl RefundsApi {
     pub async fn refund_payment(
         &self,
         body: &RefundPaymentRequest,
-    ) -> Result<RefundPaymentResponse, ApiError> {
+    ) -> Result<RefundPaymentResponse, SquareApiError> {
         let response = self.http_client.post(&self.url(), body).await?;
 
         response.deserialize().await
@@ -76,7 +76,7 @@ impl RefundsApi {
     pub async fn get_payment_refund(
         &self,
         refund_id: &str,
-    ) -> Result<GetPaymentRefundResponse, ApiError> {
+    ) -> Result<GetPaymentRefundResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), refund_id);
         let response = self.http_client.get(&url).await?;
 

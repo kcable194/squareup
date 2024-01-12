@@ -11,7 +11,7 @@ use crate::{
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::ApiError, CreateGiftCardRequest, CreateGiftCardResponse,
+        errors::SquareApiError, CreateGiftCardRequest, CreateGiftCardResponse,
         LinkCustomerToGiftCardRequest, LinkCustomerToGiftCardResponse, ListGiftCardsParameters,
         ListGiftCardsResponse, RetrieveGiftCardFromGANRequest, RetrieveGiftCardFromGANResponse,
         RetrieveGiftCardFromNonceRequest, RetrieveGiftCardFromNonceResponse,
@@ -46,7 +46,7 @@ impl GiftCardsApi {
     pub async fn list_gift_cards(
         &self,
         params: &ListGiftCardsParameters,
-    ) -> Result<ListGiftCardsResponse, ApiError> {
+    ) -> Result<ListGiftCardsResponse, SquareApiError> {
         let url = format!("{}{}", &self.url(), params.to_query_string());
         let response = self.http_client.get(&url).await?;
 
@@ -61,7 +61,7 @@ impl GiftCardsApi {
     pub async fn create_gift_card(
         &self,
         body: &CreateGiftCardRequest,
-    ) -> Result<CreateGiftCardResponse, ApiError> {
+    ) -> Result<CreateGiftCardResponse, SquareApiError> {
         let response = self.http_client.post(&self.url(), body).await?;
 
         response.deserialize().await
@@ -71,7 +71,7 @@ impl GiftCardsApi {
     pub async fn retrieve_gift_card_from_gan(
         &self,
         body: &RetrieveGiftCardFromGANRequest,
-    ) -> Result<RetrieveGiftCardFromGANResponse, ApiError> {
+    ) -> Result<RetrieveGiftCardFromGANResponse, SquareApiError> {
         let url = format!("{}/from-gan", &self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -82,7 +82,7 @@ impl GiftCardsApi {
     pub async fn retrieve_gift_card_from_nonce(
         &self,
         body: &RetrieveGiftCardFromNonceRequest,
-    ) -> Result<RetrieveGiftCardFromNonceResponse, ApiError> {
+    ) -> Result<RetrieveGiftCardFromNonceResponse, SquareApiError> {
         let url = format!("{}/from-nonce", &self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -96,7 +96,7 @@ impl GiftCardsApi {
         &self,
         gift_card_id: &str,
         body: &LinkCustomerToGiftCardRequest,
-    ) -> Result<LinkCustomerToGiftCardResponse, ApiError> {
+    ) -> Result<LinkCustomerToGiftCardResponse, SquareApiError> {
         let url = format!("{}/{}/link-customer", &self.url(), gift_card_id);
         let response = self.http_client.post(&url, body).await?;
 
@@ -110,7 +110,7 @@ impl GiftCardsApi {
         &self,
         gift_card_id: &str,
         body: &UnlinkCustomerFromGiftCardRequest,
-    ) -> Result<UnlinkCustomerFromGiftCardResponse, ApiError> {
+    ) -> Result<UnlinkCustomerFromGiftCardResponse, SquareApiError> {
         let url = format!("{}/{}/unlink-customer", &self.url(), gift_card_id);
         let response = self.http_client.post(&url, body).await?;
 
@@ -120,7 +120,7 @@ impl GiftCardsApi {
     /// Retrieves a gift card using the gift card ID.
     ///
     /// `id`: The ID of the gift card to retrieve.
-    pub async fn retrieve_gift_card(&self, id: &str) -> Result<RetrieveGiftCardResponse, ApiError> {
+    pub async fn retrieve_gift_card(&self, id: &str) -> Result<RetrieveGiftCardResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), id);
         let response = self.http_client.get(&url).await?;
 

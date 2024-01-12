@@ -12,7 +12,7 @@ use reqwest_retry::RetryTransientMiddleware;
 use serde::Serialize;
 
 use crate::http::client::http_client_configuration::RetryConfiguration;
-use crate::{http::HttpResponse, models::errors::ApiError};
+use crate::{http::HttpResponse, models::errors::SquareApiError};
 
 use super::HttpClientConfiguration;
 
@@ -26,7 +26,7 @@ pub struct HttpClient {
 
 impl HttpClient {
     /// Instantiates a new `HttpClient` given the provided `HttpClientConfiguration`.
-    pub fn try_new(config: &HttpClientConfiguration) -> Result<Self, ApiError> {
+    pub fn try_new(config: &HttpClientConfiguration) -> Result<Self, SquareApiError> {
         let mut client_builder = reqwest::ClientBuilder::new();
         client_builder = client_builder.timeout(Duration::from_secs(config.timeout.into()));
         client_builder = client_builder.user_agent(&config.user_agent);
@@ -34,7 +34,7 @@ impl HttpClient {
         let client = client_builder.build().map_err(|e| {
             let msg = format!("Failed to build client: {}", e);
             error!("{}", msg);
-            ApiError::new(&msg)
+            SquareApiError::new(&msg)
         })?;
         let retry_policy = create_retry_policy(&config.retry_configuration);
         let retry_client = ClientBuilder::new(client.clone())
@@ -47,11 +47,11 @@ impl HttpClient {
     }
 
     /// Sends an HTTP GET
-    pub async fn get(&self, url: &str) -> Result<HttpResponse, ApiError> {
+    pub async fn get(&self, url: &str) -> Result<HttpResponse, SquareApiError> {
         let response = self.retry_client.get(url).send().await.map_err(|e| {
             let msg = format!("Error getting {}: {}", url, e);
             error!("{}", msg);
-            ApiError::new(&msg)
+            SquareApiError::new(&msg)
         })?;
         Ok(HttpResponse::new(response))
     }
@@ -61,7 +61,7 @@ impl HttpClient {
         &self,
         url: &str,
         body: &T,
-    ) -> Result<HttpResponse, ApiError> {
+    ) -> Result<HttpResponse, SquareApiError> {
         let response = self
             .retry_client
             .post(url)
@@ -71,7 +71,7 @@ impl HttpClient {
             .map_err(|e| {
                 let msg = format!("Error posting to {}: {}", url, e);
                 error!("{}", msg);
-                ApiError::new(&msg)
+                SquareApiError::new(&msg)
             })?;
         Ok(HttpResponse::new(response))
     }
@@ -82,20 +82,20 @@ impl HttpClient {
         url: &str,
         body: &T,
         filepath: &str,
-    ) -> Result<HttpResponse, ApiError> {
+    ) -> Result<HttpResponse, SquareApiError> {
         let request = serde_json::to_string(body).map_err(|e| {
             let msg = format!(
                 "Error serializing request body - url: {}, body: {:?}: {}",
                 url, body, e
             );
             error!("{}", msg);
-            ApiError::new(&msg)
+            SquareApiError::new(&msg)
         })?;
 
         let mut file = File::open(filepath).map_err(|e| {
             let msg = format!("Error opening file {}: {}", filepath, e);
             error!("{}", msg);
-            ApiError::new(&msg)
+            SquareApiError::new(&msg)
         })?;
         let mut vec = Vec::new();
         let _reader = file.read_to_end(&mut vec);
@@ -106,7 +106,7 @@ impl HttpClient {
                 mime, filepath, e
             );
             error!("{}", msg);
-            ApiError::new(&msg)
+            SquareApiError::new(&msg)
         })?;
 
         let form = multipart::Form::new()
@@ -122,23 +122,23 @@ impl HttpClient {
             .map_err(|e| {
                 let msg = format!("Error posting to {}: {}", url, e);
                 error!("{}", msg);
-                ApiError::new(&msg)
+                SquareApiError::new(&msg)
             })?;
         Ok(HttpResponse::new(response))
     }
 
     /// Sends an HTTP POST without any body
-    pub async fn empty_post(&self, url: &str) -> Result<HttpResponse, ApiError> {
+    pub async fn empty_post(&self, url: &str) -> Result<HttpResponse, SquareApiError> {
         let response = self.client.post(url).send().await.map_err(|e| {
             let msg = format!("Error posting to {}: {}", url, e);
             error!("{}", msg);
-            ApiError::new(&msg)
+            SquareApiError::new(&msg)
         })?;
         Ok(HttpResponse::new(response))
     }
 
     /// Sends an HTTP PUT
-    pub async fn put<T: Serialize>(&self, url: &str, body: &T) -> Result<HttpResponse, ApiError> {
+    pub async fn put<T: Serialize>(&self, url: &str, body: &T) -> Result<HttpResponse, SquareApiError> {
         let response = self
             .retry_client
             .put(url)
@@ -148,7 +148,7 @@ impl HttpClient {
             .map_err(|e| {
                 let msg = format!("Error putting to {}: {}", url, e);
                 error!("{}", msg);
-                ApiError::new(&msg)
+                SquareApiError::new(&msg)
             })?;
         Ok(HttpResponse::new(response))
     }
@@ -159,20 +159,20 @@ impl HttpClient {
         url: &str,
         body: &T,
         filepath: &str,
-    ) -> Result<HttpResponse, ApiError> {
+    ) -> Result<HttpResponse, SquareApiError> {
         let request = serde_json::to_string(body).map_err(|e| {
             let msg = format!(
                 "Error serializing request body - url: {}, body: {:?}: {}",
                 url, body, e
             );
             error!("{}", msg);
-            ApiError::new(&msg)
+            SquareApiError::new(&msg)
         })?;
 
         let mut file = File::open(filepath).map_err(|e| {
             let msg = format!("Error opening file {}: {}", filepath, e);
             error!("{}", msg);
-            ApiError::new(&msg)
+            SquareApiError::new(&msg)
         })?;
         let mut vec = Vec::new();
         let _reader = file.read_to_end(&mut vec);
@@ -183,7 +183,7 @@ impl HttpClient {
                 mime, filepath, e
             );
             error!("{}", msg);
-            ApiError::new(&msg)
+            SquareApiError::new(&msg)
         })?;
 
         let form = multipart::Form::new()
@@ -199,27 +199,27 @@ impl HttpClient {
             .map_err(|e| {
                 let msg = format!("Error putting to {}: {}", url, e);
                 error!("{}", msg);
-                ApiError::new(&msg)
+                SquareApiError::new(&msg)
             })?;
         Ok(HttpResponse::new(response))
     }
 
     /// Sends an HTTP PUT without any body
-    pub async fn empty_put(&self, url: &str) -> Result<HttpResponse, ApiError> {
+    pub async fn empty_put(&self, url: &str) -> Result<HttpResponse, SquareApiError> {
         let response = self.retry_client.put(url).send().await.map_err(|e| {
             let msg = format!("Error putting to {}: {}", url, e);
             error!("{}", msg);
-            ApiError::new(&msg)
+            SquareApiError::new(&msg)
         })?;
         Ok(HttpResponse::new(response))
     }
 
     /// Sends an HTTP DELETE
-    pub async fn delete(&self, url: &str) -> Result<HttpResponse, ApiError> {
+    pub async fn delete(&self, url: &str) -> Result<HttpResponse, SquareApiError> {
         let response = self.retry_client.delete(url).send().await.map_err(|e| {
             let msg = format!("Error putting to {}: {}", url, e);
             error!("{}", msg);
-            ApiError::new(&msg)
+            SquareApiError::new(&msg)
         })?;
         Ok(HttpResponse::new(response))
     }
@@ -235,11 +235,11 @@ fn create_retry_policy(retry_configuration: &RetryConfiguration) -> ExponentialB
 }
 
 /// Tries to determine the file's MIME type and returns it as a str
-fn get_mime_type(filepath: &str) -> Result<&str, ApiError> {
+fn get_mime_type(filepath: &str) -> Result<&str, SquareApiError> {
     let kind = infer::get_from_path(filepath).map_err(|e| {
         let msg = format!("Error reading file {}: {}", filepath, e);
         error!("{}", msg);
-        ApiError::new(&msg)
+        SquareApiError::new(&msg)
     })?;
 
     match kind {
@@ -247,7 +247,7 @@ fn get_mime_type(filepath: &str) -> Result<&str, ApiError> {
         None => {
             let msg = format!("Error determining mime type for file {}", filepath);
             error!("{}", msg);
-            Err(ApiError::new(&msg))
+            Err(SquareApiError::new(&msg))
         }
     }
 }

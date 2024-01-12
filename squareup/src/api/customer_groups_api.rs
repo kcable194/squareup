@@ -15,7 +15,7 @@ use crate::{
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::ApiError, CreateCustomerGroupRequest, CreateCustomerGroupResponse,
+        errors::SquareApiError, CreateCustomerGroupRequest, CreateCustomerGroupResponse,
         DeleteCustomerGroupResponse, ListCustomerGroupsParameters, ListCustomerGroupsResponse,
         RetrieveCustomerGroupResponse, UpdateCustomerGroupRequest, UpdateCustomerGroupResponse,
     },
@@ -46,7 +46,7 @@ impl CustomerGroupsApi {
     pub async fn list_customer_groups(
         &self,
         params: &ListCustomerGroupsParameters,
-    ) -> Result<ListCustomerGroupsResponse, ApiError> {
+    ) -> Result<ListCustomerGroupsResponse, SquareApiError> {
         let url = format!("{}{}", &self.url(), params.to_query_string());
         let response = self.http_client.get(&url).await?;
 
@@ -59,7 +59,7 @@ impl CustomerGroupsApi {
     pub async fn create_customer_group(
         &self,
         body: &CreateCustomerGroupRequest,
-    ) -> Result<CreateCustomerGroupResponse, ApiError> {
+    ) -> Result<CreateCustomerGroupResponse, SquareApiError> {
         let response = self.http_client.post(&self.url(), body).await?;
 
         response.deserialize().await
@@ -69,7 +69,7 @@ impl CustomerGroupsApi {
     pub async fn delete_customer_group(
         &self,
         group_id: &str,
-    ) -> Result<DeleteCustomerGroupResponse, ApiError> {
+    ) -> Result<DeleteCustomerGroupResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), group_id);
         let response = self.http_client.delete(&url).await?;
 
@@ -80,7 +80,7 @@ impl CustomerGroupsApi {
     pub async fn retrieve_customer_group(
         &self,
         group_id: &str,
-    ) -> Result<RetrieveCustomerGroupResponse, ApiError> {
+    ) -> Result<RetrieveCustomerGroupResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), group_id);
         let response = self.http_client.get(&url).await?;
 
@@ -91,7 +91,7 @@ impl CustomerGroupsApi {
         &self,
         group_id: &str,
         body: &UpdateCustomerGroupRequest,
-    ) -> Result<UpdateCustomerGroupResponse, ApiError> {
+    ) -> Result<UpdateCustomerGroupResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), group_id);
         let response = self.http_client.put(&url, body).await?;
 

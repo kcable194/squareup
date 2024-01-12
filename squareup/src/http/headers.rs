@@ -2,7 +2,7 @@
 
 use super::client::HttpClientConfiguration;
 use crate::config::SquareVersion;
-use crate::models::errors::ApiError;
+use crate::models::errors::SquareApiError;
 use log::{error, warn};
 use reqwest::header::{HeaderMap, HeaderName, HeaderValue};
 use std::collections::HashMap;
@@ -153,7 +153,7 @@ impl Default for Headers {
 }
 
 impl TryFrom<&Headers> for HeaderMap {
-    type Error = ApiError;
+    type Error = SquareApiError;
 
     /// Converts `Headers` into Reqwest lib's `HeaderMap`
     fn try_from(headers: &Headers) -> Result<Self, Self::Error> {
@@ -162,7 +162,7 @@ impl TryFrom<&Headers> for HeaderMap {
             let header_name = HeaderName::from_bytes(k.as_bytes()).map_err(|e| {
                 let msg = format!("Error generating {} header name: {}", k, e);
                 error!("{}", msg);
-                ApiError::new(&msg)
+                SquareApiError::new(&msg)
             })?;
             let mut header_value = HeaderValue::from_bytes(v.as_bytes()).map_err(|e| {
                 let msg = format!(
@@ -170,7 +170,7 @@ impl TryFrom<&Headers> for HeaderMap {
                     v, k, e
                 );
                 error!("{}", msg);
-                ApiError::new(&msg)
+                SquareApiError::new(&msg)
             })?;
 
             if k == "Authorization" {

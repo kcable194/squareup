@@ -14,7 +14,7 @@ use crate::{
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::ApiError, ListCustomerSegmentsParameters, ListCustomerSegmentsResponse,
+        errors::SquareApiError, ListCustomerSegmentsParameters, ListCustomerSegmentsResponse,
         RetrieveCustomerSegmentResponse,
     },
     SquareClient,
@@ -43,7 +43,7 @@ impl CustomerSegmentsApi {
     pub async fn list_customer_segments(
         &self,
         params: &ListCustomerSegmentsParameters,
-    ) -> Result<ListCustomerSegmentsResponse, ApiError> {
+    ) -> Result<ListCustomerSegmentsResponse, SquareApiError> {
         let url = format!("{}{}", &self.url(), params.to_query_string());
         let response = self.http_client.get(&url).await?;
 
@@ -54,7 +54,7 @@ impl CustomerSegmentsApi {
     pub async fn retrieve_customer_segment(
         &self,
         segment_id: &str,
-    ) -> Result<RetrieveCustomerSegmentResponse, ApiError> {
+    ) -> Result<RetrieveCustomerSegmentResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), segment_id);
         let response = self.http_client.get(&url).await?;
 

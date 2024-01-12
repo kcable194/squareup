@@ -14,7 +14,7 @@ use crate::{
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::ApiError, CreateCardRequest, CreateCardResponse, DisableCardResponse,
+        errors::SquareApiError, CreateCardRequest, CreateCardResponse, DisableCardResponse,
         ListCardsParameters, ListCardsResponse, RetrieveCardResponse,
     },
     SquareClient,
@@ -43,7 +43,7 @@ impl CardsApi {
     pub async fn create_card(
         &self,
         body: &CreateCardRequest,
-    ) -> Result<CreateCardResponse, ApiError> {
+    ) -> Result<CreateCardResponse, SquareApiError> {
         let response = self.http_client.post(&self.url(), body).await?;
 
         response.deserialize().await
@@ -52,7 +52,7 @@ impl CardsApi {
     /// Disables the card, preventing any further updates or charges.
     ///
     /// Disabling an already disabled card is allowed but has no effect.
-    pub async fn disable_card(&self, card_id: &str) -> Result<DisableCardResponse, ApiError> {
+    pub async fn disable_card(&self, card_id: &str) -> Result<DisableCardResponse, SquareApiError> {
         let url = format!("{}/{}/disable", &self.url(), card_id);
         let response = self.http_client.empty_post(&url).await?;
 
@@ -65,7 +65,7 @@ impl CardsApi {
     pub async fn list_cards(
         &self,
         params: &ListCardsParameters,
-    ) -> Result<ListCardsResponse, ApiError> {
+    ) -> Result<ListCardsResponse, SquareApiError> {
         let url = format!("{}{}", &self.url(), params.to_query_string());
         let response = self.http_client.get(&url).await?;
 
@@ -73,7 +73,7 @@ impl CardsApi {
     }
 
     /// Retrieves details for a specific Card.
-    pub async fn retrieve_card(&self, card_id: &str) -> Result<RetrieveCardResponse, ApiError> {
+    pub async fn retrieve_card(&self, card_id: &str) -> Result<RetrieveCardResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), card_id);
         let response = self.http_client.get(&url).await?;
 

@@ -1,12 +1,12 @@
 use super::Error;
 
 #[derive(Clone, Debug, Default)]
-pub struct ApiError {
+pub struct SquareApiError {
     pub message: String,
     pub errors: Vec<Error>,
 }
 
-impl ApiError {
+impl SquareApiError {
     pub fn new(message: &str) -> Self {
         Self {
             message: message.to_owned(),
@@ -22,13 +22,13 @@ impl ApiError {
     }
 }
 
-impl std::fmt::Display for ApiError {
+impl std::fmt::Display for SquareApiError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "API Error: {:?}", self)
     }
 }
 
-impl std::error::Error for ApiError {
+impl std::error::Error for SquareApiError {
     fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
         None
     }

@@ -11,7 +11,7 @@ use crate::{
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::ApiError, CreateCustomerRequest, CreateCustomerResponse, DeleteCustomerResponse,
+        errors::SquareApiError, CreateCustomerRequest, CreateCustomerResponse, DeleteCustomerResponse,
         ListCustomersParameters, ListCustomersResponse, RetrieveCustomerResponse,
         SearchCustomersRequest, SearchCustomersResponse, UpdateCustomerRequest,
         UpdateCustomerResponse,
@@ -47,7 +47,7 @@ impl CustomersApi {
     pub async fn list_customers(
         &self,
         params: &ListCustomersParameters,
-    ) -> Result<ListCustomersResponse, ApiError> {
+    ) -> Result<ListCustomersResponse, SquareApiError> {
         let url = format!("{}{}", &self.url(), params.to_query_string());
         let response = self.http_client.get(&url).await?;
 
@@ -66,7 +66,7 @@ impl CustomersApi {
     pub async fn create_customer(
         &self,
         body: &CreateCustomerRequest,
-    ) -> Result<CreateCustomerResponse, ApiError> {
+    ) -> Result<CreateCustomerResponse, SquareApiError> {
         let response = self.http_client.post(&self.url(), body).await?;
 
         response.deserialize().await
@@ -85,7 +85,7 @@ impl CustomersApi {
     pub async fn search_customers(
         &self,
         body: &SearchCustomersRequest,
-    ) -> Result<SearchCustomersResponse, ApiError> {
+    ) -> Result<SearchCustomersResponse, SquareApiError> {
         let url = format!("{}/search", &self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -105,7 +105,7 @@ impl CustomersApi {
         &self,
         customer_id: &str,
         params: &DeleteCustomerParameters,
-    ) -> Result<DeleteCustomerResponse, ApiError> {
+    ) -> Result<DeleteCustomerResponse, SquareApiError> {
         let url = format!(
             "{}/{}{}",
             &self.url(),
@@ -121,7 +121,7 @@ impl CustomersApi {
     pub async fn retrieve_customer(
         &self,
         customer_id: &str,
-    ) -> Result<RetrieveCustomerResponse, ApiError> {
+    ) -> Result<RetrieveCustomerResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), customer_id);
         let response = self.http_client.get(&url).await?;
 
@@ -148,7 +148,7 @@ impl CustomersApi {
         &self,
         customer_id: &str,
         body: &UpdateCustomerRequest,
-    ) -> Result<UpdateCustomerResponse, ApiError> {
+    ) -> Result<UpdateCustomerResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), customer_id);
         let response = self.http_client.put(&url, body).await?;
 
@@ -163,7 +163,7 @@ impl CustomersApi {
         &self,
         customer_id: &str,
         group_id: &str,
-    ) -> Result<RemoveGroupFromCustomerResponse, ApiError> {
+    ) -> Result<RemoveGroupFromCustomerResponse, SquareApiError> {
         let url = format!("{}/{}/groups/{}", &self.url(), customer_id, group_id);
         let response = self.http_client.delete(&url).await?;
 
@@ -179,7 +179,7 @@ impl CustomersApi {
         &self,
         customer_id: &str,
         group_id: &str,
-    ) -> Result<AddGroupToCustomerResponse, ApiError> {
+    ) -> Result<AddGroupToCustomerResponse, SquareApiError> {
         let url = format!("{}/{}/groups/{}", &self.url(), customer_id, group_id);
         let response = self.http_client.empty_put(&url).await?;
 

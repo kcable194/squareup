@@ -15,7 +15,7 @@ use crate::{
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::ApiError, CancelSubscriptionResponse, CreateSubscriptionRequest,
+        errors::SquareApiError, CancelSubscriptionResponse, CreateSubscriptionRequest,
         CreateSubscriptionResponse, DeleteSubscriptionActionResponse,
         ListSubscriptionEventsParameters, ListSubscriptionEventsResponse, PauseSubscriptionRequest,
         PauseSubscriptionResponse, ResumeSubscriptionRequest, ResumeSubscriptionResponse,
@@ -54,7 +54,7 @@ impl SubscriptionsApi {
     pub async fn create_subscription(
         &self,
         body: &CreateSubscriptionRequest,
-    ) -> Result<CreateSubscriptionResponse, ApiError> {
+    ) -> Result<CreateSubscriptionResponse, SquareApiError> {
         let response = self.http_client.post(&self.url(), body).await?;
 
         response.deserialize().await
@@ -64,7 +64,7 @@ impl SubscriptionsApi {
     pub async fn bulk_swap_plan(
         &self,
         body: &BulkSwapPlanRequest,
-    ) -> Result<BulkSwapPlanResponse, ApiError> {
+    ) -> Result<BulkSwapPlanResponse, SquareApiError> {
         let url = format!("{}/bulk-swap-plan", &self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -88,7 +88,7 @@ impl SubscriptionsApi {
     pub async fn search_subscriptions(
         &self,
         body: &SearchSubscriptionsRequest,
-    ) -> Result<SearchSubscriptionsResponse, ApiError> {
+    ) -> Result<SearchSubscriptionsResponse, SquareApiError> {
         let url = format!("{}/search", &self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -100,7 +100,7 @@ impl SubscriptionsApi {
         &self,
         subscription_id: &str,
         params: &RetrieveSubscriptionParameters,
-    ) -> Result<RetrieveSubscriptionResponse, ApiError> {
+    ) -> Result<RetrieveSubscriptionResponse, SquareApiError> {
         let url = format!(
             "{}/{}{}",
             &self.url(),
@@ -119,7 +119,7 @@ impl SubscriptionsApi {
         &self,
         subscription_id: &str,
         body: &UpdateSubscriptionRequest,
-    ) -> Result<UpdateSubscriptionResponse, ApiError> {
+    ) -> Result<UpdateSubscriptionResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), subscription_id);
         let response = self.http_client.put(&url, body).await?;
 
@@ -131,7 +131,7 @@ impl SubscriptionsApi {
         &self,
         subscription_id: &str,
         action_id: &str,
-    ) -> Result<DeleteSubscriptionActionResponse, ApiError> {
+    ) -> Result<DeleteSubscriptionActionResponse, SquareApiError> {
         let url = format!("{}/{}/actions/{}", &self.url(), subscription_id, action_id);
         let response = self.http_client.delete(&url).await?;
 
@@ -143,7 +143,7 @@ impl SubscriptionsApi {
         &self,
         subscription_id: &str,
         body: &ChangeBillingAnchorDateRequest,
-    ) -> Result<ChangeBillingAnchorDateResponse, ApiError> {
+    ) -> Result<ChangeBillingAnchorDateResponse, SquareApiError> {
         let url = format!("{}/{}/billing-anchor", &self.url(), subscription_id);
         let response = self.http_client.post(&url, body).await?;
 
@@ -156,7 +156,7 @@ impl SubscriptionsApi {
     pub async fn cancel_subscription(
         &self,
         subscription_id: &str,
-    ) -> Result<CancelSubscriptionResponse, ApiError> {
+    ) -> Result<CancelSubscriptionResponse, SquareApiError> {
         let url = format!("{}/{}/cancel", &self.url(), subscription_id);
         let response = self.http_client.empty_post(&url).await?;
 
@@ -168,7 +168,7 @@ impl SubscriptionsApi {
         &self,
         subscription_id: &str,
         params: &ListSubscriptionEventsParameters,
-    ) -> Result<ListSubscriptionEventsResponse, ApiError> {
+    ) -> Result<ListSubscriptionEventsResponse, SquareApiError> {
         let url = format!(
             "{}/{}/events{}",
             &self.url(),
@@ -185,7 +185,7 @@ impl SubscriptionsApi {
         &self,
         subscription_id: &str,
         body: &PauseSubscriptionRequest,
-    ) -> Result<PauseSubscriptionResponse, ApiError> {
+    ) -> Result<PauseSubscriptionResponse, SquareApiError> {
         let url = format!("{}/{}/pause", &self.url(), subscription_id);
         let response = self.http_client.post(&url, body).await?;
 
@@ -197,7 +197,7 @@ impl SubscriptionsApi {
         &self,
         subscription_id: &str,
         body: &ResumeSubscriptionRequest,
-    ) -> Result<ResumeSubscriptionResponse, ApiError> {
+    ) -> Result<ResumeSubscriptionResponse, SquareApiError> {
         let url = format!("{}/{}/resume", &self.url(), subscription_id);
         let response = self.http_client.post(&url, body).await?;
 
@@ -209,7 +209,7 @@ impl SubscriptionsApi {
         &self,
         subscription_id: &str,
         body: &SwapPlanRequest,
-    ) -> Result<SwapPlanResponse, ApiError> {
+    ) -> Result<SwapPlanResponse, SquareApiError> {
         let url = format!("{}/{}/swap-plan", &self.url(), subscription_id);
         let response = self.http_client.post(&url, body).await?;
 

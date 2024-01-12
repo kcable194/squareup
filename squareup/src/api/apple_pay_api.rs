@@ -6,7 +6,7 @@
 use crate::{
     config::Configuration,
     http::client::HttpClient,
-    models::{errors::ApiError, RegisterDomainRequest, RegisterDomainResponse},
+    models::{errors::SquareApiError, RegisterDomainRequest, RegisterDomainResponse},
     SquareClient,
 };
 
@@ -48,7 +48,7 @@ impl ApplePayApi {
     pub async fn register_domain(
         &self,
         body: &RegisterDomainRequest,
-    ) -> Result<RegisterDomainResponse, ApiError> {
+    ) -> Result<RegisterDomainResponse, SquareApiError> {
         let response = self.http_client.post(&self.url(), body).await?;
 
         response.deserialize().await

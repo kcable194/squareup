@@ -10,7 +10,7 @@ use crate::{
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::ApiError, BulkCreateTeamMembersRequest, BulkCreateTeamMembersResponse,
+        errors::SquareApiError, BulkCreateTeamMembersRequest, BulkCreateTeamMembersResponse,
         BulkUpdateTeamMembersRequest, BulkUpdateTeamMembersResponse, CreateTeamMemberRequest,
         CreateTeamMemberResponse, RetrieveTeamMemberResponse, RetrieveWageSettingResponse,
         SearchTeamMembersRequest, SearchTeamMembersResponse, UpdateTeamMemberRequest,
@@ -49,7 +49,7 @@ impl TeamApi {
     pub async fn create_team_member(
         &self,
         body: &CreateTeamMemberRequest,
-    ) -> Result<CreateTeamMemberResponse, ApiError> {
+    ) -> Result<CreateTeamMemberResponse, SquareApiError> {
         let response = self.http_client.post(&self.url(), body).await?;
 
         response.deserialize().await
@@ -67,7 +67,7 @@ impl TeamApi {
     pub async fn bulk_create_team_members(
         &self,
         body: &BulkCreateTeamMembersRequest,
-    ) -> Result<BulkCreateTeamMembersResponse, ApiError> {
+    ) -> Result<BulkCreateTeamMembersResponse, SquareApiError> {
         let url = format!("{}/bulk-create", self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -86,7 +86,7 @@ impl TeamApi {
     pub async fn bulk_update_team_members(
         &self,
         body: &BulkUpdateTeamMembersRequest,
-    ) -> Result<BulkUpdateTeamMembersResponse, ApiError> {
+    ) -> Result<BulkUpdateTeamMembersResponse, SquareApiError> {
         let url = format!("{}/bulk-update", self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -101,7 +101,7 @@ impl TeamApi {
     pub async fn search_team_members(
         &self,
         body: &SearchTeamMembersRequest,
-    ) -> Result<SearchTeamMembersResponse, ApiError> {
+    ) -> Result<SearchTeamMembersResponse, SquareApiError> {
         let url = format!("{}/search", self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -115,7 +115,7 @@ impl TeamApi {
     pub async fn retrieve_team_member(
         &self,
         team_member_id: &str,
-    ) -> Result<RetrieveTeamMemberResponse, ApiError> {
+    ) -> Result<RetrieveTeamMemberResponse, SquareApiError> {
         let url = format!("{}/{}", self.url(), team_member_id);
         let response = self.http_client.get(&url).await?;
 
@@ -132,7 +132,7 @@ impl TeamApi {
         &self,
         team_member_id: &str,
         body: &UpdateTeamMemberRequest,
-    ) -> Result<UpdateTeamMemberResponse, ApiError> {
+    ) -> Result<UpdateTeamMemberResponse, SquareApiError> {
         let url = format!("{}/{}", self.url(), team_member_id);
         let response = self.http_client.put(&url, body).await?;
 
@@ -146,7 +146,7 @@ impl TeamApi {
     pub async fn retrieve_wage_setting(
         &self,
         team_member_id: &str,
-    ) -> Result<RetrieveWageSettingResponse, ApiError> {
+    ) -> Result<RetrieveWageSettingResponse, SquareApiError> {
         let url = format!("{}/{}/wage-setting", self.url(), team_member_id);
         let response = self.http_client.get(&url).await?;
 
@@ -165,7 +165,7 @@ impl TeamApi {
         &self,
         team_member_id: &str,
         body: &UpdateWageSettingRequest,
-    ) -> Result<UpdateWageSettingResponse, ApiError> {
+    ) -> Result<UpdateWageSettingResponse, SquareApiError> {
         let url = format!("{}/{}/wage-setting", self.url(), team_member_id);
         let response = self.http_client.put(&url, body).await?;
 

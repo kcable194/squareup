@@ -1,6 +1,6 @@
 //! Gateway for the API
 
-use crate::{config::Configuration, http::client::HttpClient, models::errors::ApiError};
+use crate::{config::Configuration, http::client::HttpClient, models::errors::SquareApiError};
 
 /// Gateway struct for the library.
 /// This struct acts as a factory for Apis.
@@ -12,7 +12,7 @@ pub struct SquareClient {
 }
 
 impl SquareClient {
-    pub fn try_new(config: Configuration) -> Result<SquareClient, ApiError> {
+    pub fn try_new(config: Configuration) -> Result<SquareClient, SquareApiError> {
         let http_client = HttpClient::try_new(&config.http_client_config)?;
 
         let client: SquareClient = Self {

@@ -10,7 +10,7 @@ use crate::{
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::ApiError, CancelInvoiceRequest, CancelInvoiceResponse, CreateInvoiceRequest,
+        errors::SquareApiError, CancelInvoiceRequest, CancelInvoiceResponse, CreateInvoiceRequest,
         CreateInvoiceResponse, DeleteInvoiceParameters, DeleteInvoiceResponse, GetInvoiceResponse,
         ListInvoicesParameters, ListInvoicesResponse, PublishInvoiceRequest,
         PublishInvoiceResponse, SearchInvoicesRequest, SearchInvoicesResponse,
@@ -45,7 +45,7 @@ impl InvoicesApi {
     pub async fn list_invoices(
         &self,
         params: &ListInvoicesParameters,
-    ) -> Result<ListInvoicesResponse, ApiError> {
+    ) -> Result<ListInvoicesResponse, SquareApiError> {
         let url = format!("{}{}", &self.url(), params.to_query_string());
         let response = self.http_client.get(&url).await?;
 
@@ -60,7 +60,7 @@ impl InvoicesApi {
     pub async fn create_invoice(
         &self,
         body: &CreateInvoiceRequest,
-    ) -> Result<CreateInvoiceResponse, ApiError> {
+    ) -> Result<CreateInvoiceResponse, SquareApiError> {
         let response = self.http_client.post(&self.url(), body).await?;
 
         response.deserialize().await
@@ -76,7 +76,7 @@ impl InvoicesApi {
     pub async fn search_invoices(
         &self,
         body: &SearchInvoicesRequest,
-    ) -> Result<SearchInvoicesResponse, ApiError> {
+    ) -> Result<SearchInvoicesResponse, SquareApiError> {
         let url = format!("{}/search", &self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -92,7 +92,7 @@ impl InvoicesApi {
         &self,
         invoice_id: &str,
         params: &DeleteInvoiceParameters,
-    ) -> Result<DeleteInvoiceResponse, ApiError> {
+    ) -> Result<DeleteInvoiceResponse, SquareApiError> {
         let url = format!("{}/{}{}", &self.url(), invoice_id, params.to_query_string());
         let response = self.http_client.delete(&url).await?;
 
@@ -100,7 +100,7 @@ impl InvoicesApi {
     }
 
     /// Retrieves an invoice by invoice ID.
-    pub async fn get_invoice(&self, invoice_id: &str) -> Result<GetInvoiceResponse, ApiError> {
+    pub async fn get_invoice(&self, invoice_id: &str) -> Result<GetInvoiceResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), invoice_id);
         let response = self.http_client.get(&url).await?;
 
@@ -118,7 +118,7 @@ impl InvoicesApi {
         &self,
         invoice_id: &str,
         body: &UpdateInvoiceRequest,
-    ) -> Result<UpdateInvoiceResponse, ApiError> {
+    ) -> Result<UpdateInvoiceResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), invoice_id);
         let response = self.http_client.put(&url, body).await?;
 
@@ -135,7 +135,7 @@ impl InvoicesApi {
         &self,
         invoice_id: &str,
         body: &CancelInvoiceRequest,
-    ) -> Result<CancelInvoiceResponse, ApiError> {
+    ) -> Result<CancelInvoiceResponse, SquareApiError> {
         let url = format!("{}/{}/cancel", &self.url(), invoice_id);
         let response = self.http_client.post(&url, body).await?;
 
@@ -156,7 +156,7 @@ impl InvoicesApi {
         &self,
         invoice_id: &str,
         body: &PublishInvoiceRequest,
-    ) -> Result<PublishInvoiceResponse, ApiError> {
+    ) -> Result<PublishInvoiceResponse, SquareApiError> {
         let url = format!("{}/{}/publish", &self.url(), invoice_id);
         let response = self.http_client.post(&url, body).await?;
 

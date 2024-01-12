@@ -19,7 +19,7 @@ use crate::{
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::ApiError, CancelPaymentByIdempotencyKeyRequest,
+        errors::SquareApiError, CancelPaymentByIdempotencyKeyRequest,
         CancelPaymentByIdempotencyKeyResponse, CancelPaymentResponse, CompletePaymentRequest,
         CompletePaymentResponse, CreatePaymentRequest, CreatePaymentResponse, GetPaymentResponse,
         ListPaymentsParameters, ListPaymentsResponse, UpdatePaymentRequest, UpdatePaymentResponse,
@@ -55,7 +55,7 @@ impl PaymentsApi {
     pub async fn list_payments(
         &self,
         params: &ListPaymentsParameters,
-    ) -> Result<ListPaymentsResponse, ApiError> {
+    ) -> Result<ListPaymentsResponse, SquareApiError> {
         let url = format!("{}{}", &self.url(), params.to_query_string());
         let response = self.http_client.get(&url).await?;
 
@@ -72,7 +72,7 @@ impl PaymentsApi {
     pub async fn create_payment(
         &self,
         body: &CreatePaymentRequest,
-    ) -> Result<CreatePaymentResponse, ApiError> {
+    ) -> Result<CreatePaymentResponse, SquareApiError> {
         let response = self.http_client.post(&self.url(), body).await?;
 
         response.deserialize().await
@@ -93,7 +93,7 @@ impl PaymentsApi {
     pub async fn cancel_payment_by_idempotency_key(
         &self,
         body: &CancelPaymentByIdempotencyKeyRequest,
-    ) -> Result<CancelPaymentByIdempotencyKeyResponse, ApiError> {
+    ) -> Result<CancelPaymentByIdempotencyKeyResponse, SquareApiError> {
         let url = format!("{}/cancel", &self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -101,7 +101,7 @@ impl PaymentsApi {
     }
 
     /// Retrieves details for a specific payment
-    pub async fn get_payment(&self, payment_id: &str) -> Result<GetPaymentResponse, ApiError> {
+    pub async fn get_payment(&self, payment_id: &str) -> Result<GetPaymentResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), payment_id);
         let response = self.http_client.get(&url).await?;
 
@@ -115,7 +115,7 @@ impl PaymentsApi {
         &self,
         payment_id: &str,
         body: &UpdatePaymentRequest,
-    ) -> Result<UpdatePaymentResponse, ApiError> {
+    ) -> Result<UpdatePaymentResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), payment_id);
         let response = self.http_client.put(&url, &body).await?;
 
@@ -128,7 +128,7 @@ impl PaymentsApi {
     pub async fn cancel_payment(
         &self,
         payment_id: &str,
-    ) -> Result<CancelPaymentResponse, ApiError> {
+    ) -> Result<CancelPaymentResponse, SquareApiError> {
         let url = format!("{}/{}/cancel", &self.url(), payment_id);
         let response = self.http_client.post::<Option<()>>(&url, &None).await?;
 
@@ -144,7 +144,7 @@ impl PaymentsApi {
         &self,
         payment_id: &str,
         body: &CompletePaymentRequest,
-    ) -> Result<CompletePaymentResponse, ApiError> {
+    ) -> Result<CompletePaymentResponse, SquareApiError> {
         let url = format!("{}/{}/complete", &self.url(), payment_id);
         let response = self.http_client.post(&url, body).await?;
 

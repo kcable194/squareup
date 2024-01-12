@@ -8,7 +8,7 @@ use crate::{
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::ApiError, CreateGiftCardActivityRequest, CreateGiftCardActivityResponse,
+        errors::SquareApiError, CreateGiftCardActivityRequest, CreateGiftCardActivityResponse,
         ListGiftCardActivitiesParameters, ListGiftCardActivitiesResponse,
     },
     SquareClient,
@@ -41,7 +41,7 @@ impl GiftCardActivitiesApi {
     pub async fn list_gift_card_activities(
         &self,
         params: &ListGiftCardActivitiesParameters,
-    ) -> Result<ListGiftCardActivitiesResponse, ApiError> {
+    ) -> Result<ListGiftCardActivitiesResponse, SquareApiError> {
         let url = format!("{}{}", &self.url(), params.to_query_string());
         let response = self.http_client.get(&url).await?;
 
@@ -55,7 +55,7 @@ impl GiftCardActivitiesApi {
     pub async fn create_gift_card_activity(
         &self,
         body: &CreateGiftCardActivityRequest,
-    ) -> Result<CreateGiftCardActivityResponse, ApiError> {
+    ) -> Result<CreateGiftCardActivityResponse, SquareApiError> {
         let response = self.http_client.post(&self.url(), body).await?;
 
         response.deserialize().await

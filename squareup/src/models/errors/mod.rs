@@ -1,7 +1,7 @@
 //! Error model structs
 
-mod api_error;
-pub use api_error::ApiError;
+mod square_api_error;
+pub use square_api_error::SquareApiError;
 
 mod error;
 pub use error::Error;

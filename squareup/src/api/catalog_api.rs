@@ -7,7 +7,7 @@ use crate::{
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::ApiError, BatchDeleteCatalogObjectsRequest, BatchDeleteCatalogObjectsResponse,
+        errors::SquareApiError, BatchDeleteCatalogObjectsRequest, BatchDeleteCatalogObjectsResponse,
         BatchRetrieveCatalogObjectsRequest, BatchRetrieveCatalogObjectsResponse,
         BatchUpsertCatalogObjectsRequest, BatchUpsertCatalogObjectsResponse, CatalogInfoResponse,
         CreateCatalogImageRequest, CreateCatalogImageResponse, DeleteCatalogObjectResponse,
@@ -52,7 +52,7 @@ impl CatalogApi {
     pub async fn batch_delete_catalog_objects(
         &self,
         body: &BatchDeleteCatalogObjectsRequest,
-    ) -> Result<BatchDeleteCatalogObjectsResponse, ApiError> {
+    ) -> Result<BatchDeleteCatalogObjectsResponse, SquareApiError> {
         let url = format!("{}/batch-delete", &self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -67,7 +67,7 @@ impl CatalogApi {
     pub async fn batch_retrieve_catalog_objects(
         &self,
         body: &BatchRetrieveCatalogObjectsRequest,
-    ) -> Result<BatchRetrieveCatalogObjectsResponse, ApiError> {
+    ) -> Result<BatchRetrieveCatalogObjectsResponse, SquareApiError> {
         let url = format!("{}/batch-retrieve", &self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -85,7 +85,7 @@ impl CatalogApi {
     pub async fn batch_upsert_catalog_objects(
         &self,
         body: &BatchUpsertCatalogObjectsRequest,
-    ) -> Result<BatchUpsertCatalogObjectsResponse, ApiError> {
+    ) -> Result<BatchUpsertCatalogObjectsResponse, SquareApiError> {
         let url = format!("{}/batch-upsert", &self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -105,7 +105,7 @@ impl CatalogApi {
         &self,
         body: &CreateCatalogImageRequest,
         image_filepath: &str,
-    ) -> Result<CreateCatalogImageResponse, ApiError> {
+    ) -> Result<CreateCatalogImageResponse, SquareApiError> {
         let url = format!("{}/images", &self.url());
         let response = self
             .http_client
@@ -125,7 +125,7 @@ impl CatalogApi {
         image_id: &str,
         body: &UpdateCatalogImageRequest,
         image_filepath: &str,
-    ) -> Result<UpdateCatalogImageResponse, ApiError> {
+    ) -> Result<UpdateCatalogImageResponse, SquareApiError> {
         let url = format!("{}/images/{}", &self.url(), image_id);
         let response = self
             .http_client
@@ -137,7 +137,7 @@ impl CatalogApi {
 
     /// Retrieves information about the Square Catalog API, such as batch size limits that can be
     /// used by the `BatchUpsertCatalogObjects` endpoint.
-    pub async fn catalog_info(&self) -> Result<CatalogInfoResponse, ApiError> {
+    pub async fn catalog_info(&self) -> Result<CatalogInfoResponse, SquareApiError> {
         let url = format!("{}/info", &self.url());
         let response = self.http_client.get(&url).await?;
 
@@ -156,7 +156,7 @@ impl CatalogApi {
     pub async fn list_catalog(
         &self,
         params: &ListCatalogParameters,
-    ) -> Result<ListCatalogResponse, ApiError> {
+    ) -> Result<ListCatalogResponse, SquareApiError> {
         let url = format!("{}/list{}", &self.url(), params.to_query_string());
         let response = self.http_client.get(&url).await?;
 
@@ -167,7 +167,7 @@ impl CatalogApi {
     pub async fn upsert_catalog_object(
         &self,
         body: &UpsertCatalogObjectRequest,
-    ) -> Result<UpsertCatalogObjectResponse, ApiError> {
+    ) -> Result<UpsertCatalogObjectResponse, SquareApiError> {
         let url = format!("{}/object", &self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -183,7 +183,7 @@ impl CatalogApi {
     pub async fn delete_catalog_object(
         &self,
         object_id: &str,
-    ) -> Result<DeleteCatalogObjectResponse, ApiError> {
+    ) -> Result<DeleteCatalogObjectResponse, SquareApiError> {
         let url = format!("{}/object/{}", &self.url(), object_id);
         let response = self.http_client.delete(&url).await?;
 
@@ -199,7 +199,7 @@ impl CatalogApi {
         &self,
         object_id: &str,
         params: &RetrieveCatalogObjectParameters,
-    ) -> Result<RetrieveCatalogObjectResponse, ApiError> {
+    ) -> Result<RetrieveCatalogObjectResponse, SquareApiError> {
         let url = format!(
             "{}/object/{}{}",
             &self.url(),
@@ -228,7 +228,7 @@ impl CatalogApi {
     pub async fn search_catalog_objects(
         &self,
         body: &SearchCatalogObjectsRequest,
-    ) -> Result<SearchCatalogObjectsResponse, ApiError> {
+    ) -> Result<SearchCatalogObjectsResponse, SquareApiError> {
         let url = format!("{}/search", &self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -251,7 +251,7 @@ impl CatalogApi {
     pub async fn search_catalog_items(
         &self,
         body: &SearchCatalogItemsRequest,
-    ) -> Result<SearchCatalogItemsResponse, ApiError> {
+    ) -> Result<SearchCatalogItemsResponse, SquareApiError> {
         let url = format!("{}/search-catalog-items", &self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -263,7 +263,7 @@ impl CatalogApi {
     pub async fn update_item_modifier_lists(
         &self,
         body: &UpdateItemModifierListsRequest,
-    ) -> Result<UpdateItemModifierListsResponse, ApiError> {
+    ) -> Result<UpdateItemModifierListsResponse, SquareApiError> {
         let url = format!("{}/update-item-modifier-lists", &self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -275,7 +275,7 @@ impl CatalogApi {
     pub async fn update_item_taxes(
         &self,
         body: &UpdateItemTaxesRequest,
-    ) -> Result<UpdateItemTaxesResponse, ApiError> {
+    ) -> Result<UpdateItemTaxesResponse, SquareApiError> {
         let url = format!("{}/update-item-taxes", &self.url());
         let response = self.http_client.post(&url, body).await?;
 

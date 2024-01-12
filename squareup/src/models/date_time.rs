@@ -6,7 +6,7 @@ use chrono::Utc;
 use log::error;
 use serde::{Deserialize, Serialize};
 
-use super::errors::ApiError;
+use super::errors::SquareApiError;
 
 /// Represents a Timestamp or DateTime.
 ///
@@ -81,7 +81,7 @@ impl From<&chrono::DateTime<Utc>> for DateTime {
 }
 
 impl TryFrom<i64> for DateTime {
-    type Error = ApiError;
+    type Error = SquareApiError;
 
     /// Attempts to convert a Unix timestamp into a `DateTime`.
     ///
@@ -115,7 +115,7 @@ impl Serialize for DateTime {
 }
 
 impl TryFrom<&str> for DateTime {
-    type Error = ApiError;
+    type Error = SquareApiError;
 
     /// Attempts to generate a `DateTime` from RFC3339 formatted String slice.
     ///

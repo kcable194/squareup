@@ -13,7 +13,7 @@ use crate::{
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::ApiError, BatchChangeInventoryRequest, BatchChangeInventoryResponse,
+        errors::SquareApiError, BatchChangeInventoryRequest, BatchChangeInventoryResponse,
         BatchRetrieveInventoryChangesRequest, BatchRetrieveInventoryChangesResponse,
         BatchRetrieveInventoryCountsRequest, BatchRetrieveInventoryCountsResponse,
         RetrieveInventoryAdjustmentResponse, RetrieveInventoryCountParams,
@@ -45,7 +45,7 @@ impl InventoryApi {
     pub async fn retrieve_inventory_adjustment(
         &self,
         adjustment_id: &str,
-    ) -> Result<RetrieveInventoryAdjustmentResponse, ApiError> {
+    ) -> Result<RetrieveInventoryAdjustmentResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), adjustment_id);
         let response = self.http_client.get(&url).await?;
 
@@ -58,7 +58,7 @@ impl InventoryApi {
     pub async fn batch_change_inventory(
         &self,
         body: &BatchChangeInventoryRequest,
-    ) -> Result<BatchChangeInventoryResponse, ApiError> {
+    ) -> Result<BatchChangeInventoryResponse, SquareApiError> {
         let url = format!("{}/changes/batch-create", &self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -70,7 +70,7 @@ impl InventoryApi {
     pub async fn batch_retrieve_inventory_changes(
         &self,
         body: &BatchRetrieveInventoryChangesRequest,
-    ) -> Result<BatchRetrieveInventoryChangesResponse, ApiError> {
+    ) -> Result<BatchRetrieveInventoryChangesResponse, SquareApiError> {
         let url = format!("{}/changes/batch-retrieve", &self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -82,7 +82,7 @@ impl InventoryApi {
     pub async fn batch_retrieve_inventory_counts(
         &self,
         body: &BatchRetrieveInventoryCountsRequest,
-    ) -> Result<BatchRetrieveInventoryCountsResponse, ApiError> {
+    ) -> Result<BatchRetrieveInventoryCountsResponse, SquareApiError> {
         let url = format!("{}/counts/batch-retrieve", &self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -93,7 +93,7 @@ impl InventoryApi {
     pub async fn retrieve_inventory_physical_count(
         &self,
         physical_count_id: &str,
-    ) -> Result<RetrieveInventoryPhysicalCountResponse, ApiError> {
+    ) -> Result<RetrieveInventoryPhysicalCountResponse, SquareApiError> {
         let url = format!("{}/physical-counts/{}", &self.url(), physical_count_id);
         let response = self.http_client.get(&url).await?;
 
@@ -104,7 +104,7 @@ impl InventoryApi {
     pub async fn retrieve_inventory_transfer(
         &self,
         transfer_id: &str,
-    ) -> Result<RetrieveInventoryTransferResponse, ApiError> {
+    ) -> Result<RetrieveInventoryTransferResponse, SquareApiError> {
         let url = format!("{}/transfers/{}", &self.url(), transfer_id);
         let response = self.http_client.get(&url).await?;
 
@@ -116,7 +116,7 @@ impl InventoryApi {
         &self,
         catalog_object_id: &str,
         params: RetrieveInventoryCountParams,
-    ) -> Result<RetrieveInventoryCountResponse, ApiError> {
+    ) -> Result<RetrieveInventoryCountResponse, SquareApiError> {
         let url = format!(
             "{}/{}{}",
             &self.url(),

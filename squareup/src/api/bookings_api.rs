@@ -17,7 +17,7 @@ use crate::models::{
     SearchAvailabilityResponse, UpdateBookingRequest, UpdateBookingResponse,
 };
 use crate::{
-    config::Configuration, http::client::HttpClient, models::errors::ApiError, SquareClient,
+    config::Configuration, http::client::HttpClient, models::errors::SquareApiError, SquareClient,
 };
 
 const DEFAULT_URI: &str = "/bookings";
@@ -47,7 +47,7 @@ impl BookingsApi {
     pub async fn list_bookings(
         &self,
         params: &ListBookingsParameters,
-    ) -> Result<ListBookingsResponse, ApiError> {
+    ) -> Result<ListBookingsResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), params.to_query_string());
         let response = self.http_client.get(&url).await?;
 
@@ -73,7 +73,7 @@ impl BookingsApi {
     pub async fn create_booking(
         &self,
         body: &CreateBookingRequest,
-    ) -> Result<CreateBookingResponse, ApiError> {
+    ) -> Result<CreateBookingResponse, SquareApiError> {
         let url = &self.url();
         let response = self.http_client.post(url, body).await?;
 
@@ -89,7 +89,7 @@ impl BookingsApi {
     pub async fn search_availability(
         &self,
         body: &SearchAvailabilityRequest,
-    ) -> Result<SearchAvailabilityResponse, ApiError> {
+    ) -> Result<SearchAvailabilityResponse, SquareApiError> {
         let url = format!("{}/availability/search", &self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -106,7 +106,7 @@ impl BookingsApi {
     pub async fn bulk_retrieve_bookings(
         &self,
         body: &BulkRetrieveBookingsRequest,
-    ) -> Result<BulkRetrieveBookingsResponse, ApiError> {
+    ) -> Result<BulkRetrieveBookingsResponse, SquareApiError> {
         let url = format!("{}/bulk-retrieve", &self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -117,7 +117,7 @@ impl BookingsApi {
     /// Permissions:APPOINTMENTS_BUSINESS_SETTINGS_READ
     pub async fn retrieve_business_booking_profile(
         &self,
-    ) -> Result<RetrieveBusinessBookingProfileResponse, ApiError> {
+    ) -> Result<RetrieveBusinessBookingProfileResponse, SquareApiError> {
         let url = format!("{}/business-booking-profile", &self.url());
         let response = self.http_client.get(&url).await?;
 
@@ -129,7 +129,7 @@ impl BookingsApi {
     pub async fn list_location_booking_profiles(
         &self,
         params: &ListLocationBookingProfilesParameters,
-    ) -> Result<ListLocationBookingProfilesResponse, ApiError> {
+    ) -> Result<ListLocationBookingProfilesResponse, SquareApiError> {
         let url = format!(
             "{}/location-booking-profiles{}",
             &self.url(),
@@ -145,7 +145,7 @@ impl BookingsApi {
     pub async fn retrieve_location_booking_profile(
         &self,
         location_id: &str,
-    ) -> Result<RetrieveLocationBookingProfileResponse, ApiError> {
+    ) -> Result<RetrieveLocationBookingProfileResponse, SquareApiError> {
         let url = format!("{}/location-booking-profiles/{location_id}", &self.url());
         let response = self.http_client.get(&url).await?;
 
@@ -157,7 +157,7 @@ impl BookingsApi {
     pub async fn list_team_member_booking_profiles(
         &self,
         params: &ListTeamMemberBookingProfilesParameters,
-    ) -> Result<ListTeamMemberBookingProfilesResponse, ApiError> {
+    ) -> Result<ListTeamMemberBookingProfilesResponse, SquareApiError> {
         let url = format!(
             "{}/team-member-booking-profiles{}",
             &self.url(),
@@ -173,7 +173,7 @@ impl BookingsApi {
     pub async fn bulk_retrieve_team_member_booking_profiles(
         &self,
         body: &BulkRetrieveTeamMemberBookingProfilesRequest,
-    ) -> Result<BulkRetrieveTeamMemberBookingProfilesResponse, ApiError> {
+    ) -> Result<BulkRetrieveTeamMemberBookingProfilesResponse, SquareApiError> {
         let url = format!("{}/team-member-booking-profiles/bulk-retrieve", &self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -185,7 +185,7 @@ impl BookingsApi {
     pub async fn retrieve_team_member_booking_profile(
         &self,
         team_member_id: &str,
-    ) -> Result<RetrieveTeamMemberBookingProfileResponse, ApiError> {
+    ) -> Result<RetrieveTeamMemberBookingProfileResponse, SquareApiError> {
         let url = format!(
             "{}/team-member-booking-profiles/{}",
             &self.url(),
@@ -205,7 +205,7 @@ impl BookingsApi {
     pub async fn retrieve_booking(
         &self,
         booking_id: &str,
-    ) -> Result<RetrieveBookingResponse, ApiError> {
+    ) -> Result<RetrieveBookingResponse, SquareApiError> {
         let url = format!("{}/{booking_id}", &self.url());
         let response = self.http_client.get(&url).await?;
 
@@ -225,7 +225,7 @@ impl BookingsApi {
         &self,
         booking_id: &str,
         body: &UpdateBookingRequest,
-    ) -> Result<UpdateBookingResponse, ApiError> {
+    ) -> Result<UpdateBookingResponse, SquareApiError> {
         let url = format!("{}/{booking_id}", &self.url());
         let response = self.http_client.put(&url, body).await?;
 
@@ -245,7 +245,7 @@ impl BookingsApi {
         &self,
         booking_id: &str,
         body: &CancelBookingRequest,
-    ) -> Result<CancelBookingResponse, ApiError> {
+    ) -> Result<CancelBookingResponse, SquareApiError> {
         let url = format!("{}/{booking_id}/cancel", &self.url());
         let response = self.http_client.post(&url, body).await?;
 

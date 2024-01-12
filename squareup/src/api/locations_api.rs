@@ -7,7 +7,7 @@ use crate::{
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::ApiError, CreateLocationRequest, CreateLocationResponse, ListLocationsResponse,
+        errors::SquareApiError, CreateLocationRequest, CreateLocationResponse, ListLocationsResponse,
         RetrieveLocationResponse, UpdateLocationRequest, UpdateLocationResponse,
     },
     SquareClient,
@@ -35,7 +35,7 @@ impl LocationsApi {
     /// Provides details about all of the seller's
     /// [locations](https://developer.squareup.com/docs/locations-api), including those
     /// with an inactive status.
-    pub async fn list_locations(&self) -> Result<ListLocationsResponse, ApiError> {
+    pub async fn list_locations(&self) -> Result<ListLocationsResponse, SquareApiError> {
         let response = self.http_client.get(&self.url()).await?;
 
         response.deserialize().await
@@ -52,7 +52,7 @@ impl LocationsApi {
     pub async fn create_location(
         &self,
         body: &CreateLocationRequest,
-    ) -> Result<CreateLocationResponse, ApiError> {
+    ) -> Result<CreateLocationResponse, SquareApiError> {
         let response = self.http_client.post(&self.url(), body).await?;
 
         response.deserialize().await
@@ -65,7 +65,7 @@ impl LocationsApi {
     pub async fn retrieve_location(
         &self,
         location_id: &str,
-    ) -> Result<RetrieveLocationResponse, ApiError> {
+    ) -> Result<RetrieveLocationResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), location_id);
         let response = self.http_client.get(&url).await?;
 
@@ -77,7 +77,7 @@ impl LocationsApi {
         &self,
         location_id: &str,
         body: &UpdateLocationRequest,
-    ) -> Result<UpdateLocationResponse, ApiError> {
+    ) -> Result<UpdateLocationResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), location_id);
         let response = self.http_client.post(&url, body).await?;
 

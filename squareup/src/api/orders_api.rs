@@ -15,7 +15,7 @@ use crate::{
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::ApiError, BatchRetrieveOrdersRequest, BatchRetrieveOrdersResponse,
+        errors::SquareApiError, BatchRetrieveOrdersRequest, BatchRetrieveOrdersResponse,
         CalculateOrderRequest, CalculateOrderResponse, CloneOrderRequest, CloneOrderResponse,
         CreateOrderRequest, CreateOrderResponse, PayOrderRequest, PayOrderResponse,
         RetrieveOrderResponse, SearchOrdersRequest, SearchOrdersResponse, UpdateOrderRequest,
@@ -51,7 +51,7 @@ impl OrdersApi {
     pub async fn create_order(
         &self,
         body: &CreateOrderRequest,
-    ) -> Result<CreateOrderResponse, ApiError> {
+    ) -> Result<CreateOrderResponse, SquareApiError> {
         let response = self.http_client.post(&self.url(), body).await?;
 
         response.deserialize().await
@@ -63,7 +63,7 @@ impl OrdersApi {
     pub async fn batch_retrieve_orders(
         &self,
         body: &BatchRetrieveOrdersRequest,
-    ) -> Result<BatchRetrieveOrdersResponse, ApiError> {
+    ) -> Result<BatchRetrieveOrdersResponse, SquareApiError> {
         let url = format!("{}/batch-retrieve", &self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -74,7 +74,7 @@ impl OrdersApi {
     pub async fn calculate_order(
         &self,
         body: &CalculateOrderRequest,
-    ) -> Result<CalculateOrderResponse, ApiError> {
+    ) -> Result<CalculateOrderResponse, SquareApiError> {
         let url = format!("{}/calculate", &self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -88,7 +88,7 @@ impl OrdersApi {
     pub async fn clone_order(
         &self,
         body: &CloneOrderRequest,
-    ) -> Result<CloneOrderResponse, ApiError> {
+    ) -> Result<CloneOrderResponse, SquareApiError> {
         let url = format!("{}/clone", &self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -114,7 +114,7 @@ impl OrdersApi {
     pub async fn search_orders(
         &self,
         body: &SearchOrdersRequest,
-    ) -> Result<SearchOrdersResponse, ApiError> {
+    ) -> Result<SearchOrdersResponse, SquareApiError> {
         let url = format!("{}/search", &self.url());
         let response = self.http_client.post(&url, body).await?;
 
@@ -122,7 +122,7 @@ impl OrdersApi {
     }
 
     /// Retrieves an [Order] by ID.
-    pub async fn retrieve_order(&self, order_id: &str) -> Result<RetrieveOrderResponse, ApiError> {
+    pub async fn retrieve_order(&self, order_id: &str) -> Result<RetrieveOrderResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), order_id);
         let response = self.http_client.get(&url).await?;
 
@@ -148,7 +148,7 @@ impl OrdersApi {
         &self,
         order_id: &str,
         body: &UpdateOrderRequest,
-    ) -> Result<UpdateOrderResponse, ApiError> {
+    ) -> Result<UpdateOrderResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), order_id);
         let response = self.http_client.put(&url, body).await?;
 
@@ -174,7 +174,7 @@ impl OrdersApi {
         &self,
         order_id: &str,
         body: &PayOrderRequest,
-    ) -> Result<PayOrderResponse, ApiError> {
+    ) -> Result<PayOrderResponse, SquareApiError> {
         let url = format!("{}/{}/pay", &self.url(), order_id);
         let response = self.http_client.post(&url, body).await?;
 
