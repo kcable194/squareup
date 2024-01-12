@@ -6,12 +6,15 @@
 //! book services provided by Square sellers.
 
 use crate::models::{
-    BulkRetrieveBookingsRequest, BulkRetrieveBookingsResponse, CreateBookingRequest,
-    CreateBookingResponse, ListBookingsParameters, ListBookingsResponse,
-    ListLocationBookingProfilesParameters, ListLocationBookingProfilesResponse,
-    ListTeamMemberBookingProfilesParameters, ListTeamMemberBookingProfilesResponse,
+    BulkRetrieveBookingsRequest, BulkRetrieveBookingsResponse,
+    BulkRetrieveTeamMemberBookingProfilesRequest, BulkRetrieveTeamMemberBookingProfilesResponse,
+    CancelBookingRequest, CancelBookingResponse, CreateBookingRequest, CreateBookingResponse,
+    ListBookingsParameters, ListBookingsResponse, ListLocationBookingProfilesParameters,
+    ListLocationBookingProfilesResponse, ListTeamMemberBookingProfilesParameters,
+    ListTeamMemberBookingProfilesResponse, RetrieveBookingResponse,
     RetrieveBusinessBookingProfileResponse, RetrieveLocationBookingProfileResponse,
-    SearchAvailabilityRequest, SearchAvailabilityResponse,
+    RetrieveTeamMemberBookingProfileResponse, SearchAvailabilityRequest,
+    SearchAvailabilityResponse, UpdateBookingRequest, UpdateBookingResponse,
 };
 use crate::{
     config::Configuration, http::client::HttpClient, models::errors::ApiError, SquareClient,
@@ -45,7 +48,7 @@ impl BookingsApi {
         &self,
         params: &ListBookingsParameters,
     ) -> Result<ListBookingsResponse, ApiError> {
-        let url = format!("{}{}", &self.url(), params.to_query_string());
+        let url = format!("{}/{}", &self.url(), params.to_query_string());
         let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
@@ -143,7 +146,7 @@ impl BookingsApi {
         &self,
         location_id: &str,
     ) -> Result<RetrieveLocationBookingProfileResponse, ApiError> {
-        let url = format!("{}/location-booking-profiles/{}", &self.url(), location_id);
+        let url = format!("{}/location-booking-profiles/{location_id}", &self.url());
         let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
@@ -161,6 +164,90 @@ impl BookingsApi {
             params.to_query_string()
         );
         let response = self.http_client.get(&url).await?;
+
+        response.deserialize().await
+    }
+
+    /// Retrieves one or more team members' booking profiles.
+    /// Permissions:APPOINTMENTS_BUSINESS_SETTINGS_READ
+    pub async fn bulk_retrieve_team_member_booking_profiles(
+        &self,
+        body: &BulkRetrieveTeamMemberBookingProfilesRequest,
+    ) -> Result<BulkRetrieveTeamMemberBookingProfilesResponse, ApiError> {
+        let url = format!("{}/team-member-booking-profiles/bulk-retrieve", &self.url());
+        let response = self.http_client.post(&url, body).await?;
+
+        response.deserialize().await
+    }
+
+    /// Retrieves a team member's booking profile.
+    /// Permissions:APPOINTMENTS_BUSINESS_SETTINGS_READ
+    pub async fn retrieve_team_member_booking_profile(
+        &self,
+        team_member_id: &str,
+    ) -> Result<RetrieveTeamMemberBookingProfileResponse, ApiError> {
+        let url = format!(
+            "{}/team-member-booking-profiles/{}",
+            &self.url(),
+            team_member_id
+        );
+        let response = self.http_client.get(&url).await?;
+
+        response.deserialize().await
+    }
+
+    /// Retrieves a booking.
+    /// To call this endpoint with buyer-level permissions, set APPOINTMENTS_READ for the OAuth
+    /// scope. To call this endpoint with seller-level permissions, set APPOINTMENTS_ALL_READ and
+    /// APPOINTMENTS_READ for the OAuth scope.
+    ///
+    /// Permissions:APPOINTMENTS_READ
+    pub async fn retrieve_booking(
+        &self,
+        booking_id: &str,
+    ) -> Result<RetrieveBookingResponse, ApiError> {
+        let url = format!("{}/{booking_id}", &self.url());
+        let response = self.http_client.get(&url).await?;
+
+        response.deserialize().await
+    }
+
+    /// Updates a booking.
+    /// To call this endpoint with buyer-level permissions, set APPOINTMENTS_WRITE for the
+    /// OAuth scope. To call this endpoint with seller-level permissions, set
+    /// APPOINTMENTS_ALL_WRITE and APPOINTMENTS_WRITE for the OAuth scope.
+    ///
+    /// For calls to this endpoint with seller-level permissions to succeed, the seller must have
+    /// subscribed to Appointments Plus or Appointments Premium.
+    ///
+    /// Permissions:APPOINTMENTS_WRITE
+    pub async fn update_booking(
+        &self,
+        booking_id: &str,
+        body: &UpdateBookingRequest,
+    ) -> Result<UpdateBookingResponse, ApiError> {
+        let url = format!("{}/{booking_id}", &self.url());
+        let response = self.http_client.put(&url, body).await?;
+
+        response.deserialize().await
+    }
+
+    /// Cancels an existing booking.
+    /// To call this endpoint with buyer-level permissions, set APPOINTMENTS_WRITE for the
+    /// OAuth scope. To call this endpoint with seller-level permissions, set
+    /// APPOINTMENTS_ALL_WRITE and APPOINTMENTS_WRITE for the OAuth scope.
+    ///
+    /// For calls to this endpoint with seller-level permissions to succeed, the seller must have
+    /// subscribed to Appointments Plus or Appointments Premium.
+    ///
+    /// Permissions:APPOINTMENTS_WRITE
+    pub async fn cancel_booking(
+        &self,
+        booking_id: &str,
+        body: &CancelBookingRequest,
+    ) -> Result<CancelBookingResponse, ApiError> {
+        let url = format!("{}/{booking_id}/cancel", &self.url());
+        let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await
     }
