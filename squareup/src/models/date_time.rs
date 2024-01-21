@@ -2,7 +2,7 @@
 
 use std::fmt::{Debug, Display};
 
-use chrono::Utc;
+use chrono::{TimeZone, Utc};
 use log::error;
 use serde::{Deserialize, Serialize};
 
@@ -68,6 +68,18 @@ impl<'de> Deserialize<'de> for DateTime {
 impl Display for DateTime {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         std::fmt::Display::fmt(&self.inner, f)
+    }
+}
+
+impl Into<chrono::DateTime<Utc>> for DateTime {
+    fn into(self) -> chrono::DateTime<Utc> {
+        self.inner
+    }
+}
+
+impl Into<chrono::NaiveDateTime> for DateTime {
+    fn into(self) -> chrono::NaiveDateTime {
+        self.inner.naive_utc()
     }
 }
 

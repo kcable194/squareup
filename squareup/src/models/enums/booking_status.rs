@@ -1,5 +1,6 @@
 //! Model for BookingStatus type.
 
+use std::fmt::{Display, Formatter};
 use serde::{Deserialize, Serialize};
 
 /// The status of a booking
@@ -20,4 +21,17 @@ pub enum BookingStatus {
     /// a no-show by the seller because the client either missed the booking or cancelled it
     /// without enough notice.
     NoShow,
+}
+
+impl Display for BookingStatus {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        match self {
+            BookingStatus::Pending => { write!(f, "PENDING") }
+            BookingStatus::CancelledByCustomer => { write!(f, "CANCELLED_BY_CUSTOMER") }
+            BookingStatus::CancelledBySeller => { write!(f, "CANCELLED_BY_SELLER") }
+            BookingStatus::Declined => { write!(f, "DECLINED") }
+            BookingStatus::Accepted => { write!(f, "ACCEPTED") }
+            BookingStatus::NoShow => { write!(f, "NO_SHOW") }
+        }
+    }
 }

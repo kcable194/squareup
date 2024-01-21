@@ -71,11 +71,11 @@ impl Display for ListBookingsParameters {
         }
 
         if let Some(start_at_min) = &self.start_at_min {
-            params.push(format!("start_at_min={}", start_at_min));
+            params.push(format!("start_at_min={:?}", start_at_min));
         }
 
         if let Some(start_at_max) = &self.start_at_max {
-            params.push(format!("start_at_max={}", start_at_max));
+            params.push(format!("start_at_max={:?}", start_at_max));
         }
 
         let str = if params.is_empty() {
