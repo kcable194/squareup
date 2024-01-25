@@ -127,6 +127,7 @@ mod tender_square_account_details_status;
 mod tender_type;
 mod timezone;
 mod transaction_product;
+mod team_member_webhook_event_type;
 
 pub use ach_details_account_type::AchDetailsAccountType;
 pub use application_details_external_square_product::ApplicationDetailsExternalSquareProduct;
@@ -255,3 +256,4 @@ pub use tender_square_account_details_status::TenderSquareAccountDetailsStatus;
 pub use tender_type::TenderType;
 pub use timezone::Timezone;
 pub use transaction_product::TransactionProduct;
+pub use team_member_webhook_event_type::TeamMemberWebhookEventType;
