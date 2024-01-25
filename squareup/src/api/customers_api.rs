@@ -11,10 +11,10 @@ use crate::{
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::SquareApiError, CreateCustomerRequest, CreateCustomerResponse, DeleteCustomerResponse,
-        ListCustomersParameters, ListCustomersResponse, RetrieveCustomerResponse,
-        SearchCustomersRequest, SearchCustomersResponse, UpdateCustomerRequest,
-        UpdateCustomerResponse,
+        errors::SquareApiError, CreateCustomerRequest, CreateCustomerResponse,
+        DeleteCustomerResponse, ListCustomersParameters, ListCustomersResponse,
+        RetrieveCustomerResponse, SearchCustomersRequest, SearchCustomersResponse,
+        UpdateCustomerRequest, UpdateCustomerResponse,
     },
     SquareClient,
 };

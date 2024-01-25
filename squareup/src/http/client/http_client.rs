@@ -138,7 +138,11 @@ impl HttpClient {
     }
 
     /// Sends an HTTP PUT
-    pub async fn put<T: Serialize>(&self, url: &str, body: &T) -> Result<HttpResponse, SquareApiError> {
+    pub async fn put<T: Serialize>(
+        &self,
+        url: &str,
+        body: &T,
+    ) -> Result<HttpResponse, SquareApiError> {
         let response = self
             .retry_client
             .put(url)

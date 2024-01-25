@@ -73,7 +73,10 @@ impl CardsApi {
     }
 
     /// Retrieves details for a specific Card.
-    pub async fn retrieve_card(&self, card_id: &str) -> Result<RetrieveCardResponse, SquareApiError> {
+    pub async fn retrieve_card(
+        &self,
+        card_id: &str,
+    ) -> Result<RetrieveCardResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), card_id);
         let response = self.http_client.get(&url).await?;
 

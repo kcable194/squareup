@@ -7,16 +7,16 @@ use crate::{
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::SquareApiError, BatchDeleteCatalogObjectsRequest, BatchDeleteCatalogObjectsResponse,
-        BatchRetrieveCatalogObjectsRequest, BatchRetrieveCatalogObjectsResponse,
-        BatchUpsertCatalogObjectsRequest, BatchUpsertCatalogObjectsResponse, CatalogInfoResponse,
-        CreateCatalogImageRequest, CreateCatalogImageResponse, DeleteCatalogObjectResponse,
-        ListCatalogParameters, ListCatalogResponse, RetrieveCatalogObjectParameters,
-        RetrieveCatalogObjectResponse, SearchCatalogItemsRequest, SearchCatalogItemsResponse,
-        SearchCatalogObjectsRequest, SearchCatalogObjectsResponse, UpdateCatalogImageRequest,
-        UpdateCatalogImageResponse, UpdateItemModifierListsRequest,
-        UpdateItemModifierListsResponse, UpdateItemTaxesRequest, UpdateItemTaxesResponse,
-        UpsertCatalogObjectRequest, UpsertCatalogObjectResponse,
+        errors::SquareApiError, BatchDeleteCatalogObjectsRequest,
+        BatchDeleteCatalogObjectsResponse, BatchRetrieveCatalogObjectsRequest,
+        BatchRetrieveCatalogObjectsResponse, BatchUpsertCatalogObjectsRequest,
+        BatchUpsertCatalogObjectsResponse, CatalogInfoResponse, CreateCatalogImageRequest,
+        CreateCatalogImageResponse, DeleteCatalogObjectResponse, ListCatalogParameters,
+        ListCatalogResponse, RetrieveCatalogObjectParameters, RetrieveCatalogObjectResponse,
+        SearchCatalogItemsRequest, SearchCatalogItemsResponse, SearchCatalogObjectsRequest,
+        SearchCatalogObjectsResponse, UpdateCatalogImageRequest, UpdateCatalogImageResponse,
+        UpdateItemModifierListsRequest, UpdateItemModifierListsResponse, UpdateItemTaxesRequest,
+        UpdateItemTaxesResponse, UpsertCatalogObjectRequest, UpsertCatalogObjectResponse,
     },
     SquareClient,
 };
@@ -198,13 +198,13 @@ impl CatalogApi {
     pub async fn retrieve_catalog_object(
         &self,
         object_id: &str,
-        params: &RetrieveCatalogObjectParameters,
+        params: RetrieveCatalogObjectParameters,
     ) -> Result<RetrieveCatalogObjectResponse, SquareApiError> {
         let url = format!(
             "{}/object/{}{}",
             &self.url(),
             object_id,
-            params.to_query_string()
+            params.to_owned().to_query_string()
         );
         let response = self.http_client.get(&url).await?;
 

@@ -122,7 +122,10 @@ impl OrdersApi {
     }
 
     /// Retrieves an [Order] by ID.
-    pub async fn retrieve_order(&self, order_id: &str) -> Result<RetrieveOrderResponse, SquareApiError> {
+    pub async fn retrieve_order(
+        &self,
+        order_id: &str,
+    ) -> Result<RetrieveOrderResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), order_id);
         let response = self.http_client.get(&url).await?;
 

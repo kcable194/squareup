@@ -7,8 +7,9 @@ use crate::{
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::SquareApiError, CreateLocationRequest, CreateLocationResponse, ListLocationsResponse,
-        RetrieveLocationResponse, UpdateLocationRequest, UpdateLocationResponse,
+        errors::SquareApiError, CreateLocationRequest, CreateLocationResponse,
+        ListLocationsResponse, RetrieveLocationResponse, UpdateLocationRequest,
+        UpdateLocationResponse,
     },
     SquareClient,
 };

@@ -4,7 +4,7 @@ use log::{error, warn};
 use reqwest::Response;
 use serde::de::DeserializeOwned;
 
-use crate::models::errors::{SquareApiError, ErrorResponse};
+use crate::models::errors::{ErrorResponse, SquareApiError};
 
 /// Representation of HTTP API response.
 ///
@@ -29,8 +29,10 @@ impl HttpResponse {
             let err_response_res: Result<ErrorResponse, SquareApiError> = self.json().await;
             match err_response_res {
                 Ok(error_response) => {
-                    let api_error =
-                        SquareApiError::with_response_errors("Error response", &error_response.errors);
+                    let api_error = SquareApiError::with_response_errors(
+                        "Error response",
+                        &error_response.errors,
+                    );
                     warn!("{:?}", api_error);
                     Err(api_error)
                 }

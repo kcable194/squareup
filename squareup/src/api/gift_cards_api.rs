@@ -120,7 +120,10 @@ impl GiftCardsApi {
     /// Retrieves a gift card using the gift card ID.
     ///
     /// `id`: The ID of the gift card to retrieve.
-    pub async fn retrieve_gift_card(&self, id: &str) -> Result<RetrieveGiftCardResponse, SquareApiError> {
+    pub async fn retrieve_gift_card(
+        &self,
+        id: &str,
+    ) -> Result<RetrieveGiftCardResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), id);
         let response = self.http_client.get(&url).await?;
 

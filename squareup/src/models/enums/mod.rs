@@ -8,6 +8,7 @@ mod bank_account_payment_details_transfer_type;
 mod booking_booking_source;
 mod booking_creator_details_creator_type;
 mod booking_status;
+mod booking_webhook_event_type;
 mod business_appointment_settings_alignment_time;
 mod business_appointment_settings_booking_location_type;
 mod business_appointment_settings_cancellation_policy;
@@ -135,6 +136,7 @@ pub use bank_account_payment_details_transfer_type::BankAccountPaymentDetailsTra
 pub use booking_booking_source::BookingBookingSource;
 pub use booking_creator_details_creator_type::BookingCreatorDetailsCreatorType;
 pub use booking_status::BookingStatus;
+pub use booking_webhook_event_type::BookingWebhookEventType;
 pub use business_appointment_settings_alignment_time::BusinessAppointmentSettingsAlignmentTime;
 pub use business_appointment_settings_booking_location_type::BusinessAppointmentSettingsBookingLocationType;
 pub use business_appointment_settings_cancellation_policy::BusinessAppointmentSettingsCancellationPolicy;

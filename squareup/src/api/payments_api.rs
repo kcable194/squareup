@@ -101,7 +101,10 @@ impl PaymentsApi {
     }
 
     /// Retrieves details for a specific payment
-    pub async fn get_payment(&self, payment_id: &str) -> Result<GetPaymentResponse, SquareApiError> {
+    pub async fn get_payment(
+        &self,
+        payment_id: &str,
+    ) -> Result<GetPaymentResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), payment_id);
         let response = self.http_client.get(&url).await?;
 

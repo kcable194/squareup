@@ -100,7 +100,10 @@ impl InvoicesApi {
     }
 
     /// Retrieves an invoice by invoice ID.
-    pub async fn get_invoice(&self, invoice_id: &str) -> Result<GetInvoiceResponse, SquareApiError> {
+    pub async fn get_invoice(
+        &self,
+        invoice_id: &str,
+    ) -> Result<GetInvoiceResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), invoice_id);
         let response = self.http_client.get(&url).await?;
 

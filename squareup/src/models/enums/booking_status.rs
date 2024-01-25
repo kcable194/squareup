@@ -1,7 +1,7 @@
 //! Model for BookingStatus type.
 
-use std::fmt::{Display, Formatter};
 use serde::{Deserialize, Serialize};
+use std::fmt::{Display, Formatter};
 
 /// The status of a booking
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
@@ -26,12 +26,24 @@ pub enum BookingStatus {
 impl Display for BookingStatus {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
-            BookingStatus::Pending => { write!(f, "PENDING") }
-            BookingStatus::CancelledByCustomer => { write!(f, "CANCELLED_BY_CUSTOMER") }
-            BookingStatus::CancelledBySeller => { write!(f, "CANCELLED_BY_SELLER") }
-            BookingStatus::Declined => { write!(f, "DECLINED") }
-            BookingStatus::Accepted => { write!(f, "ACCEPTED") }
-            BookingStatus::NoShow => { write!(f, "NO_SHOW") }
+            BookingStatus::Pending => {
+                write!(f, "PENDING")
+            }
+            BookingStatus::CancelledByCustomer => {
+                write!(f, "CANCELLED_BY_CUSTOMER")
+            }
+            BookingStatus::CancelledBySeller => {
+                write!(f, "CANCELLED_BY_SELLER")
+            }
+            BookingStatus::Declined => {
+                write!(f, "DECLINED")
+            }
+            BookingStatus::Accepted => {
+                write!(f, "ACCEPTED")
+            }
+            BookingStatus::NoShow => {
+                write!(f, "NO_SHOW")
+            }
         }
     }
 }

@@ -2,7 +2,7 @@
 
 use std::fmt::{Debug, Display};
 
-use chrono::{TimeZone, Utc};
+use chrono::Utc;
 use log::error;
 use serde::{Deserialize, Serialize};
 
