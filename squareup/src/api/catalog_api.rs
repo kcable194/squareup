@@ -198,7 +198,7 @@ impl CatalogApi {
     pub async fn retrieve_catalog_object(
         &self,
         object_id: &str,
-        params: RetrieveCatalogObjectParameters,
+        params: &RetrieveCatalogObjectParameters,
     ) -> Result<RetrieveCatalogObjectResponse, SquareApiError> {
         let url = format!(
             "{}/object/{}{}",
