@@ -123,6 +123,11 @@ So far, we have the following APIs wrapped in the Rust Square API Client:
 - [Refunds](https://developer.squareup.com/reference/square/refunds-api)
 - [Subscriptions](https://developer.squareup.com/reference/square/subscriptions-api)
 - [Team](https://developer.squareup.com/reference/square/team-api)
+- [Webhook Subscriptions](https://developer.squareup.com/reference/square/webhook-subscriptions-api)
+  - [Bookings](https://developer.squareup.com/reference/square/bookings-api/webhooks)
+  - [Locations](https://developer.squareup.com/reference/square/locations-api/webhooks)
+  - [Team](https://developer.squareup.com/reference/square/team-api/webhooks)
+
 
 ### To be implemented
 
