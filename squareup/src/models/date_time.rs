@@ -142,3 +142,20 @@ impl TryFrom<&str> for DateTime {
         Ok(Self { inner })
     }
 }
+
+impl TryFrom<&String> for DateTime {
+    type Error = SquareApiError;
+
+    /// Attempts to generate a `DateTime` from RFC3339 formatted String slice.
+    ///
+    /// Returns an API Error if the input String cannot be parsed.
+    fn try_from(rfc3339: &String) -> Result<Self, Self::Error> {
+        let inner = chrono::DateTime::parse_from_rfc3339(rfc3339.as_str()).map_err(|e| {
+            let msg = format!("Error parsing RFC3339 DateTime string: {}: {}", rfc3339, e);
+            error!("{}", &msg);
+            Self::Error::new(&msg)
+        })?;
+        let inner = inner.with_timezone(&Utc);
+        Ok(Self { inner })
+    }
+}

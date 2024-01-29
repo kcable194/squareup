@@ -1,7 +1,7 @@
 //! Response body struct for the team_member.created event webhook
 
-use serde::Deserialize;
 use crate::models::enums::TeamMemberWebhookEventType;
+use serde::Deserialize;
 
 use super::{DateTime, TeamMemberCreatedEventData};
 

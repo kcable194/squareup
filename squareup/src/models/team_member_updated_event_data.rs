@@ -1,7 +1,7 @@
 //! Response body struct for the TeamMemberUpdatedEventData type
 
-use serde::Deserialize;
 use crate::models::TeamMemberUpdatedEventObject;
+use serde::Deserialize;
 
 /// This is a model struct for TeamMemberCreatedEventData type.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]

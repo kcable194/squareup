@@ -1,6 +1,6 @@
 //! Response body struct for the TeamMemberCreatedEventObject type
 
-use crate::models::{TeamMember};
+use crate::models::TeamMember;
 use serde::Deserialize;
 
 /// This is a model struct for TeamMemberCreatedEventObject type.
