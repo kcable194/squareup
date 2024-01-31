@@ -1,12 +1,12 @@
 //! Response body struct for the booking.updated event webhook
 
 use crate::models::enums::BookingWebhookEventType;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 use super::{BookingUpdatedEventData, DateTime};
 
 /// This is a model struct for BookingUpdatedWebhookResponse type.
-#[derive(Clone, Debug, Deserialize, Eq, PartialEq)]
+#[derive(Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
 pub struct BookingUpdatedWebhookResponse {
     /// The ID of the target seller associated with the event.
     pub merchant_id: String,

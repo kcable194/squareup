@@ -1,12 +1,12 @@
 //! Response body struct for the team_member.updated event webhook
 
 use crate::models::enums::TeamMemberWebhookEventType;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 use super::{DateTime, TeamMemberUpdatedEventData};
 
 /// This is a model struct for TeamMemberUpdatedWebhookResponse type.
-#[derive(Clone, Debug, Deserialize, Eq, PartialEq)]
+#[derive(Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
 pub struct TeamMemberUpdatedWebhookResponse {
     /// The ID of the target seller associated with the event.
     pub merchant_id: String,

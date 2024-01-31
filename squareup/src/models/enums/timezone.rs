@@ -1506,7 +1506,7 @@ impl Into<chrono_tz::Tz> for Timezone {
             Timezone::AmericaNorthDakotaBeulah => {chrono_tz::America::North_Dakota::Beulah}
             Timezone::AmericaNorthDakotaCenter => {chrono_tz::America::North_Dakota::Center}
             Timezone::AmericaNorthDakotaNewSalem => {chrono_tz::America::North_Dakota::New_Salem}
-            _ => {chrono_tz::UTC} // TODO add rest
+            _ => {chrono_tz::America::New_York} // TODO add rest
         };
 
         return res;
