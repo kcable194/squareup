@@ -95,8 +95,10 @@ pub struct OrderLineItem {
     /// **Read only** The total price of all item variations sold in this line item. The price is
     /// calculated as `base_price_money` multiplied by `quantity`. It does not include modifiers.
     pub variation_total_price_money: Option<Money>,
-    /// **Read only** The amount of money made in gross sales for this line item. The amount is
-    /// calculated as the sum of the variation's total price and each modifier's total price.
+    /// **Read only** The amount of money made in gross sales for this line item. The amount is calculated as the sum
+    /// of the variation's total price and each modifier's total price. For inclusive tax items in the US and Japan,
+    /// tax is deducted from gross_sales_money. For Europe and Australia, inclusive tax remains as part of the gross
+    /// sale calculation.
     pub gross_sales_money: Option<Money>,
     /// **Read only** The total amount of tax money to collect for the line item.
     pub total_tax_money: Option<Money>,

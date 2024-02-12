@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 
 use super::{
     OrderMoneyAmounts, OrderReturnDiscount, OrderReturnLineItem, OrderReturnServiceCharge,
-    OrderReturnTax, OrderRoundingAdjustment,
+    OrderReturnTax, OrderReturnTip, OrderRoundingAdjustment,
 };
 
 /// The set of line items, service charges, taxes, discounts, tips, and other items being returned
@@ -28,6 +28,8 @@ pub struct OrderReturn {
     /// applied discount amount to be returned. The discounts must reference a top-level discount ID
     /// from the source order.
     pub return_discounts: Option<Vec<OrderReturnDiscount>>,
+    /// A collection of references to tips being returned for an order.
+    pub return_tips: Option<Vec<OrderReturnTip>>,
     /// A positive or negative rounding adjustment to the total value being returned. Adjustments
     /// are commonly used to apply cash rounding when the minimum unit of the account is smaller
     /// than the lowest physical denomination of the currency.
