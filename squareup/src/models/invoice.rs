@@ -4,8 +4,8 @@ use serde::{Deserialize, Serialize};
 
 use super::{
     enums::{InvoiceDeliveryMethod, InvoiceStatus, Timezone},
-    DateTime, InvoiceAcceptedPaymentMethods, InvoiceCustomField, InvoicePaymentRequest,
-    InvoiceRecipient, Money,
+    DateTime, InvoiceAcceptedPaymentMethods, InvoiceAttachment, InvoiceCustomField,
+    InvoicePaymentRequest, InvoiceRecipient, Money,
 };
 
 /// Stores information about an invoice.
@@ -149,4 +149,8 @@ pub struct Invoice {
     /// file** or **Save my bank on file** checkbox on the invoice payment page. Stored payment
     /// information can be used for future automatic payments. The default value is `false`.
     pub store_payment_method_enabled: Option<bool>,
+    /// Read only Metadata about the attachments on the invoice. Invoice attachments are managed using the
+    /// CreateInvoiceAttachment and DeleteInvoiceAttachment endpoints.
+    /// Max Length 10
+    pub attachments: Option<Vec<InvoiceAttachment>>,
 }

@@ -6,6 +6,10 @@
 //! Square sends the invoice to the customer or automatically charges a card on file. Square also
 //! hosts each invoice on a web page where customers can easily pay for it.
 
+use crate::models::{
+    CreateInvoiceAttachmentRequest, CreateInvoiceAttachmentResponse,
+    DeleteInvoiceAttachmentResponse,
+};
 use crate::{
     config::Configuration,
     http::client::HttpClient,
@@ -162,6 +166,48 @@ impl InvoicesApi {
     ) -> Result<PublishInvoiceResponse, SquareApiError> {
         let url = format!("{}/{}/publish", &self.url(), invoice_id);
         let response = self.http_client.post(&url, body).await?;
+
+        response.deserialize().await
+    }
+
+    /// Uploads a file and attaches it to an invoice.
+    ///
+    /// This endpoint accepts HTTP multipart/form-data file uploads with a JSON request part and a file part. The
+    /// file part must be a readable stream that contains a file in a supported format: GIF, JPEG, PNG, TIFF, BMP, or
+    /// PDF.
+    ///
+    /// Invoices can have up to 10 attachments with a total file size of 25 MB. Attachments can be added only to
+    /// invoices in the DRAFT, SCHEDULED, UNPAID, or PARTIALLY_PAID state
+    pub async fn create_invoice_attachment(
+        &self,
+        invoice_id: &str,
+        body: &CreateInvoiceAttachmentRequest,
+        filepath: &str,
+    ) -> Result<CreateInvoiceAttachmentResponse, SquareApiError> {
+        let url = format!("{}/{}/attachments", &self.url(), invoice_id);
+        let response = self
+            .http_client
+            .post_multipart(&url, body, filepath)
+            .await?;
+
+        response.deserialize().await
+    }
+
+    /// Removes an attachment from an invoice and permanently deletes the file.
+    ///
+    /// Attachments can be removed only from invoices in the DRAFT, SCHEDULED, UNPAID, or PARTIALLY_PAID state.
+    pub async fn delete_invoice_attachment(
+        &self,
+        invoice_id: &str,
+        attachment_id: &str,
+    ) -> Result<DeleteInvoiceAttachmentResponse, SquareApiError> {
+        let url = format!(
+            "{}/{}/attachments/{}",
+            &self.url(),
+            invoice_id,
+            attachment_id
+        );
+        let response = self.http_client.delete(&url).await?;
 
         response.deserialize().await
     }

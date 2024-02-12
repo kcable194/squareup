@@ -1,9 +1,8 @@
 //! Model struct for CatalogItemFoodAndBeverageDetails type.
 
-use serde::{Deserialize, Serialize};
 use crate::models::catalog_item_food_and_beverage_details_ingredient::CatalogItemFoodAndBeverageDetailsIngredient;
 use crate::models::CatalogItemFoodAndBeverageDetailsDietaryPreference;
-
+use serde::{Deserialize, Serialize};
 
 /// The food and beverage-specific details of a FOOD_AND_BEV item.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]
@@ -15,5 +14,5 @@ pub struct CatalogItemFoodAndBeverageDetails {
     /// is of Unicode code points.
     pub dietary_preferences: Option<Vec<CatalogItemFoodAndBeverageDetailsDietaryPreference>>,
     /// The ingredients for the FOOD_AND_BEV type item.
-    pub ingredients: Option<Vec<CatalogItemFoodAndBeverageDetailsIngredient>>
+    pub ingredients: Option<Vec<CatalogItemFoodAndBeverageDetailsIngredient>>,
 }

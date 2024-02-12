@@ -2,7 +2,10 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::{enums::CatalogItemProductType, CatalogEcomSeoData, CatalogItemModifierListInfo, CatalogItemOptionForItem, CatalogObject, CatalogObjectCategory, CatalogItemFoodAndBeverageDetails};
+use super::{
+    enums::CatalogItemProductType, CatalogEcomSeoData, CatalogItemFoodAndBeverageDetails,
+    CatalogItemModifierListInfo, CatalogItemOptionForItem, CatalogObject, CatalogObjectCategory,
+};
 
 /// A [CatalogObject] instance of the `ITEM` type, also referred to as an item, in the catalog.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]
