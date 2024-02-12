@@ -432,6 +432,9 @@ mod update_wage_setting_response;
 mod upsert_catalog_object_request;
 mod upsert_catalog_object_response;
 mod wage_setting;
+mod catalog_item_food_and_beverage_details;
+mod catalog_item_food_and_beverage_details_dietary_preference;
+mod catalog_item_food_and_beverage_details_ingredient;
 
 pub use ach_details::AchDetails;
 pub use add_group_to_customer_response::AddGroupToCustomerResponse;
@@ -862,3 +865,5 @@ pub use update_wage_setting_response::UpdateWageSettingResponse;
 pub use upsert_catalog_object_request::UpsertCatalogObjectRequest;
 pub use upsert_catalog_object_response::UpsertCatalogObjectResponse;
 pub use wage_setting::WageSetting;
+pub use catalog_item_food_and_beverage_details::CatalogItemFoodAndBeverageDetails;
+pub use catalog_item_food_and_beverage_details_dietary_preference::CatalogItemFoodAndBeverageDetailsDietaryPreference;

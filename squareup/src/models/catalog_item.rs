@@ -2,10 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::{
-    enums::CatalogItemProductType, CatalogEcomSeoData, CatalogItemModifierListInfo,
-    CatalogItemOptionForItem, CatalogObject, CatalogObjectCategory,
-};
+use super::{enums::CatalogItemProductType, CatalogEcomSeoData, CatalogItemModifierListInfo, CatalogItemOptionForItem, CatalogObject, CatalogObjectCategory, CatalogItemFoodAndBeverageDetails};
 
 /// A [CatalogObject] instance of the `ITEM` type, also referred to as an item, in the catalog.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]
@@ -84,6 +81,8 @@ pub struct CatalogItem {
     pub is_archived: Option<bool>,
     /// The SEO data for a seller's Square Online store.
     pub ecom_seo_data: Option<CatalogEcomSeoData>,
+    /// The food and beverage-specific details for the FoodAndBev item.
+    pub food_and_beverage_details: Option<CatalogItemFoodAndBeverageDetails>,
     /// The item's reporting category.
     pub reporting_category: Option<CatalogObjectCategory>,
 }
