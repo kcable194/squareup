@@ -2,7 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::{BusinessHoursPeriod, DateTime};
+use super::{DateTime};
 
 /// Represents a file attached to an invoice
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]
