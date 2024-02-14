@@ -118,6 +118,7 @@ So far, we have the following APIs wrapped in the Rust Square API Client:
 - [Inventory](https://developer.squareup.com/reference/square/inventory-api)
 - [Invoices](https://developer.squareup.com/reference/square/invoices-api)
 - [Locations](https://developer.squareup.com/reference/square/locations-api)
+- [OAuth](https://developer.squareup.com/reference/square/oauth-api)
 - [Orders](https://developer.squareup.com/reference/square/orders-api)
 - [Payments](https://developer.squareup.com/reference/square/payments-api)
 - [Refunds](https://developer.squareup.com/reference/square/refunds-api)
@@ -126,6 +127,7 @@ So far, we have the following APIs wrapped in the Rust Square API Client:
 - [Webhook Subscriptions](https://developer.squareup.com/reference/square/webhook-subscriptions-api)
   - [Bookings](https://developer.squareup.com/reference/square/bookings-api/webhooks)
   - [Locations](https://developer.squareup.com/reference/square/locations-api/webhooks)
+  - [OAuth](https://developer.squareup.com/reference/square/o-auth-api/webhooks)
   - [Team](https://developer.squareup.com/reference/square/team-api/webhooks)
 
 
@@ -142,7 +144,6 @@ Future versions of this crate will implement the following APIs:
 - [Loyalty](https://developer.squareup.com/reference/square/loyalty-api)
 - [Merchants](https://developer.squareup.com/reference/square/merchants-api)
 - [Mobile Authorization](https://developer.squareup.com/reference/square/mobile-authorization-api)
-- [OAuth](https://developer.squareup.com/reference/square/oauth-api)
 - [Payouts](https://developer.squareup.com/reference/square/payouts-api)
 - [Sites](https://developer.squareup.com/reference/square/sites-api)
 - [Snippets](https://developer.squareup.com/reference/square/snippets-api)
