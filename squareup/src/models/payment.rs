@@ -46,7 +46,7 @@ pub struct Payment {
     ///
     /// The amount cannot be more than 90% of the `total_money` value.
     ///
-    /// To set this field, `PAYMENTS_WRITE_ADDITIONAL_RECIPIENTS` OAuth permission is required. For
+    /// To set this field, `PaymentsWriteAdditionalRecipients` OAuth permission is required. For
     /// more information, see
     /// [Permissions](https://developer.squareup.com/docs/payments-api/take-payments-and-collect-fees#permissions).
     pub app_fee_money: Option<Money>,
