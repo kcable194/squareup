@@ -31,7 +31,7 @@ and the value of your API Token string... otherwise, you'll get API errors when 
 You can also add your API Token to the Headers manually when configuring the client. Only do this
 for local scripts (if even then).
 
-Other default values are `Sandbox` for the Square environment, `2023-12-13` API version, a base URI
+Other default values are `Sandbox` for the Square environment, `2024-01-18` API version, a base URI
 of `/v2`, a timeout of 60 seconds and no HTTP Client retries.
 
 
