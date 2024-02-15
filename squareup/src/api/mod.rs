@@ -15,11 +15,13 @@ mod payments_api;
 mod refunds_api;
 mod subscriptions_api;
 mod team_api;
+mod checkout_api;
 
 pub use apple_pay_api::ApplePayApi;
 pub use bookings_api::BookingsApi;
 pub use cards_api::CardsApi;
 pub use catalog_api::CatalogApi;
+pub use checkout_api::CheckoutApi;
 pub use customer_groups_api::CustomerGroupsApi;
 pub use customer_segments_api::CustomerSegmentsApi;
 pub use customers_api::CustomersApi;
