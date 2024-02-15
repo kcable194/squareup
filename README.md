@@ -31,15 +31,17 @@ and the value of your API Token string... otherwise, you'll get API errors when 
 You can also add your API Token to the Headers manually when configuring the client. Only do this
 for local scripts (if even then).
 
-Other default values are `Sandbox` for the Square environment, `2024-01-18` API version, a base URI
-of `/v2`, a timeout of 60 seconds and no HTTP Client retries.
+You also need to set the `SQUARE_ENVIRONMENT` environment variable to either `SANDBOX` or `PRODUCTION`.
+If a value is not set, the default is `SANDBOX`.
+
+Other default values `2024-01-18` API version, a base URI of `/v2`, a timeout of 60 seconds and no HTTP Client retries.
 
 
 The standard configuration for production is shown below:
 ```rust
     // Create square client config
     let config = Configuration {
-        environment: Environment::Production,
+        environment: Environment::Production, // OPTIONAL if you set the SQUARE_ENVIRONMENT env var
         http_client_config: HttpClientConfiguration::default(),
         base_uri: BaseUri::Default,
     };
