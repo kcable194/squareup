@@ -5,6 +5,7 @@ use std::io::Read;
 use std::{fmt::Debug, time::Duration};
 
 use log::error;
+use reqwest::header::{HeaderName, HeaderValue};
 use reqwest::multipart::{self, Part};
 use reqwest_middleware::{ClientBuilder, ClientWithMiddleware};
 use reqwest_retry::policies::ExponentialBackoff;
@@ -65,6 +66,29 @@ impl HttpClient {
         let response = self
             .retry_client
             .post(url)
+            .json(body)
+            .send()
+            .await
+            .map_err(|e| {
+                let msg = format!("Error posting to {}: {}", url, e);
+                error!("{}", msg);
+                SquareApiError::new(&msg)
+            })?;
+        Ok(HttpResponse::new(response))
+    }
+
+    /// Sends an HTTP POST with custom header
+    pub async fn post_with_header<T: Serialize + ?Sized>(
+        &self,
+        url: &str,
+        body: &T,
+        header_name: HeaderName,
+        header_value: HeaderValue,
+    ) -> Result<HttpResponse, SquareApiError> {
+        let response = self
+            .retry_client
+            .post(url)
+            .header(header_name, header_value)
             .json(body)
             .send()
             .await

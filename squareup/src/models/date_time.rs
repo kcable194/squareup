@@ -71,15 +71,15 @@ impl Display for DateTime {
     }
 }
 
-impl Into<chrono::DateTime<Utc>> for DateTime {
-    fn into(self) -> chrono::DateTime<Utc> {
-        self.inner
+impl From<DateTime> for chrono::DateTime<Utc> {
+    fn from(val: DateTime) -> Self {
+        val.inner
     }
 }
 
-impl Into<chrono::NaiveDateTime> for DateTime {
-    fn into(self) -> chrono::NaiveDateTime {
-        self.inner.naive_utc()
+impl From<DateTime> for chrono::NaiveDateTime {
+    fn from(val: DateTime) -> Self {
+        val.inner.naive_utc()
     }
 }
 

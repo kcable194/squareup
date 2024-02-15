@@ -41,9 +41,9 @@ impl BookingsApi {
 
     /// Retrieve a collection of [Bookings].
     ///
-    /// To call this endpoint with buyer-level permissions, set APPOINTMENTS_READ for
+    /// To call this endpoint with buyer-level permissions, set AppointmentsRead for
     /// the OAuth scope. To call this endpoint with seller-level permissions, set
-    /// APPOINTMENTS_ALL_READ and APPOINTMENTS_READ for the OAuth scope.
+    /// AppointmentsAllRead and AppointmentsRead for the OAuth scope.
     pub async fn list_bookings(
         &self,
         params: &ListBookingsParameters,
@@ -64,9 +64,9 @@ impl BookingsApi {
     /// Booking.AppointmentSegment.service_variation_id
     /// Booking.AppointmentSegment.service_variation_version
     ///
-    /// To call this endpoint with buyer-level permissions, set APPOINTMENTS_WRITE for the OAuth
-    /// scope. To call this endpoint with seller-level permissions, set APPOINTMENTS_ALL_WRITE
-    /// and APPOINTMENTS_WRITE for the OAuth scope.
+    /// To call this endpoint with buyer-level permissions, set AppointmentsWrite for the OAuth
+    /// scope. To call this endpoint with seller-level permissions, set AppointmentsAllWrite
+    /// and AppointmentsWrite for the OAuth scope.
     ///
     /// For calls to this endpoint with seller-level permissions to succeed, the seller must have
     /// subscribed to Appointments Plus or Appointments Premium.
@@ -82,10 +82,10 @@ impl BookingsApi {
 
     /// Searches for availabilities for booking.
     ///
-    /// To call this endpoint with buyer-level permissions, set APPOINTMENTS_READ for the OAuth
-    /// scope. To call this endpoint with seller-level permissions, set APPOINTMENTS_ALL_READ
-    /// and APPOINTMENTS_READ for the OAuth scope.
-    /// Permissions: APPOINTMENTS_READ
+    /// To call this endpoint with buyer-level permissions, set AppointmentsRead for the OAuth
+    /// scope. To call this endpoint with seller-level permissions, set AppointmentsAllRead
+    /// and AppointmentsRead for the OAuth scope.
+    /// Permissions: AppointmentsRead
     pub async fn search_availability(
         &self,
         body: &SearchAvailabilityRequest,
@@ -98,11 +98,11 @@ impl BookingsApi {
 
     /// Bulk-Retrieves a list of bookings by booking IDs.
     ///
-    /// To call this endpoint with buyer-level permissions, set APPOINTMENTS_READ for the OAuth
-    /// scope. To call this endpoint with seller-level permissions, set APPOINTMENTS_ALL_READ and
-    /// APPOINTMENTS_READ for the OAuth scope.
+    /// To call this endpoint with buyer-level permissions, set AppointmentsRead for the OAuth
+    /// scope. To call this endpoint with seller-level permissions, set AppointmentsAllRead and
+    /// AppointmentsRead for the OAuth scope.
     ///
-    /// Permissions:APPOINTMENTS_READ
+    /// Permissions:AppointmentsRead
     pub async fn bulk_retrieve_bookings(
         &self,
         body: &BulkRetrieveBookingsRequest,
@@ -114,7 +114,7 @@ impl BookingsApi {
     }
 
     /// Retrieves a seller's booking profile.
-    /// Permissions:APPOINTMENTS_BUSINESS_SETTINGS_READ
+    /// Permissions:AppointmentsBusinessSettingsRead
     pub async fn retrieve_business_booking_profile(
         &self,
     ) -> Result<RetrieveBusinessBookingProfileResponse, SquareApiError> {
@@ -125,7 +125,7 @@ impl BookingsApi {
     }
 
     /// Lists location booking profiles of a seller.
-    /// Permissions:APPOINTMENTS_BUSINESS_SETTINGS_READ
+    /// Permissions:AppointmentsBusinessSettingsRead
     pub async fn list_location_booking_profiles(
         &self,
         params: &ListLocationBookingProfilesParameters,
@@ -141,7 +141,7 @@ impl BookingsApi {
     }
 
     /// Retrieves a seller's location booking profile.
-    /// Permissions:APPOINTMENTS_BUSINESS_SETTINGS_READ
+    /// Permissions:AppointmentsBusinessSettingsRead
     pub async fn retrieve_location_booking_profile(
         &self,
         location_id: &str,
@@ -153,7 +153,7 @@ impl BookingsApi {
     }
 
     /// Lists booking profiles for team members.
-    /// Permissions:APPOINTMENTS_BUSINESS_SETTINGS_READ
+    /// Permissions:AppointmentsBusinessSettingsRead
     pub async fn list_team_member_booking_profiles(
         &self,
         params: &ListTeamMemberBookingProfilesParameters,
@@ -169,7 +169,7 @@ impl BookingsApi {
     }
 
     /// Retrieves one or more team members' booking profiles.
-    /// Permissions:APPOINTMENTS_BUSINESS_SETTINGS_READ
+    /// Permissions:AppointmentsBusinessSettingsRead
     pub async fn bulk_retrieve_team_member_booking_profiles(
         &self,
         body: &BulkRetrieveTeamMemberBookingProfilesRequest,
@@ -181,7 +181,7 @@ impl BookingsApi {
     }
 
     /// Retrieves a team member's booking profile.
-    /// Permissions:APPOINTMENTS_BUSINESS_SETTINGS_READ
+    /// Permissions:AppointmentsBusinessSettingsRead
     pub async fn retrieve_team_member_booking_profile(
         &self,
         team_member_id: &str,
@@ -197,11 +197,11 @@ impl BookingsApi {
     }
 
     /// Retrieves a booking.
-    /// To call this endpoint with buyer-level permissions, set APPOINTMENTS_READ for the OAuth
-    /// scope. To call this endpoint with seller-level permissions, set APPOINTMENTS_ALL_READ and
-    /// APPOINTMENTS_READ for the OAuth scope.
+    /// To call this endpoint with buyer-level permissions, set AppointmentsRead for the OAuth
+    /// scope. To call this endpoint with seller-level permissions, set AppointmentsAllRead and
+    /// AppointmentsRead for the OAuth scope.
     ///
-    /// Permissions:APPOINTMENTS_READ
+    /// Permissions:AppointmentsRead
     pub async fn retrieve_booking(
         &self,
         booking_id: &str,
@@ -213,14 +213,14 @@ impl BookingsApi {
     }
 
     /// Updates a booking.
-    /// To call this endpoint with buyer-level permissions, set APPOINTMENTS_WRITE for the
+    /// To call this endpoint with buyer-level permissions, set AppointmentsWrite for the
     /// OAuth scope. To call this endpoint with seller-level permissions, set
-    /// APPOINTMENTS_ALL_WRITE and APPOINTMENTS_WRITE for the OAuth scope.
+    /// AppointmentsAllWrite and AppointmentsWrite for the OAuth scope.
     ///
     /// For calls to this endpoint with seller-level permissions to succeed, the seller must have
     /// subscribed to Appointments Plus or Appointments Premium.
     ///
-    /// Permissions:APPOINTMENTS_WRITE
+    /// Permissions:AppointmentsWrite
     pub async fn update_booking(
         &self,
         booking_id: &str,
@@ -233,14 +233,14 @@ impl BookingsApi {
     }
 
     /// Cancels an existing booking.
-    /// To call this endpoint with buyer-level permissions, set APPOINTMENTS_WRITE for the
+    /// To call this endpoint with buyer-level permissions, set AppointmentsWrite for the
     /// OAuth scope. To call this endpoint with seller-level permissions, set
-    /// APPOINTMENTS_ALL_WRITE and APPOINTMENTS_WRITE for the OAuth scope.
+    /// AppointmentsAllWrite and AppointmentsWrite for the OAuth scope.
     ///
     /// For calls to this endpoint with seller-level permissions to succeed, the seller must have
     /// subscribed to Appointments Plus or Appointments Premium.
     ///
-    /// Permissions:APPOINTMENTS_WRITE
+    /// Permissions:AppointmentsWrite
     pub async fn cancel_booking(
         &self,
         booking_id: &str,
