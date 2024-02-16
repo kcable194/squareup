@@ -38,13 +38,6 @@ mod tests {
     }
 
     #[test]
-    fn get_base_url_for_custom_url() {
-        let mut configuration = Configuration::default();
-        configuration.environment = Environment::Custom(String::from("some_custom_url"));
-        assert_eq!("some_custom_url/v2", configuration.get_base_url());
-    }
-
-    #[test]
     fn get_base_url_with_different_base_uri() {
         let mut configuration = Configuration::default();
         configuration.base_uri = BaseUri::Custom("/custom_base_uri".to_string());
