@@ -4,9 +4,7 @@ use axum::{
     Json, Router,
 };
 use squareup::api::{CustomersApi, OrdersApi};
-use squareup::config::BaseUri;
-use squareup::config::{Configuration, Environment};
-use squareup::http::client::HttpClientConfiguration;
+use squareup::config::Configuration;
 use squareup::models::enums::{SortCustomersField, SortOrder};
 use squareup::models::{
     Customer, ListCustomersParameters, ListCustomersResponse, Order, SearchOrdersRequest,
@@ -14,7 +12,6 @@ use squareup::models::{
 use squareup::SquareClient;
 use std::sync::Arc;
 use tokio::net::TcpListener;
-
 
 // struct that holds shared app state that axum will inject
 struct AppState {
@@ -37,11 +34,7 @@ impl AppState {
 #[tokio::main]
 async fn main() {
     // Create square client config
-    let config = Configuration {
-        environment: Environment::Production,
-        http_client_config: HttpClientConfiguration::default(),
-        base_uri: BaseUri::Default,
-    };
+    let config = Configuration::default();
 
     // Create square client, and instantiate any api structs you want
     let square_client: SquareClient = SquareClient::try_new(config).unwrap();

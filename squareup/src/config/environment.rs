@@ -6,8 +6,7 @@ const PRODUCTION_URL: &str = "https://connect.squareup.com";
 const SANDBOX_URL: &str = "https://connect.squareupsandbox.com";
 
 /// Identifies the Square environment in which this app instance is operating
-#[derive(Clone, Debug, Eq, PartialEq, Deserialize, Serialize)]
-#[serde(rename_all = "UPPERCASE")]
+#[derive(Clone, Debug, Eq, PartialEq)]
 pub enum Environment {
     Production,
     Sandbox,
@@ -27,7 +26,11 @@ impl Default for Environment {
     /// default to env variable and if not present, default to Sandbox
     fn default() -> Self {
         let env_string = std::env::var("SQUARE_ENVIRONMENT").unwrap_or(String::from("SANDBOX"));
-        serde_json::from_str(env_string.as_str()).unwrap_or(Self::Sandbox)
+        return match env_string.as_str() {
+            "PRODUCTION" => Self::Production,
+            "SANDBOX" => Self::Sandbox,
+            _ => Self::Sandbox,
+        };
     }
 }
 
