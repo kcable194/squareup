@@ -2,6 +2,7 @@ mod apple_pay_api;
 mod bookings_api;
 mod cards_api;
 mod catalog_api;
+mod checkout_api;
 mod customer_groups_api;
 mod customer_segments_api;
 mod customers_api;
@@ -16,7 +17,6 @@ mod payments_api;
 mod refunds_api;
 mod subscriptions_api;
 mod team_api;
-mod checkout_api;
 
 pub use apple_pay_api::ApplePayApi;
 pub use bookings_api::BookingsApi;

@@ -10,10 +10,15 @@
 //! First time Square developers should utilize the payment link endpoints to create, update, retrieve, and
 //! list checkout pages.
 
-use crate::{config::Configuration, http::client::HttpClient, models::{
-    errors::SquareApiError, CreatePaymentLinkRequest, CreatePaymentLinkResponse,
-    DeletePaymentLinkResponse,
-}, SquareClient};
+use crate::{
+    config::Configuration,
+    http::client::HttpClient,
+    models::{
+        errors::SquareApiError, CreatePaymentLinkRequest, CreatePaymentLinkResponse,
+        DeletePaymentLinkResponse,
+    },
+    SquareClient,
+};
 
 const DEFAULT_URI: &str = "/online-checkout/payment-links";
 
@@ -27,10 +32,10 @@ pub struct CheckoutApi {
 
 impl CheckoutApi {
     /// Instantiates a new [`CheckoutApi`]
-    pub fn new(client: SquareClient) -> Self {
+    pub fn new(square_client: SquareClient) -> Self {
         Self {
-            config: client.config,
-            client: client.http_client
+            config: square_client.config,
+            client: square_client.http_client,
         }
     }
 
@@ -47,9 +52,9 @@ impl CheckoutApi {
     }
 
     /// Deletes a payment link.
-    pub async fn delete_payment_link(
+    pub async fn delete_payment_link<T: ToString>(
         &self,
-        id: impl ToString,
+        id: T,
     ) -> Result<DeletePaymentLinkResponse, SquareApiError> {
         let url = format!("{}/{}", &self.url(), id.to_string());
         let response = self.client.delete(&url).await?;

@@ -157,7 +157,7 @@ impl CatalogApi {
         &self,
         params: &ListCatalogParameters,
     ) -> Result<ListCatalogResponse, SquareApiError> {
-        let url = format!("{}/list{}", &self.url(), params.to_query_string()).replace("\"", "");
+        let url = format!("{}/list{}", &self.url(), params.to_query_string());
         let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
