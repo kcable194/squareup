@@ -104,12 +104,12 @@ impl CatalogApi {
     pub async fn create_catalog_image(
         &self,
         body: &CreateCatalogImageRequest,
-        image_filepath: &str,
+        image_filepath: impl AsRef<str>,
     ) -> Result<CreateCatalogImageResponse, SquareApiError> {
         let url = format!("{}/images", &self.url());
         let response = self
             .http_client
-            .post_multipart(&url, body, image_filepath)
+            .post_multipart(&url, body, image_filepath.as_ref())
             .await?;
 
         response.deserialize().await
@@ -122,14 +122,14 @@ impl CatalogApi {
     /// 15MB.
     pub async fn update_catalog_image(
         &self,
-        image_id: &str,
+        image_id: impl AsRef<str>,
         body: &UpdateCatalogImageRequest,
-        image_filepath: &str,
+        image_filepath: impl AsRef<str>,
     ) -> Result<UpdateCatalogImageResponse, SquareApiError> {
-        let url = format!("{}/images/{}", &self.url(), image_id);
+        let url = format!("{}/images/{}", &self.url(), image_id.as_ref());
         let response = self
             .http_client
-            .put_multipart(&url, body, image_filepath)
+            .put_multipart(&url, body, image_filepath.as_ref())
             .await?;
 
         response.deserialize().await
@@ -182,9 +182,9 @@ impl CatalogApi {
     /// [CatalogItemVariation] children.
     pub async fn delete_catalog_object(
         &self,
-        object_id: &str,
+        object_id: impl AsRef<str>,
     ) -> Result<DeleteCatalogObjectResponse, SquareApiError> {
-        let url = format!("{}/object/{}", &self.url(), object_id);
+        let url = format!("{}/object/{}", &self.url(), object_id.as_ref());
         let response = self.http_client.delete(&url).await?;
 
         response.deserialize().await
@@ -197,13 +197,13 @@ impl CatalogApi {
     /// ids of any [CatalogTax] objects that apply to it.
     pub async fn retrieve_catalog_object(
         &self,
-        object_id: &str,
+        object_id: impl AsRef<str>,
         params: &RetrieveCatalogObjectParameters,
     ) -> Result<RetrieveCatalogObjectResponse, SquareApiError> {
         let url = format!(
             "{}/object/{}{}",
             &self.url(),
-            object_id,
+            object_id.as_ref(),
             params.to_owned().to_query_string()
         );
         let response = self.http_client.get(&url).await?;

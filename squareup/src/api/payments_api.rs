@@ -103,9 +103,9 @@ impl PaymentsApi {
     /// Retrieves details for a specific payment
     pub async fn get_payment(
         &self,
-        payment_id: &str,
+        payment_id: impl AsRef<str>,
     ) -> Result<GetPaymentResponse, SquareApiError> {
-        let url = format!("{}/{}", &self.url(), payment_id);
+        let url = format!("{}/{}", &self.url(), payment_id.as_ref());
         let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
@@ -116,10 +116,10 @@ impl PaymentsApi {
     /// You can update the `amount_money` and `tip_money` using this endpoint.
     pub async fn update_payment(
         &self,
-        payment_id: &str,
+        payment_id: impl AsRef<str>,
         body: &UpdatePaymentRequest,
     ) -> Result<UpdatePaymentResponse, SquareApiError> {
-        let url = format!("{}/{}", &self.url(), payment_id);
+        let url = format!("{}/{}", &self.url(), payment_id.as_ref());
         let response = self.http_client.put(&url, &body).await?;
 
         response.deserialize().await
@@ -130,9 +130,9 @@ impl PaymentsApi {
     /// You can use this endpoint to cancel a payment with the APPROVED `status`.
     pub async fn cancel_payment(
         &self,
-        payment_id: &str,
+        payment_id: impl AsRef<str>,
     ) -> Result<CancelPaymentResponse, SquareApiError> {
-        let url = format!("{}/{}/cancel", &self.url(), payment_id);
+        let url = format!("{}/{}/cancel", &self.url(), payment_id.as_ref());
         let response = self.http_client.post::<Option<()>>(&url, &None).await?;
 
         response.deserialize().await
@@ -145,10 +145,10 @@ impl PaymentsApi {
     /// You can use this endpoint to complete a payment with the APPROVED `status`.
     pub async fn complete_payment(
         &self,
-        payment_id: &str,
+        payment_id: impl AsRef<str>,
         body: &CompletePaymentRequest,
     ) -> Result<CompletePaymentResponse, SquareApiError> {
-        let url = format!("{}/{}/complete", &self.url(), payment_id);
+        let url = format!("{}/{}/complete", &self.url(), payment_id.as_ref());
         let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await

@@ -75,9 +75,9 @@ impl RefundsApi {
     /// Retrieves a specific refund using the `refund_id`.
     pub async fn get_payment_refund(
         &self,
-        refund_id: &str,
+        refund_id: impl AsRef<str>,
     ) -> Result<GetPaymentRefundResponse, SquareApiError> {
-        let url = format!("{}/{}", &self.url(), refund_id);
+        let url = format!("{}/{}", &self.url(), refund_id.as_ref());
         let response = self.http_client.get(&url).await?;
 
         response.deserialize().await

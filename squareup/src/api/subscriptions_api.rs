@@ -98,13 +98,13 @@ impl SubscriptionsApi {
     /// Retrieves a subscription.
     pub async fn retrieve_subscription(
         &self,
-        subscription_id: &str,
+        subscription_id: impl AsRef<str>,
         params: &RetrieveSubscriptionParameters,
     ) -> Result<RetrieveSubscriptionResponse, SquareApiError> {
         let url = format!(
             "{}/{}{}",
             &self.url(),
-            subscription_id,
+            subscription_id.as_ref(),
             params.to_query_string()
         );
         let response = self.http_client.get(&url).await?;
@@ -117,10 +117,10 @@ impl SubscriptionsApi {
     /// You can set, modify, and clear the `subscription` field values.
     pub async fn update_subscription(
         &self,
-        subscription_id: &str,
+        subscription_id: impl AsRef<str>,
         body: &UpdateSubscriptionRequest,
     ) -> Result<UpdateSubscriptionResponse, SquareApiError> {
-        let url = format!("{}/{}", &self.url(), subscription_id);
+        let url = format!("{}/{}", &self.url(), subscription_id.as_ref());
         let response = self.http_client.put(&url, body).await?;
 
         response.deserialize().await
@@ -129,10 +129,15 @@ impl SubscriptionsApi {
     /// Deletes a scheduled action for a subscription.
     pub async fn delete_subscription_action(
         &self,
-        subscription_id: &str,
-        action_id: &str,
+        subscription_id: impl AsRef<str>,
+        action_id: impl AsRef<str>,
     ) -> Result<DeleteSubscriptionActionResponse, SquareApiError> {
-        let url = format!("{}/{}/actions/{}", &self.url(), subscription_id, action_id);
+        let url = format!(
+            "{}/{}/actions/{}",
+            &self.url(),
+            subscription_id.as_ref(),
+            action_id.as_ref()
+        );
         let response = self.http_client.delete(&url).await?;
 
         response.deserialize().await
@@ -141,10 +146,14 @@ impl SubscriptionsApi {
     /// Changes the billing anchor date for a subscription.
     pub async fn change_billing_anchor_date(
         &self,
-        subscription_id: &str,
+        subscription_id: impl AsRef<str>,
         body: &ChangeBillingAnchorDateRequest,
     ) -> Result<ChangeBillingAnchorDateResponse, SquareApiError> {
-        let url = format!("{}/{}/billing-anchor", &self.url(), subscription_id);
+        let url = format!(
+            "{}/{}/billing-anchor",
+            &self.url(),
+            subscription_id.as_ref()
+        );
         let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await
@@ -155,9 +164,9 @@ impl SubscriptionsApi {
     /// ACTIVE to CANCELED after this date.
     pub async fn cancel_subscription(
         &self,
-        subscription_id: &str,
+        subscription_id: impl AsRef<str>,
     ) -> Result<CancelSubscriptionResponse, SquareApiError> {
-        let url = format!("{}/{}/cancel", &self.url(), subscription_id);
+        let url = format!("{}/{}/cancel", &self.url(), subscription_id.as_ref());
         let response = self.http_client.empty_post(&url).await?;
 
         response.deserialize().await
@@ -166,13 +175,13 @@ impl SubscriptionsApi {
     /// Lists all events for a specific subscription.
     pub async fn list_subscription_events(
         &self,
-        subscription_id: &str,
+        subscription_id: impl AsRef<str>,
         params: &ListSubscriptionEventsParameters,
     ) -> Result<ListSubscriptionEventsResponse, SquareApiError> {
         let url = format!(
             "{}/{}/events{}",
             &self.url(),
-            subscription_id,
+            subscription_id.as_ref(),
             params.to_query_string()
         );
         let response = self.http_client.get(&url).await?;
@@ -183,10 +192,10 @@ impl SubscriptionsApi {
     /// Schedules a `PAUSE` action to pause an active subscription.
     pub async fn pause_subscription(
         &self,
-        subscription_id: &str,
+        subscription_id: impl AsRef<str>,
         body: &PauseSubscriptionRequest,
     ) -> Result<PauseSubscriptionResponse, SquareApiError> {
-        let url = format!("{}/{}/pause", &self.url(), subscription_id);
+        let url = format!("{}/{}/pause", &self.url(), subscription_id.as_ref());
         let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await
@@ -195,10 +204,10 @@ impl SubscriptionsApi {
     /// Schedules a `RESUME` action to resume a paused or a deactivated subscription.
     pub async fn resume_subscription(
         &self,
-        subscription_id: &str,
+        subscription_id: impl AsRef<str>,
         body: &ResumeSubscriptionRequest,
     ) -> Result<ResumeSubscriptionResponse, SquareApiError> {
-        let url = format!("{}/{}/resume", &self.url(), subscription_id);
+        let url = format!("{}/{}/resume", &self.url(), subscription_id.as_ref());
         let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await
@@ -207,10 +216,10 @@ impl SubscriptionsApi {
     /// Schedules a `SWAP_PLAN` action to swap a subscription plan in an existing subscription.
     pub async fn swap_plan(
         &self,
-        subscription_id: &str,
+        subscription_id: impl AsRef<str>,
         body: &SwapPlanRequest,
     ) -> Result<SwapPlanResponse, SquareApiError> {
-        let url = format!("{}/{}/swap-plan", &self.url(), subscription_id);
+        let url = format!("{}/{}/swap-plan", &self.url(), subscription_id.as_ref());
         let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await

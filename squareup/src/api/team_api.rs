@@ -114,9 +114,9 @@ impl TeamApi {
     /// API](https://developer.squareup.com/docs/team/troubleshooting#createteammember).
     pub async fn retrieve_team_member(
         &self,
-        team_member_id: &str,
+        team_member_id: impl AsRef<str>,
     ) -> Result<RetrieveTeamMemberResponse, SquareApiError> {
-        let url = format!("{}/{}", self.url(), team_member_id);
+        let url = format!("{}/{}", self.url(), team_member_id.as_ref());
         let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
@@ -130,10 +130,10 @@ impl TeamApi {
     /// API](https://developer.squareup.com/docs/team/troubleshooting#createteammember).
     pub async fn update_team_member(
         &self,
-        team_member_id: &str,
+        team_member_id: impl AsRef<str>,
         body: &UpdateTeamMemberRequest,
     ) -> Result<UpdateTeamMemberResponse, SquareApiError> {
-        let url = format!("{}/{}", self.url(), team_member_id);
+        let url = format!("{}/{}", self.url(), team_member_id.as_ref());
         let response = self.http_client.put(&url, body).await?;
 
         response.deserialize().await
@@ -145,9 +145,9 @@ impl TeamApi {
     /// API](https://developer.squareup.com/docs/team/troubleshooting#createteammember).
     pub async fn retrieve_wage_setting(
         &self,
-        team_member_id: &str,
+        team_member_id: impl AsRef<str>,
     ) -> Result<RetrieveWageSettingResponse, SquareApiError> {
-        let url = format!("{}/{}/wage-setting", self.url(), team_member_id);
+        let url = format!("{}/{}/wage-setting", self.url(), team_member_id.as_ref());
         let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
@@ -163,10 +163,10 @@ impl TeamApi {
     /// API](https://developer.squareup.com/docs/team/troubleshooting#createteammember).
     pub async fn update_wage_setting(
         &self,
-        team_member_id: &str,
+        team_member_id: impl AsRef<str>,
         body: &UpdateWageSettingRequest,
     ) -> Result<UpdateWageSettingResponse, SquareApiError> {
-        let url = format!("{}/{}/wage-setting", self.url(), team_member_id);
+        let url = format!("{}/{}/wage-setting", self.url(), team_member_id.as_ref());
         let response = self.http_client.put(&url, body).await?;
 
         response.deserialize().await
