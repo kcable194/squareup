@@ -1,14 +1,16 @@
 //! Square environment in which to operate
 
+use serde::{Deserialize, Serialize};
+
 const PRODUCTION_URL: &str = "https://connect.squareup.com";
 const SANDBOX_URL: &str = "https://connect.squareupsandbox.com";
 
 /// Identifies the Square environment in which this app instance is operating
-#[derive(Clone, Debug, Eq, PartialEq)]
+#[derive(Clone, Debug, Eq, PartialEq, Deserialize, Serialize)]
+#[serde(rename_all = "UPPERCASE")]
 pub enum Environment {
     Production,
     Sandbox,
-    Custom(String),
 }
 
 impl Environment {
@@ -17,15 +19,15 @@ impl Environment {
         match self {
             Environment::Production => String::from(PRODUCTION_URL),
             Environment::Sandbox => String::from(SANDBOX_URL),
-            Environment::Custom(custom_url) => custom_url.to_owned(),
         }
     }
 }
 
 impl Default for Environment {
-    /// Sandbox is the default environment
+    /// default to env variable and if not present, default to Sandbox
     fn default() -> Self {
-        Self::Sandbox
+        let env_string = std::env::var("SQUARE_ENVIRONMENT").unwrap_or(String::from("SANDBOX"));
+        serde_json::from_str(env_string.as_str()).unwrap_or(Self::Sandbox)
     }
 }
 
@@ -41,14 +43,6 @@ mod tests {
             String::from("https://connect.squareupsandbox.com"),
             environment.get_base_url()
         )
-    }
-
-    #[test]
-    fn get_base_url_custom() {
-        assert_eq!(
-            String::from("some_custom_url"),
-            Environment::Custom(String::from("some_custom_url")).get_base_url()
-        );
     }
 
     #[test]
