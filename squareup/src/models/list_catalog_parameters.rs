@@ -34,7 +34,7 @@ pub struct ListCatalogParameters {
 
 impl ListCatalogParameters {
     pub fn to_query_string(&self) -> String {
-        self.to_string()
+        self.to_string().replace("\"", "")
     }
 }
 

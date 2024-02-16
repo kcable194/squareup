@@ -1,33 +1,38 @@
+use axum::routing::get;
 use axum::{
     extract::{Path, State},
-    routing::get,
     Json, Router,
 };
-use squareup::api::{CustomersApi, OrdersApi};
-use squareup::config::BaseUri;
-use squareup::config::{Configuration, Environment};
+use squareup::api::{CatalogApi, CustomersApi, OrdersApi};
+use squareup::config::{BaseUri, Configuration, Environment};
 use squareup::http::client::HttpClientConfiguration;
-use squareup::models::enums::{SortCustomersField, SortOrder};
+use squareup::models::enums::{CatalogObjectType, SortCustomersField, SortOrder};
 use squareup::models::{
-    Customer, ListCustomersParameters, ListCustomersResponse, Order, SearchOrdersRequest,
+    CatalogObject, Customer, ListCatalogParameters, ListCustomersParameters, ListCustomersResponse,
+    Order, SearchOrdersRequest,
 };
 use squareup::SquareClient;
 use std::sync::Arc;
 use tokio::net::TcpListener;
 
-
 // struct that holds shared app state that axum will inject
 struct AppState {
     customers_api: CustomersApi,
     orders_api: OrdersApi,
+    catalog_api: CatalogApi,
 }
 
 impl AppState {
     // convenience method for wrapping app state in an Arc
-    pub fn new(customers_api: CustomersApi, orders_api: OrdersApi) -> Arc<AppState> {
+    pub fn new(
+        customers_api: CustomersApi,
+        orders_api: OrdersApi,
+        catalog_api: CatalogApi,
+    ) -> Arc<AppState> {
         let app_state = AppState {
             customers_api,
             orders_api,
+            catalog_api,
         };
 
         Arc::new(app_state)
@@ -37,24 +42,23 @@ impl AppState {
 #[tokio::main]
 async fn main() {
     // Create square client config
-    let config = Configuration {
-        environment: Environment::Production,
-        http_client_config: HttpClientConfiguration::default(),
-        base_uri: BaseUri::Default,
-    };
+    let config = Configuration::default();
+    println!("{:#?}", config);
 
     // Create square client, and instantiate any api structs you want
     let square_client: SquareClient = SquareClient::try_new(config).unwrap();
     let customers_api: CustomersApi = CustomersApi::new(square_client.to_owned());
     let orders_api: OrdersApi = OrdersApi::new(square_client.to_owned());
+    let catalog_api: CatalogApi = CatalogApi::new(square_client.to_owned());
 
     // Instantiate app state struct, wrapped in an Arc for sharing across threads
-    let app_state: Arc<AppState> = AppState::new(customers_api, orders_api);
+    let app_state: Arc<AppState> = AppState::new(customers_api, orders_api, catalog_api);
 
     // Add some routes to the application, as well as our app state
     let app: Router = Router::new()
         .route("/customers/:num", get(customers))
         .route("/orders/:location_id/:num", get(orders))
+        .route("/catalog/list", get(list_catalog))
         .with_state(app_state);
 
     // run app with hyper
@@ -114,4 +118,24 @@ async fn orders(
     let order: &Order = orders.get(num).unwrap();
 
     Json(order.to_owned())
+}
+
+async fn list_catalog(State(app_state): State<Arc<AppState>>) -> Json<Vec<CatalogObject>> {
+    // Create list catalog parameters object
+    let list_catalog_params = ListCatalogParameters {
+        cursor: None,
+        types: Some(vec![CatalogObjectType::Item]),
+        catalog_version: None,
+    };
+
+    // call orders api to get list of orders
+    let list_catalog_response = app_state
+        .catalog_api
+        .list_catalog(&list_catalog_params)
+        .await
+        .unwrap();
+
+    // unwrap response and send back as serialized json
+    let catalog_items = list_catalog_response.objects.unwrap();
+    Json(catalog_items)
 }
