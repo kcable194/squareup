@@ -31,7 +31,7 @@ impl Default for Environment {
             "PRODUCTION" => Self::Production,
             "SANDBOX" => Self::Sandbox,
             _ => Self::Sandbox,
-        }
+        };
     }
 }
 
