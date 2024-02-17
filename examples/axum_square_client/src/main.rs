@@ -7,6 +7,7 @@ use squareup::api::{CatalogApi, CustomersApi, OrdersApi};
 use squareup::config::{BaseUri, Configuration, Environment};
 use squareup::http::client::HttpClientConfiguration;
 use squareup::models::enums::{CatalogObjectType, SortCustomersField, SortOrder};
+
 use squareup::models::{
     CatalogObject, Customer, ListCatalogParameters, ListCustomersParameters, ListCustomersResponse,
     Order, SearchOrdersRequest,

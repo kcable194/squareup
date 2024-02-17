@@ -94,10 +94,15 @@ impl InvoicesApi {
     /// scheduled for processing).
     pub async fn delete_invoice(
         &self,
-        invoice_id: &str,
+        invoice_id: impl AsRef<str>,
         params: &DeleteInvoiceParameters,
     ) -> Result<DeleteInvoiceResponse, SquareApiError> {
-        let url = format!("{}/{}{}", &self.url(), invoice_id, params.to_query_string());
+        let url = format!(
+            "{}/{}{}",
+            &self.url(),
+            invoice_id.as_ref(),
+            params.to_query_string()
+        );
         let response = self.http_client.delete(&url).await?;
 
         response.deserialize().await
@@ -106,9 +111,9 @@ impl InvoicesApi {
     /// Retrieves an invoice by invoice ID.
     pub async fn get_invoice(
         &self,
-        invoice_id: &str,
+        invoice_id: impl AsRef<str>,
     ) -> Result<GetInvoiceResponse, SquareApiError> {
-        let url = format!("{}/{}", &self.url(), invoice_id);
+        let url = format!("{}/{}", &self.url(), invoice_id.as_ref());
         let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
@@ -123,10 +128,10 @@ impl InvoicesApi {
     /// additional restrictions.
     pub async fn update_invoice(
         &self,
-        invoice_id: &str,
+        invoice_id: impl AsRef<str>,
         body: &UpdateInvoiceRequest,
     ) -> Result<UpdateInvoiceResponse, SquareApiError> {
-        let url = format!("{}/{}", &self.url(), invoice_id);
+        let url = format!("{}/{}", &self.url(), invoice_id.as_ref());
         let response = self.http_client.put(&url, body).await?;
 
         response.deserialize().await
@@ -140,10 +145,10 @@ impl InvoicesApi {
     /// `REFUNDED`, `CANCELED`, or `FAILED`.
     pub async fn cancel_invoice(
         &self,
-        invoice_id: &str,
+        invoice_id: impl AsRef<str>,
         body: &CancelInvoiceRequest,
     ) -> Result<CancelInvoiceResponse, SquareApiError> {
-        let url = format!("{}/{}/cancel", &self.url(), invoice_id);
+        let url = format!("{}/{}/cancel", &self.url(), invoice_id.as_ref());
         let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await
@@ -161,10 +166,10 @@ impl InvoicesApi {
     /// `PARTIALLY_PAID` if Square charge a card on file for a portion of the invoice amount.
     pub async fn publish_invoice(
         &self,
-        invoice_id: &str,
+        invoice_id: impl AsRef<str>,
         body: &PublishInvoiceRequest,
     ) -> Result<PublishInvoiceResponse, SquareApiError> {
-        let url = format!("{}/{}/publish", &self.url(), invoice_id);
+        let url = format!("{}/{}/publish", &self.url(), invoice_id.as_ref());
         let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await
@@ -180,14 +185,14 @@ impl InvoicesApi {
     /// invoices in the DRAFT, SCHEDULED, UNPAID, or PARTIALLY_PAID state
     pub async fn create_invoice_attachment(
         &self,
-        invoice_id: &str,
+        invoice_id: impl AsRef<str>,
         body: &CreateInvoiceAttachmentRequest,
-        filepath: &str,
+        filepath: impl AsRef<str>,
     ) -> Result<CreateInvoiceAttachmentResponse, SquareApiError> {
-        let url = format!("{}/{}/attachments", &self.url(), invoice_id);
+        let url = format!("{}/{}/attachments", &self.url(), invoice_id.as_ref());
         let response = self
             .http_client
-            .post_multipart(&url, body, filepath)
+            .post_multipart(&url, body, filepath.as_ref())
             .await?;
 
         response.deserialize().await
@@ -198,14 +203,14 @@ impl InvoicesApi {
     /// Attachments can be removed only from invoices in the DRAFT, SCHEDULED, UNPAID, or PARTIALLY_PAID state.
     pub async fn delete_invoice_attachment(
         &self,
-        invoice_id: &str,
-        attachment_id: &str,
+        invoice_id: impl AsRef<str>,
+        attachment_id: impl AsRef<str>,
     ) -> Result<DeleteInvoiceAttachmentResponse, SquareApiError> {
         let url = format!(
             "{}/{}/attachments/{}",
             &self.url(),
-            invoice_id,
-            attachment_id
+            invoice_id.as_ref(),
+            attachment_id.as_ref()
         );
         let response = self.http_client.delete(&url).await?;
 

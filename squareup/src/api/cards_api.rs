@@ -52,8 +52,11 @@ impl CardsApi {
     /// Disables the card, preventing any further updates or charges.
     ///
     /// Disabling an already disabled card is allowed but has no effect.
-    pub async fn disable_card(&self, card_id: &str) -> Result<DisableCardResponse, SquareApiError> {
-        let url = format!("{}/{}/disable", &self.url(), card_id);
+    pub async fn disable_card(
+        &self,
+        card_id: impl AsRef<str>,
+    ) -> Result<DisableCardResponse, SquareApiError> {
+        let url = format!("{}/{}/disable", &self.url(), card_id.as_ref());
         let response = self.http_client.empty_post(&url).await?;
 
         response.deserialize().await
@@ -75,9 +78,9 @@ impl CardsApi {
     /// Retrieves details for a specific Card.
     pub async fn retrieve_card(
         &self,
-        card_id: &str,
+        card_id: impl AsRef<str>,
     ) -> Result<RetrieveCardResponse, SquareApiError> {
-        let url = format!("{}/{}", &self.url(), card_id);
+        let url = format!("{}/{}", &self.url(), card_id.as_ref());
         let response = self.http_client.get(&url).await?;
 
         response.deserialize().await

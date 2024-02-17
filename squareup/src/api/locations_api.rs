@@ -65,9 +65,9 @@ impl LocationsApi {
     /// location](https://developer.squareup.com/docs/locations-api#about-the-main-location).
     pub async fn retrieve_location(
         &self,
-        location_id: &str,
+        location_id: impl AsRef<str>,
     ) -> Result<RetrieveLocationResponse, SquareApiError> {
-        let url = format!("{}/{}", &self.url(), location_id);
+        let url = format!("{}/{}", &self.url(), location_id.as_ref());
         let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
@@ -76,10 +76,10 @@ impl LocationsApi {
     /// Updates a [location](https://developer.squareup.com/docs/locations-api).
     pub async fn update_location(
         &self,
-        location_id: &str,
+        location_id: impl AsRef<str>,
         body: &UpdateLocationRequest,
     ) -> Result<UpdateLocationResponse, SquareApiError> {
-        let url = format!("{}/{}", &self.url(), location_id);
+        let url = format!("{}/{}", &self.url(), location_id.as_ref());
         let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await

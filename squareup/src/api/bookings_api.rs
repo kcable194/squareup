@@ -144,9 +144,13 @@ impl BookingsApi {
     /// Permissions:AppointmentsBusinessSettingsRead
     pub async fn retrieve_location_booking_profile(
         &self,
-        location_id: &str,
+        location_id: impl AsRef<str>,
     ) -> Result<RetrieveLocationBookingProfileResponse, SquareApiError> {
-        let url = format!("{}/location-booking-profiles/{location_id}", &self.url());
+        let url = format!(
+            "{}/location-booking-profiles/{}",
+            &self.url(),
+            location_id.as_ref()
+        );
         let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
@@ -184,12 +188,12 @@ impl BookingsApi {
     /// Permissions:AppointmentsBusinessSettingsRead
     pub async fn retrieve_team_member_booking_profile(
         &self,
-        team_member_id: &str,
+        team_member_id: impl AsRef<str>,
     ) -> Result<RetrieveTeamMemberBookingProfileResponse, SquareApiError> {
         let url = format!(
             "{}/team-member-booking-profiles/{}",
             &self.url(),
-            team_member_id
+            team_member_id.as_ref()
         );
         let response = self.http_client.get(&url).await?;
 
@@ -204,9 +208,9 @@ impl BookingsApi {
     /// Permissions:AppointmentsRead
     pub async fn retrieve_booking(
         &self,
-        booking_id: &str,
+        booking_id: impl AsRef<str>,
     ) -> Result<RetrieveBookingResponse, SquareApiError> {
-        let url = format!("{}/{booking_id}", &self.url());
+        let url = format!("{}/{}", &self.url(), booking_id.as_ref());
         let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
@@ -223,10 +227,10 @@ impl BookingsApi {
     /// Permissions:AppointmentsWrite
     pub async fn update_booking(
         &self,
-        booking_id: &str,
+        booking_id: impl AsRef<str>,
         body: &UpdateBookingRequest,
     ) -> Result<UpdateBookingResponse, SquareApiError> {
-        let url = format!("{}/{booking_id}", &self.url());
+        let url = format!("{}/{}", &self.url(), booking_id.as_ref());
         let response = self.http_client.put(&url, body).await?;
 
         response.deserialize().await
@@ -243,10 +247,10 @@ impl BookingsApi {
     /// Permissions:AppointmentsWrite
     pub async fn cancel_booking(
         &self,
-        booking_id: &str,
+        booking_id: impl AsRef<str>,
         body: &CancelBookingRequest,
     ) -> Result<CancelBookingResponse, SquareApiError> {
-        let url = format!("{}/{booking_id}/cancel", &self.url());
+        let url = format!("{}/{}/cancel", &self.url(), booking_id.as_ref());
         let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await

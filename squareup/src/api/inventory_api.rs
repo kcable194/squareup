@@ -44,9 +44,9 @@ impl InventoryApi {
     /// Returns the InventoryAdjustment object with the provided adjustment id.
     pub async fn retrieve_inventory_adjustment(
         &self,
-        adjustment_id: &str,
+        adjustment_id: impl AsRef<str>,
     ) -> Result<RetrieveInventoryAdjustmentResponse, SquareApiError> {
-        let url = format!("{}/{}", &self.url(), adjustment_id);
+        let url = format!("{}/{}", &self.url(), adjustment_id.as_ref());
         let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
@@ -92,9 +92,13 @@ impl InventoryApi {
     /// Returns the InventoryPhysicalCount object with the provided physical_count_id.
     pub async fn retrieve_inventory_physical_count(
         &self,
-        physical_count_id: &str,
+        physical_count_id: impl AsRef<str>,
     ) -> Result<RetrieveInventoryPhysicalCountResponse, SquareApiError> {
-        let url = format!("{}/physical-counts/{}", &self.url(), physical_count_id);
+        let url = format!(
+            "{}/physical-counts/{}",
+            &self.url(),
+            physical_count_id.as_ref()
+        );
         let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
@@ -103,9 +107,9 @@ impl InventoryApi {
     /// Returns the InventoryTransfer object with the provided transfer_id.
     pub async fn retrieve_inventory_transfer(
         &self,
-        transfer_id: &str,
+        transfer_id: impl AsRef<str>,
     ) -> Result<RetrieveInventoryTransferResponse, SquareApiError> {
-        let url = format!("{}/transfers/{}", &self.url(), transfer_id);
+        let url = format!("{}/transfers/{}", &self.url(), transfer_id.as_ref());
         let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
@@ -114,13 +118,13 @@ impl InventoryApi {
     /// Retrieves the current calculated stock count for a given CatalogObject at a given set of Locations.
     pub async fn retrieve_inventory_count(
         &self,
-        catalog_object_id: &str,
+        catalog_object_id: impl AsRef<str>,
         params: RetrieveInventoryCountParams,
     ) -> Result<RetrieveInventoryCountResponse, SquareApiError> {
         let url = format!(
             "{}/{}{}",
             &self.url(),
-            catalog_object_id,
+            catalog_object_id.as_ref(),
             params.to_query_string()
         );
         let response = self.http_client.get(&url).await?;

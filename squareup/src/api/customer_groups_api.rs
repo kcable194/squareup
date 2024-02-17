@@ -68,9 +68,9 @@ impl CustomerGroupsApi {
     /// Deletes a customer group as identified by the `group_id` value.
     pub async fn delete_customer_group(
         &self,
-        group_id: &str,
+        group_id: impl AsRef<str>,
     ) -> Result<DeleteCustomerGroupResponse, SquareApiError> {
-        let url = format!("{}/{}", &self.url(), group_id);
+        let url = format!("{}/{}", &self.url(), group_id.as_ref());
         let response = self.http_client.delete(&url).await?;
 
         response.deserialize().await
@@ -79,9 +79,9 @@ impl CustomerGroupsApi {
     /// Retrieves a specific customer group as identified by the `group_id` value.
     pub async fn retrieve_customer_group(
         &self,
-        group_id: &str,
+        group_id: impl AsRef<str>,
     ) -> Result<RetrieveCustomerGroupResponse, SquareApiError> {
-        let url = format!("{}/{}", &self.url(), group_id);
+        let url = format!("{}/{}", &self.url(), group_id.as_ref());
         let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
@@ -89,10 +89,10 @@ impl CustomerGroupsApi {
 
     pub async fn update_customer_group(
         &self,
-        group_id: &str,
+        group_id: impl AsRef<str>,
         body: &UpdateCustomerGroupRequest,
     ) -> Result<UpdateCustomerGroupResponse, SquareApiError> {
-        let url = format!("{}/{}", &self.url(), group_id);
+        let url = format!("{}/{}", &self.url(), group_id.as_ref());
         let response = self.http_client.put(&url, body).await?;
 
         response.deserialize().await

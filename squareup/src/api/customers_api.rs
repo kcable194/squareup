@@ -103,13 +103,13 @@ impl CustomersApi {
     /// ID of the newly created profile.
     pub async fn delete_customer(
         &self,
-        customer_id: &str,
+        customer_id: impl AsRef<str>,
         params: &DeleteCustomerParameters,
     ) -> Result<DeleteCustomerResponse, SquareApiError> {
         let url = format!(
             "{}/{}{}",
             &self.url(),
-            customer_id,
+            customer_id.as_ref(),
             params.to_query_string()
         );
         let response = self.http_client.delete(&url).await?;
@@ -120,9 +120,9 @@ impl CustomersApi {
     /// Returns details for a single [Customer].
     pub async fn retrieve_customer(
         &self,
-        customer_id: &str,
+        customer_id: impl AsRef<str>,
     ) -> Result<RetrieveCustomerResponse, SquareApiError> {
-        let url = format!("{}/{}", &self.url(), customer_id);
+        let url = format!("{}/{}", &self.url(), customer_id.as_ref());
         let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
@@ -146,10 +146,10 @@ impl CustomersApi {
     /// API](https://developer.squareup.com/reference/square/giftcards-api).
     pub async fn update_customer(
         &self,
-        customer_id: &str,
+        customer_id: impl AsRef<str>,
         body: &UpdateCustomerRequest,
     ) -> Result<UpdateCustomerResponse, SquareApiError> {
-        let url = format!("{}/{}", &self.url(), customer_id);
+        let url = format!("{}/{}", &self.url(), customer_id.as_ref());
         let response = self.http_client.put(&url, body).await?;
 
         response.deserialize().await
@@ -161,10 +161,15 @@ impl CustomersApi {
     /// identified by the group_id value.
     pub async fn remove_group_from_customer(
         &self,
-        customer_id: &str,
-        group_id: &str,
+        customer_id: impl AsRef<str>,
+        group_id: impl AsRef<str>,
     ) -> Result<RemoveGroupFromCustomerResponse, SquareApiError> {
-        let url = format!("{}/{}/groups/{}", &self.url(), customer_id, group_id);
+        let url = format!(
+            "{}/{}/groups/{}",
+            &self.url(),
+            customer_id.as_ref(),
+            group_id.as_ref()
+        );
         let response = self.http_client.delete(&url).await?;
 
         response.deserialize().await
@@ -177,10 +182,15 @@ impl CustomersApi {
     /// the group_id value.
     pub async fn add_group_to_customer(
         &self,
-        customer_id: &str,
-        group_id: &str,
+        customer_id: impl AsRef<str>,
+        group_id: impl AsRef<str>,
     ) -> Result<AddGroupToCustomerResponse, SquareApiError> {
-        let url = format!("{}/{}/groups/{}", &self.url(), customer_id, group_id);
+        let url = format!(
+            "{}/{}/groups/{}",
+            &self.url(),
+            customer_id.as_ref(),
+            group_id.as_ref()
+        );
         let response = self.http_client.empty_put(&url).await?;
 
         response.deserialize().await
