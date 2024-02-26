@@ -20,7 +20,7 @@ use crate::{
     SquareClient,
 };
 
-const DEFAULT_URI: &str = "/online-checkout/payment-links";
+const DEFAULT_URI: &str = "/online-checkout";
 
 /// The Checkout API lets developers create and delete Square-hosted checkout links.
 pub struct CheckoutApi {
@@ -39,6 +39,66 @@ impl CheckoutApi {
         }
     }
 
+    /// Retrieves the location-level settings for a Square-hosted checkout page.
+    /// Permissions:MERCHANT_PROFILE_READ
+    pub async fn retrieve_location_settings(
+        &self,
+        location_id: impl AsRef<str>,
+    ) -> Result<RetrieveLocationSettingsResponse, SquareApiError> {
+        let url = format!("{}/location-settings/{}", &self.url(), location_id.as_ref());
+        let response = self.client.get(&url).await?;
+
+        response.deserialize().await
+    }
+
+    /// Updates the location-level settings for a Square-hosted checkout page.
+    /// Permissions:MERCHANT_PROFILE_WRITE, MERCHANT_PROFILE_READ
+    pub async fn update_location_settings(
+        &self,
+        location_id: impl AsRef<str>,
+        body: &UpdateLocationSettingsRequest,
+    ) -> Result<UpdateLocationSettingsResponse, SquareApiError> {
+        let url = format!("{}/location-settings/{}", &self.url(), location_id.as_ref());
+        let response = self.client.put(&url, body).await?;
+
+        response.deserialize().await
+    }
+
+    /// Retrieves the merchant-level settings for a Square-hosted checkout page.
+    /// Permissions:PAYMENT_METHODS_READ, MERCHANT_PROFILE_READ
+    pub async fn retrieve_merchant_settings(
+        &self,
+    ) -> Result<RetrieveMerchantSettingsResponse, SquareApiError> {
+        let url = format!("{}/merchant-settings", &self.url());
+        let response = self.client.get(&url).await?;
+
+        response.deserialize().await
+    }
+
+    /// Updates the merchant-level settings for a Square-hosted checkout page.
+    /// Permissions:MERCHANT_PROFILE_WRITE, PAYMENT_METHODS_READ, MERCHANT_PROFILE_READ
+    pub async fn update_merchant_settings(
+        &self,
+        body: &UpdateMerchantSettingsRequest,
+    ) -> Result<UpdateMerchantSettingsResponse, SquareApiError> {
+        let url = format!("{}/merchant-settings", &self.url());
+        let response = self.client.put(&url, body).await?;
+
+        response.deserialize().await
+    }
+
+    /// Lists all payment links.
+    /// Permissions:ORDERS_READ
+    pub async fn list_payment_links(
+        &self,
+        params: &ListPaymentLinksParameters,
+    ) -> Result<CreatePaymentLinkResponse, SquareApiError> {
+        let url = format!("{}/payment-links{}", &self.url(), params.to_query_string());
+        let response = self.client.get(&url).await?;
+
+        response.deserialize().await
+    }
+
     /// Creates a Square-hosted checkout page.
     ///
     /// Applications can share the resulting payment link with their buyer to pay for goods and services.
@@ -46,18 +106,48 @@ impl CheckoutApi {
         &self,
         body: &CreatePaymentLinkRequest,
     ) -> Result<CreatePaymentLinkResponse, SquareApiError> {
-        let response = self.client.post(&self.url(), body).await?;
+        let url = format!("{}/payment-links", &self.url());
+        let response = self.client.post(&url, body).await?;
 
         response.deserialize().await
     }
 
     /// Deletes a payment link.
-    pub async fn delete_payment_link<T: ToString>(
+    pub async fn delete_payment_link(
         &self,
-        id: T,
+        id: impl AsRef<str>,
     ) -> Result<DeletePaymentLinkResponse, SquareApiError> {
-        let url = format!("{}/{}", &self.url(), id.to_string());
+        let url = format!("{}/payment-links/{}", &self.url(), id.as_ref());
         let response = self.client.delete(&url).await?;
+
+        response.deserialize().await
+    }
+
+    /// Retrieves a payment link.
+    /// Permissions:ORDERS_READ
+    pub async fn retrieve_payment_link(
+        &self,
+        id: impl AsRef<str>,
+    ) -> Result<RetrievePaymentLinkResponse, SquareApiError> {
+        let url = format!("{}/payment-links/{}", &self.url(), id.as_ref());
+        let response = self.client.get(&url).await?;
+
+        response.deserialize().await
+    }
+
+    /// Updates a payment link.
+    ///
+    /// You can update the payment_link fields such as description, checkout_options, and
+    /// pre_populated_data. You cannot update other fields such as the order_id, version, URL, or
+    /// timestamp field.
+    /// Permissions:PAYMENTS_WRITE, ORDERS_READ, ORDERS_WRITE
+    pub async fn update_payment_link(
+        &self,
+        id: impl AsRef<str>,
+        body: &UpdatePaymentLinkRequest,
+    ) -> Result<UpdatePaymentLinkResponse, SquareApiError> {
+        let url = format!("{}/payment-links/{}", &self.url(), id.as_ref());
+        let response = self.client.put(&url, body).await?;
 
         response.deserialize().await
     }
