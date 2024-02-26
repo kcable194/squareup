@@ -12,4 +12,9 @@ pub enum OrderFulfillmentType {
     Shipment,
     /// A courier to deliver the fulfillment.
     Delivery,
+    /// A digital order of intangible product
+    /// Warning: Square's documentation is lacking this variant in many places!
+    /// Only found (as of 2/26/24) in example response here:
+    /// https://developer.squareup.com/reference/square/checkout-api/create-payment-link
+    Digital,
 }

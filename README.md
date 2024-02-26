@@ -112,6 +112,7 @@ So far, we have the following APIs wrapped in the Rust Square API Client:
 - [Bookings](https://developer.squareup.com/reference/square/bookings-api)
 - [Cards](https://developer.squareup.com/reference/square/cards-api)
 - [Catalog](https://developer.squareup.com/reference/square/catalog-api)
+- [Checkout](https://developer.squareup.com/reference/square/checkout-api)
 - [Customer Groups](https://developer.squareup.com/reference/square/customer-groups-api)
 - [Customer Segments](https://developer.squareup.com/reference/square/customer-segments-api)
 - [Customers](https://developer.squareup.com/reference/square/customers-api)
@@ -128,6 +129,7 @@ So far, we have the following APIs wrapped in the Rust Square API Client:
 - [Team](https://developer.squareup.com/reference/square/team-api)
 - [Webhook Subscriptions](https://developer.squareup.com/reference/square/webhook-subscriptions-api)
   - [Bookings](https://developer.squareup.com/reference/square/bookings-api/webhooks)
+  - [Checkout](https://developer.squareup.com/reference/square/checkout-api/webhooks)
   - [Locations](https://developer.squareup.com/reference/square/locations-api/webhooks)
   - [OAuth](https://developer.squareup.com/reference/square/o-auth-api/webhooks)
   - [Team](https://developer.squareup.com/reference/square/team-api/webhooks)
@@ -138,7 +140,6 @@ So far, we have the following APIs wrapped in the Rust Square API Client:
 Future versions of this crate will implement the following APIs:
 - [Bank Accounts](https://developer.squareup.com/reference/square/bank-accounts-api)
 - [Cash Drawers](https://developer.squareup.com/reference/square/cash-drawers-api)
-- [Checkout](https://developer.squareup.com/reference/square/checkout-api)
 - [Customer Custom Attributes](https://developer.squareup.com/reference/square/customer-custom-attributes-api)
 - [Devices](https://developer.squareup.com/reference/square/devices-api)
 - [Disputes](https://developer.squareup.com/reference/square/disputes-api)

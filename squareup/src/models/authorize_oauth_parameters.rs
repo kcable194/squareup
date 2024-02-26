@@ -59,7 +59,7 @@ impl Display for AuthorizeOAuthParameters {
             for permission in scope {
                 scope_string_vec.push(serde_json::to_string(permission).unwrap());
             }
-            params.push(format!("scope={}", scope_string_vec.join(" ")));
+            params.push(format!("scope={}", scope_string_vec.join(" ")).replace('\"', ""));
         }
 
         if let Some(locale) = &self.locale {
