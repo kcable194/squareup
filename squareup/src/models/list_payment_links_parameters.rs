@@ -18,7 +18,7 @@ pub struct ListPaymentLinksParameters {
 
 impl ListPaymentLinksParameters {
     pub fn to_query_string(&self) -> String {
-        self.to_string().replace('\"', "")
+        self.to_string()
     }
 }
 

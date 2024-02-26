@@ -34,7 +34,7 @@ pub struct ListCatalogParameters {
 
 impl ListCatalogParameters {
     pub fn to_query_string(&self) -> String {
-        self.to_string().replace('\"', "")
+        self.to_string()
     }
 }
 
@@ -58,7 +58,7 @@ impl Display for ListCatalogParameters {
                     .iter()
                     .map(|t| serde_json::to_string(&t).unwrap())
                     .collect();
-                params.push(format!("types={}", string_types.join(",")));
+                params.push(format!("types={}", string_types.join(",").replace('\"', "")));
             }
         }
 
