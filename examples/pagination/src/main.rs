@@ -11,7 +11,7 @@ async fn main() {
     let config = Configuration {
         environment: Environment::Production,
         http_client_config: HttpClientConfiguration::default(),
-        base_uri: BaseUri::Default,
+        base_uri: BaseUri::V2,
     };
 
     let square_client: SquareClient = SquareClient::try_new(config).unwrap();

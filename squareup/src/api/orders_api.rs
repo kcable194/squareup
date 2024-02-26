@@ -124,9 +124,9 @@ impl OrdersApi {
     /// Retrieves an [Order] by ID.
     pub async fn retrieve_order(
         &self,
-        order_id: &str,
+        order_id: impl AsRef<str>,
     ) -> Result<RetrieveOrderResponse, SquareApiError> {
-        let url = format!("{}/{}", &self.url(), order_id);
+        let url = format!("{}/{}", &self.url(), order_id.as_ref());
         let response = self.http_client.get(&url).await?;
 
         response.deserialize().await
@@ -149,10 +149,10 @@ impl OrdersApi {
     /// To pay for an order, see Pay for Orders.
     pub async fn update_order(
         &self,
-        order_id: &str,
+        order_id: impl AsRef<str>,
         body: &UpdateOrderRequest,
     ) -> Result<UpdateOrderResponse, SquareApiError> {
-        let url = format!("{}/{}", &self.url(), order_id);
+        let url = format!("{}/{}", &self.url(), order_id.as_ref());
         let response = self.http_client.put(&url, body).await?;
 
         response.deserialize().await
@@ -175,10 +175,10 @@ impl OrdersApi {
     ///   Using a delayed capture payment with `PayOrder` completes the approved payment.
     pub async fn pay_order(
         &self,
-        order_id: &str,
+        order_id: impl AsRef<str>,
         body: &PayOrderRequest,
     ) -> Result<PayOrderResponse, SquareApiError> {
-        let url = format!("{}/{}/pay", &self.url(), order_id);
+        let url = format!("{}/{}/pay", &self.url(), order_id.as_ref());
         let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await

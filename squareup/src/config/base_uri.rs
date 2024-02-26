@@ -1,11 +1,11 @@
 //! Square major api version to use
 
-const DEFAULT_URI: &str = "/v2";
+const V2_URI: &str = "/v2";
 
 /// Identifies square major api version via base uri
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub enum BaseUri {
-    Default,
+    V2,
     Custom(String),
 }
 
@@ -13,7 +13,7 @@ impl BaseUri {
     /// Gets the base Square API URL for this environment
     pub fn get_base_uri(&self) -> String {
         match self {
-            BaseUri::Default => String::from(DEFAULT_URI),
+            BaseUri::V2 => String::from(V2_URI),
             BaseUri::Custom(custom_uri) => custom_uri.to_owned(),
         }
     }
@@ -22,6 +22,6 @@ impl BaseUri {
 impl Default for BaseUri {
     /// Default is the default uri
     fn default() -> Self {
-        Self::Default
+        Self::V2
     }
 }

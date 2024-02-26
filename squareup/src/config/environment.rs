@@ -6,8 +6,7 @@ const PRODUCTION_URL: &str = "https://connect.squareup.com";
 const SANDBOX_URL: &str = "https://connect.squareupsandbox.com";
 
 /// Identifies the Square environment in which this app instance is operating
-#[derive(Clone, Debug, Eq, PartialEq, Deserialize, Serialize)]
-#[serde(rename_all = "UPPERCASE")]
+#[derive(Clone, Debug, Eq, PartialEq)]
 pub enum Environment {
     Production,
     Sandbox,

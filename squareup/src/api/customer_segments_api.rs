@@ -53,9 +53,9 @@ impl CustomerSegmentsApi {
     /// Retrieves a specific customer segment as identified by the `segment_id` value.
     pub async fn retrieve_customer_segment(
         &self,
-        segment_id: &str,
+        segment_id: impl AsRef<str>,
     ) -> Result<RetrieveCustomerSegmentResponse, SquareApiError> {
-        let url = format!("{}/{}", &self.url(), segment_id);
+        let url = format!("{}/{}", &self.url(), segment_id.as_ref());
         let response = self.http_client.get(&url).await?;
 
         response.deserialize().await

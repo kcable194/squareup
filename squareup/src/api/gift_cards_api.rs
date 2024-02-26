@@ -94,10 +94,10 @@ impl GiftCardsApi {
     /// `gift_card_id`: The ID of the gift card to be linked.
     pub async fn link_customer_to_gift_card(
         &self,
-        gift_card_id: &str,
+        gift_card_id: impl AsRef<str>,
         body: &LinkCustomerToGiftCardRequest,
     ) -> Result<LinkCustomerToGiftCardResponse, SquareApiError> {
-        let url = format!("{}/{}/link-customer", &self.url(), gift_card_id);
+        let url = format!("{}/{}/link-customer", &self.url(), gift_card_id.as_ref());
         let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await
@@ -108,10 +108,10 @@ impl GiftCardsApi {
     /// `gift_card_id`: The ID of the gift card to be linked.
     pub async fn unlink_customer_from_gift_card(
         &self,
-        gift_card_id: &str,
+        gift_card_id: impl AsRef<str>,
         body: &UnlinkCustomerFromGiftCardRequest,
     ) -> Result<UnlinkCustomerFromGiftCardResponse, SquareApiError> {
-        let url = format!("{}/{}/unlink-customer", &self.url(), gift_card_id);
+        let url = format!("{}/{}/unlink-customer", &self.url(), gift_card_id.as_ref());
         let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await
@@ -122,9 +122,9 @@ impl GiftCardsApi {
     /// `id`: The ID of the gift card to retrieve.
     pub async fn retrieve_gift_card(
         &self,
-        id: &str,
+        id: impl AsRef<str>,
     ) -> Result<RetrieveGiftCardResponse, SquareApiError> {
-        let url = format!("{}/{}", &self.url(), id);
+        let url = format!("{}/{}", &self.url(), id.as_ref());
         let response = self.http_client.get(&url).await?;
 
         response.deserialize().await

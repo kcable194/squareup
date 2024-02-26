@@ -110,10 +110,10 @@ impl OAuthApi {
     /// expired or not a valid access token, the endpoint returns an UNAUTHORIZED error.
     pub async fn retrieve_token_status(
         &self,
-        access_token: &str,
+        access_token: impl AsRef<str>,
     ) -> Result<RetrieveTokenStatusResponse, SquareApiError> {
         let url = format!("{}/token", self.url());
-        let header_value = HeaderValue::try_from(format!("Bearer {}", access_token))
+        let header_value = HeaderValue::try_from(format!("Bearer {}", access_token.as_ref()))
             .map_err(|e| SquareApiError::new(e.to_string().as_str()))?;
         let response = self
             .http_client
