@@ -1,6 +1,6 @@
 //! Model struct for InventoryCount type
 
-use serde::{Deserialize, Deserializer, Serialize};
+use serde::{Deserialize, Serialize};
 
 use super::enums::InventoryState;
 

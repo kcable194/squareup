@@ -1,7 +1,5 @@
 //! Square environment in which to operate
 
-use serde::{Deserialize, Serialize};
-
 const PRODUCTION_URL: &str = "https://connect.squareup.com";
 const SANDBOX_URL: &str = "https://connect.squareupsandbox.com";
 

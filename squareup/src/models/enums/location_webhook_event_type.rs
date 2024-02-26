@@ -7,18 +7,18 @@ use std::fmt::{Display, Formatter};
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 pub enum LocationWebhookEventType {
     #[serde(rename = "location.created")]
-    Created,
+    LocationCreated,
     #[serde(rename = "location.updated")]
-    Updated,
+    LocationUpdated,
 }
 
 impl Display for LocationWebhookEventType {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
-            LocationWebhookEventType::Created => {
+            LocationWebhookEventType::LocationCreated => {
                 write!(f, "location.created")
             }
-            LocationWebhookEventType::Updated => {
+            LocationWebhookEventType::LocationUpdated => {
                 write!(f, "location.updated")
             }
         }

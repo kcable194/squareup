@@ -7,13 +7,13 @@ use std::fmt::{Display, Formatter};
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 pub enum OnlineCheckoutLocationSettingsEventType {
     #[serde(rename = "online_checkout.location_settings.updated")]
-    Updated,
+    OnlineCheckoutLocationSettingsUpdated,
 }
 
 impl Display for OnlineCheckoutLocationSettingsEventType {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
-            OnlineCheckoutLocationSettingsEventType::Updated => {
+            OnlineCheckoutLocationSettingsEventType::OnlineCheckoutLocationSettingsUpdated => {
                 write!(f, "online_checkout.location_settings.updated")
             }
         }
