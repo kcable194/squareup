@@ -1,18 +1,18 @@
-//! Response body struct for the location.updated event webhook
+//! Response body struct for the location event webhook
 
 use crate::models::enums::LocationWebhookEventType;
 use serde::{Deserialize, Serialize};
 
-use super::{DateTime, LocationUpdatedEventData};
+use super::{DateTime, LocationEventData};
 
-/// This is a model struct for LocationUpdatedWebhookResponse type.
+/// This is a model struct for LocationEventWebhookResponse type.
 #[derive(Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
-pub struct LocationUpdatedWebhookResponse {
+pub struct LocationEventWebhookResponse {
     /// The ID of the target seller associated with the event.
     pub merchant_id: String,
     /// The location id.
     pub location_id: String,
-    /// The type of this event. The value is "location.updated".
+    /// The type of this event.
     pub r#type: LocationWebhookEventType,
     /// A unique ID for the event.
     pub event_id: String,
@@ -22,5 +22,5 @@ pub struct LocationUpdatedWebhookResponse {
     /// Pacific Standard Time with UTC offset: 2020-01-25T18:25:34-08:00
     pub created_at: DateTime,
     /// The data associated with the event.
-    pub data: LocationUpdatedEventData,
+    pub data: LocationEventData,
 }

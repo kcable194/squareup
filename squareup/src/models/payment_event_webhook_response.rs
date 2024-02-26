@@ -4,7 +4,7 @@ use super::{enums::PaymentEventPaymentEventType, PaymentEventData};
 
 /// Published when a Payment
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
-pub struct PaymentEvent {
+pub struct PaymentEventWebhookResponse {
     /// The ID of the target merchant associated with the event.
     merchant_id: Option<String>,
 

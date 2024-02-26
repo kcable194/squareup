@@ -7,18 +7,18 @@ use std::fmt::{Display, Formatter};
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 pub enum TeamMemberWebhookEventType {
     #[serde(rename = "team_member.created")]
-    Created,
+    TeamMemberCreated,
     #[serde(rename = "team_member.updated")]
-    Updated,
+    TeamMemberUpdated,
 }
 
 impl Display for TeamMemberWebhookEventType {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
-            TeamMemberWebhookEventType::Created => {
+            TeamMemberWebhookEventType::TeamMemberCreated => {
                 write!(f, "team_member.created")
             }
-            TeamMemberWebhookEventType::Updated => {
+            TeamMemberWebhookEventType::TeamMemberUpdated => {
                 write!(f, "team_member.updated")
             }
         }
