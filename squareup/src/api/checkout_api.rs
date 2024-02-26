@@ -10,6 +10,12 @@
 //! First time Square developers should utilize the payment link endpoints to create, update, retrieve, and
 //! list checkout pages.
 
+use crate::models::{
+    ListPaymentLinkResponse, ListPaymentLinksParameters, RetrieveLocationSettingsResponse,
+    RetrieveMerchantSettingsResponse, RetrievePaymentLinkResponse, UpdateLocationSettingsRequest,
+    UpdateLocationSettingsResponse, UpdateMerchantSettingsRequest, UpdateMerchantSettingsResponse,
+    UpdatePaymentLinkRequest, UpdatePaymentLinkResponse,
+};
 use crate::{
     config::Configuration,
     http::client::HttpClient,
@@ -92,7 +98,7 @@ impl CheckoutApi {
     pub async fn list_payment_links(
         &self,
         params: &ListPaymentLinksParameters,
-    ) -> Result<CreatePaymentLinkResponse, SquareApiError> {
+    ) -> Result<ListPaymentLinkResponse, SquareApiError> {
         let url = format!("{}/payment-links{}", &self.url(), params.to_query_string());
         let response = self.client.get(&url).await?;
 
