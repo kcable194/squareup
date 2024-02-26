@@ -58,7 +58,10 @@ impl Display for ListCatalogParameters {
                     .iter()
                     .map(|t| serde_json::to_string(&t).unwrap())
                     .collect();
-                params.push(format!("types={}", string_types.join(",").replace('\"', "")));
+                params.push(format!(
+                    "types={}",
+                    string_types.join(",").replace('\"', "")
+                ));
             }
         }
 
