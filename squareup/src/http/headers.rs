@@ -200,7 +200,7 @@ mod tests {
         );
         assert_eq!(
             headers.headers.get("Square-Version"),
-            Some(&String::from("2024-01-18"))
+            Some(&String::from("2024-02-22"))
         );
         assert_eq!(
             headers.headers.get("accept"),

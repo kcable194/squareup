@@ -110,7 +110,7 @@ pub struct Payment {
     /// Payments](https://developer.squareup.com/docs/payments-api/take-payments/afterpay-payments).
     pub buy_now_pay_later_details: Option<BuyNowPayLaterDetails>,
     /// **Read only** Details about a Square Account payment. The details are only populated if the
-    /// source_type is SQUARE_ACCOUNT.
+    /// source_type is SquareAccount.
     pub square_account_details: Option<SquareAccountDetails>,
     /// **Read only** The ID of the location associated with the payment.
     pub location_id: Option<String>,

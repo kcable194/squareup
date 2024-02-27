@@ -34,7 +34,7 @@ for local scripts (if even then).
 You also need to set the `SQUARE_ENVIRONMENT` environment variable to either `SANDBOX` or `PRODUCTION`.
 If a value is not set, the default is `SANDBOX`.
 
-Other default values `2024-01-18` API version, a base URI of `/v2`, a timeout of 60 seconds and no HTTP Client retries.
+Other default values include the `2024-02-22` API version, a base URI of `/v2`, a timeout of 60 seconds and no HTTP Client retries.
 
 
 The standard configuration for production is shown below:
@@ -61,7 +61,7 @@ use squareup::http::Headers;
 let mut headers = Headers::default();
 headers.set_user_agent("Some User Agent String");
 headers.insert("X_SOME_CUSTOM_HEADER", "custom_header_value");
-// Not recommended, only do this if you are running local scripts
+// Not recommended to set auth header, only do this if you are running local scripts
 headers.set_authorization("YOUR_API_TOKEN".to_string());
 
 let config = Configuration {
@@ -132,6 +132,7 @@ So far, we have the following APIs wrapped in the Rust Square API Client:
   - [Checkout](https://developer.squareup.com/reference/square/checkout-api/webhooks)
   - [Locations](https://developer.squareup.com/reference/square/locations-api/webhooks)
   - [OAuth](https://developer.squareup.com/reference/square/o-auth-api/webhooks)
+  - [Payments](https://developer.squareup.com/reference/square/payments-api/webhooks)
   - [Team](https://developer.squareup.com/reference/square/team-api/webhooks)
 
 

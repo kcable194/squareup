@@ -1,15 +1,12 @@
-//! Model struct for CreateCustomerRequest type
+//! Model struct for BulkUpdateCustomerData type
 
 use serde::Serialize;
 
 use super::{Address, CustomerTaxIds};
 
-/// This is a model struct for CreateCustomerRequest type
+/// This is a model struct for BulkUpdateCustomerData type
 #[derive(Clone, Debug, Default, Eq, PartialEq, Serialize)]
-pub struct CreateCustomerRequest {
-    /// The idempotency key for the request. For more information, see
-    /// [Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency).
-    pub idempotency_key: Option<String>,
+pub struct BulkUpdateCustomerData {
     /// The given name (that is, the first name) associated with the customer profile.
     pub given_name: Option<String>,
     /// The family name (that is, the last name) associated with the customer profile.
@@ -40,4 +37,9 @@ pub struct CreateCustomerRequest {
     /// Kingdom. For more information, see [Customer tax
     /// IDs](https://developer.squareup.com/docs/customers-api/what-it-does#customer-tax-ids).
     pub tax_ids: Option<CustomerTaxIds>,
+    /// The current version of the customer profile.
+    ///
+    /// As a best practice, you should include this field to enable optimistic concurrency
+    /// control.
+    pub version: Option<i64>,
 }

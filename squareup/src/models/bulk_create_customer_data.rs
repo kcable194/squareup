@@ -1,15 +1,12 @@
-//! Model struct for CreateCustomerRequest type
+//! Model struct for BulkCreateCustomerData type
 
 use serde::Serialize;
 
 use super::{Address, CustomerTaxIds};
 
-/// This is a model struct for CreateCustomerRequest type
+/// This is a model struct for BulkCreateCustomerData type
 #[derive(Clone, Debug, Default, Eq, PartialEq, Serialize)]
-pub struct CreateCustomerRequest {
-    /// The idempotency key for the request. For more information, see
-    /// [Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency).
-    pub idempotency_key: Option<String>,
+pub struct BulkCreateCustomerData {
     /// The given name (that is, the first name) associated with the customer profile.
     pub given_name: Option<String>,
     /// The family name (that is, the last name) associated with the customer profile.
