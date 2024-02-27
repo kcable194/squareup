@@ -10,6 +10,6 @@ pub struct CardEventData {
     pub r#type: String,
     /// The ID of the event data object. Max Length 192
     pub id: String,
-    /// An object containing the booking associated with the event.
+    /// An object containing the card associated with the event.
     pub object: CardEventObject,
 }
