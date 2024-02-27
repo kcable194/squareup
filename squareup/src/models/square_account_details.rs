@@ -3,7 +3,7 @@
 use crate::models::errors::Error;
 use serde::{Deserialize, Serialize};
 
-/// Details about a Square Account payment. The details are only populated if the source_type is SQUARE_ACCOUNT.
+/// Details about a Square Account payment. The details are only populated if the source_type is SquareAccount.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]
 pub struct SquareAccountDetails {
     /// Unique identifier for the payment source used for this payment.

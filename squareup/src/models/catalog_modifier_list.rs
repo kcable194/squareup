@@ -1,5 +1,6 @@
 //! Model struct for CatalogModifierList type.
 
+use crate::models::enums::CatalogModifierListModifierType;
 use serde::{Deserialize, Serialize};
 
 use super::{enums::CatalogModifierListSelectionType, CatalogObject};
@@ -28,4 +29,27 @@ pub struct CatalogModifierList {
     /// The IDs of images associated with this `CatalogModifierList` instance. Currently these
     /// images are not displayed by Square, but are free to be displayed in 3rd party applications.
     pub image_ids: Option<Vec<String>>,
+    /// The type of the modifier.
+    ///
+    /// When this modifier_type value is TEXT, the CatalogModifierList represents a text-based
+    /// modifier. When this modifier_type value is LIST, the CatalogModifierList contains a list
+    /// of CatalogModifier objects.
+    pub modifier_type: Option<CatalogModifierListModifierType>,
+    /// The maximum length, in Unicode points, of the text string of the text-based modifier as
+    /// represented by this CatalogModifierList object with the modifier_type set to TEXT.
+    pub max_length: Option<i32>,
+    /// Whether the text string must be a non-empty string (true) or not (false) for a text-based
+    /// modifier as represented by this CatalogModifierList object with the modifier_type set to
+    /// TEXT.
+    pub text_required: Option<bool>,
+    /// A note for internal use by the business.
+    ///
+    /// For example, for a text-based modifier applied to a T-shirt item, if the buyer-supplied
+    /// text of "Hello, Kitty!" is to be printed on the T-shirt, this internal_name attribute can
+    /// be "Use italic face" as an instruction for the business to follow.
+    ///
+    /// For non text-based modifiers, this internal_name attribute can be used to include SKUs,
+    /// internal codes, or supplemental descriptions for internal use.
+    /// Max Length 512
+    pub internal_name: Option<String>,
 }

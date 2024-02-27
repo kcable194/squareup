@@ -12,4 +12,5 @@ pub enum DestinationType {
     BuyNowPayLater,
     Cash,
     External,
+    SquareAccount,
 }

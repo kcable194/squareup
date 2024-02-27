@@ -54,7 +54,7 @@ pub struct Tender {
     pub buy_now_pay_later_details: Option<TenderBuyNowPayLaterDetails>,
     /// The details of a Square Account tender.
     ///
-    /// This value is present only if the value of type is SQUARE_ACCOUNT.
+    /// This value is present only if the value of type is SquareAccount.
     pub square_account_details: Option<TenderSquareAccountDetails>,
     /// Additional recipients (other than the merchant) receiving a portion of this tender. For
     /// example, fees assessed on the purchase by a third party integration.

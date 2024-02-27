@@ -5,7 +5,10 @@
 //! API to sync contacts between your CRM system and Square.
 
 use crate::models::{
-    AddGroupToCustomerResponse, DeleteCustomerParameters, RemoveGroupFromCustomerResponse,
+    AddGroupToCustomerResponse, BulkCreateCustomersRequest, BulkCreateCustomersResponse,
+    BulkDeleteCustomersRequest, BulkDeleteCustomersResponse, BulkRetrieveCustomersRequest,
+    BulkRetrieveCustomersResponse, BulkUpdateCustomersRequest, BulkUpdateCustomersResponse,
+    DeleteCustomerParameters, RemoveGroupFromCustomerResponse,
 };
 use crate::{
     config::Configuration,
@@ -68,6 +71,74 @@ impl CustomersApi {
         body: &CreateCustomerRequest,
     ) -> Result<CreateCustomerResponse, SquareApiError> {
         let response = self.http_client.post(&self.url(), body).await?;
+
+        response.deserialize().await
+    }
+
+    /// Creates multiple customer profiles for a business.
+    ///
+    /// This endpoint takes a map of individual create requests and returns a map of responses.
+    ///
+    /// You must provide at least one of the following values in each create request:
+    ///
+    /// * `given_name`
+    /// * `family_name`
+    /// * `company_name`
+    /// * `email_address`
+    /// * `phone_number`
+    ///
+    /// Permissions:CUSTOMERS_WRITE
+    pub async fn bulk_create_customers(
+        &self,
+        body: &BulkCreateCustomersRequest,
+    ) -> Result<BulkCreateCustomersResponse, SquareApiError> {
+        let url = format!("{}/bulk-create", &self.url());
+        let response = self.http_client.post(&url, body).await?;
+
+        response.deserialize().await
+    }
+
+    /// Deletes multiple customer profiles.
+    ///
+    /// The endpoint takes a list of customer IDs and returns a map of responses.
+    /// Permissions:CUSTOMERS_WRITE
+    pub async fn bulk_delete_customers(
+        &self,
+        body: &BulkDeleteCustomersRequest,
+    ) -> Result<BulkDeleteCustomersResponse, SquareApiError> {
+        let url = format!("{}/bulk-delete", &self.url());
+        let response = self.http_client.post(&url, body).await?;
+
+        response.deserialize().await
+    }
+
+    /// Retrieves multiple customer profiles.
+    ///
+    /// This endpoint takes a list of customer IDs and returns a map of responses.
+    /// Permissions:CUSTOMERS_READ
+    pub async fn bulk_retrieve_customers(
+        &self,
+        body: &BulkRetrieveCustomersRequest,
+    ) -> Result<BulkRetrieveCustomersResponse, SquareApiError> {
+        let url = format!("{}/bulk-retrieve", &self.url());
+        let response = self.http_client.post(&url, body).await?;
+
+        response.deserialize().await
+    }
+
+    /// Updates multiple customer profiles.
+    ///
+    /// This endpoint takes a map of individual update requests and returns a map of responses.
+    ///
+    /// You cannot use this endpoint to change cards on file. To make changes, use the Cards API
+    /// Use the Cards API to save a credit or debit card on file.Reference or Gift Cards API
+    /// Permissions:CUSTOMERS_WRITE
+    pub async fn bulk_update_customers(
+        &self,
+        body: &BulkUpdateCustomersRequest,
+    ) -> Result<BulkUpdateCustomersResponse, SquareApiError> {
+        let url = format!("{}/bulk-update", &self.url());
+        let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await
     }
