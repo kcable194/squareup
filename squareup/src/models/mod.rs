@@ -70,6 +70,9 @@ mod cancel_payment_by_idempotency_key_response;
 mod cancel_payment_response;
 mod cancel_subscription_response;
 mod card;
+mod card_event_data;
+mod card_event_object;
+mod card_event_webhook_response;
 mod card_payment_details;
 mod card_payment_timeline;
 mod cash_app_details;
@@ -563,6 +566,8 @@ pub use cancel_payment_by_idempotency_key_response::CancelPaymentByIdempotencyKe
 pub use cancel_payment_response::CancelPaymentResponse;
 pub use cancel_subscription_response::CancelSubscriptionResponse;
 pub use card::Card;
+pub use card_event_data::CardEventData;
+pub use card_event_object::CardEventObject;
 pub use card_payment_details::CardPaymentDetails;
 pub use card_payment_timeline::CardPaymentTimeline;
 pub use cash_app_details::CashAppDetails;

@@ -26,6 +26,7 @@ mod card_payment_details_verification_result;
 mod card_prepaid_type;
 mod card_square_product;
 mod card_type;
+mod card_webhook_event_type;
 mod catalog_category_type;
 mod catalog_custom_attribute_definition_app_visibility;
 mod catalog_custom_attribute_definition_seller_visibility;
@@ -169,6 +170,7 @@ pub use card_payment_details_verification_result::CardPaymentDetailsVerification
 pub use card_prepaid_type::CardPrepaidType;
 pub use card_square_product::CardSquareProduct;
 pub use card_type::CardType;
+pub use card_webhook_event_type::CardWebhookEventType;
 pub use catalog_category_type::CatalogCategoryType;
 pub use catalog_custom_attribute_definition_app_visibility::CatalogCustomAttributeDefinitionAppVisibility;
 pub use catalog_custom_attribute_definition_seller_visibility::CatalogCustomAttributeDefinitionSellerVisibility;
