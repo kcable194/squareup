@@ -15,7 +15,7 @@ exclude = ["../examples", "../.github"]
 
 [dependencies]
 async-trait = "0.1.77"
-chrono = { version = "0.4.33", features = ["serde"] }
+chrono = { version = "0.4.34", features = ["serde"] }
 infer = "0.15.0"
 log = "0.4.20"
 reqwest = { version = "0.11.24", features = ["json", "multipart"] }
@@ -24,6 +24,6 @@ reqwest-retry = "0.3.0"
 package_info = "0.1.0"
 package_info_derive = "0.1.0"
 rustc_version_runtime = "0.3.0"
-serde = { version = "1.0.196", features = ["derive"] }
-serde_json = "1.0.113"
-chrono-tz = { version = "0.8.5", features = ["filter-by-regex"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+chrono-tz = { version = "0.8", features = ["filter-by-regex"] }
