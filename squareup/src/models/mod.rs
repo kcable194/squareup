@@ -502,6 +502,9 @@ mod catalog_version_updated_webhook_response;
 mod catalog_event_data;
 mod catalog_version_updated_event_object;
 mod catalog_version_updated_event_catalog_version;
+mod customer_event_webhook_response;
+mod customer_event_data;
+mod customer_event_object;
 
 pub use accepted_payment_methods::AcceptedPaymentMethods;
 pub use ach_details::AchDetails;
@@ -994,3 +997,6 @@ pub use catalog_version_updated_event_object::CatalogVersionUpdatedEventObject;
 pub use catalog_event_data::CatalogEventData;
 pub use catalog_version_updated_webhook_response::CatalogVersionUpdatedWebhookResponse;
 pub use card_event_webhook_response::CardEventWebhookResponse;
+pub use customer_event_data::CustomerEventData;
+pub use customer_event_object::CustomerEventObject;
+pub use customer_event_webhook_response::CustomerEventWebhookResponse;

@@ -144,6 +144,7 @@ mod tender_type;
 mod timezone;
 mod transaction_product;
 mod catalog_webhook_event_type;
+mod customer_webhook_event_type;
 
 pub use ach_details_account_type::AchDetailsAccountType;
 pub use application_details_external_square_product::ApplicationDetailsExternalSquareProduct;
@@ -289,3 +290,4 @@ pub use tender_type::TenderType;
 pub use timezone::Timezone;
 pub use transaction_product::TransactionProduct;
 pub use catalog_webhook_event_type::CatalogWebhookEventType;
+pub use customer_webhook_event_type::CustomerWebhookEventType;
