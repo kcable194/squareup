@@ -141,6 +141,8 @@ So far, we have the following APIs wrapped in the Rust Square API Client:
   - [OAuth](https://developer.squareup.com/reference/square/o-auth-api/webhooks)
   - [Orders](https://developer.squareup.com/reference/square/orders-api/webhooks)
   - [Payments](https://developer.squareup.com/reference/square/payments-api/webhooks)
+  - [Refunds](https://developer.squareup.com/reference/square/refunds-api/webhooks)
+  - [Subscriptions](https://developer.squareup.com/reference/square/subscriptions-api/webhooks)
   - [Team](https://developer.squareup.com/reference/square/team-api/webhooks)
 
 
