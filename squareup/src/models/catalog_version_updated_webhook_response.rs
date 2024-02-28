@@ -1,19 +1,17 @@
-//! Response body struct for the booking event webhook
+//! Response body struct for the catalog version updated event webhook
 
-use crate::models::enums::BookingWebhookEventType;
+use crate::models::enums::CatalogWebhookEventType;
 use serde::{Deserialize, Serialize};
 
-use super::{BookingEventData, DateTime};
+use super::{CatalogEventData, DateTime};
 
-/// This is a model struct for BookingEventWebhookResponse type.
+/// This is a model struct for CatalogVersionUpdatedWebhookResponse type.
 #[derive(Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]
-pub struct BookingEventWebhookResponse {
+pub struct CatalogVersionUpdatedWebhookResponse {
     /// The ID of the target seller associated with the event.
     pub merchant_id: String,
-    /// The location id.
-    pub location_id: Option<String>,
     /// The type of this event.
-    pub r#type: BookingWebhookEventType,
+    pub r#type: CatalogWebhookEventType,
     /// A unique ID for the event.
     pub event_id: String,
     /// Read only The timestamp of when the event was created, in RFC 3339 format.
@@ -22,5 +20,5 @@ pub struct BookingEventWebhookResponse {
     /// Pacific Standard Time with UTC offset: 2020-01-25T18:25:34-08:00
     pub created_at: DateTime,
     /// The data associated with the event.
-    pub data: BookingEventData,
+    pub data: CatalogEventData,
 }

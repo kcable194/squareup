@@ -26,7 +26,7 @@ impl Configuration {
 
 #[cfg(test)]
 mod tests {
-    use crate::config::{BaseUri, Configuration, Environment};
+    use crate::config::{BaseUri, Configuration};
 
     #[test]
     fn get_base_url_default_url() {
