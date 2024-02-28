@@ -48,7 +48,7 @@ impl BookingsApi {
         &self,
         params: &ListBookingsParameters,
     ) -> Result<ListBookingsResponse, SquareApiError> {
-        let url = format!("{}/{}", &self.url(), params.to_query_string());
+        let url = format!("{}{}", &self.url(), params.to_query_string());
         let response = self.http_client.get(&url).await?;
 
         response.deserialize().await

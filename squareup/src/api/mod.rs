@@ -17,6 +17,7 @@ mod payments_api;
 mod refunds_api;
 mod subscriptions_api;
 mod team_api;
+mod webhook_subscriptions_api;
 
 pub use apple_pay_api::ApplePayApi;
 pub use bookings_api::BookingsApi;
