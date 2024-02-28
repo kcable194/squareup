@@ -7,18 +7,18 @@ use std::fmt::{Display, Formatter};
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 pub enum BookingWebhookEventType {
     #[serde(rename = "booking.created")]
-    Created,
+    BookingCreated,
     #[serde(rename = "booking.updated")]
-    Updated,
+    BookingUpdated,
 }
 
 impl Display for BookingWebhookEventType {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
-            BookingWebhookEventType::Created => {
+            BookingWebhookEventType::BookingCreated => {
                 write!(f, "booking.created")
             }
-            BookingWebhookEventType::Updated => {
+            BookingWebhookEventType::BookingUpdated => {
                 write!(f, "booking.updated")
             }
         }
