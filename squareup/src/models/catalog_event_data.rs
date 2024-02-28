@@ -1,7 +1,7 @@
 //! Response body struct for the CatalogEventData type
 
-use serde::{Deserialize, Serialize};
 use crate::models::CatalogVersionUpdatedEventObject;
+use serde::{Deserialize, Serialize};
 
 /// This is a model struct for CatalogEventData type.
 #[derive(Clone, Debug, Default, Serialize, Deserialize, Eq, PartialEq)]

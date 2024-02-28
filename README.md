@@ -133,6 +133,8 @@ So far, we have the following APIs wrapped in the Rust Square API Client:
   - [Catalog](https://developer.squareup.com/reference/square/catalog-api/webhooks)
   - [Checkout](https://developer.squareup.com/reference/square/checkout-api/webhooks)
   - [Customers](https://developer.squareup.com/reference/square/customers-api/webhooks)
+  - [Gift Card Activities](https://developer.squareup.com/reference/square/gift-cards-api/webhooks)
+  - [Gift Cards](https://developer.squareup.com/reference/square/gift-card-activities-api)
   - [Locations](https://developer.squareup.com/reference/square/locations-api/webhooks)
   - [OAuth](https://developer.squareup.com/reference/square/o-auth-api/webhooks)
   - [Payments](https://developer.squareup.com/reference/square/payments-api/webhooks)

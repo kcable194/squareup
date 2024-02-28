@@ -1,7 +1,7 @@
 //! Response body struct for the CatalogVersionUpdatedEventCatalogVersion type
 
-use serde::{Deserialize, Serialize};
 use crate::models::DateTime;
+use serde::{Deserialize, Serialize};
 
 /// This is a model struct for CatalogVersionUpdatedEventCatalogVersion type.
 #[derive(Clone, Debug, Default, Serialize, Deserialize, Eq, PartialEq)]
