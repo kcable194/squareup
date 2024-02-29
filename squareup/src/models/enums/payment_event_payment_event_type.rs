@@ -5,7 +5,6 @@ use std::fmt::{Display, Formatter};
 pub enum PaymentEventPaymentEventType {
     #[serde(rename = "payment.created")]
     PaymentCreated,
-
     #[serde(rename = "payment.updated")]
     PaymentUpdated,
 }

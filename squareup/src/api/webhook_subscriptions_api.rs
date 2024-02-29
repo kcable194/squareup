@@ -10,17 +10,9 @@
 //!     Webhook Subscriptions [https://developer.squareup.com/docs/webhooks/webhook-subscriptions-api]
 
 use crate::{
-    config::Configuration,
-    http::client::HttpClient,
-    models::{
-        errors::SquareApiError, BulkCreateTeamMembersRequest, BulkCreateTeamMembersResponse,
-        BulkUpdateTeamMembersRequest, BulkUpdateTeamMembersResponse, CreateTeamMemberRequest,
-        CreateTeamMemberResponse, RetrieveTeamMemberResponse, RetrieveWageSettingResponse,
-        SearchTeamMembersRequest, SearchTeamMembersResponse, UpdateTeamMemberRequest,
-        UpdateTeamMemberResponse, UpdateWageSettingRequest, UpdateWageSettingResponse,
-    },
-    SquareClient,
+    config::Configuration, http::client::HttpClient, models::errors::SquareApiError, SquareClient,
 };
+use crate::models::ListWebhookEventTypesResponse;
 
 const DEFAULT_URI: &str = "/webhooks";
 

@@ -38,3 +38,4 @@ pub use payments_api::PaymentsApi;
 pub use refunds_api::RefundsApi;
 pub use subscriptions_api::SubscriptionsApi;
 pub use team_api::TeamApi;
+pub use webhook_subscriptions_api::WebhookSubscriptionsApi;
