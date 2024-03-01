@@ -4,10 +4,6 @@
 //! subscriptions. Because Webhook subscriptions are owned by the application and not any one
 //! seller, you cannot use OAuth Access Tokens with the Webhook Subscriptions API. You must use
 //! the application’s personal access token
-//!
-//! For more information, see the following guide the following guide:
-//!
-//!     Webhook Subscriptions [https://developer.squareup.com/docs/webhooks/webhook-subscriptions-api]
 
 use crate::models::{
     CreateWebhookSubscriptionRequest, CreateWebhookSubscriptionResponse,
