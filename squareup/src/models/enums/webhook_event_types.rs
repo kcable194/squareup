@@ -5,12 +5,10 @@ use crate::models::enums::{
     CustomerWebhookEventType, GiftCardActivityWebhookEventType, GiftCardWebhookEventType,
     InventoryWebhookEventType, InvoiceWebhookEventType, LocationWebhookEventType,
     OauthWebhookEventType, OnlineCheckoutLocationSettingsEventType,
-    OnlineCheckoutMerchantSettingsEventType, PaymentEventPaymentEventType, RefundWebhookEventType,
-    SubscriptionWebhookEventType, TeamMemberWebhookEventType,
+    OnlineCheckoutMerchantSettingsEventType, OrderWebhookEventType, PaymentEventPaymentEventType,
+    RefundWebhookEventType, SubscriptionWebhookEventType, TeamMemberWebhookEventType,
 };
-use crate::models::OrderEventWebhookResponse;
 use serde::{Deserialize, Serialize};
-use std::fmt::Display;
 
 /// The types of webhook events
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
@@ -28,7 +26,7 @@ pub enum WebhookEventType {
     OauthAuthorization(OauthWebhookEventType),
     OnlineCheckoutLocationSettings(OnlineCheckoutLocationSettingsEventType),
     OnlineCheckoutMerchantSettings(OnlineCheckoutMerchantSettingsEventType),
-    Order(OrderEventWebhookResponse),
+    Order(OrderWebhookEventType),
     Payment(PaymentEventPaymentEventType),
     Refund(RefundWebhookEventType),
     Subscription(SubscriptionWebhookEventType),
@@ -163,7 +161,7 @@ impl TryFrom<WebhookEventType> for OnlineCheckoutMerchantSettingsEventType {
         }
     }
 }
-impl TryFrom<WebhookEventType> for OrderEventWebhookResponse {
+impl TryFrom<WebhookEventType> for OrderWebhookEventType {
     type Error = &'static str;
 
     fn try_from(w: WebhookEventType) -> Result<Self, Self::Error> {

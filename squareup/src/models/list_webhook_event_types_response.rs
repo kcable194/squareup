@@ -21,8 +21,8 @@ pub struct ListWebhookEventTypesResponse {
 mod tests {
     use crate::models::enums::{
         BookingWebhookEventType, CatalogWebhookEventType, InventoryWebhookEventType,
-        LocationWebhookEventType, PaymentEventPaymentEventType, TeamMemberWebhookEventType,
-        WebhookEventType,
+        InvoiceWebhookEventType, LocationWebhookEventType, PaymentEventPaymentEventType,
+        TeamMemberWebhookEventType, WebhookEventType,
     };
     use crate::models::list_webhook_event_types_response::ListWebhookEventTypesResponse;
     use crate::models::EventTypeMetadata;
@@ -138,12 +138,17 @@ mod tests {
                       "event_type": "team_member.updated",
                       "api_version_introduced": "2021-07-12",
                       "release_status": "PUBLIC"
+                    },
+                    {
+                      "event_type": "invoice.scheduled_charge_failed",
+                      "api_version_introduced": "2021-07-13",
+                      "release_status": "PUBLIC"
                     }
                   ]
                 }
             "#;
 
-        let event_types = Vec::from([
+        let webhook_event_types = Vec::from([
             WebhookEventType::Booking(BookingWebhookEventType::BookingCreated),
             WebhookEventType::CatalogVersion(CatalogWebhookEventType::CatalogVersionUpdated),
             WebhookEventType::Location(LocationWebhookEventType::LocationUpdated),
@@ -152,19 +157,78 @@ mod tests {
 
         let webhook_response = ListWebhookEventTypesResponse {
             errors: None,
-            event_types: Some(event_types),
-            metadata: Some(Vec::from([EventTypeMetadata {
-                event_type: Some(WebhookEventType::TeamMember(
-                    TeamMemberWebhookEventType::TeamMemberUpdated,
-                )),
-                api_version_introduced: Some("2021-07-12".to_string()),
-                release_status: Some("PUBLIC".to_string()),
-            }])),
+            event_types: Some(webhook_event_types.clone()),
+            metadata: Some(Vec::from([
+                EventTypeMetadata {
+                    event_type: Some(WebhookEventType::TeamMember(
+                        TeamMemberWebhookEventType::TeamMemberUpdated,
+                    )),
+                    api_version_introduced: Some("2021-07-12".to_string()),
+                    release_status: Some("PUBLIC".to_string()),
+                },
+                EventTypeMetadata {
+                    event_type: Some(WebhookEventType::Invoice(
+                        InvoiceWebhookEventType::InvoiceScheduledChargeFailed,
+                    )),
+                    api_version_introduced: Some("2021-07-13".to_string()),
+                    release_status: Some("PUBLIC".to_string()),
+                },
+            ])),
         };
 
         let deserialized_enum: ListWebhookEventTypesResponse =
             serde_json::from_str(response_json).unwrap();
 
         assert_eq!(webhook_response, deserialized_enum);
+
+        for (idx, inner) in deserialized_enum
+            .event_types
+            .as_ref()
+            .unwrap()
+            .iter()
+            .enumerate()
+        {
+            let expected_string = match webhook_event_types.get(idx).unwrap() {
+                WebhookEventType::Booking(inner) => inner.to_string(),
+                WebhookEventType::Card(inner) => inner.to_string(),
+                WebhookEventType::CatalogVersion(inner) => inner.to_string(),
+                WebhookEventType::Customer(inner) => inner.to_string(),
+                WebhookEventType::GiftCardActivity(inner) => inner.to_string(),
+                WebhookEventType::GiftCard(inner) => inner.to_string(),
+                WebhookEventType::InventoryCount(inner) => inner.to_string(),
+                WebhookEventType::Invoice(inner) => inner.to_string(),
+                WebhookEventType::Location(inner) => inner.to_string(),
+                WebhookEventType::OauthAuthorization(inner) => inner.to_string(),
+                WebhookEventType::OnlineCheckoutLocationSettings(inner) => inner.to_string(),
+                WebhookEventType::OnlineCheckoutMerchantSettings(inner) => inner.to_string(),
+                WebhookEventType::Order(inner) => inner.to_string(),
+                WebhookEventType::Payment(inner) => inner.to_string(),
+                WebhookEventType::Refund(inner) => inner.to_string(),
+                WebhookEventType::Subscription(inner) => inner.to_string(),
+                WebhookEventType::TeamMember(inner) => inner.to_string(),
+            };
+
+            let inner_string = match inner {
+                WebhookEventType::Booking(inner) => inner.to_string(),
+                WebhookEventType::Card(inner) => inner.to_string(),
+                WebhookEventType::CatalogVersion(inner) => inner.to_string(),
+                WebhookEventType::Customer(inner) => inner.to_string(),
+                WebhookEventType::GiftCardActivity(inner) => inner.to_string(),
+                WebhookEventType::GiftCard(inner) => inner.to_string(),
+                WebhookEventType::InventoryCount(inner) => inner.to_string(),
+                WebhookEventType::Invoice(inner) => inner.to_string(),
+                WebhookEventType::Location(inner) => inner.to_string(),
+                WebhookEventType::OauthAuthorization(inner) => inner.to_string(),
+                WebhookEventType::OnlineCheckoutLocationSettings(inner) => inner.to_string(),
+                WebhookEventType::OnlineCheckoutMerchantSettings(inner) => inner.to_string(),
+                WebhookEventType::Order(inner) => inner.to_string(),
+                WebhookEventType::Payment(inner) => inner.to_string(),
+                WebhookEventType::Refund(inner) => inner.to_string(),
+                WebhookEventType::Subscription(inner) => inner.to_string(),
+                WebhookEventType::TeamMember(inner) => inner.to_string(),
+            };
+
+            assert_eq!(expected_string, inner_string);
+        }
     }
 }

@@ -9,10 +9,18 @@
 //!
 //!     Webhook Subscriptions [https://developer.squareup.com/docs/webhooks/webhook-subscriptions-api]
 
+use crate::models::{
+    CreateWebhookSubscriptionRequest, CreateWebhookSubscriptionResponse,
+    DeleteWebhookSubscriptionResponse, ListWebhookEventTypesResponse,
+    ListWebhookSubscriptionsParams, ListWebhookSubscriptionsResponse,
+    RetrieveWebhookSubscriptionResponse, TestWebhookSubscriptionRequest,
+    TestWebhookSubscriptionResponse, UpdateWebhookSubscriptionRequest,
+    UpdateWebhookSubscriptionResponse, UpdateWebhookSubscriptionSignatureKeyRequest,
+    UpdateWebhookSubscriptionSignatureKeyResponse,
+};
 use crate::{
     config::Configuration, http::client::HttpClient, models::errors::SquareApiError, SquareClient,
 };
-use crate::models::ListWebhookEventTypesResponse;
 
 const DEFAULT_URI: &str = "/webhooks";
 
@@ -38,8 +46,12 @@ impl WebhookSubscriptionsApi {
         api_version: &Option<String>,
     ) -> Result<ListWebhookEventTypesResponse, SquareApiError> {
         let url = match api_version {
-            None => { format!("{}/event-types", self.url()) }
-            Some(version) => { format!("{}/event-types?api_version={}", self.url(), version) }
+            None => {
+                format!("{}/event-types", self.url())
+            }
+            Some(version) => {
+                format!("{}/event-types?api_version={}", self.url(), version)
+            }
         };
         let response = self.http_client.get(&url).await?;
 
@@ -120,7 +132,11 @@ impl WebhookSubscriptionsApi {
         subscription_id: impl AsRef<str>,
         body: &TestWebhookSubscriptionRequest,
     ) -> Result<TestWebhookSubscriptionResponse, SquareApiError> {
-        let url = format!("{}/subscriptions/{}/test", self.url(), subscription_id.as_ref());
+        let url = format!(
+            "{}/subscriptions/{}/test",
+            self.url(),
+            subscription_id.as_ref()
+        );
         let response = self.http_client.post(&url, body).await?;
 
         response.deserialize().await

@@ -154,7 +154,7 @@ mod tender_square_account_details_status;
 mod tender_type;
 mod timezone;
 mod transaction_product;
-mod webhook_event_types;
+pub(crate) mod webhook_event_types;
 
 pub use ach_details_account_type::AchDetailsAccountType;
 pub use application_details_external_square_product::ApplicationDetailsExternalSquareProduct;
