@@ -127,6 +127,7 @@ So far, we have the following APIs wrapped in the Rust Square API Client:
 - [Refunds](https://developer.squareup.com/reference/square/refunds-api)
 - [Subscriptions](https://developer.squareup.com/reference/square/subscriptions-api)
 - [Team](https://developer.squareup.com/reference/square/team-api)
+- [Webhook Subscriptions](https://developer.squareup.com/reference/square/webhook-subscriptions-api)
 - [Webhooks](https://developer.squareup.com/reference/square/webhooks)
   - [Bookings](https://developer.squareup.com/reference/square/bookings-api/webhooks)
   - [Cards](https://developer.squareup.com/reference/square/cards-api/webhooks)
@@ -167,5 +168,3 @@ Future versions of this crate will implement the following APIs:
 - [Snippets](https://developer.squareup.com/reference/square/snippets-api)
 - [Terminal](https://developer.squareup.com/reference/square/terminal-api)
 - [Vendors](https://developer.squareup.com/reference/square/vendors-api)
-- [Webhook Subscriptions](https://developer.squareup.com/reference/square/webhook-subscriptions-api)
-
