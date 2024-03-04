@@ -1,6 +1,6 @@
 //! Response body struct for the oauth.authorization.revoked event webhook
 
-use crate::models::enums::LocationWebhookEventType;
+use crate::models::enums::OauthWebhookEventType;
 use crate::models::oauth_authorization_revoked_event_data::OauthAuthorizationRevokedEventData;
 use serde::{Deserialize, Serialize};
 
@@ -15,7 +15,7 @@ pub struct OAuthAuthorizationRevokedWebhookResponse {
     /// The ID of the target seller associated with the event.
     pub merchant_id: String,
     /// The type of event this represents, "oauth.authorization.revoked".
-    pub r#type: LocationWebhookEventType,
+    pub r#type: OauthWebhookEventType,
     /// A unique ID for the event.
     pub event_id: String,
     /// Read only The timestamp of when the event was created, in RFC 3339 format.
