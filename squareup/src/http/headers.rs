@@ -190,6 +190,7 @@ mod tests {
     use crate::http::Headers;
     use reqwest::header::HeaderMap;
     use std::collections::HashMap;
+    use crate::config::square_version::CURRENT_SQUARE_VERSION;
 
     #[test]
     fn headers_default() {
@@ -200,7 +201,7 @@ mod tests {
         );
         assert_eq!(
             headers.headers.get("Square-Version"),
-            Some(&String::from("2024-02-22"))
+            Some(&CURRENT_SQUARE_VERSION.to_string())
         );
         assert_eq!(
             headers.headers.get("accept"),

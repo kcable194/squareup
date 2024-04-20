@@ -7,7 +7,7 @@ pub use configuration::Configuration;
 mod environment;
 pub use environment::Environment;
 
-mod square_version;
+pub mod square_version;
 pub use square_version::SquareVersion;
 
 mod base_uri;
