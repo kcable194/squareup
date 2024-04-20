@@ -9,5 +9,11 @@ pub enum DigitalWalletBrand {
     CashApp,
     /// I'm not sure if this a typo in Square's docs
     Paypay,
+    Alipay,
+    RakutenPay,
+    AuPay,
+    DBarai,
+    Merpay,
+    WechatPay,
     Unknown,
 }
