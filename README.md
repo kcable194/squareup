@@ -34,7 +34,7 @@ for local scripts (if even then).
 You also need to set the `SQUARE_ENVIRONMENT` environment variable to either `SANDBOX` or `PRODUCTION`.
 If a value is not set, the default is `SANDBOX`.
 
-Other default values include the `2024-04-17` API version, a base URI of `/v2`, a timeout of 60 seconds and no HTTP Client retries.
+Other default values include the `2024-06-04` API version, a base URI of `/v2`, a timeout of 60 seconds and no HTTP Client retries.
 
 
 The standard configuration for production is shown below:
@@ -156,6 +156,7 @@ Future versions of this crate will implement the following APIs:
 - [Customer Custom Attributes](https://developer.squareup.com/reference/square/customer-custom-attributes-api)
 - [Devices](https://developer.squareup.com/reference/square/devices-api)
 - [Disputes](https://developer.squareup.com/reference/square/disputes-api)
+- [Events](https://developer.squareup.com/reference/square/events-api)
 - [Labor](https://developer.squareup.com/reference/square/labor-api)
 - [Loyalty](https://developer.squareup.com/reference/square/loyalty-api)
 - [Location Custom Attributes](https://developer.squareup.com/reference/square/location-custom-attributes-api)

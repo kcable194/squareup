@@ -1,6 +1,6 @@
 //! Square API version management, will correspond to crate version
 
-pub const CURRENT_SQUARE_VERSION: &str = "2024-04-17";
+pub const CURRENT_SQUARE_VERSION: &str = "2024-06-04";
 
 /// Identifies the Square api version
 #[derive(Clone, Debug, Eq, PartialEq)]
