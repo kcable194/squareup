@@ -20,6 +20,8 @@ pub struct CatalogItem {
     /// The color of the item's display label in the Square Point of Sale app. This must be a valid
     /// hex color code.
     pub label_color: Option<String>,
+    /// Indicates whether the item is taxable (true) or non-taxable (false). Default is true.
+    pub is_taxable: Option<bool>,
     /// If `true`, the item can be added to shipping orders from the merchant's online store.
     pub available_online: Option<bool>,
     /// If `true`, the item can be added to pickup orders from the merchant's online store.

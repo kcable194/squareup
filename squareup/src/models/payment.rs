@@ -159,6 +159,8 @@ pub struct Payment {
     pub device_details: Option<DeviceDetails>,
     /// **Read only** Details about the application that took the payment.
     pub application_details: Option<ApplicationDetails>,
+    /// **Read only** Whether or not this payment was taken offline.
+    pub is_offline_payment: Option<bool>,
     /// Used for optimistic concurrency. This opaque token identifies a specific version of the
     /// `Payment` object.
     pub version_token: Option<String>,

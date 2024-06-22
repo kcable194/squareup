@@ -11,4 +11,6 @@ pub struct DestinationDetailsCardRefundDetails {
     pub card: Option<Card>,
     /// The method used to enter the card's details for the refund.
     pub entry_method: Option<CardPaymentDetailsEntryMethod>,
+    /// The authorization code provided by the issuer when a refund is approved. Max Length 10
+    pub auth_result_code: Option<String>,
 }
