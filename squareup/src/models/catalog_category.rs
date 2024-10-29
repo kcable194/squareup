@@ -33,5 +33,5 @@ pub struct CatalogCategory {
     pub ecom_seo_data: Option<CatalogEcomSeoData>,
     /// The path from the category to its root category. The first node of the path is the parent of the
     /// category and the last is the root category. The path is empty if the category is a root category.
-    pub path_to_root: Option<CategoryPathToRootNode>,
+    pub path_to_root: Option<Vec<CategoryPathToRootNode>>,
 }

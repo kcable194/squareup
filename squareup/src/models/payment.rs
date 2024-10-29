@@ -1,13 +1,13 @@
 //! Model struct for Payment type
 
-use serde::{Deserialize, Serialize};
-
 use super::{
     enums::{PaymentCapability, PaymentDelayAction, PaymentSourceType, PaymentStatus},
     Address, ApplicationDetails, BankAccountPaymentDetails, BuyNowPayLaterDetails,
     CardPaymentDetails, CashPaymentDetails, DateTime, DeviceDetails, DigitalWalletDetails,
     ExternalPaymentDetails, Money, ProcessingFee, RiskEvaluation, SquareAccountDetails,
 };
+use crate::models::offline_payment_details::OfflinePaymentDetails;
+use serde::{Deserialize, Serialize};
 
 /// Represents a payment processed by the Square API.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]
@@ -133,6 +133,8 @@ pub struct Payment {
     /// by Square. This field is present for payments to sellers that have opted in to receive risk
     /// evaluations.
     pub risk_evaluation: Option<RiskEvaluation>,
+    /// **Read only** An optional ID for a Terminal checkout that is associated with the payment.
+    pub terminal_checkout_id: Option<String>,
     /// **Read only** The buyer's email address.
     pub buyer_email_address: Option<String>,
     /// **Read only** The buyer's billing address.
@@ -161,6 +163,8 @@ pub struct Payment {
     pub application_details: Option<ApplicationDetails>,
     /// **Read only** Whether or not this payment was taken offline.
     pub is_offline_payment: Option<bool>,
+    /// **Read only** Additional information about the payment if it was taken offline.
+    pub offline_payment_details: Option<OfflinePaymentDetails>,
     /// Used for optimistic concurrency. This opaque token identifies a specific version of the
     /// `Payment` object.
     pub version_token: Option<String>,

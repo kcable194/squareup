@@ -3,7 +3,7 @@
 use crate::models::enums::{
     BookingBookingSource, BookingStatus, BusinessAppointmentSettingsBookingLocationType,
 };
-use crate::models::{AppointmentSegment, BookingCreatorDetails, DateTime};
+use crate::models::{Address, AppointmentSegment, BookingCreatorDetails, DateTime};
 use serde::{Deserialize, Serialize};
 
 /// Represents a booking as a time-bound service contract for a seller's staff member to provide
@@ -63,4 +63,6 @@ pub struct Booking {
     /// **Read only** The source of the booking. Access to this field requires seller-level
     /// permissions.
     pub source: Option<BookingBookingSource>,
+    /// Stores a customer address if the location type is CUSTOMER_LOCATION.
+    pub address: Option<Address>,
 }
