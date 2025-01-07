@@ -156,6 +156,7 @@ mod tender_type;
 mod timezone;
 mod transaction_product;
 mod webhook_event_types;
+mod payment_sort_field;
 
 pub use ach_details_account_type::AchDetailsAccountType;
 pub use application_details_external_square_product::ApplicationDetailsExternalSquareProduct;
@@ -313,3 +314,4 @@ pub use tender_type::TenderType;
 pub use timezone::Timezone;
 pub use transaction_product::TransactionProduct;
 pub use webhook_event_types::WebhookEventType;
+pub use payment_sort_field::PaymentSortField;

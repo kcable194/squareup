@@ -14,13 +14,13 @@ exclude = ["../examples", "../.github"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-async-trait = "0.1"
+#async-trait = "0.1"
 chrono = { version = "0.4", features = ["serde"] }
 infer = "0.16.0"
 log = "0.4"
 reqwest = { version = "0.12", features = ["json", "multipart"] }
-reqwest-middleware = { version = "0.3", features = ["json"] }
-reqwest-retry = "0.6.1"
+reqwest-middleware = { version = "0.4.0", features = ["json"] }
+reqwest-retry = "0.7.0"
 package_info = "0.1.0"
 package_info_derive = "0.1.0"
 rustc_version_runtime = "0.3.0"

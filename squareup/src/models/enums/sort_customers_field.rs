@@ -26,7 +26,7 @@ impl Display for SortCustomersField {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let str = match self {
             SortCustomersField::Default => String::from("DEFAULT"),
-            SortCustomersField::CreatedAt => String::from("CREATED_AT"),
+            SortCustomersField::CreatedAt => String::from("CreatedAt"),
         };
         write!(f, "{}", str)
     }

@@ -3,7 +3,7 @@
 use crate::models::enums::DelayAction;
 use serde::Serialize;
 
-use super::{Address, CashPaymentDetails, CustomerDetails, ExternalPaymentDetails, Money};
+use super::{Address, CashPaymentDetails, CustomerDetails, ExternalPaymentDetails, Money, OfflinePaymentDetails};
 
 /// This is a model class for CreatePaymentRequest type.
 #[derive(Clone, Debug, Default, Eq, PartialEq, Serialize)]
@@ -31,7 +31,7 @@ pub struct CreatePaymentRequest {
     ///
     /// The currency code must match the currency associated with the business that is accepting the
     /// payment.
-    pub amount_money: Money,
+    pub amount_money: Option<Money>,
     /// The amount designated as a tip, in addition to `amount_money`.
     ///
     /// The amount must be specified in the smallest denomination of the applicable currency (for
@@ -124,11 +124,18 @@ pub struct CreatePaymentRequest {
     pub accept_partial_authorization: Option<bool>,
     /// The buyer's email address.
     pub buyer_email_address: Option<String>,
+    /// The buyer's phone number. Must follow the following format:
+    ///   1. A leading + symbol (followed by a country code)
+    ///   2. The phone number can contain spaces and the special characters ( , ) , - , and
+    ///      Alphabetical characters aren't allowed.
+    ///   3. The phone number must contain between 9 and 16 digits.
+    pub buyer_phone_number: Option<String>,
     /// The buyer's billing address.
     pub billing_address: Option<Address>,
     /// The buyer's shipping address.
     pub shipping_address: Option<Address>,
     /// An optional note to be entered by the developer when creating a payment.
+    /// Max Length 500
     pub note: Option<String>,
     /// Optional additional payment information to include on the customer's card statement as part
     /// of the statement description. This can be, for example, an invoice number, ticket number, or
@@ -144,4 +151,7 @@ pub struct CreatePaymentRequest {
     pub external_details: Option<ExternalPaymentDetails>,
     /// Details about the customer making the payment.
     pub customer_details: Option<CustomerDetails>,
+    /// An optional field for specifying the offline payment details. This is intended for internal
+    /// 1st-party callers only.
+    pub offline_payment_details: Option<OfflinePaymentDetails>
 }

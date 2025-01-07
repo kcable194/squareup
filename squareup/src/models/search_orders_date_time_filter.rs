@@ -4,7 +4,7 @@ use serde::Serialize;
 
 use super::TimeRange;
 
-/// Filter for `Order` objects based on whether their `CREATED_AT`, `CLOSED_AT`, or `UPDATED_AT`
+/// Filter for `Order` objects based on whether their `CreatedAt`, `CLOSED_AT`, or `UpdatedAt`
 /// timestamps fall within a specified time range.
 ///
 /// You can specify the time range and which timestamp to filter for. You can filter for only one
@@ -22,10 +22,10 @@ use super::TimeRange;
 #[derive(Clone, Debug, Default, Eq, PartialEq, Serialize)]
 pub struct SearchOrdersDateTimeFilter {
     /// The time range for filtering on the `created_at` timestamp. If you use this value, you must
-    /// set the `sort_field` in the `OrdersSearchSort` object to `CREATED_AT`.
+    /// set the `sort_field` in the `OrdersSearchSort` object to `CreatedAt`.
     pub created_at: Option<TimeRange>,
     /// The time range for filtering on the `updated_at` timestamp. If you use this value, you must
-    /// set the `sort_field` in the `OrdersSearchSort` object to `UPDATED_AT`.
+    /// set the `sort_field` in the `OrdersSearchSort` object to `UpdatedAt`.
     pub updated_at: Option<TimeRange>,
     /// The time range for filtering on the `closed_at` timestamp. If you use this value, you must
     /// set the `sort_field` in the `OrdersSearchSort` object to `CLOSED_AT`.

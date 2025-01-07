@@ -11,11 +11,11 @@ pub struct SearchCustomersSort {
     ///
     /// **Important:** When using a [DateTimeFilter](SearchCustomersDateTimeFilter), `sort_field` must
     /// match the timestamp field that the `DateTimeFilter` uses to filter. For example, if you set
-    /// your `sort_field` to `CREATED_AT` and you use a `DateTimeFilter`, your `DateTimeFilter` must
-    /// filter for customers by their `CREATED_AT` date. If this field does not match the timestamp
+    /// your `sort_field` to `CreatedAt` and you use a `DateTimeFilter`, your `DateTimeFilter` must
+    /// filter for customers by their `CreatedAt` date. If this field does not match the timestamp
     /// field in `DateTimeFilter`, `SearchCustomers` returns an error.
     ///
-    /// Default: `CREATED_AT`.
+    /// Default: `CreatedAt`.
     pub field: Option<SortCustomersField>,
     /// The chronological order in which results are returned. Defaults to DESC.
     pub order: Option<SortOrder>,
