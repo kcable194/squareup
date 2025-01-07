@@ -99,11 +99,9 @@ impl TryFrom<i64> for DateTime {
     ///
     /// Returns an API Error if the input i64 cannot be parsed.
     fn try_from(timestamp: i64) -> Result<Self, Self::Error> {
-        let inner = chrono::NaiveDateTime::from_timestamp_opt(timestamp, 0);
+        let inner = chrono::DateTime::from_timestamp(timestamp, 0);
         match inner {
-            Some(datetime) => Ok(Self::from(
-                &chrono::DateTime::<Utc>::from_naive_utc_and_offset(datetime, Utc),
-            )),
+            Some(datetime) => Ok(Self::from(&chrono::DateTime::<Utc>::from(datetime))),
             None => {
                 let msg = format!(
                     "Error parsing UTC timestamp to NaiveDateTime: {}",

@@ -20,11 +20,11 @@ pub struct Customer {
     /// Payment details of the credit, debit, and gift cards stored on file for the customer
     /// profile.
     ///
-    /// DEPRECATED at version 2021-06-16. Replaced by calling `ListCards` (for credit and debit
-    /// cards on file) or `ListGiftCards` (for gift cards on file) and including the
-    /// `customer_id` query parameter. For more information, see [Migrate to the Cards API and Gift
-    /// Cards
-    /// API](https://developer.squareup.com/docs/customers-api/use-the-api/integrate-with-other-services#migrate-customer-cards).
+    /// DEPRECATED at version 2021-06-16 and will be RETIRED at version 2024-12-18. Replaced by
+    /// calling `ListCards` (for credit and debit cards on file) or `ListGiftCards` (for gift cards
+    /// on file) and including the `customer_id` query parameter. For more information, see [Migrate
+    /// to the Cards API and Gift Cards API]
+    /// (https://developer.squareup.com/docs/customers-api/use-the-api/integrate-with-other-services#migrate-customer-cards).
     #[deprecated]
     pub cards: Option<Vec<Card>>,
     /// The given name (that is, the first name) associated with the customer profile.
