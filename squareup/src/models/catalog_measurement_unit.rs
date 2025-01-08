@@ -16,6 +16,7 @@ pub struct CatalogMeasurementUnit {
     /// * if the precision is 0, the quantity can be 1, 2, 3, etc.
     /// * if the precision is 1, the quantity can be 0.1, 0.2, etc.
     /// * if the precision is 2, the quantity can be 0.01, 0.12, etc.
+    ///
     /// Default: 3
     pub precision: Option<i32>,
 }

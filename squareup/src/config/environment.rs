@@ -24,11 +24,11 @@ impl Default for Environment {
     /// default to env variable and if not present, default to Sandbox
     fn default() -> Self {
         let env_string = std::env::var("SQUARE_ENVIRONMENT").unwrap_or(String::from("SANDBOX"));
-        return match env_string.as_str() {
+        match env_string.as_str() {
             "PRODUCTION" => Self::Production,
             "SANDBOX" => Self::Sandbox,
             _ => Self::Sandbox,
-        };
+        }
     }
 }
 

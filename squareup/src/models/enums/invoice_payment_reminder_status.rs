@@ -13,9 +13,9 @@ pub enum InvoicePaymentReminderStatus {
     ///
     /// - You schedule a reminder to be sent before the invoice is published.
     /// - The invoice is configured with multiple payment requests and a payment request reminder is
-    /// configured to be sent after the next payment request `due_date`.
+    ///   configured to be sent after the next payment request `due_date`.
     /// - Two reminders (for different payment requests) are configured to be sent on the same date.
-    /// Therefore, only one reminder is sent.
+    ///   Therefore, only one reminder is sent.
     /// - You configure a reminder to be sent on the date that the invoice is scheduled to be sent.
     /// - The payment request is already paid.
     /// - The invoice status is `CANCELED` or `FAILED`.

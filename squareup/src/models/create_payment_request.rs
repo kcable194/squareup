@@ -3,7 +3,10 @@
 use crate::models::enums::DelayAction;
 use serde::Serialize;
 
-use super::{Address, CashPaymentDetails, CustomerDetails, ExternalPaymentDetails, Money, OfflinePaymentDetails};
+use super::{
+    Address, CashPaymentDetails, CustomerDetails, ExternalPaymentDetails, Money,
+    OfflinePaymentDetails,
+};
 
 /// This is a model class for CreatePaymentRequest type.
 #[derive(Clone, Debug, Default, Eq, PartialEq, Serialize)]
@@ -153,5 +156,5 @@ pub struct CreatePaymentRequest {
     pub customer_details: Option<CustomerDetails>,
     /// An optional field for specifying the offline payment details. This is intended for internal
     /// 1st-party callers only.
-    pub offline_payment_details: Option<OfflinePaymentDetails>
+    pub offline_payment_details: Option<OfflinePaymentDetails>,
 }

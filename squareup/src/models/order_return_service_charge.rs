@@ -33,7 +33,7 @@ pub struct OrderReturnServiceCharge {
     ///
     /// * For fixed-amount service charges, `applied_money` is equal to `amount_money`.
     /// * For percentage-based service charges, `applied_money` is the money calculated using the
-    /// percentage.
+    ///   percentage.
     pub applied_money: Option<Money>,
     /// **Read only** The total amount of money to collect for the service charge.
     ///

@@ -4,9 +4,9 @@
 //! Developers can integrate the Cards API in their application to let Square sellers:
 //!
 //! * Save a card that can be charged by any Square seller who uses your application. Your
-//! application specifies the organization access token in the `CreateCard` request.
+//!   application specifies the organization access token in the `CreateCard` request.
 //! * Save a card that can be charged by a single Square seller. Your application specifies the
-//! access token of the specific seller account in the `CreateCard` request.
+//!   access token of the specific seller account in the `CreateCard` request.
 //!
 //! The Cards API also supports other endpoints to manage the cards.
 

@@ -5,7 +5,7 @@
 //! * The amount to charge.
 //!
 //! * The payment recipient. The payment goes to the account identified by the Authorization header
-//! in the API request.
+//!   in the API request.
 //!
 //! * The payment source. The source can be a payment token or card on file.
 //!

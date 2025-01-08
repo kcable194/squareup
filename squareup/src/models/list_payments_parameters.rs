@@ -1,7 +1,7 @@
 //! Model struct for ListPaymentsParameters (query parameters)
 
 use super::{enums::SortOrder, DateTime};
-use crate::models::enums::{CardBrand, InvoiceSortField, PaymentSortField, SortCustomersField};
+use crate::models::enums::{CardBrand, PaymentSortField};
 use std::fmt::Display;
 
 /// This is a model struct for ListPaymentsParameters (query parameters)
@@ -57,17 +57,17 @@ pub struct ListPaymentsParameters {
     //
     /// Pacific Standard Time with UTC offset: 2020-01-25T18:25:34-08:00
     pub offline_begin_time: Option<DateTime>,
-    /// Indicates the end of the time range for which to retrieve offline payments, in RFC 3339 
-    /// format for timestamps. The range is determined using the 
-    /// offline_payment_details.client_created_at field for each Payment. If set, payments without 
+    /// Indicates the end of the time range for which to retrieve offline payments, in RFC 3339
+    /// format for timestamps. The range is determined using the
+    /// offline_payment_details.client_created_at field for each Payment. If set, payments without
     /// a value set in offline_payment_details.client_created_at will not be returned.
-    /// 
+    ///
     /// Default: The current time.
-    /// 
+    ///
     /// Examples for January 25th, 2020 6:25:34pm Pacific Standard Time:
-    /// 
+    ///
     /// UTC: 2020-01-26T02:25:34Z
-    /// 
+    ///
     /// Pacific Standard Time with UTC offset: 2020-01-25T18:25:34-08:00
     pub offline_end_time: Option<DateTime>,
     /// Indicates the start of the time range to retrieve payments for, in RFC 3339 format. The
@@ -77,7 +77,7 @@ pub struct ListPaymentsParameters {
     /// is determined using the updated_at field for each Payment.
     pub updated_at_end_time: Option<DateTime>,
     /// The field used to sort results by. The default is CREATED_AT.
-    pub sort_field: Option<PaymentSortField>
+    pub sort_field: Option<PaymentSortField>,
 }
 
 impl ListPaymentsParameters {
