@@ -34,7 +34,7 @@ impl<'de> Deserialize<'de> for Iso8601Date {
     {
         struct Iso8601DateVisitor;
 
-        impl<'de> Visitor<'de> for Iso8601DateVisitor {
+        impl Visitor<'_> for Iso8601DateVisitor {
             type Value = Iso8601Date;
 
             fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {

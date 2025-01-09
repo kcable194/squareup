@@ -20,4 +20,6 @@ pub struct JobAssignment {
     pub annual_rate: Option<Money>,
     /// The planned hours per week for the job. Set if the job `PayType` is `SALARY`.
     pub weekly_hours: Option<i32>,
+    /// The ID of the job
+    pub job_id: Option<String>,
 }

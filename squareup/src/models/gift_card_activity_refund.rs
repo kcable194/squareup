@@ -16,8 +16,8 @@ pub struct GiftCardActivityRefund {
     /// for a payment processed by Square and one of the following conditions is true:
     /// - The Refunds API is used to refund a gift card payment to the same gift card.
     /// - A seller initiated the refund from Square Point of Sale or the Seller Dashboard. The
-    /// payment source can be the same gift card or a cross-tender payment from a credit card or a
-    /// different gift card.
+    ///   payment source can be the same gift card or a cross-tender payment from a credit card or a
+    ///   different gift card.
     pub payment_id: Option<String>,
     /// The ID of the refunded `REDEEM` gift card activity. Square populates this field if the
     /// `payment_id` in the corresponding

@@ -17,7 +17,7 @@ pub struct SearchOrdersSort {
     /// filter for orders by their `CLOSED_AT` date. If this field does not match the timestamp
     /// field in `DateTimeFilter`, `SearchOrders` returns an error.
     ///
-    /// Default: `CREATED_AT`.
+    /// Default: `CreatedAt`.
     pub sort_field: SearchOrdersSortField,
     /// The chronological order in which results are returned. Defaults to DESC.
     pub sort_order: Option<SortOrder>,

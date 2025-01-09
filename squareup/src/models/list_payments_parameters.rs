@@ -1,7 +1,7 @@
 //! Model struct for ListPaymentsParameters (query parameters)
 
 use super::{enums::SortOrder, DateTime};
-use crate::models::enums::CardBrand;
+use crate::models::enums::{CardBrand, PaymentSortField};
 use std::fmt::Display;
 
 /// This is a model struct for ListPaymentsParameters (query parameters)
@@ -42,6 +42,42 @@ pub struct ListPaymentsParameters {
     ///
     /// Default: `100`
     pub limit: Option<i32>,
+    /// Whether the payment was taken offline or not.
+    pub is_offline_payment: Option<bool>,
+    /// Indicates the start of the time range for which to retrieve offline payments, in RFC 3339
+    /// format for timestamps. The range is determined using the
+    /// offline_payment_details.client_created_at field for each Payment. If set, payments without
+    /// a value set in offline_payment_details.client_created_at will not be returned.
+    ///
+    /// Default: The current time.
+    ///
+    /// Examples for January 25th, 2020 6:25:34pm Pacific Standard Time:
+    ///
+    /// UTC: 2020-01-26T02:25:34Z
+    //
+    /// Pacific Standard Time with UTC offset: 2020-01-25T18:25:34-08:00
+    pub offline_begin_time: Option<DateTime>,
+    /// Indicates the end of the time range for which to retrieve offline payments, in RFC 3339
+    /// format for timestamps. The range is determined using the
+    /// offline_payment_details.client_created_at field for each Payment. If set, payments without
+    /// a value set in offline_payment_details.client_created_at will not be returned.
+    ///
+    /// Default: The current time.
+    ///
+    /// Examples for January 25th, 2020 6:25:34pm Pacific Standard Time:
+    ///
+    /// UTC: 2020-01-26T02:25:34Z
+    ///
+    /// Pacific Standard Time with UTC offset: 2020-01-25T18:25:34-08:00
+    pub offline_end_time: Option<DateTime>,
+    /// Indicates the start of the time range to retrieve payments for, in RFC 3339 format. The
+    /// range is determined using the updated_at field for each Payment.
+    pub updated_at_begin_time: Option<DateTime>,
+    /// Indicates the end of the time range to retrieve payments for, in RFC 3339 format. The range
+    /// is determined using the updated_at field for each Payment.
+    pub updated_at_end_time: Option<DateTime>,
+    /// The field used to sort results by. The default is CREATED_AT.
+    pub sort_field: Option<PaymentSortField>,
 }
 
 impl ListPaymentsParameters {
@@ -97,6 +133,30 @@ impl Display for ListPaymentsParameters {
 
         if let Some(limit) = &self.limit {
             params.push(format!("limit={}", limit));
+        }
+
+        if let Some(is_offline_payment) = &self.is_offline_payment {
+            params.push(format!("is_offline_payment={}", is_offline_payment));
+        }
+
+        if let Some(offline_begin_time) = &self.offline_begin_time {
+            params.push(format!("offline_begin_time={}", offline_begin_time));
+        }
+
+        if let Some(offline_end_time) = &self.offline_end_time {
+            params.push(format!("offline_end_time={}", offline_end_time));
+        }
+
+        if let Some(updated_at_begin_time) = &self.updated_at_begin_time {
+            params.push(format!("updated_at_begin_time={}", updated_at_begin_time));
+        }
+
+        if let Some(updated_at_end_time) = &self.updated_at_end_time {
+            params.push(format!("updated_at_end_time={}", updated_at_end_time));
+        }
+
+        if let Some(sort_field) = &self.sort_field {
+            params.push(format!("sort_field={}", sort_field));
         }
 
         let str = if params.is_empty() {

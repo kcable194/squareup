@@ -4,7 +4,7 @@ use serde::Serialize;
 
 use super::TimeRange;
 
-/// Filter for `Customer` objects based on whether their `CREATED_AT`
+/// Filter for `Customer` objects based on whether their `CreatedAt`
 /// timestamps fall within a specified time range.
 ///
 /// You can specify the time range and which timestamp to filter for. You can filter for only one
@@ -15,6 +15,6 @@ use super::TimeRange;
 #[derive(Clone, Debug, Default, Eq, PartialEq, Serialize)]
 pub struct SearchCustomersDateTimeFilter {
     /// The time range for filtering on the `created_at` timestamp. If you use this value, you must
-    /// set the `sort_field` in the `CustomersSearchSort` object to `CREATED_AT`.
+    /// set the `sort_field` in the `CustomersSearchSort` object to `CreatedAt`.
     pub created_at: Option<TimeRange>,
 }

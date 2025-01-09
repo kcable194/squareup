@@ -51,10 +51,10 @@ pub struct InvoicePaymentRequest {
     /// Specifies the amount for the payment request in percentage:
     ///
     /// - When the payment `request_type` is `DEPOSIT`, it is the percentage of the order's total
-    /// amount.
+    ///   amount.
     /// - When the payment `request_type` is `INSTALLMENT`, it is the percentage of the order's
-    /// total less the deposit, if requested. The sum of the `percentage_requested` in all
-    /// installment payment requests must be equal to 100.
+    ///   total less the deposit, if requested. The sum of the `percentage_requested` in all
+    ///   installment payment requests must be equal to 100.
     ///
     /// You cannot specify this when the payment `request_type` is `BALANCE` or when the payment
     /// request specifies the `fixed_amount_requested_money` field.

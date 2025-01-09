@@ -12,9 +12,9 @@ pub enum InvoiceRequestType {
     /// A request for a balance payment. The balance amount is computed as follows:
     ///
     /// - If the invoice specifies only a balance payment request, the balance amount is the total
-    /// amount of the associated order.
+    ///   amount of the associated order.
     /// - If the invoice also specifies a deposit request, the balance amount is the amount
-    /// remaining after the deposit.
+    ///   remaining after the deposit.
     ///
     /// `INSTALLMENT` and `BALANCE` payment requests are not allowed in the same invoice.
     Balance,

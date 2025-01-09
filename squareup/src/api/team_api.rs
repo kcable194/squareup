@@ -6,6 +6,10 @@
 //! The Team API is best used in conjunction with the Labor API, where you provide team member IDs
 //! to manage shifts, breaks, and wages.
 
+use crate::models::{
+    CreateJobRequest, CreateJobResponse, ListJobsParameters, ListJobsResponse, RetrieveJobResponse,
+    UpdateJobRequest, UpdateJobResponse,
+};
 use crate::{
     config::Configuration,
     http::client::HttpClient,
@@ -89,6 +93,66 @@ impl TeamApi {
     ) -> Result<BulkUpdateTeamMembersResponse, SquareApiError> {
         let url = format!("{}/bulk-update", self.url());
         let response = self.http_client.post(&url, body).await?;
+
+        response.deserialize().await
+    }
+
+    /// Lists jobs in a seller account.
+    ///
+    /// Results are sorted by title in ascending order.
+    /// Permissions:EMPLOYEES_READ
+    pub async fn list_jobs(
+        &self,
+        params: &ListJobsParameters,
+    ) -> Result<ListJobsResponse, SquareApiError> {
+        let url = format!("{}/jobs{}", &self.url(), params.to_query_string());
+        let response = self.http_client.get(&url).await?;
+
+        response.deserialize().await
+    }
+
+    /// Creates a job in a seller account.
+    ///
+    /// A job defines a title and tip eligibility. Compensation is defined in a job assignment
+    /// in a team member's wage setting.
+    /// Permissions: EMPLOYEES_WRITE
+    pub async fn create_job(
+        &self,
+        request: &CreateJobRequest,
+    ) -> Result<CreateJobResponse, SquareApiError> {
+        let url = format!("{}/jobs", self.url());
+        let response = self.http_client.post(&url, request).await?;
+
+        response.deserialize().await
+    }
+
+    /// Retrieves a specified job.
+    ///
+    /// Permissions: EMPLOYEES_READ
+    pub async fn retrieve_job(
+        &self,
+        job_id: impl AsRef<str>,
+    ) -> Result<RetrieveJobResponse, SquareApiError> {
+        let url = format!("{}/jobs/{}", self.url(), job_id.as_ref());
+        let response = self.http_client.get(&url).await?;
+
+        response.deserialize().await
+    }
+
+    /// Updates the title or tip eligibility of a job.
+    ///
+    /// Changes to the title propagate to all `JobAssignment`, `Shift`, and `TeamMemberWage` objects
+    /// that reference the job ID. Changes to tip eligibility propagate to all `TeamMemberWage` objects
+    /// that reference the job ID.
+    ///
+    /// Permissions: EMPLOYEES_WRITE
+    pub async fn update_job(
+        &self,
+        job_id: impl AsRef<str>,
+        request: &UpdateJobRequest,
+    ) -> Result<UpdateJobResponse, SquareApiError> {
+        let url = format!("{}/jobs/{}", self.url(), job_id.as_ref());
+        let response = self.http_client.put(&url, request).await?;
 
         response.deserialize().await
     }

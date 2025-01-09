@@ -2,7 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::{enums::TeamMemberStatus, DateTime, TeamMemberAssignedLocations};
+use super::{enums::TeamMemberStatus, DateTime, TeamMemberAssignedLocations, WageSetting};
 
 /// A record representing an individual team member for a business.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]
@@ -32,4 +32,7 @@ pub struct TeamMember {
     pub updated_at: Option<DateTime>,
     /// Describes the team member's assigned locations.
     pub assigned_locations: Option<TeamMemberAssignedLocations>,
+    /// Information about the team member's overtime exemption status, job assignments, and
+    /// compensation.
+    pub wage_setting: Option<WageSetting>,
 }

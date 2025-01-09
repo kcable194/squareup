@@ -27,12 +27,12 @@ pub enum GiftCardActivityType {
     /// to a Square payment, depending on how the payment and refund are processed. For example:
     ///
     /// - A gift card payment processed by Square can be refunded to the same gift card using
-    /// Square Point of Sale, the Square Seller Dashboard, or the Refunds API.
+    ///   Square Point of Sale, the Square Seller Dashboard, or the Refunds API.
     /// - A cross-tender payment processed by Square can be refunded to a gift card using Square
-    /// Point of Sale or the Square Seller Dashboard. The payment source might be a credit card or
-    /// different gift card.
+    ///   Point of Sale or the Square Seller Dashboard. The payment source might be a credit card or
+    ///   different gift card.
     /// - A payment processed using a custom payment processing system can be refunded to the same
-    /// gift card.
+    ///   gift card.
     Refund,
     /// Added money to a gift card from a refunded transaction that was processed using a custom
     /// payment processing system and not linked to the gift card.

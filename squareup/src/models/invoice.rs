@@ -68,9 +68,9 @@ pub struct Invoice {
     /// One of the following is required when creating an invoice:
     ///
     /// - (Recommended) This `delivery_method` field. To configure an automatic payment, the
-    /// `automatic_payment_source` field of the payment request is also required.
+    ///   `automatic_payment_source` field of the payment request is also required.
     /// - The deprecated `request_method` field of the payment request. Note that `invoice` objects
-    /// returned in responses do not include `request_method`.
+    ///   returned in responses do not include `request_method`.
     pub delivery_method: Option<InvoiceDeliveryMethod>,
     /// A user-friendly invoice number that is displayed on the invoice. The value is unique within
     /// a location. If not provided when creating an invoice, Square assigns a value. It increments

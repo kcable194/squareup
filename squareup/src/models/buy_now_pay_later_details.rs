@@ -12,6 +12,7 @@ pub struct BuyNowPayLaterDetails {
     /// Details about an Afterpay payment. These details are only populated if the `brand` is
     /// `AFTERPAY`.
     pub afterpay_details: Option<AfterpayDetails>,
-    ///
+    ///Details about a Clearpay payment. These details are only populated if the `brand` is
+    /// `CLEARPAY`.
     pub clearpay_details: Option<ClearpayDetails>,
 }
