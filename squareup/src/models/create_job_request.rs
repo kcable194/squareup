@@ -1,7 +1,7 @@
 //! Model struct for CreateJobRequest type
 
 use super::Job;
-use serde::{Serialize};
+use serde::Serialize;
 
 /// This is a model struct for CreateJobRequest type
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]

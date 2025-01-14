@@ -67,7 +67,12 @@ impl<'de> Deserialize<'de> for DateTime {
 
 impl Display for DateTime {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.inner.to_rfc3339_opts(chrono::SecondsFormat::Millis, true))
+        write!(
+            f,
+            "{}",
+            self.inner
+                .to_rfc3339_opts(chrono::SecondsFormat::Millis, true)
+        )
     }
 }
 

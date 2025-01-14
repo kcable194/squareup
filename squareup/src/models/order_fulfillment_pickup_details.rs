@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 
 use super::{
     enums::OrderFulfillmentPickupDetailsScheduleType, DateTime,
-    OrderFulfillmentPickupDetailsCurbsidePickupDetails, OrderFulfillmentRecipient
+    OrderFulfillmentPickupDetailsCurbsidePickupDetails, OrderFulfillmentRecipient,
 };
 
 /// This is a model struct for OrderFulfillmentPickupDetails type.

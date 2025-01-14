@@ -49,6 +49,7 @@ mod checkout_location_settings_branding_button_shape;
 mod checkout_location_settings_branding_header_type;
 mod country;
 mod currency;
+mod custom_attribute_definition_visibility;
 mod customer_creation_source;
 mod customer_inclusion_exclusion;
 mod customer_webhook_event_type;
@@ -207,6 +208,7 @@ pub use checkout_location_settings_branding_button_shape::CheckoutLocationSettin
 pub use checkout_location_settings_branding_header_type::CheckoutLocationSettingsBrandingHeaderType;
 pub use country::Country;
 pub use currency::Currency;
+pub use custom_attribute_definition_visibility::CustomAttributeDefinitionVisibility;
 pub use customer_creation_source::CustomerCreationSource;
 pub use customer_inclusion_exclusion::CustomerInclusionExclusion;
 pub use customer_webhook_event_type::CustomerWebhookEventType;
