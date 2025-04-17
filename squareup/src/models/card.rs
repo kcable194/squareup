@@ -29,9 +29,8 @@ pub struct Card {
     /// **Read only** Intended as a Square-assigned identifier, based on the card number, to
     /// identify the card across multiple locations within a single application.
     pub fingerprint: Option<String>,
-    /// **Required** The ID of a customer created using the Customers API to be associated with the
-    /// card.
-    pub customer_id: String,
+    /// The ID of a customer created using the Customers API to be associated with the card.
+    pub customer_id: Option<String>,
     /// **Read only** The ID of the merchant associated with the card.
     pub merchant_id: Option<String>,
     /// An optional user-defined reference ID that associates this card with another entity in an
