@@ -2,7 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::{enums::ProcessingFeeType, DateTime, Money};
+use super::{DateTime, Money, enums::ProcessingFeeType};
 
 /// Represents the Square processing fee.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]

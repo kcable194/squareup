@@ -11,15 +11,15 @@ use crate::models::{
     DeleteCustomerParameters, RemoveGroupFromCustomerResponse,
 };
 use crate::{
+    SquareClient,
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::SquareApiError, CreateCustomerRequest, CreateCustomerResponse,
-        DeleteCustomerResponse, ListCustomersParameters, ListCustomersResponse,
-        RetrieveCustomerResponse, SearchCustomersRequest, SearchCustomersResponse,
-        UpdateCustomerRequest, UpdateCustomerResponse,
+        CreateCustomerRequest, CreateCustomerResponse, DeleteCustomerResponse,
+        ListCustomersParameters, ListCustomersResponse, RetrieveCustomerResponse,
+        SearchCustomersRequest, SearchCustomersResponse, UpdateCustomerRequest,
+        UpdateCustomerResponse, errors::SquareApiError,
     },
-    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/customers";

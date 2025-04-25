@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, Availability};
+use super::{Availability, errors::Error};
 
 /// This is a model struct for SearchAvailabilityResponse type
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]

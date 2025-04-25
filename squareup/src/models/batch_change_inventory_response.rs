@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, InventoryChange, InventoryCount};
+use super::{InventoryChange, InventoryCount, errors::Error};
 
 /// This is a model struct for BatchChangeInventoryResponse type.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]

@@ -3,8 +3,8 @@
 use serde::Deserialize;
 use std::collections::HashMap;
 
-use super::errors::Error;
 use super::CreateCustomerResponse;
+use super::errors::Error;
 
 /// This is a model struct for BulkCreateCustomersResponse type
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]

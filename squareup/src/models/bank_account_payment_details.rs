@@ -3,12 +3,12 @@
 use serde::{Deserialize, Serialize};
 
 use super::{
+    AchDetails,
     enums::{
         BankAccountPaymentDetailsAccountOwnershipType, BankAccountPaymentDetailsTransferType,
         Country,
     },
     errors::Error,
-    AchDetails,
 };
 
 /// Additional details about BANK_ACCOUNT type payments.

@@ -2,8 +2,8 @@
 
 use serde::Deserialize;
 
-use super::errors::Error;
 use super::Card;
+use super::errors::Error;
 
 /// This is a model struct for CreateCardResponse type.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]

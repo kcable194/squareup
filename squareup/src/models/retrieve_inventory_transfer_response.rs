@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, InventoryTransfer};
+use super::{InventoryTransfer, errors::Error};
 
 /// This is a model struct for RetrieveInventoryTransferResponse type.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]

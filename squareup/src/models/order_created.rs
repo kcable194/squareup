@@ -1,7 +1,7 @@
 //! Response body struct for the OrderCreated type
 
-use crate::models::enums::OrderState;
 use crate::models::DateTime;
+use crate::models::enums::OrderState;
 use serde::{Deserialize, Serialize};
 
 /// This is a model struct for OrderCreated type.

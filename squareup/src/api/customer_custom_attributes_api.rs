@@ -18,7 +18,7 @@ use crate::models::{
     UpdateCustomerCustomAttributeDefinitionResponse, UpsertCustomerCustomAttributeRequest,
     UpsertCustomerCustomAttributeResponse,
 };
-use crate::{config::Configuration, http::client::HttpClient, SquareClient};
+use crate::{SquareClient, config::Configuration, http::client::HttpClient};
 
 const DEFAULT_URI: &str = "/customers";
 

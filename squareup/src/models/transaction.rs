@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{enums::TransactionProduct, Address, DateTime, Refund, Tender};
+use super::{Address, DateTime, Refund, Tender, enums::TransactionProduct};
 
 /// Represents a transaction processed with Square, either with the Connect API or with Square Point
 /// of Sale.

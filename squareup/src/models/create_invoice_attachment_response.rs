@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, InvoiceAttachment};
+use super::{InvoiceAttachment, errors::Error};
 
 /// This is a model struct for CreateInvoiceAttachmentResponse type
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]

@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use super::{enums::PaymentEventPaymentEventType, PaymentEventData};
+use super::{PaymentEventData, enums::PaymentEventPaymentEventType};
 
 /// Published when a Payment
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]

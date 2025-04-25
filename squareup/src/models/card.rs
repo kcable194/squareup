@@ -3,8 +3,8 @@
 use serde::{Deserialize, Serialize};
 
 use super::{
-    enums::{CardBrand, CardCoBrand, CardPrepaidType, CardType},
     Address,
+    enums::{CardBrand, CardCoBrand, CardPrepaidType, CardType},
 };
 
 /// Represents the payment details of a card to be used for payments.

@@ -12,14 +12,14 @@
 //! based on group membership.
 
 use crate::{
+    SquareClient,
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::SquareApiError, CreateCustomerGroupRequest, CreateCustomerGroupResponse,
-        DeleteCustomerGroupResponse, ListCustomerGroupsParameters, ListCustomerGroupsResponse,
-        RetrieveCustomerGroupResponse, UpdateCustomerGroupRequest, UpdateCustomerGroupResponse,
+        CreateCustomerGroupRequest, CreateCustomerGroupResponse, DeleteCustomerGroupResponse,
+        ListCustomerGroupsParameters, ListCustomerGroupsResponse, RetrieveCustomerGroupResponse,
+        UpdateCustomerGroupRequest, UpdateCustomerGroupResponse, errors::SquareApiError,
     },
-    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/customers/groups";

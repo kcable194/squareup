@@ -1,7 +1,7 @@
 //! Model struct for CatalogItemFoodAndBeverageDetails type.
 
-use crate::models::catalog_item_food_and_beverage_details_ingredient::CatalogItemFoodAndBeverageDetailsIngredient;
 use crate::models::CatalogItemFoodAndBeverageDetailsDietaryPreference;
+use crate::models::catalog_item_food_and_beverage_details_ingredient::CatalogItemFoodAndBeverageDetailsIngredient;
 use serde::{Deserialize, Serialize};
 
 /// The food and beverage-specific details of a FOOD_AND_BEV item.

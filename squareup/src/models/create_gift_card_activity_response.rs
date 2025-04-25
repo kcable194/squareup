@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, GiftCardActivity};
+use super::{GiftCardActivity, errors::Error};
 
 /// This is a model struct for CreateGiftCardActivityResponse type
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq)]

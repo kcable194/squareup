@@ -1,7 +1,7 @@
 //! Model struct for SubscriptionTestResult type.
 
-use crate::models::enums::WebhookEventType;
 use crate::models::DateTime;
+use crate::models::enums::WebhookEventType;
 use serde::{Deserialize, Serialize};
 
 /// /// Subscription test result details.

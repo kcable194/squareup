@@ -15,9 +15,9 @@ use crate::models::{
     RevokeTokenOAuthResponse,
 };
 use crate::{
-    config::Configuration, http::client::HttpClient, models::errors::SquareApiError, SquareClient,
+    SquareClient, config::Configuration, http::client::HttpClient, models::errors::SquareApiError,
 };
-use reqwest::header::{HeaderValue, AUTHORIZATION};
+use reqwest::header::{AUTHORIZATION, HeaderValue};
 
 const DEFAULT_URI: &str = "/oauth2";
 

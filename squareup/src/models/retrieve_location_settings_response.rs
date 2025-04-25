@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, CheckoutLocationSettings};
+use super::{CheckoutLocationSettings, errors::Error};
 
 /// This is a model struct for RetrieveLocationSettingsResponse type
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq)]

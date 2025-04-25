@@ -3,7 +3,7 @@
 use crate::models::enums::CatalogModifierListModifierType;
 use serde::{Deserialize, Serialize};
 
-use super::{enums::CatalogModifierListSelectionType, CatalogObject};
+use super::{CatalogObject, enums::CatalogModifierListSelectionType};
 
 ///  list of modifiers applicable to items at the time of sale.
 ///

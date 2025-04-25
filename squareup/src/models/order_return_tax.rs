@@ -3,8 +3,8 @@
 use serde::{Deserialize, Serialize};
 
 use super::{
-    enums::{OrderLineItemTaxScope, OrderLineItemTaxType},
     Money,
+    enums::{OrderLineItemTaxScope, OrderLineItemTaxType},
 };
 
 /// Represents a tax being returned that applies to one or more return line items in an order.

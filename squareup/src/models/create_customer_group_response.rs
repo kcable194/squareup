@@ -3,7 +3,7 @@
 /// This is a model struct for CreateCustomerGroupResponse type
 use serde::Deserialize;
 
-use super::{errors::Error, CustomerGroup};
+use super::{CustomerGroup, errors::Error};
 
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]
 pub struct CreateCustomerGroupResponse {

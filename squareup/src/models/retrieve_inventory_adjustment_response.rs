@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, InventoryAdjustment};
+use super::{InventoryAdjustment, errors::Error};
 
 /// This is a model struct for RetrieveInventoryAdjustmentResponse type.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]

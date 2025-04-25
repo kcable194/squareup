@@ -3,8 +3,8 @@
 use serde::{Deserialize, Serialize};
 
 use super::{
-    enums::{SubscriptionStatus, Timezone},
     DateTime, Money, Phase, SubscriptionAction, SubscriptionSource,
+    enums::{SubscriptionStatus, Timezone},
 };
 
 /// Represents a subscription to a subscription plan by a subscriber.

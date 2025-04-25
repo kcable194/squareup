@@ -3,7 +3,7 @@
 use crate::models::enums::DestinationType;
 use serde::{Deserialize, Serialize};
 
-use super::{enums::PaymentRefundStatus, DateTime, DestinationDetails, Money, ProcessingFee};
+use super::{DateTime, DestinationDetails, Money, ProcessingFee, enums::PaymentRefundStatus};
 
 /// Represents a refund of a payment made using Square.
 ///

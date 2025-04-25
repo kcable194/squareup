@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, Job};
+use super::{Job, errors::Error};
 
 /// This is a model struct for ListJobsResponse type
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq)]

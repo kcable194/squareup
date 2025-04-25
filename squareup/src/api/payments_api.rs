@@ -16,15 +16,15 @@
 //! You can create a customer and add a card on file using Square APIs, the Square Seller Dashboard, or the Square Point of Sale application.
 
 use crate::{
+    SquareClient,
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::SquareApiError, CancelPaymentByIdempotencyKeyRequest,
-        CancelPaymentByIdempotencyKeyResponse, CancelPaymentResponse, CompletePaymentRequest,
-        CompletePaymentResponse, CreatePaymentRequest, CreatePaymentResponse, GetPaymentResponse,
-        ListPaymentsParameters, ListPaymentsResponse, UpdatePaymentRequest, UpdatePaymentResponse,
+        CancelPaymentByIdempotencyKeyRequest, CancelPaymentByIdempotencyKeyResponse,
+        CancelPaymentResponse, CompletePaymentRequest, CompletePaymentResponse,
+        CreatePaymentRequest, CreatePaymentResponse, GetPaymentResponse, ListPaymentsParameters,
+        ListPaymentsResponse, UpdatePaymentRequest, UpdatePaymentResponse, errors::SquareApiError,
     },
-    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/payments";

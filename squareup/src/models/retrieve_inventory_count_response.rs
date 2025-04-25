@@ -2,7 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::{errors::Error, InventoryCount};
+use super::{InventoryCount, errors::Error};
 
 /// This is a model struct for RetrieveInventoryCountResponse type.
 #[derive(Clone, Debug, Default, Serialize, Deserialize, Eq, PartialEq)]

@@ -3,11 +3,11 @@
 use serde::{Deserialize, Serialize};
 
 use super::{
+    MeasurementUnitCustom,
     enums::{
         MeasurementUnitArea, MeasurementUnitGeneric, MeasurementUnitLength, MeasurementUnitTime,
         MeasurementUnitUnitType, MeasurementUnitVolume, MeasurementUnitWeight,
     },
-    MeasurementUnitCustom,
 };
 
 /// Represents a unit of measurement to use with a quantity, such as ounces or inches.

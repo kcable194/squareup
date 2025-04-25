@@ -4,14 +4,14 @@
 //! to get data about those locations, such as their addresses, names, and business hours.
 
 use crate::{
+    SquareClient,
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::SquareApiError, CreateLocationRequest, CreateLocationResponse,
-        ListLocationsResponse, RetrieveLocationResponse, UpdateLocationRequest,
-        UpdateLocationResponse,
+        CreateLocationRequest, CreateLocationResponse, ListLocationsResponse,
+        RetrieveLocationResponse, UpdateLocationRequest, UpdateLocationResponse,
+        errors::SquareApiError,
     },
-    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/locations";

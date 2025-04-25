@@ -5,8 +5,8 @@ use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
 
 use super::{
-    enums::{OrderLineItemTaxScope, OrderLineItemTaxType},
     Money,
+    enums::{OrderLineItemTaxScope, OrderLineItemTaxType},
 };
 
 /// Represents a tax that applies to one or more line item in the order.

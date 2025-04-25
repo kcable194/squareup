@@ -5,11 +5,11 @@ use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
 
 use super::{
+    OrderFulfillmentDeliveryDetails, OrderFulfillmentFulfillmentEntry,
+    OrderFulfillmentPickupDetails, OrderFulfillmentShipmentDetails,
     enums::{
         OrderFulfillmentFulfillmentLineItemApplication, OrderFulfillmentState, OrderFulfillmentType,
     },
-    OrderFulfillmentDeliveryDetails, OrderFulfillmentFulfillmentEntry,
-    OrderFulfillmentPickupDetails, OrderFulfillmentShipmentDetails,
 };
 
 /// This is a model struct for OrderFulfillment type.

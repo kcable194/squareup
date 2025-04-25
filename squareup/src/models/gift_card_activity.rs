@@ -3,12 +3,13 @@
 use serde::{Deserialize, Serialize};
 
 use super::{
-    enums::GiftCardActivityType, DateTime, GiftCardActivityActivate,
-    GiftCardActivityAdjustDecrement, GiftCardActivityAdjustIncrement, GiftCardActivityBlock,
-    GiftCardActivityClearBalance, GiftCardActivityDeactivate, GiftCardActivityImport,
-    GiftCardActivityImportReversal, GiftCardActivityLoad, GiftCardActivityRedeem,
-    GiftCardActivityRefund, GiftCardActivityTransferBalanceFrom, GiftCardActivityTransferBalanceTo,
+    DateTime, GiftCardActivityActivate, GiftCardActivityAdjustDecrement,
+    GiftCardActivityAdjustIncrement, GiftCardActivityBlock, GiftCardActivityClearBalance,
+    GiftCardActivityDeactivate, GiftCardActivityImport, GiftCardActivityImportReversal,
+    GiftCardActivityLoad, GiftCardActivityRedeem, GiftCardActivityRefund,
+    GiftCardActivityTransferBalanceFrom, GiftCardActivityTransferBalanceTo,
     GiftCardActivityUnblock, GiftCardActivityUnlinkedActivityRefund, Money,
+    enums::GiftCardActivityType,
 };
 
 /// Represents an action performed on a gift card that affects its state or balance.

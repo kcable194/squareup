@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, Order, OrderEntry};
+use super::{Order, OrderEntry, errors::Error};
 
 /// This is a model struct for SearchOrdersResponse type
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]

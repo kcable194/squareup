@@ -3,7 +3,7 @@
 use crate::models::enums::{OrderServiceChargeScope, OrderServiceChargeTreatmentType};
 use serde::{Deserialize, Serialize};
 
-use super::{enums::OrderServiceChargeCalculationPhase, Money, OrderLineItemAppliedTax};
+use super::{Money, OrderLineItemAppliedTax, enums::OrderServiceChargeCalculationPhase};
 
 /// Represents the service charge applied to the original order.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]

@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, Payment};
+use super::{Payment, errors::Error};
 
 /// This is a model struct for UpdatePaymentResponse type.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]

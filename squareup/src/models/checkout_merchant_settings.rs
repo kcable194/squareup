@@ -1,7 +1,7 @@
 //! Model struct for CheckoutMerchantSettings type
 
-use crate::models::checkout_merchant_settings_payment_methods::CheckoutMerchantSettingsPaymentMethods;
 use crate::models::DateTime;
+use crate::models::checkout_merchant_settings_payment_methods::CheckoutMerchantSettingsPaymentMethods;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]

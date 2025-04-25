@@ -2,7 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::{enums::TeamMemberStatus, DateTime, TeamMemberAssignedLocations, WageSetting};
+use super::{DateTime, TeamMemberAssignedLocations, WageSetting, enums::TeamMemberStatus};
 
 /// A record representing an individual team member for a business.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]

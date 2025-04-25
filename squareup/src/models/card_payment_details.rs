@@ -3,13 +3,13 @@
 use serde::{Deserialize, Serialize};
 
 use super::{
+    Card, CardPaymentTimeline, DeviceDetails,
     enums::{
         CardPaymentDetailsAvsStatus, CardPaymentDetailsCvvStatus, CardPaymentDetailsEntryMethod,
         CardPaymentDetailsStatus, CardPaymentDetailsVerificationMethod,
         CardPaymentDetailsVerificationResult,
     },
     errors::Error,
-    Card, CardPaymentTimeline, DeviceDetails,
 };
 
 /// Reflects the current status of a card payment.

@@ -2,7 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::{enums::GiftCardActivityRedeemStatus, Money};
+use super::{Money, enums::GiftCardActivityRedeemStatus};
 
 /// Represents details about a `REDEEM` [gift card activity type](GiftCardActivityType).
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]

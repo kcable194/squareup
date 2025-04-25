@@ -2,7 +2,7 @@
 
 use serde::Serialize;
 
-use super::{enums::Timezone, Money, Phase, SubscriptionSource};
+use super::{Money, Phase, SubscriptionSource, enums::Timezone};
 
 /// This is a model class for CreateSubscriptionRequest type.
 #[derive(Clone, Debug, Default, Eq, PartialEq, Serialize)]

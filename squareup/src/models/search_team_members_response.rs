@@ -2,7 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::{errors::Error, TeamMember};
+use super::{TeamMember, errors::Error};
 
 /// This is a model struct for SearchTeamMembersResponse type.
 #[derive(Clone, Debug, Default, Deserialize, Serialize, Eq, PartialEq)]

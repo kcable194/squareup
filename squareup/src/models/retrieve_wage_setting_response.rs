@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, WageSetting};
+use super::{WageSetting, errors::Error};
 
 /// This is a model struct for RetrieveWageSettingResponse type.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]

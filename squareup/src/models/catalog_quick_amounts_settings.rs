@@ -2,7 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::{enums::CatalogQuickAmountsSettingsOption, CatalogQuickAmount};
+use super::{CatalogQuickAmount, enums::CatalogQuickAmountsSettingsOption};
 
 /// A parent Catalog Object model represents a set of Quick Amounts and the settings control the
 /// amounts.

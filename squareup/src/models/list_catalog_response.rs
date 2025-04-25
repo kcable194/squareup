@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, CatalogObject};
+use super::{CatalogObject, errors::Error};
 
 /// This is a model struct for ListCatalogResponse type
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq)]

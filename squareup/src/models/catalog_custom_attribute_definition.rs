@@ -3,13 +3,13 @@
 use serde::{Deserialize, Serialize};
 
 use super::{
+    CatalogCustomAttributeDefinitionNumberConfig, CatalogCustomAttributeDefinitionSelectionConfig,
+    CatalogCustomAttributeDefinitionStringConfig, SourceApplication,
     enums::{
         CatalogCustomAttributeDefinitionAppVisibility,
         CatalogCustomAttributeDefinitionSellerVisibility, CatalogCustomAttributeDefinitionType,
         CatalogObjectType,
     },
-    CatalogCustomAttributeDefinitionNumberConfig, CatalogCustomAttributeDefinitionSelectionConfig,
-    CatalogCustomAttributeDefinitionStringConfig, SourceApplication,
 };
 
 /// Contains information defining a custom attribute.

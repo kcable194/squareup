@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, CheckoutMerchantSettings};
+use super::{CheckoutMerchantSettings, errors::Error};
 
 /// This is a model struct for UpdateMerchantSettingsResponse type
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq)]

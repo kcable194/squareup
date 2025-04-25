@@ -1,7 +1,7 @@
 //! Model struct for DestinationDetailsCardRefundDetails type
 
-use crate::models::enums::CardPaymentDetailsEntryMethod;
 use crate::models::Card;
+use crate::models::enums::CardPaymentDetailsEntryMethod;
 use serde::{Deserialize, Serialize};
 
 /// Details about a refund's card.

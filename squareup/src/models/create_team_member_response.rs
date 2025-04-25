@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, TeamMember};
+use super::{TeamMember, errors::Error};
 
 /// This is a model struct for CreateTeamMemberResponse type.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]

@@ -1,9 +1,9 @@
+use squareup::SquareClient;
 use squareup::api::CustomersApi;
 use squareup::config::{BaseUri, Configuration, Environment};
 use squareup::http::client::HttpClientConfiguration;
 use squareup::models::enums::{SortCustomersField, SortOrder};
 use squareup::models::{ListCustomersParameters, ListCustomersResponse};
-use squareup::SquareClient;
 
 #[tokio::main]
 async fn main() {

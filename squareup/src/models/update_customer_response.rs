@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, Customer};
+use super::{Customer, errors::Error};
 
 /// This is a model struct for UpdateCustomerResponse type.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]
