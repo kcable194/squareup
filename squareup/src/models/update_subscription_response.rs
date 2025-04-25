@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, Subscription};
+use super::{Subscription, errors::Error};
 
 /// This is a model struct for UpdateSubscriptionResponse type.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]

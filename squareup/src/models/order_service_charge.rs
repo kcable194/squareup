@@ -6,8 +6,8 @@ use crate::models::enums::{OrderServiceChargeScope, OrderServiceChargeTreatmentT
 use serde::{Deserialize, Serialize};
 
 use super::{
-    enums::{OrderServiceChargeCalculationPhase, OrderServiceChargeType},
     Money, OrderLineItemAppliedTax,
+    enums::{OrderServiceChargeCalculationPhase, OrderServiceChargeType},
 };
 
 /// Represents a service charge applied to an order.

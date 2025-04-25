@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, Order};
+use super::{Order, errors::Error};
 
 /// This is a model struct for UpdateOrderResponse type.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]

@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, CustomerSegment};
+use super::{CustomerSegment, errors::Error};
 
 /// This is a model struct for ListCustomerSegmentsResponse type
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq)]

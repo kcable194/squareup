@@ -11,16 +11,16 @@ use crate::models::{
     UpdateJobRequest, UpdateJobResponse,
 };
 use crate::{
+    SquareClient,
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::SquareApiError, BulkCreateTeamMembersRequest, BulkCreateTeamMembersResponse,
-        BulkUpdateTeamMembersRequest, BulkUpdateTeamMembersResponse, CreateTeamMemberRequest,
-        CreateTeamMemberResponse, RetrieveTeamMemberResponse, RetrieveWageSettingResponse,
-        SearchTeamMembersRequest, SearchTeamMembersResponse, UpdateTeamMemberRequest,
-        UpdateTeamMemberResponse, UpdateWageSettingRequest, UpdateWageSettingResponse,
+        BulkCreateTeamMembersRequest, BulkCreateTeamMembersResponse, BulkUpdateTeamMembersRequest,
+        BulkUpdateTeamMembersResponse, CreateTeamMemberRequest, CreateTeamMemberResponse,
+        RetrieveTeamMemberResponse, RetrieveWageSettingResponse, SearchTeamMembersRequest,
+        SearchTeamMembersResponse, UpdateTeamMemberRequest, UpdateTeamMemberResponse,
+        UpdateWageSettingRequest, UpdateWageSettingResponse, errors::SquareApiError,
     },
-    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/team-members";

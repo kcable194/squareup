@@ -5,12 +5,12 @@ use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
 
 use super::{
-    enums::CatalogObjectType, CatalogAvailabilityPeriod, CatalogCategory,
-    CatalogCustomAttributeDefinition, CatalogCustomAttributeValue, CatalogDiscount, CatalogImage,
-    CatalogItem, CatalogItemOption, CatalogItemOptionValue, CatalogItemVariation,
-    CatalogMeasurementUnit, CatalogModifier, CatalogModifierList, CatalogPricingRule,
-    CatalogProductSet, CatalogQuickAmountsSettings, CatalogSubscriptionPlan,
-    CatalogSubscriptionPlanVariation, CatalogTax, CatalogTimePeriod, CatalogV1Id, DateTime,
+    CatalogAvailabilityPeriod, CatalogCategory, CatalogCustomAttributeDefinition,
+    CatalogCustomAttributeValue, CatalogDiscount, CatalogImage, CatalogItem, CatalogItemOption,
+    CatalogItemOptionValue, CatalogItemVariation, CatalogMeasurementUnit, CatalogModifier,
+    CatalogModifierList, CatalogPricingRule, CatalogProductSet, CatalogQuickAmountsSettings,
+    CatalogSubscriptionPlan, CatalogSubscriptionPlanVariation, CatalogTax, CatalogTimePeriod,
+    CatalogV1Id, DateTime, enums::CatalogObjectType,
 };
 
 /// The wrapper object for the catalog entries of a given object type.

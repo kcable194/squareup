@@ -3,8 +3,8 @@
 use serde::{Deserialize, Serialize};
 
 use super::{
-    enums::{OrderLineItemDiscountScope, OrderLineItemDiscountType},
     Money,
+    enums::{OrderLineItemDiscountScope, OrderLineItemDiscountType},
 };
 
 /// Represents a discount being returned that applies to one or more return line items in an order.

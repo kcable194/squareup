@@ -12,18 +12,18 @@ use crate::models::{
     ChangeBillingAnchorDateResponse,
 };
 use crate::{
+    SquareClient,
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::SquareApiError, CancelSubscriptionResponse, CreateSubscriptionRequest,
-        CreateSubscriptionResponse, DeleteSubscriptionActionResponse,
-        ListSubscriptionEventsParameters, ListSubscriptionEventsResponse, PauseSubscriptionRequest,
-        PauseSubscriptionResponse, ResumeSubscriptionRequest, ResumeSubscriptionResponse,
-        RetrieveSubscriptionParameters, RetrieveSubscriptionResponse, SearchSubscriptionsRequest,
-        SearchSubscriptionsResponse, SwapPlanRequest, SwapPlanResponse, UpdateSubscriptionRequest,
-        UpdateSubscriptionResponse,
+        CancelSubscriptionResponse, CreateSubscriptionRequest, CreateSubscriptionResponse,
+        DeleteSubscriptionActionResponse, ListSubscriptionEventsParameters,
+        ListSubscriptionEventsResponse, PauseSubscriptionRequest, PauseSubscriptionResponse,
+        ResumeSubscriptionRequest, ResumeSubscriptionResponse, RetrieveSubscriptionParameters,
+        RetrieveSubscriptionResponse, SearchSubscriptionsRequest, SearchSubscriptionsResponse,
+        SwapPlanRequest, SwapPlanResponse, UpdateSubscriptionRequest, UpdateSubscriptionResponse,
+        errors::SquareApiError,
     },
-    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/subscriptions";

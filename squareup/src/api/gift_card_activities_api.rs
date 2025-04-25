@@ -5,13 +5,13 @@
 //! card, and redeem a gift card.
 
 use crate::{
+    SquareClient,
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::SquareApiError, CreateGiftCardActivityRequest, CreateGiftCardActivityResponse,
-        ListGiftCardActivitiesParameters, ListGiftCardActivitiesResponse,
+        CreateGiftCardActivityRequest, CreateGiftCardActivityResponse,
+        ListGiftCardActivitiesParameters, ListGiftCardActivitiesResponse, errors::SquareApiError,
     },
-    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/gift-cards/activities";

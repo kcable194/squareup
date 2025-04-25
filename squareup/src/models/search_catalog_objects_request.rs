@@ -2,7 +2,7 @@
 
 use serde::Serialize;
 
-use super::{enums::CatalogObjectType, CatalogQuery, DateTime};
+use super::{CatalogQuery, DateTime, enums::CatalogObjectType};
 
 /// This is a model struct for SearchCatalogObjectsRequest type.
 #[derive(Clone, Debug, Default, Eq, PartialEq, Serialize)]

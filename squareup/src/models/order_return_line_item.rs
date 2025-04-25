@@ -3,8 +3,8 @@
 use serde::{Deserialize, Serialize};
 
 use super::{
-    enums::OrderLineItemItemType, Money, OrderLineItemAppliedDiscount, OrderLineItemAppliedTax,
-    OrderQuantityUnit, OrderReturnLineItemModifier,
+    Money, OrderLineItemAppliedDiscount, OrderLineItemAppliedTax, OrderQuantityUnit,
+    OrderReturnLineItemModifier, enums::OrderLineItemItemType,
 };
 
 /// The line item being returned in an order.

@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, Subscription, SubscriptionAction};
+use super::{Subscription, SubscriptionAction, errors::Error};
 
 /// This is a model struct for the SwapPlanResponse type.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]

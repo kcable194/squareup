@@ -2,7 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::{enums::RefundStatus, AdditionalRecipient, DateTime, Money};
+use super::{AdditionalRecipient, DateTime, Money, enums::RefundStatus};
 
 /// Represents a refund processed for a Square transaction.
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]

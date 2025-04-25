@@ -12,16 +12,16 @@
 //! structure](https://developer.squareup.com/docs/payments-pricing#orders-api-fee-structure).
 
 use crate::{
+    SquareClient,
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::SquareApiError, BatchRetrieveOrdersRequest, BatchRetrieveOrdersResponse,
-        CalculateOrderRequest, CalculateOrderResponse, CloneOrderRequest, CloneOrderResponse,
-        CreateOrderRequest, CreateOrderResponse, PayOrderRequest, PayOrderResponse,
-        RetrieveOrderResponse, SearchOrdersRequest, SearchOrdersResponse, UpdateOrderRequest,
-        UpdateOrderResponse,
+        BatchRetrieveOrdersRequest, BatchRetrieveOrdersResponse, CalculateOrderRequest,
+        CalculateOrderResponse, CloneOrderRequest, CloneOrderResponse, CreateOrderRequest,
+        CreateOrderResponse, PayOrderRequest, PayOrderResponse, RetrieveOrderResponse,
+        SearchOrdersRequest, SearchOrdersResponse, UpdateOrderRequest, UpdateOrderResponse,
+        errors::SquareApiError,
     },
-    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/orders";

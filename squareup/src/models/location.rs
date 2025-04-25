@@ -3,10 +3,10 @@
 use serde::{Deserialize, Serialize};
 
 use super::{
+    Address, BusinessHours, Coordinates, DateTime, TaxIds,
     enums::{
         Country, Currency, Language, LocationCapability, LocationStatus, LocationType, Timezone,
     },
-    Address, BusinessHours, Coordinates, DateTime, TaxIds,
 };
 
 /// Represents one of a business' [locations](https://developer.squareup.com/docs/locations-api).

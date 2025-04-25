@@ -1,6 +1,6 @@
 //! Model struct for RetrieveJobResponse type
 
-use super::{errors::Error, Job};
+use super::{Job, errors::Error};
 use serde::Deserialize;
 
 /// This is a model struct for RetrieveJobResponse type

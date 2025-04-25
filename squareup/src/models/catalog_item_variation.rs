@@ -3,9 +3,9 @@
 use serde::{Deserialize, Serialize};
 
 use super::{
-    enums::{CatalogPricingType, InventoryAlertType},
     CatalogItemOptionValueForItemVariation, CatalogStockConversion, ItemVariationLocationOverrides,
     Money,
+    enums::{CatalogPricingType, InventoryAlertType},
 };
 
 /// An item variation (i.e., product) in the Catalog object model.

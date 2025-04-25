@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, Location};
+use super::{Location, errors::Error};
 
 /// This is a model struct for ListLocationsResponse type
 #[derive(Clone, Debug, Deserialize, PartialEq)]

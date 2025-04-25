@@ -2,7 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::{enums::InvoicePaymentReminderStatus, DateTime};
+use super::{DateTime, enums::InvoicePaymentReminderStatus};
 
 /// Describes a payment request reminder (automatic notification) that Square sends to the customer.
 ///

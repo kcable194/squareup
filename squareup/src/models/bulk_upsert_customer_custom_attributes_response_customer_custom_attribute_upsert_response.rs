@@ -1,6 +1,6 @@
 //! Model struct for BulkUpsertCustomerCustomAttributesResponseCustomerCustomAttributeUpsertResponse type
 
-use super::{errors::Error, CustomAttribute};
+use super::{CustomAttribute, errors::Error};
 use serde::{Deserialize, Serialize};
 
 /// Represents a response for an individual upsert request in a BulkUpsertCustomerCustomAttributes operation.

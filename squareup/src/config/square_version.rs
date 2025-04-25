@@ -30,8 +30,8 @@ impl Default for SquareVersion {
 
 #[cfg(test)]
 mod tests {
-    use crate::config::square_version::CURRENT_SQUARE_VERSION;
     use crate::config::SquareVersion;
+    use crate::config::square_version::CURRENT_SQUARE_VERSION;
 
     #[test]
     fn as_string_default() {

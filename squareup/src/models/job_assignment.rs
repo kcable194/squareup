@@ -2,7 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::{enums::JobAssignmentPayType, Money};
+use super::{Money, enums::JobAssignmentPayType};
 
 /// An object describing a job that a team member is assigned to.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]

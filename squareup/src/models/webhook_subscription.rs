@@ -1,7 +1,7 @@
 //! Model struct for WebhookSubscription type
 
-use crate::models::enums::WebhookEventType;
 use crate::models::DateTime;
+use crate::models::enums::WebhookEventType;
 use serde::{Deserialize, Serialize};
 
 /// Represents the details of a webhook subscription, including notification URL, event types, and

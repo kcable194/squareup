@@ -2,7 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::{enums::SubscriptionEventSubscriptionEventType, SubscriptionEventInfo};
+use super::{SubscriptionEventInfo, enums::SubscriptionEventSubscriptionEventType};
 
 /// Describes changes to a subscription and the subscription status.
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]

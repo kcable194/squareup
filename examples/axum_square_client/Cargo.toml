@@ -1,11 +1,11 @@
 [package]
 name = "axum_square_client"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-axum = "0.7.5"
+axum = "0.8.3"
 tokio = { version = "1.38.0", features = ["full"] }
-squareup = { path = "../../squareup" }
+squareup = { path = "../../squareup", default-features = false, features = ["rustls-tls"] }

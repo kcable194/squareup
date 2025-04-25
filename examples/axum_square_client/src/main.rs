@@ -1,15 +1,15 @@
 use axum::{
+    Json, Router,
     extract::{Path, State},
     routing::get,
-    Json, Router,
 };
+use squareup::SquareClient;
 use squareup::api::{CustomersApi, OrdersApi};
 use squareup::config::Configuration;
 use squareup::models::enums::{SortCustomersField, SortOrder};
 use squareup::models::{
     Customer, ListCustomersParameters, ListCustomersResponse, Order, SearchOrdersRequest,
 };
-use squareup::SquareClient;
 use std::sync::Arc;
 use tokio::net::TcpListener;
 
@@ -46,8 +46,8 @@ async fn main() {
 
     // Add some routes to the application, as well as our app state
     let app: Router = Router::new()
-        .route("/customers/:num", get(customers))
-        .route("/orders/:location_id/:num", get(orders))
+        .route("/customers/{num}", get(customers))
+        .route("/orders/{location_id}/{num}", get(orders))
         .with_state(app_state);
 
     // run app with hyper

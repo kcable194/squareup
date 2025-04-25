@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, Invoice};
+use super::{Invoice, errors::Error};
 
 /// This is a model struct for UpdateInvoiceResponse type.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]

@@ -8,17 +8,17 @@
 //! activities, such as activate a gift card, add funds to a gift card, and redeem a gift card.
 
 use crate::{
+    SquareClient,
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::SquareApiError, CreateGiftCardRequest, CreateGiftCardResponse,
-        LinkCustomerToGiftCardRequest, LinkCustomerToGiftCardResponse, ListGiftCardsParameters,
-        ListGiftCardsResponse, RetrieveGiftCardFromGANRequest, RetrieveGiftCardFromGANResponse,
+        CreateGiftCardRequest, CreateGiftCardResponse, LinkCustomerToGiftCardRequest,
+        LinkCustomerToGiftCardResponse, ListGiftCardsParameters, ListGiftCardsResponse,
+        RetrieveGiftCardFromGANRequest, RetrieveGiftCardFromGANResponse,
         RetrieveGiftCardFromNonceRequest, RetrieveGiftCardFromNonceResponse,
         RetrieveGiftCardResponse, UnlinkCustomerFromGiftCardRequest,
-        UnlinkCustomerFromGiftCardResponse,
+        UnlinkCustomerFromGiftCardResponse, errors::SquareApiError,
     },
-    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/gift-cards";

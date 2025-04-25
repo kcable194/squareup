@@ -187,8 +187,8 @@ impl TryFrom<&Headers> for HeaderMap {
 #[cfg(test)]
 mod tests {
     use crate::config::square_version::CURRENT_SQUARE_VERSION;
-    use crate::http::client::HttpClientConfiguration;
     use crate::http::Headers;
+    use crate::http::client::HttpClientConfiguration;
     use reqwest::header::HeaderMap;
     use std::collections::HashMap;
 

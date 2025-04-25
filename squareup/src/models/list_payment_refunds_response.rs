@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, PaymentRefund};
+use super::{PaymentRefund, errors::Error};
 
 /// This is a model struct for ListPaymentRefundsResponse type
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq)]

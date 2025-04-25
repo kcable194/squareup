@@ -1,7 +1,7 @@
 //! Response body struct for the OauthAuthorizationRevokedEventRevocationObject type
 
-use crate::models::enums::OauthAuthorizationRevokedEventRevokerType;
 use crate::models::DateTime;
+use crate::models::enums::OauthAuthorizationRevokedEventRevokerType;
 use serde::{Deserialize, Serialize};
 
 /// This is a model struct for OauthAuthorizationRevokedEventRevocationObject type.

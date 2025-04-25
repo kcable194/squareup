@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, SubscriptionEvent};
+use super::{SubscriptionEvent, errors::Error};
 
 /// This is a model struct for ListSubscriptionEventsResponse type
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq)]

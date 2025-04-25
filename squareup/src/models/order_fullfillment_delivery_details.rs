@@ -3,7 +3,7 @@
 use serde::{Deserialize, Serialize};
 
 use super::{
-    enums::OrderFulfillmentDeliveryDetailsScheduleType, DateTime, OrderFulfillmentRecipient,
+    DateTime, OrderFulfillmentRecipient, enums::OrderFulfillmentDeliveryDetailsScheduleType,
 };
 
 /// Describes delivery details of an order fulfillment.

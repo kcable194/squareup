@@ -15,7 +15,7 @@ use crate::models::{
     UpdateWebhookSubscriptionSignatureKeyResponse,
 };
 use crate::{
-    config::Configuration, http::client::HttpClient, models::errors::SquareApiError, SquareClient,
+    SquareClient, config::Configuration, http::client::HttpClient, models::errors::SquareApiError,
 };
 
 const DEFAULT_URI: &str = "/webhooks";

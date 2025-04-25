@@ -2,7 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::{enums::SubscriptionCadence, Money, SubscriptionPricing};
+use super::{Money, SubscriptionPricing, enums::SubscriptionCadence};
 
 /// Describes a phase in a subscription plan.
 ///

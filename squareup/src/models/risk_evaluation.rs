@@ -2,7 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::{enums::RiskEvaluationRiskLevel, DateTime};
+use super::{DateTime, enums::RiskEvaluationRiskLevel};
 
 /// Represents fraud risk information for the associated payment.
 ///

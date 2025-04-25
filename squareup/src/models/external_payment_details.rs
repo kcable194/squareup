@@ -2,7 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::{enums::ExternalPaymentType, Money};
+use super::{Money, enums::ExternalPaymentType};
 
 /// Stores details about an external payment.
 ///

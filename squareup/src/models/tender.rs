@@ -3,8 +3,8 @@
 use serde::{Deserialize, Serialize};
 
 use super::{
-    enums::TenderType, AdditionalRecipient, DateTime, Money, TenderBankAccountDetails,
-    TenderBuyNowPayLaterDetails, TenderCardDetails, TenderCashDetails, TenderSquareAccountDetails,
+    AdditionalRecipient, DateTime, Money, TenderBankAccountDetails, TenderBuyNowPayLaterDetails,
+    TenderCardDetails, TenderCashDetails, TenderSquareAccountDetails, enums::TenderType,
 };
 
 /// Represents a tender (i.e., a method of payment) used in a Square transaction.

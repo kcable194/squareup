@@ -1,10 +1,10 @@
 //! Model struct for Payment type
 
 use super::{
-    enums::{PaymentCapability, PaymentDelayAction, PaymentSourceType, PaymentStatus},
     Address, ApplicationDetails, BankAccountPaymentDetails, BuyNowPayLaterDetails,
     CardPaymentDetails, CashPaymentDetails, DateTime, DeviceDetails, DigitalWalletDetails,
     ExternalPaymentDetails, Money, ProcessingFee, RiskEvaluation, SquareAccountDetails,
+    enums::{PaymentCapability, PaymentDelayAction, PaymentSourceType, PaymentStatus},
 };
 use crate::models::offline_payment_details::OfflinePaymentDetails;
 use serde::{Deserialize, Serialize};

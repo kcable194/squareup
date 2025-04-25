@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, InventoryPhysicalCount};
+use super::{InventoryPhysicalCount, errors::Error};
 
 /// This is a model struct for RetrieveInventoryPhysicalCount type.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]

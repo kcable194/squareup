@@ -2,8 +2,8 @@
 
 use serde::Deserialize;
 
-use super::errors::Error;
 use super::Payment;
+use super::errors::Error;
 
 /// This is a model struct for CreatePaymentResponse type.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]

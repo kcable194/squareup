@@ -3,7 +3,7 @@
 use crate::models::enums::CatalogObjectType;
 use serde::{Deserialize, Serialize};
 
-use super::{enums::InventoryState, DateTime, SourceApplication};
+use super::{DateTime, SourceApplication, enums::InventoryState};
 
 /// Represents the quantity of an item variation that is physically present at a specific location,
 /// verified by a seller or a seller's employee.

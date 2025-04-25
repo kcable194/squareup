@@ -10,17 +10,17 @@
 //! SourceApplication - application that makes an inventory change and helps trace sources of inventory changes.
 
 use crate::{
+    SquareClient,
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::SquareApiError, BatchChangeInventoryRequest, BatchChangeInventoryResponse,
+        BatchChangeInventoryRequest, BatchChangeInventoryResponse,
         BatchRetrieveInventoryChangesRequest, BatchRetrieveInventoryChangesResponse,
         BatchRetrieveInventoryCountsRequest, BatchRetrieveInventoryCountsResponse,
         RetrieveInventoryAdjustmentResponse, RetrieveInventoryCountParams,
         RetrieveInventoryCountResponse, RetrieveInventoryPhysicalCountResponse,
-        RetrieveInventoryTransferResponse,
+        RetrieveInventoryTransferResponse, errors::SquareApiError,
     },
-    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/inventory";

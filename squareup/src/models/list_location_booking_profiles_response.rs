@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, LocationBookingProfile};
+use super::{LocationBookingProfile, errors::Error};
 
 /// This is a model struct for ListLocationBookingProfilesResponse type
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq)]
