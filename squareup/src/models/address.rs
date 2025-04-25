@@ -39,6 +39,7 @@ pub struct Address {
     pub administrative_district_level_3: Option<String>,
     /// The address's postal code. For a full list of field meanings by country, see [Working with
     /// Addresses](https://developer.squareup.com/docs/build-basics/working-with-addresses).
+    /// Can be specified in ZIP+4 format (for example, 12345-6789).
     pub postal_code: Option<String>,
     /// The address's country, in the two-letter format of ISO 3166. For example, `US` or `FR`.
     pub country: Option<Country>,

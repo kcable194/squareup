@@ -4,8 +4,8 @@ use super::{
     DateTime,
     enums::{PaymentRefundStatus, PaymentSourceType, SortOrder},
 };
-use std::fmt::Display;
 use crate::models::enums::ListPaymentRefundsRequestSortField;
+use std::fmt::Display;
 
 /// This is a model struct for ListPaymentRefundsParameters (query parameters)
 #[derive(Clone, Debug, Default)]
@@ -50,14 +50,14 @@ pub struct ListPaymentRefundsParameters {
     ///
     /// Default: `100`
     pub limit: Option<i32>,
-    /// Indicates the start of the time range to retrieve each PaymentRefund for, in RFC 3339 
+    /// Indicates the start of the time range to retrieve each PaymentRefund for, in RFC 3339
     /// format. The range is determined using the updated_at field for each PaymentRefund.
-    /// 
+    ///
     /// Default: If omitted, the time range starts at begin_time.
     pub updated_at_begin_time: Option<DateTime>,
-    /// Indicates the end of the time range to retrieve each PaymentRefund for, in RFC 3339 
+    /// Indicates the end of the time range to retrieve each PaymentRefund for, in RFC 3339
     /// format. The range is determined using the updated_at field for each PaymentRefund.
-    /// 
+    ///
     /// Default: The current time.
     pub updated_at_end_time: Option<DateTime>,
     /// The field used to sort results by. The default is CREATED_AT.

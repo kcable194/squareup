@@ -1,11 +1,11 @@
 //! Model struct for the Card type
 
-use serde::{Deserialize, Serialize};
-
 use super::{
-    Address,
+    Address, DateTime,
     enums::{CardBrand, CardCoBrand, CardPrepaidType, CardType},
 };
+use crate::models::enums::CardIssuerAlert;
+use serde::{Deserialize, Serialize};
 
 /// Represents the payment details of a card to be used for payments.
 ///
@@ -54,4 +54,24 @@ pub struct Card {
     /// **Read only** The card's co-brand if available. For example, an Afterpay virtual card would
     /// have a co-brand of AFTERPAY.
     pub card_co_brand: Option<CardCoBrand>,
+    /// **Read only** An alert from the issuing bank about the card status. Alerts can indicate whether
+    /// future charges to the card are likely to fail.
+    /// For more information, see Manage Card on File Declines.
+    ///
+    /// This field is present only if there's an active issuer alert.
+    pub issuer_alert: Option<CardIssuerAlert>,
+    /// **Read only** The timestamp of when the current issuer alert was received and processed,
+    /// in RFC 3339 format.
+    ///
+    /// This field is present only if there's an active issuer alert.
+    ///
+    /// Examples for January 25th, 2020 6:25:34pm Pacific Standard Time:
+    ///
+    /// UTC: 2020-01-26T02:25:34Z
+    ///
+    /// Pacific Standard Time with UTC offset: 2020-01-25T18:25:34-08:00
+    pub issuer_alert_at: Option<DateTime>,
+    /// **Read only** Indicates whether the card is linked to a Health Savings Account (HSA) or
+    /// Flexible Spending Account (FSA), based on the card BIN.
+    pub hsa_fsa: Option<bool>,
 }

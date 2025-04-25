@@ -153,4 +153,8 @@ pub struct Invoice {
     /// CreateInvoiceAttachment and DeleteInvoiceAttachment endpoints.
     /// Max Length 10
     pub attachments: Option<Vec<InvoiceAttachment>>,
+    /// **Read only** The ID of the team member who created the invoice. This field is present
+    /// only on invoices created in the Square Dashboard or Square Invoices app by a logged-in
+    /// team member.
+    pub creator_team_member_id: Option<String>,
 }

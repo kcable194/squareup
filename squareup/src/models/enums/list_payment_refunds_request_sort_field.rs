@@ -25,7 +25,6 @@ impl Display for ListPaymentRefundsRequestSortField {
         let str = match self {
             ListPaymentRefundsRequestSortField::CreatedAt => String::from("CreatedAt"),
             ListPaymentRefundsRequestSortField::UpdatedAt => String::from("UpdatedAt"),
-
         };
         write!(f, "{}", str)
     }
