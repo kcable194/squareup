@@ -1,8 +1,8 @@
 //! Query parameters for the List Gift Card Activities API
 
 use super::{
-    enums::{GiftCardActivityType, SortOrder},
     DateTime,
+    enums::{GiftCardActivityType, SortOrder},
 };
 use std::fmt::Display;
 

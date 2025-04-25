@@ -4,7 +4,7 @@ use std::collections::HashMap;
 
 use serde::Deserialize;
 
-use super::{errors::Error, CreateTeamMemberResponse};
+use super::{CreateTeamMemberResponse, errors::Error};
 
 /// This is a model struct for BulkCreateTeamMembersResponse type.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]

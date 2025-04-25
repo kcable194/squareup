@@ -1,6 +1,6 @@
 //! Model struct for UpsertCustomerCustomAttributeResponse type
 
-use super::{errors::Error, CustomAttribute};
+use super::{CustomAttribute, errors::Error};
 use serde::Deserialize;
 
 /// Represents the response for the UpsertCustomerCustomAttribute endpoint.

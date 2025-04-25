@@ -3,8 +3,8 @@
 use serde::{Deserialize, Serialize};
 
 use super::{
-    enums::{CatalogPricingType, InventoryAlertType},
     DateTime, Money,
+    enums::{CatalogPricingType, InventoryAlertType},
 };
 
 /// Price and inventory alerting overrides for a `CatalogItemVariation` at a specific `Location`.

@@ -1,6 +1,6 @@
 //! Model struct for ListPaymentsParameters (query parameters)
 
-use super::{enums::SortOrder, DateTime};
+use super::{DateTime, enums::SortOrder};
 use crate::models::enums::{CardBrand, PaymentSortField};
 use std::fmt::Display;
 

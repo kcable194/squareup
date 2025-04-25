@@ -1,7 +1,7 @@
 //! Model struct for SubscriptionPricing type.
 
-use crate::models::enums::SubscriptionPricingType;
 use crate::models::Money;
+use crate::models::enums::SubscriptionPricingType;
 use serde::{Deserialize, Serialize};
 
 /// Describes the pricing for the subscription.

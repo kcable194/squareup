@@ -3,8 +3,8 @@
 use serde::{Deserialize, Serialize};
 
 use super::{
-    enums::{TenderCardDetailsEntryMethod, TenderCardDetailsStatus},
     Card,
+    enums::{TenderCardDetailsEntryMethod, TenderCardDetailsStatus},
 };
 
 /// Represents additional details of a tender with type `CARD` or `SQUARE_GIFT_CARD`

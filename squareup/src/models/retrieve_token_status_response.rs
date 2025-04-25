@@ -1,8 +1,8 @@
 //! Model struct for RetrieveTokenStatusResponse type
 
 use super::errors::Error;
-use crate::models::enums::OAuthPermission;
 use crate::models::DateTime;
+use crate::models::enums::OAuthPermission;
 use serde::Deserialize;
 
 /// This is a model struct for RetrieveTokenStatusResponse type

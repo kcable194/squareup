@@ -17,7 +17,7 @@ use crate::models::{
     SearchAvailabilityResponse, UpdateBookingRequest, UpdateBookingResponse,
 };
 use crate::{
-    config::Configuration, http::client::HttpClient, models::errors::SquareApiError, SquareClient,
+    SquareClient, config::Configuration, http::client::HttpClient, models::errors::SquareApiError,
 };
 
 const DEFAULT_URI: &str = "/bookings";

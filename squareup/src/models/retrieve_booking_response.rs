@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, Booking};
+use super::{Booking, errors::Error};
 
 /// This is a model struct for RetrieveBookingResponse type.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]

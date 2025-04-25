@@ -3,7 +3,7 @@
 use serde::{Deserialize, Serialize};
 
 use super::{
-    enums::CustomerCreationSource, Address, Card, CustomerPreferences, CustomerTaxIds, DateTime,
+    Address, Card, CustomerPreferences, CustomerTaxIds, DateTime, enums::CustomerCreationSource,
 };
 
 /// Represents a Square customer profile in the Customer Directory of a Square seller.

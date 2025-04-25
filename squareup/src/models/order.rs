@@ -5,9 +5,9 @@ use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
 
 use super::{
-    enums::OrderState, DateTime, Money, OrderFulfillment, OrderLineItem, OrderLineItemDiscount,
-    OrderLineItemTax, OrderMoneyAmounts, OrderPricingOptions, OrderReturn, OrderReward,
-    OrderRoundingAdjustment, OrderServiceCharge, OrderSource, Refund, Tender,
+    DateTime, Money, OrderFulfillment, OrderLineItem, OrderLineItemDiscount, OrderLineItemTax,
+    OrderMoneyAmounts, OrderPricingOptions, OrderReturn, OrderReward, OrderRoundingAdjustment,
+    OrderServiceCharge, OrderSource, Refund, Tender, enums::OrderState,
 };
 
 /// Contains all information related to a single order to process with Square, including line items

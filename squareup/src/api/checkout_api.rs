@@ -17,13 +17,13 @@ use crate::models::{
     UpdatePaymentLinkRequest, UpdatePaymentLinkResponse,
 };
 use crate::{
+    SquareClient,
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::SquareApiError, CreatePaymentLinkRequest, CreatePaymentLinkResponse,
-        DeletePaymentLinkResponse,
+        CreatePaymentLinkRequest, CreatePaymentLinkResponse, DeletePaymentLinkResponse,
+        errors::SquareApiError,
     },
-    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/online-checkout";

@@ -3,8 +3,8 @@
 /// This is a model struct for CreateCustomerResponse type
 use serde::Deserialize;
 
-use super::errors::Error;
 use super::Customer;
+use super::errors::Error;
 
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]
 pub struct CreateCustomerResponse {

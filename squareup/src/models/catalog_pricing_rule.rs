@@ -2,7 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::{enums::ExcludeStrategy, Money};
+use super::{Money, enums::ExcludeStrategy};
 
 /// Defines how discounts are automatically applied to a set of items that match the pricing rule
 /// during the active time period.

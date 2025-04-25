@@ -4,10 +4,10 @@
 //! with Square for merchants using their platform.
 
 use crate::{
+    SquareClient,
     config::Configuration,
     http::client::HttpClient,
-    models::{errors::SquareApiError, RegisterDomainRequest, RegisterDomainResponse},
-    SquareClient,
+    models::{RegisterDomainRequest, RegisterDomainResponse, errors::SquareApiError},
 };
 
 const DEFAULT_URI: &str = "/apple-pay/domains";

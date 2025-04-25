@@ -1,11 +1,11 @@
 //! Model struct for BusinessAppointmentSettings type
 
+use crate::models::Money;
 use crate::models::enums::{
     BusinessAppointmentSettingsAlignmentTime, BusinessAppointmentSettingsBookingLocationType,
     BusinessAppointmentSettingsCancellationPolicy,
     BusinessAppointmentSettingsMaxAppointmentsPerDayLimitType,
 };
-use crate::models::Money;
 use serde::{Deserialize, Serialize};
 
 /// The service appointment settings, including where and how the service is provided.

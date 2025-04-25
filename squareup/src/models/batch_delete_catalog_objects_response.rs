@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, DateTime};
+use super::{DateTime, errors::Error};
 
 /// This is a model struct for BatchDeleteCatalogObjectsResponse type.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]

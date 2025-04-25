@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, CatalogIdMapping, CatalogObject};
+use super::{CatalogIdMapping, CatalogObject, errors::Error};
 
 /// This is a model struct for UpsertCatalogObjectResponse type.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]

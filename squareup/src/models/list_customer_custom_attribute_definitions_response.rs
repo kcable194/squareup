@@ -1,6 +1,6 @@
 //! Model struct for ListCustomerCustomAttributeDefinitionsResponse type
 
-use super::{errors::Error, CustomAttributeDefinition};
+use super::{CustomAttributeDefinition, errors::Error};
 use serde::Deserialize;
 
 /// This is a model struct for ListCustomerCustomAttributeDefinitionsResponse type

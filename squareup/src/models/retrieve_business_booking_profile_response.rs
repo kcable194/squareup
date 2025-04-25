@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, BusinessBookingProfile};
+use super::{BusinessBookingProfile, errors::Error};
 
 /// This is a model struct for RetrieveBusinessBookingProfileResponse type.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]

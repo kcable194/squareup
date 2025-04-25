@@ -5,9 +5,9 @@ use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
 
 use super::{
-    enums::OrderLineItemItemType, Money, OrderLineItemAppliedDiscount,
-    OrderLineItemAppliedServiceCharge, OrderLineItemAppliedTax, OrderLineItemModifier,
-    OrderLineItemPricingBlocklists, OrderQuantityUnit,
+    Money, OrderLineItemAppliedDiscount, OrderLineItemAppliedServiceCharge,
+    OrderLineItemAppliedTax, OrderLineItemModifier, OrderLineItemPricingBlocklists,
+    OrderQuantityUnit, enums::OrderLineItemItemType,
 };
 
 /// Represents a line item in an order.

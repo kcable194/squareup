@@ -1,7 +1,7 @@
 //! Model struct for CustomerAddressFilter type
 
-use crate::models::enums::Country;
 use crate::models::SearchCustomersTextFilter;
+use crate::models::enums::Country;
 use serde::Serialize;
 
 /// The customer address filter.

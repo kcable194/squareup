@@ -3,7 +3,7 @@
 use crate::models::enums::CatalogObjectType;
 use serde::{Deserialize, Serialize};
 
-use super::{enums::InventoryState, DateTime, InventoryAdjustmentGroup, Money, SourceApplication};
+use super::{DateTime, InventoryAdjustmentGroup, Money, SourceApplication, enums::InventoryState};
 
 /// Represents a change in state or quantity of product inventory at a particular time and location.
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]

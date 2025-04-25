@@ -3,8 +3,8 @@
 use serde::{Deserialize, Serialize};
 
 use super::{
-    enums::InventoryChangeType, CatalogMeasurementUnit, InventoryAdjustment,
-    InventoryPhysicalCount, InventoryTransfer,
+    CatalogMeasurementUnit, InventoryAdjustment, InventoryPhysicalCount, InventoryTransfer,
+    enums::InventoryChangeType,
 };
 
 /// Changes created for the request.

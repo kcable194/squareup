@@ -11,13 +11,13 @@
 //! The Cards API also supports other endpoints to manage the cards.
 
 use crate::{
+    SquareClient,
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::SquareApiError, CreateCardRequest, CreateCardResponse, DisableCardResponse,
-        ListCardsParameters, ListCardsResponse, RetrieveCardResponse,
+        CreateCardRequest, CreateCardResponse, DisableCardResponse, ListCardsParameters,
+        ListCardsResponse, RetrieveCardResponse, errors::SquareApiError,
     },
-    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/cards";

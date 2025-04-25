@@ -11,13 +11,13 @@
 //! segment, such as the segment name and the time when it was created.
 
 use crate::{
+    SquareClient,
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::SquareApiError, ListCustomerSegmentsParameters, ListCustomerSegmentsResponse,
-        RetrieveCustomerSegmentResponse,
+        ListCustomerSegmentsParameters, ListCustomerSegmentsResponse,
+        RetrieveCustomerSegmentResponse, errors::SquareApiError,
     },
-    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/customers/segments";

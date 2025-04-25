@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, CatalogIdMapping, CatalogObject, DateTime};
+use super::{CatalogIdMapping, CatalogObject, DateTime, errors::Error};
 
 /// This is a model struct for BatchUpsertCatalogObjectsResponse type.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]

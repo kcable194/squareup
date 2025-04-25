@@ -3,8 +3,8 @@
 use serde::{Deserialize, Serialize};
 
 use super::{
-    enums::{GiftCardGANSource, GiftCardStatus, GiftCardType},
     DateTime, Money,
+    enums::{GiftCardGANSource, GiftCardStatus, GiftCardType},
 };
 
 /// Represents a Square gift card.

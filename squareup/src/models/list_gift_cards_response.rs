@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, GiftCard};
+use super::{GiftCard, errors::Error};
 
 /// This is a model struct for ListGiftCardsResponse type
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq)]

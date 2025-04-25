@@ -2,7 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use super::{enums::CatalogQuickAmountType, Money};
+use super::{Money, enums::CatalogQuickAmountType};
 
 /// Represents a Quick Amount in the Catalog.
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]

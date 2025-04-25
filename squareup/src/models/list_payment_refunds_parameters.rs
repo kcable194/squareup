@@ -1,8 +1,8 @@
 //! Model struct for ListPaymentRefundsParameters (query parameters)
 
 use super::{
-    enums::{PaymentRefundStatus, PaymentSourceType, SortOrder},
     DateTime,
+    enums::{PaymentRefundStatus, PaymentSourceType, SortOrder},
 };
 use std::fmt::Display;
 

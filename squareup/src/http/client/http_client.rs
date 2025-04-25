@@ -8,8 +8,8 @@ use log::error;
 use reqwest::header::{HeaderName, HeaderValue};
 use reqwest::multipart::{self, Part};
 use reqwest_middleware::{ClientBuilder, ClientWithMiddleware};
-use reqwest_retry::policies::ExponentialBackoff;
 use reqwest_retry::RetryTransientMiddleware;
+use reqwest_retry::policies::ExponentialBackoff;
 use serde::Serialize;
 
 use crate::http::client::http_client_configuration::RetryConfiguration;
@@ -28,10 +28,23 @@ pub struct HttpClient {
 impl HttpClient {
     /// Instantiates a new `HttpClient` given the provided `HttpClientConfiguration`.
     pub fn try_new(config: &HttpClientConfiguration) -> Result<Self, SquareApiError> {
-        let mut client_builder = reqwest::ClientBuilder::new();
-        client_builder = client_builder.timeout(Duration::from_secs(config.timeout.into()));
-        client_builder = client_builder.user_agent(&config.user_agent);
-        client_builder = client_builder.default_headers((&config.default_headers).try_into()?);
+        let client_builder = reqwest::ClientBuilder::new()
+            .timeout(Duration::from_secs(config.timeout.into()))
+            .user_agent(&config.user_agent)
+            .default_headers((&config.default_headers).try_into()?);
+
+        #[cfg(feature = "native-tls")]
+        let client_builder = client_builder;
+
+        #[cfg(feature = "native-tls-vendored")]
+        let client_builder = client_builder.use_native_tls();
+
+        #[cfg(feature = "native-tls-alpn")]
+        let client_builder = client_builder.use_native_tls();
+
+        #[cfg(feature = "rustls-tls")]
+        let client_builder = client_builder.use_rustls_tls();
+
         let client = client_builder.build().map_err(|e| {
             let msg = format!("Failed to build client: {}", e);
             error!("{}", msg);

@@ -4,21 +4,21 @@
 //! variations, categories, discounts, taxes, modifiers, and more.
 
 use crate::{
+    SquareClient,
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::SquareApiError, BatchDeleteCatalogObjectsRequest,
-        BatchDeleteCatalogObjectsResponse, BatchRetrieveCatalogObjectsRequest,
-        BatchRetrieveCatalogObjectsResponse, BatchUpsertCatalogObjectsRequest,
-        BatchUpsertCatalogObjectsResponse, CatalogInfoResponse, CreateCatalogImageRequest,
-        CreateCatalogImageResponse, DeleteCatalogObjectResponse, ListCatalogParameters,
-        ListCatalogResponse, RetrieveCatalogObjectParameters, RetrieveCatalogObjectResponse,
-        SearchCatalogItemsRequest, SearchCatalogItemsResponse, SearchCatalogObjectsRequest,
-        SearchCatalogObjectsResponse, UpdateCatalogImageRequest, UpdateCatalogImageResponse,
-        UpdateItemModifierListsRequest, UpdateItemModifierListsResponse, UpdateItemTaxesRequest,
-        UpdateItemTaxesResponse, UpsertCatalogObjectRequest, UpsertCatalogObjectResponse,
+        BatchDeleteCatalogObjectsRequest, BatchDeleteCatalogObjectsResponse,
+        BatchRetrieveCatalogObjectsRequest, BatchRetrieveCatalogObjectsResponse,
+        BatchUpsertCatalogObjectsRequest, BatchUpsertCatalogObjectsResponse, CatalogInfoResponse,
+        CreateCatalogImageRequest, CreateCatalogImageResponse, DeleteCatalogObjectResponse,
+        ListCatalogParameters, ListCatalogResponse, RetrieveCatalogObjectParameters,
+        RetrieveCatalogObjectResponse, SearchCatalogItemsRequest, SearchCatalogItemsResponse,
+        SearchCatalogObjectsRequest, SearchCatalogObjectsResponse, UpdateCatalogImageRequest,
+        UpdateCatalogImageResponse, UpdateItemModifierListsRequest,
+        UpdateItemModifierListsResponse, UpdateItemTaxesRequest, UpdateItemTaxesResponse,
+        UpsertCatalogObjectRequest, UpsertCatalogObjectResponse, errors::SquareApiError,
     },
-    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/catalog";

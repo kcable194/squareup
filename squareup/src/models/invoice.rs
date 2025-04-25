@@ -3,9 +3,9 @@
 use serde::{Deserialize, Serialize};
 
 use super::{
-    enums::{InvoiceDeliveryMethod, InvoiceStatus, Timezone},
     DateTime, InvoiceAcceptedPaymentMethods, InvoiceAttachment, InvoiceCustomField,
     InvoicePaymentRequest, InvoiceRecipient, Money,
+    enums::{InvoiceDeliveryMethod, InvoiceStatus, Timezone},
 };
 
 /// Stores information about an invoice.

@@ -3,8 +3,8 @@
 use serde::{Deserialize, Serialize};
 
 use super::{
-    enums::{InvoiceAutomaticPaymentSource, InvoiceRequestMethod, InvoiceRequestType},
     DateTime, InvoicePaymentReminder, Money,
+    enums::{InvoiceAutomaticPaymentSource, InvoiceRequestMethod, InvoiceRequestType},
 };
 
 /// Represents a payment request for an [Invoice].

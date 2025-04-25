@@ -13,13 +13,13 @@
 //!   however, you can cancel an approved payment.
 
 use crate::{
+    SquareClient,
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::SquareApiError, GetPaymentRefundResponse, ListPaymentRefundsParameters,
-        ListPaymentRefundsResponse, RefundPaymentRequest, RefundPaymentResponse,
+        GetPaymentRefundResponse, ListPaymentRefundsParameters, ListPaymentRefundsResponse,
+        RefundPaymentRequest, RefundPaymentResponse, errors::SquareApiError,
     },
-    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/refunds";

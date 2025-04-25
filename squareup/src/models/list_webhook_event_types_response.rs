@@ -3,7 +3,7 @@
 use crate::models::enums::WebhookEventType;
 use serde::Deserialize;
 
-use super::{errors::Error, EventTypeMetadata};
+use super::{EventTypeMetadata, errors::Error};
 
 /// This is a model struct for ListWebhookEventTypesResponse type
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq)]
@@ -19,13 +19,13 @@ pub struct ListWebhookEventTypesResponse {
 
 #[cfg(test)]
 mod tests {
+    use crate::models::EventTypeMetadata;
     use crate::models::enums::{
         BookingWebhookEventType, CatalogWebhookEventType, InventoryWebhookEventType,
         InvoiceWebhookEventType, LocationWebhookEventType, PaymentEventPaymentEventType,
         TeamMemberWebhookEventType, WebhookEventType,
     };
     use crate::models::list_webhook_event_types_response::ListWebhookEventTypesResponse;
-    use crate::models::EventTypeMetadata;
 
     #[test]
     fn inventory_count_updated() {

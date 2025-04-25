@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, TeamMemberBookingProfile};
+use super::{TeamMemberBookingProfile, errors::Error};
 
 /// This is a model struct for ListTeamMemberBookingProfilesResponse type
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq)]

@@ -5,8 +5,8 @@ use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
 
 use super::{
-    enums::{OrderLineItemDiscountScope, OrderLineItemDiscountType},
     Money,
+    enums::{OrderLineItemDiscountScope, OrderLineItemDiscountType},
 };
 
 /// Represents a discount that applies to one or more line items in an order.

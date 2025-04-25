@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, WebhookSubscription};
+use super::{WebhookSubscription, errors::Error};
 
 /// This is a model struct for CreateWebhookSubscriptionResponse type
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq)]

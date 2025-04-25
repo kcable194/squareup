@@ -2,7 +2,7 @@
 
 use serde::Deserialize;
 
-use super::{errors::Error, Card};
+use super::{Card, errors::Error};
 
 /// This is a model struct for RetrieveCardResponse type
 #[derive(Clone, Debug, Deserialize, Default, Eq, PartialEq)]

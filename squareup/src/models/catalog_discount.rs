@@ -3,8 +3,8 @@
 use serde::{Deserialize, Serialize};
 
 use super::{
-    enums::{CatalogDiscountModifyTaxBasis, CatalogDiscountType},
     Money,
+    enums::{CatalogDiscountModifyTaxBasis, CatalogDiscountType},
 };
 
 /// A discount applicable to items.

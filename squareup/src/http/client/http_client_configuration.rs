@@ -91,8 +91,8 @@ impl Default for HttpClientConfiguration {
 
 #[cfg(test)]
 mod tests {
-    use crate::http::client::{HttpClientConfiguration, RetryConfiguration};
     use crate::http::Headers;
+    use crate::http::client::{HttpClientConfiguration, RetryConfiguration};
 
     #[test]
     fn http_client_configuration_new_with_default_headers() {

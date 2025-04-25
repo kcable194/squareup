@@ -11,16 +11,16 @@ use crate::models::{
     DeleteInvoiceAttachmentResponse,
 };
 use crate::{
+    SquareClient,
     config::Configuration,
     http::client::HttpClient,
     models::{
-        errors::SquareApiError, CancelInvoiceRequest, CancelInvoiceResponse, CreateInvoiceRequest,
-        CreateInvoiceResponse, DeleteInvoiceParameters, DeleteInvoiceResponse, GetInvoiceResponse,
-        ListInvoicesParameters, ListInvoicesResponse, PublishInvoiceRequest,
-        PublishInvoiceResponse, SearchInvoicesRequest, SearchInvoicesResponse,
-        UpdateInvoiceRequest, UpdateInvoiceResponse,
+        CancelInvoiceRequest, CancelInvoiceResponse, CreateInvoiceRequest, CreateInvoiceResponse,
+        DeleteInvoiceParameters, DeleteInvoiceResponse, GetInvoiceResponse, ListInvoicesParameters,
+        ListInvoicesResponse, PublishInvoiceRequest, PublishInvoiceResponse, SearchInvoicesRequest,
+        SearchInvoicesResponse, UpdateInvoiceRequest, UpdateInvoiceResponse,
+        errors::SquareApiError,
     },
-    SquareClient,
 };
 
 const DEFAULT_URI: &str = "/invoices";

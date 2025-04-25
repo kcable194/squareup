@@ -1,7 +1,7 @@
 //! Model struct for Iso8601Date type
 
 use serde::de::Visitor;
-use serde::{de, Deserialize, Deserializer, Serializer};
+use serde::{Deserialize, Deserializer, Serializer, de};
 use std::fmt;
 
 /// ISO 8601 Datetime
