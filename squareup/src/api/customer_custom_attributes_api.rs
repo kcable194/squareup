@@ -156,7 +156,7 @@ impl CustomerCustomAttributesApi {
         &self,
         request: &BulkUpsertCustomerCustomAttributesRequest,
     ) -> Result<BulkUpsertCustomerCustomAttributesResponse, SquareApiError> {
-        let url = format!("{}//custom-attributes/bulk-upsert", self.url());
+        let url = format!("{}/custom-attributes/bulk-upsert", self.url());
         let response = self.http_client.post(&url, request).await?;
 
         response.deserialize().await

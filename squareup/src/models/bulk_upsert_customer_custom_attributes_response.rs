@@ -1,5 +1,7 @@
 //! Model struct for BulkUpsertCustomerCustomAttributesResponse type
 
+use std::collections::HashMap;
+
 use super::BulkUpsertCustomerCustomAttributesResponseCustomerCustomAttributeUpsertResponse;
 use crate::models::errors::Error;
 use serde::{Deserialize, Serialize};
@@ -9,7 +11,7 @@ use serde::{Deserialize, Serialize};
 pub struct BulkUpsertCustomerCustomAttributesResponse {
     /// A list of responses that correspond to individual upsert requests.
     pub values:
-        Vec<BulkUpsertCustomerCustomAttributesResponseCustomerCustomAttributeUpsertResponse>,
+        HashMap<String, BulkUpsertCustomerCustomAttributesResponseCustomerCustomAttributeUpsertResponse>,
     /// Any errors that occurred during the request.
     pub errors: Option<Vec<Error>>,
 }
