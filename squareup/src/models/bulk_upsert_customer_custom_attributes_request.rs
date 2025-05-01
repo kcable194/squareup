@@ -1,5 +1,7 @@
 //! Model struct for BulkUpsertCustomerCustomAttributesRequest type
 
+use std::collections::HashMap;
+
 use super::BulkUpsertCustomerCustomAttributesRequestCustomerCustomAttributeUpsertRequest;
 use serde::{Deserialize, Serialize};
 
@@ -7,5 +9,5 @@ use serde::{Deserialize, Serialize};
 #[derive(Clone, Debug, Serialize, Deserialize, Eq, PartialEq)]
 pub struct BulkUpsertCustomerCustomAttributesRequest {
     /// A list of 1 to 25 individual upsert requests.
-    pub values: Vec<BulkUpsertCustomerCustomAttributesRequestCustomerCustomAttributeUpsertRequest>,
+    pub values: HashMap<String, BulkUpsertCustomerCustomAttributesRequestCustomerCustomAttributeUpsertRequest>,
 }
