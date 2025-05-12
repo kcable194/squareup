@@ -46,10 +46,19 @@ impl HttpResponse {
     }
 
     async fn json<T: DeserializeOwned>(self) -> Result<T, SquareApiError> {
-        self.inner.json().await.map_err(|e| {
-            let msg = format!("Error deserializing: {}", e);
-            error!("{}", msg);
-            SquareApiError::new(&msg)
-        })
+        use serde_path_to_error;
+        match self.inner.bytes().await {
+            Err(e) => {
+                let msg = format!("Error deserializing: {}", e);
+                Err(SquareApiError::new(&msg))
+            },
+            Ok(full) => {
+                let mut jd = serde_json::Deserializer::from_slice(&full);
+                serde_path_to_error::deserialize(&mut jd).map_err(|e| {
+                    let msg = format!("Error deserializing: {}", e);
+                    SquareApiError::new(&msg)
+                })
+            }
+        }
     }
 }
