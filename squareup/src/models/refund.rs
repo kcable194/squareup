@@ -14,7 +14,7 @@ pub struct Refund {
     /// **Required** The ID of the transaction that the refunded tender is part of.
     pub transaction_id: Option<String>,
     /// **Required** The ID of the refunded tender.
-    pub tender_id: String,
+    pub tender_id: Option<String>,
     /// **Read only** The timestamp for when the refund was created.
     pub created_at: Option<DateTime>,
     /// **Required** The reason for the refund being issued.
