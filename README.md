@@ -34,7 +34,7 @@ for local scripts (if even then).
 You also need to set the `SQUARE_ENVIRONMENT` environment variable to either `SANDBOX` or `PRODUCTION`.
 If a value is not set, the default is `SANDBOX`.
 
-Other default values include the `2024-12-18` API version, a base URI of `/v2`, a timeout of 60 seconds and no HTTP Client retries.
+Other default values include the `2025-03-19` API version, a base URI of `/v2`, a timeout of 60 seconds and no HTTP Client retries.
 
 
 The standard configuration for production is shown below:
