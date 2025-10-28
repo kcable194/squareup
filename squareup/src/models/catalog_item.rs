@@ -90,4 +90,6 @@ pub struct CatalogItem {
     pub food_and_beverage_details: Option<CatalogItemFoodAndBeverageDetails>,
     /// The item's reporting category.
     pub reporting_category: Option<CatalogObjectCategory>,
+    /// Indicates whether this item is alcoholic (true) or not (false).
+    pub is_alcoholic: Option<bool>,
 }

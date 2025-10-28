@@ -25,6 +25,8 @@ pub struct HttpClientConfiguration {
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct RetryConfiguration {
     /// How many times client should call same request in case of failure.
+    /// Square now makes a maximum of 11 retry attempts for up to 24 hours after the event.
+    /// This change applies to webhook subscriptions for all Square API versions.
     pub retries_count: u32,
     /// Minimum waiting time between two retry attempts (it can end up being lower due to jittering).
     pub min_retry_interval: Duration,

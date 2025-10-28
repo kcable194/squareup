@@ -16,4 +16,6 @@ pub enum SubscriptionActionType {
     SwapPlan,
     /// A billing anchor date change action.
     ChangeBillingAnchorDate,
+    /// The action marking when a subscription completes a fixed number of phases.
+    Complete,
 }

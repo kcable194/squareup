@@ -14,6 +14,8 @@ pub enum SubscriptionStatus {
     Canceled,
     /// The subscription is deactivated.
     Deactivated,
-    /// the subscription is paused.
+    /// The subscription is paused.
     Paused,
+    /// The subscription has completed all of its phases.
+    Completed,
 }

@@ -93,9 +93,12 @@ pub struct Invoice {
     ///
     /// If the field is not set, Square processes the invoice immediately after it is published.
     pub scheduled_at: Option<DateTime>,
-    /// **Read only** The URL of the Square-hosted invoice page. After you publish the invoice using
-    /// the `PublishInvoice` endpoint, Square hosts the invoice page and returns the page URL in the
-    /// response.
+    /// **Read only** A temporary link to the Square-hosted payment page where the customer can pay
+    /// the invoice. If the link expires, customers can provide the email address or phone number
+    /// associated with the invoice and request a new link directly from the expired payment page.
+    ///
+    /// This field is added after the invoice is published and reaches the scheduled date (if one
+    /// is defined).
     pub public_url: Option<String>,
     /// Read only The current amount due for the invoice. In addition to the amount due on the next
     /// payment request, this includes any overdue payment amounts.

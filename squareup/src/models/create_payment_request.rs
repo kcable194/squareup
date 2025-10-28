@@ -156,5 +156,6 @@ pub struct CreatePaymentRequest {
     pub customer_details: Option<CustomerDetails>,
     /// An optional field for specifying the offline payment details. This is intended for internal
     /// 1st-party callers only.
+    #[deprecated(note = "It will be retired on November 19, 2025")]
     pub offline_payment_details: Option<OfflinePaymentDetails>,
 }

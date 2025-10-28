@@ -76,4 +76,9 @@ pub struct Subscription {
     pub monthly_billing_anchor_date: Option<i32>,
     /// **Read only** array of phases for this subscription
     pub phases: Option<Vec<Phase>>,
+    /// The `YYYY-MM-DD`-formatted date when the subscription enters a terminal state.
+    /// After this date, the subscription status changes to COMPLETED and the subscription billing
+    /// stops. If the subscription is for a plan variation that includes at least one phase that
+    /// isn't fixed-length, it has no defined completion date and this field is unset.
+    pub completed_date: Option<String>,
 }
