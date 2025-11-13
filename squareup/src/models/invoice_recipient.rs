@@ -21,19 +21,26 @@ pub struct InvoiceRecipient {
     /// Min Length: 1, Max Length: 255
     pub customer_id: Option<String>,
     /// **Read only** The recipient's given (that is, first) name.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub given_name: Option<String>,
     /// **Read only** The recipient's family (that is, last) name.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub family_name: Option<String>,
     /// **Read only** The recipient's email address.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub email_address: Option<String>,
     /// **Read only** The recipient's physical address.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub address: Option<Address>,
     /// **Read only** The recipient's phone number.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub phone_number: Option<String>,
     /// **Read only** The name of the recipient's company.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub company_name: Option<String>,
     /// **Read only** The recipient's tax IDs. The country of the seller account determines whether
     /// this field is available for the customer. For more information, see [Invoice recipient tax
     /// IDs](https://developer.squareup.com/docs/invoices-api/overview#recipient-tax-ids).
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub tax_ids: Option<InvoiceRecipientTaxIds>,
 }

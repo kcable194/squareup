@@ -20,9 +20,11 @@ pub struct InvoicePaymentRequest {
     /// The Square-generated ID of the payment request in an [Invoice].
     ///
     /// Min Length: 1, Max Length: 255
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub uid: Option<String>,
     /// Identifies the payment request type. This type defines how the payment request amount is
     /// determined. This field is required to create a payment request.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub request_type: Option<InvoiceRequestType>,
     /// The due date (in the invoice's time zone) for the payment request, in `YYYY-MM-DD` format.
     /// This field is required to create a payment request. If an `automatic_payment_source` is
@@ -35,6 +37,7 @@ pub struct InvoicePaymentRequest {
     /// If the payment request specifies `DEPOSIT` or `INSTALLMENT` as the `request_type`, this
     /// indicates the request amount. You cannot specify this when `request_type` is `BALANCE` or
     /// when the payment request includes the `percentage_requested` field.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub fixed_amount_requested_money: Option<Money>,
     /// Specifies the amount for the payment request in percentage:
     ///
@@ -46,16 +49,19 @@ pub struct InvoicePaymentRequest {
     ///
     /// You cannot specify this when the payment `request_type` is `BALANCE` or when the payment
     /// request specifies the `fixed_amount_requested_money` field.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub percentage_requested: Option<String>,
     /// If set to true, the Square-hosted invoice page (the `public_url` field of the invoice)
     /// provides a place for the customer to pay a tip.
     ///
     /// This field is allowed only on the final payment request and the payment `request_type` must
     /// be `BALANCE` or `INSTALLMENT`.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub tipping_enabled: Option<bool>,
     /// The payment method for an automatic payment.
     ///
     /// The default value is `NONE`.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub automatic_payment_source: Option<InvoiceAutomaticPaymentSource>,
     /// The ID of the credit or debit card on file to charge for the payment request. To get the
     /// cards on file for a customer, call
@@ -63,20 +69,25 @@ pub struct InvoicePaymentRequest {
     /// include the `customer_id` of the invoice recipient.
     ///
     /// Min Length: 1, Max Length: 255
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub card_id: Option<String>,
     /// A list of one or more reminders to send for the payment request.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub reminders: Option<Vec<InvoicePaymentReminder>>,
     /// **Read only** The amount of the payment request, computed using the order amount and
     /// information from the various payment request fields (`request_type`,
     /// `fixed_amount_requested_money`, and `percentage_requested`).
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub computed_amount_money: Option<Money>,
     /// **Read only** The amount of money already paid for the specific payment request. This amount
     /// might include a rounding adjustment if the most recent invoice payment was in cash in a
     /// currency that rounds cash payments (such as, `CAD` or `AUD`).
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub total_completed_amount_money: Option<Money>,
     /// **Read only** If the most recent payment was a cash payment in a currency that rounds cash
     /// payments (such as, `CAD` or `AUD`) and the payment is rounded from `computed_amount_money`
     /// in the payment request, then this field specifies the rounding adjustment applied. This
     /// amount might be negative.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub rounding_adjustment_included_money: Option<Money>,
 }
