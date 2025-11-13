@@ -15,9 +15,11 @@ use super::{
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]
 pub struct Invoice {
     /// **Read only** The Square-assigned ID of the invoice.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
-    /// The Square-assigned version number, which is incremented each time an update is committed to
-    /// the invoice.
+    /// **Read only** The Square-assigned version number, which is incremented each time an update
+    /// is committed to the invoice.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub version: Option<i32>,
     /// The ID of the location that this invoice is associated with.
     ///
@@ -25,6 +27,7 @@ pub struct Invoice {
     /// associated order.
     ///
     /// Min Length: 1, Max Length: 255
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub location_id: Option<String>,
     /// The ID of the [Order] for which the invoice is created. This field is required when creating
     /// an invoice, and the order must be in the `OPEN` state.
@@ -39,6 +42,7 @@ pub struct Invoice {
     /// used by Square to deliver the invoice.
     ///
     /// This field is required to publish an invoice, and it must specify the `customer_id`.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub primary_recipient: Option<InvoiceRecipient>,
     /// The payment schedule for the invoice, represented by one or more payment requests that
     /// define payment settings, such as amount due and due date. An invoice supports the following
@@ -58,6 +62,7 @@ pub struct Invoice {
     /// subscription](https://developer.squareup.com/docs/invoices-api/overview#invoices-plus-subscription).
     ///
     /// Min Length: 1, Max Length: 13
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub payment_requests: Option<Vec<InvoicePaymentRequest>>,
     /// The delivery method that Square uses to send the invoice, reminders, and receipts to the
     /// customer. After the invoice is published, Square processes the invoice based on the delivery
@@ -71,6 +76,7 @@ pub struct Invoice {
     ///   `automatic_payment_source` field of the payment request is also required.
     /// - The deprecated `request_method` field of the payment request. Note that `invoice` objects
     ///   returned in responses do not include `request_method`.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub delivery_method: Option<InvoiceDeliveryMethod>,
     /// A user-friendly invoice number that is displayed on the invoice. The value is unique within
     /// a location. If not provided when creating an invoice, Square assigns a value. It increments
@@ -78,20 +84,24 @@ pub struct Invoice {
     /// 0000002).
     ///
     /// Min Length: 1, Max Length: 191
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub invoice_number: Option<String>,
     /// The title of the invoice, which is displayed on the invoice.
     ///
     /// Min Length: 1, Max Length: 255
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub title: Option<String>,
     /// The description of the invoice, which is displayed on the invoice.
     ///
     /// Min Length: 1, Max Length: 65536
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
     /// The timestamp when the invoice is scheduled for processing, in RFC 3339 format. After the
     /// invoice is published, Square processes the invoice on the specified date, according to the
     /// delivery method and payment request settings.
     ///
     /// If the field is not set, Square processes the invoice immediately after it is published.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub scheduled_at: Option<DateTime>,
     /// **Read only** A temporary link to the Square-hosted payment page where the customer can pay
     /// the invoice. If the link expires, customers can provide the email address or phone number
@@ -99,25 +109,32 @@ pub struct Invoice {
     ///
     /// This field is added after the invoice is published and reaches the scheduled date (if one
     /// is defined).
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub public_url: Option<String>,
     /// Read only The current amount due for the invoice. In addition to the amount due on the next
     /// payment request, this includes any overdue payment amounts.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub next_payment_amount_money: Option<Money>,
     /// **Read only** The status of the invoice.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub status: Option<InvoiceStatus>,
-    /// Read only The time zone used to interpret calendar dates on the invoice, such as `due_date`.
+    /// **Read only** The time zone used to interpret calendar dates on the invoice, such as `due_date`.
     /// When an invoice is created, this field is set to the `timezone` specified for the seller
     /// location. The value cannot be changed.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub timezone: Option<Timezone>,
     /// **Read only** The timestamp when the invoice was created, in RFC 3339 format.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub created_at: Option<DateTime>,
     /// **Read only** The timestamp when the invoice was last updated, in RFC 3339 format.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub updated_at: Option<DateTime>,
     /// The payment methods that customers can use to pay the invoice on the Square-hosted invoice
     /// page. This setting is independent of any automatic payment requests for the invoice.
     ///
     /// This field is required when creating an invoice and must set at least one payment method to
     /// `true`.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub accepted_payment_methods: Option<InvoiceAcceptedPaymentMethods>,
     /// Additional seller-defined fields that are displayed on the invoice. For more information,
     /// see [Custom
@@ -129,13 +146,16 @@ pub struct Invoice {
     /// Max: 2 custom fields
     ///
     /// Max Length: 2
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub custom_fields: Option<Vec<InvoiceCustomField>>,
     /// **Read only** The ID of the
     /// [subscription](https://developer.squareup.com/reference/square/objects/Subscription)
     /// associated with the invoice. This field is present only on subscription billing invoices.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub subscription_id: Option<String>,
     /// The date of the sale or the date that the service is rendered, in `YYYY-MM-DD` format. This
     /// field can be used to specify a past or future date which is displayed on the invoice.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub sale_or_service_date: Option<String>,
     /// **France only**. The payment terms and conditions that are displayed on the invoice. For
     /// more information, see [Payment
@@ -146,18 +166,22 @@ pub struct Invoice {
     /// detail if this field is included in `CreateInvoice` or `UpdateInvoice` requests.
     ///
     /// Min Length: 1, Max Length: 2000
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub payment_conditions: Option<String>,
     /// Indicates whether to allow a customer to save a credit or debit card as a card on file or a
     /// bank transfer as a bank account on file. If `true`, Square displays a **Save my card on
     /// file** or **Save my bank on file** checkbox on the invoice payment page. Stored payment
     /// information can be used for future automatic payments. The default value is `false`.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub store_payment_method_enabled: Option<bool>,
-    /// Read only Metadata about the attachments on the invoice. Invoice attachments are managed using the
-    /// CreateInvoiceAttachment and DeleteInvoiceAttachment endpoints.
+    /// **Read only** Metadata about the attachments on the invoice. Invoice attachments are managed
+    /// using the CreateInvoiceAttachment and DeleteInvoiceAttachment endpoints.
     /// Max Length 10
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub attachments: Option<Vec<InvoiceAttachment>>,
     /// **Read only** The ID of the team member who created the invoice. This field is present
     /// only on invoices created in the Square Dashboard or Square Invoices app by a logged-in
     /// team member.
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub creator_team_member_id: Option<String>,
 }
