@@ -21,18 +21,6 @@ pub struct InvoicePaymentRequest {
     ///
     /// Min Length: 1, Max Length: 255
     pub uid: Option<String>,
-    /// Indicates how Square processes the payment request. DEPRECATED at version 2021-01-21.
-    /// Replaced by the `Invoice.delivery_method` and
-    /// `InvoicePaymentRequest.automatic_payment_source` fields.
-    ///
-    /// One of the following is required when creating an invoice:
-    ///
-    /// (Recommended) The `delivery_method` field of the invoice. To configure an automatic payment,
-    /// the `automatic_payment_source` field of the payment request is also required.
-    /// This `request_method` field. Note that `invoice` objects returned in responses do not
-    /// include `request_method`.
-    #[deprecated]
-    pub request_method: Option<InvoiceRequestMethod>,
     /// Identifies the payment request type. This type defines how the payment request amount is
     /// determined. This field is required to create a payment request.
     pub request_type: Option<InvoiceRequestType>,
