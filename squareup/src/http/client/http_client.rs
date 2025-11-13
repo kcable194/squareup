@@ -31,7 +31,8 @@ impl HttpClient {
         let client_builder = reqwest::ClientBuilder::new()
             .timeout(Duration::from_secs(config.timeout.into()))
             .user_agent(&config.user_agent)
-            .default_headers((&config.default_headers).try_into()?);
+            .default_headers((&config.default_headers).try_into()?)
+            .connection_verbose(true);
 
         #[cfg(feature = "native-tls")]
         let client_builder = client_builder;
