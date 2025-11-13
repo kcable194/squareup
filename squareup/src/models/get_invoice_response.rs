@@ -8,7 +8,7 @@ use super::{Invoice, errors::Error};
 #[derive(Clone, Debug, Default, Deserialize, Eq, PartialEq)]
 pub struct GetInvoiceResponse {
     /// The invoice requested.
-    pub refund: Option<Invoice>,
+    pub invoice: Option<Invoice>,
     /// Information about errors encountered during the request.
     pub errors: Option<Vec<Error>>,
 }
