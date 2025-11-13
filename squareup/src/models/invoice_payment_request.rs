@@ -3,7 +3,7 @@
 use serde::{Deserialize, Serialize};
 
 use super::{
-    DateTime, InvoicePaymentReminder, Money,
+    InvoicePaymentReminder, Money,
     enums::{InvoiceAutomaticPaymentSource, InvoiceRequestMethod, InvoiceRequestType},
 };
 
@@ -36,14 +36,14 @@ pub struct InvoicePaymentRequest {
     /// Identifies the payment request type. This type defines how the payment request amount is
     /// determined. This field is required to create a payment request.
     pub request_type: Option<InvoiceRequestType>,
-    ///The due date (in the invoice's time zone) for the payment request, in `YYYY-MM-DD` format.
+    /// The due date (in the invoice's time zone) for the payment request, in `YYYY-MM-DD` format.
     /// This field is required to create a payment request. If an `automatic_payment_source` is
     /// defined for the request, Square charges the payment source on this date.
     ///
     /// After this date, the invoice becomes overdue. For example, a payment `due_date` of
     /// 2021-03-09 with a `timezone` of America/Los_Angeles becomes overdue at midnight on March 9
     /// in America/Los_Angeles (which equals a UTC timestamp of 2021-03-10T08:00:00Z).
-    pub due_date: Option<DateTime>,
+    pub due_date: Option<chrono::NaiveDate>,
     /// If the payment request specifies `DEPOSIT` or `INSTALLMENT` as the `request_type`, this
     /// indicates the request amount. You cannot specify this when `request_type` is `BALANCE` or
     /// when the payment request includes the `percentage_requested` field.
